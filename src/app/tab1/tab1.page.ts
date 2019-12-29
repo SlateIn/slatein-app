@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestService } from '../test/test.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -8,6 +8,6 @@ import { TestService } from '../test/test.service';
 })
 export class Tab1Page {
 
-  constructor(public test: TestService) {}
+  constructor() {}
 
 }
