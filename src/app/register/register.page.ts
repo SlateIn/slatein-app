@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterPage implements OnInit {
   username: string = "";
   password: string = "";
   cpassword: string = "";
-  constructor( public afAuth: AngularFireAuth) { }
+  constructor( public afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +27,7 @@ export class RegisterPage implements OnInit {
       try{
         const res = await this.afAuth.auth.createUserWithEmailAndPassword(username,password);
         console.log(res);
+        this.router.navigate(['tabs/tab1']);
       }catch(error){
         console.dir(error);
       }
