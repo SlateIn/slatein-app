@@ -13,6 +13,22 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'myday',
+    loadChildren: () => import('./myday/myday.module').then( m => m.MydayPageModule)
+  },
+  {
+    path: 'planner',
+    loadChildren: () => import('./planner/planner.module').then( m => m.PlannerPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'calendar',
+    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
   }
 ];
 @NgModule({

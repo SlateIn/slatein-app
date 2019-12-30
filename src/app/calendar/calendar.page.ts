@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-calender',
-  templateUrl: './calender.component.html',
-  styleUrls: ['./calender.component.scss'],
+  selector: 'app-calendar',
+  templateUrl: './calendar.page.html',
+  styleUrls: ['./calendar.page.scss'],
 })
-export class CalenderComponent implements OnInit {
+export class CalendarPage implements OnInit {
 
-  // All the variables required for ionic2-calender
+  // All the variables required for ionic2-calendar
   eventSource;
 
   calendar = {
