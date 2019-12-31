@@ -73,7 +73,7 @@ export class RegisterPage implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = (event) => {
-      this.profilePic.nativeElement.src = event.target.result as string;
+      this.profilePic.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
     }
       // try{
