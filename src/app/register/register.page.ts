@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterPage implements OnInit {
   
   @ViewChild('profilePic', {static: true}) profilePic: ElementRef;
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private navCtrl: NavController) { }
+  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private navCtrl: NavController, private router: Router) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -75,6 +76,13 @@ export class RegisterPage implements OnInit {
       this.profilePic.nativeElement.src = event.target.result as string;
       this.isProfilePicSelected = true;
     }
+      // try{
+      //   const res = await this.afAuth.auth.createUserWithEmailAndPassword(username,password);
+      //   console.log(res);
+      //   this.router.navigate(['tabs/myday']);
+      // }catch(error){
+      //   console.dir(error);
+      // }
   }
 
   picChange(event: any) {
