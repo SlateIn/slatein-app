@@ -16,6 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgCalendarModule  } from 'ionic2-calendar';
 
+// ionic4-datepicker
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
+
 
 
 @NgModule({
@@ -31,7 +34,8 @@ import { NgCalendarModule  } from 'ionic2-calendar';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ionic4DatepickerModule,
   ],
 
   providers: [
