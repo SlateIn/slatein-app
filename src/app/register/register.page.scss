@@ -1,14 +1,14 @@
 ion-content {
     --overflow: hidden;
-    // --background: #21D4FD;
-    // --background: linear-gradient(-225deg, #D4FFEC 0%, #57F2CC 48%, #4596FB 100%);
-    --background: #3F3D56;
+    --background: #21D4FD;
+    --background: linear-gradient(0deg, #abf7d5 0%, #57F2CC 48%, #4596FB 100%);
+    // --background: #3F3D56;
    
 }
 
 div.register-card {
     position: absolute;
-    bottom: 8%;
+    bottom: 25%;
     width: 100%;
 }
 
@@ -26,7 +26,8 @@ ion-icon {
 
 ion-button {
     // --background: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
-    --background: #6C63FF;
+    --background: #4596FB;
+    // --background: #6C63FF;
     // position: absolute;
     // bottom: -22px;
     // right: 10px;

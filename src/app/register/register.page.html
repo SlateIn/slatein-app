@@ -40,19 +40,16 @@
             </ion-item>
             <ion-button expand="block" class="ion-margin-top" fill="solid" size="default" (click)="register()"
               [disabled]="!registerForm.valid">Register</ion-button>
+
+              <div class="ion-text-center ion-margin-top">
+                <ion-label >Already have account? Login</ion-label>
+              </div>
+
           </form>
-        </ion-list>
+        </ion-list>        
       </ion-card-content>
     </ion-card>
-    <ion-grid class="account-exists-label">
-      <ion-row>
-        <ion-col (click)="loginPage()">
-          <div class="ion-text-center">
-            <p>Already have account? Login</p>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    
   </div>
 
 </ion-content>
