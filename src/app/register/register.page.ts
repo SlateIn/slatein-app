@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
   password: string;
   cpassword: string;
   registerForm: FormGroup;
-  avatarSrc = '../../assets/icon/default_profile.svg';
+  avatarSrc = 'assets/icon/default_profile.svg';
   isProfilePicSelected = false;
   profilePicFile: File;
   singUpFailedErrorMsg: string;
