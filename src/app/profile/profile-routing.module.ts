@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
+  },
+  {
+    path: 'personal-information',
+    loadChildren: () => import('./personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
+  },
+  {
+    path: 'security-password',
+    loadChildren: () => import('./security-password/security-password.module').then( m => m.SecurityPasswordPageModule)
   }
 ];
 
