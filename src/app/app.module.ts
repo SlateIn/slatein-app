@@ -22,8 +22,8 @@ import { NgCalendarModule  } from 'ionic2-calendar';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     NgCalendarModule,
     FormsModule,
