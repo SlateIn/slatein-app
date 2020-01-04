@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  avatarSrc = '../../assets/icon/default_profile.svg';
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
+  }
+
+  goToPersonalInfo(){
+    this.navCtrl.navigateForward('/tabs/profile/personal-information')
+  }
+
+  goToPasswordAndSecurity(){
+    this.navCtrl.navigateForward('/tabs/profile/security-password')
   }
 
 }
