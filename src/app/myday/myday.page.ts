@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';
-import { UserInfo } from '../models/userInfo';
+import { UserInfo } from '@models/userInfo';
 
 @Component({
   selector: 'app-myday',

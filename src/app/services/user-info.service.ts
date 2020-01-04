@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map, switchMap } from 'rxjs/operators';
-import { UserInfo } from '../models/userInfo';
+import { UserInfo } from '@models/userInfo';
 
 @Injectable({
   providedIn: 'root'
