@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { NavController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -18,10 +16,16 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   avatarSrc = '../../assets/icon/default_profile.svg';
   isProfilePicSelected = false;
-  
-  @ViewChild('profilePic', {static: true}) profilePic: ElementRef;
+  profilePicFile: File;
+  singUpFailedErrorMsg: string;
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder, private navCtrl: NavController, private router: Router) { }
+  @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
+
+  constructor(
+    private fb: FormBuilder,
+    private navCtrl: NavController,
+    private auth: AuthService,
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -59,51 +63,40 @@ export class RegisterPage implements OnInit {
 
   get controls() { return this.registerForm.controls; }
 
-  async register() {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-    // try {
-    //   const res = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
-    //   console.log(res);
-    // } catch (error) {
-    //   console.dir(error);
-    // }
+  picChange(event: any) {
+    this.profilePicFile = event.srcElement.files[0];
+    this.previewProfilePic(this.profilePicFile);
   }
 
   previewProfilePic(file: File) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = (event) => {
-      this.profilePic.nativeElement.src = event.target['result'];
+      this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
     }
-      // try{
-      //   const res = await this.afAuth.auth.createUserWithEmailAndPassword(username,password);
-      //   console.log(res);
-      //   this.router.navigate(['tabs/myday']);
-      // }catch(error){
-      //   console.dir(error);
-      // }
   }
 
-  picChange(event: any) {
-    let file: File = event.srcElement.files[0];
-    this.previewProfilePic(file);
+  async register() {
+    const loading = await this.createLoadingAlert();
+    await loading.present();
+
+    this.auth.signUp(this.registerForm.value, this.profilePicFile).then(() => {
+      loading.dismiss();
+      this.navCtrl.navigateForward('/tabs/myday');
+    }).catch(err => {
+      loading.dismiss();
+      this.singUpFailedErrorMsg = err.message;
+    });
+  }
+
+  createLoadingAlert(): Promise<HTMLIonLoadingElement> {
+    return this.loadingController.create({
+      message: 'Signing Up',
+      mode: 'ios',
+      animated: true,
+      showBackdrop: true
+    })
+  }
   
-    // var storageRef = firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`);
-    // console.log(this.afAuth.auth.currentUser.uid);
-    // var uploadTask = storageRef.put(file).then((snapshot) => {
-    //   snapshot.ref.getDownloadURL().then((url) => {
-    //     this.auth.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
-    //       'photoURL': url
-    //     }).then(() => {
-    //       this.setRoot();
-    //     });
-    //   });
-    // });
-  }
-
-  loginPage() {
-    this.navCtrl.pop();
-  }
-
 }

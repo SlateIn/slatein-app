@@ -5,5 +5,8 @@
 </ion-header>
 
 <ion-content>
-
+  <div *ngIf="(info$ |async) as info">
+    <h3>Display Name: {{info.displayName}}</h3>
+    <img [src]="info.photoURL" alt="">
+  </div>
 </ion-content>
