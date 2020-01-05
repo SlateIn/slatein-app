@@ -1,7 +1,7 @@
 ion-content {
     --overflow: hidden;
-    --background: linear-gradient(0deg, #abf7d5 0%, #57F2CC 48%, #4596FB 100%);
     --background: #21D4FD;
+    --background: linear-gradient(0deg, #abf7d5 0%, #57F2CC 48%, #4596FB 100%);
 }
 
 div.register-card {
@@ -22,6 +22,7 @@ ion-icon {
 
 ion-button.register {
     --background: #4596FB;
+    color: #ffffff;
 }
 
 ion-avatar {
