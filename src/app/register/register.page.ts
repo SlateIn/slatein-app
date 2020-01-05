@@ -29,11 +29,14 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      name: new FormControl('', Validators.required),
+      fname: new FormControl('', Validators.required),
+      lname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.email
       ])),
+      gender: new FormControl('', Validators.required),
+      birthdate: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
         Validators.minLength(5),
         Validators.required
