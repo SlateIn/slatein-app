@@ -14,13 +14,35 @@
         <ion-list  class="margin-bottom">
           <form [formGroup]="registerForm" (ngSubmit)="register()">
             <ion-item>
-              <ion-input placeholder="Name" formControlName="name" type="text" autofocus="true"></ion-input>
+              <ion-input placeholder="First Name" formControlName="fname" type="text" autofocus="true"></ion-input>
+              <ion-icon name="person" mode="ios" slot="end" align-self-end></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Last Name" formControlName="lname" type="text" autofocus="true"></ion-input>
               <ion-icon name="person" mode="ios" slot="end" align-self-end></ion-icon>
             </ion-item>
 
             <ion-item>
               <ion-input autofill="off" placeholder="Email" formControlName="email" type="text"></ion-input>
               <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="controls.email.touched && controls.email.errors" lines="none">
+              <ion-text color="danger">
+                <ion-label>Email must be valid formate</ion-label>
+              </ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Gender</ion-label>
+              <ion-select placeholder="Select One" mode="ios" formControlName="gender">
+                <ion-select-option value="female">Female</ion-select-option>
+                <ion-select-option value="male">Male</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Birth date</ion-label>
+              <ion-datetime placeholder="Select Date" formControlName="birthdate"></ion-datetime>
             </ion-item>
 
             <ion-item>

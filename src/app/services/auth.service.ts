@@ -36,7 +36,11 @@ export class AuthService {
 
   private updateUserInfo(newUser, profilePicUrl?) {
     return this.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
-      displayName: newUser.name,
+      fname: newUser.fname,
+      lname: newUser.lname,
+      email: newUser.email,
+      gender: newUser.gender,
+      birthdate: newUser.birthdate,
       'photoURL': profilePicUrl ? profilePicUrl : ''
     });
   }
