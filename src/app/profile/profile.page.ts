@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { UserService } from '../services/user-info.service';
+import { Observable } from 'rxjs';
+import { UserInfo } from '@models/userInfo';
 
 @Component({
   selector: 'app-profile',
@@ -8,11 +11,16 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   avatarSrc = '../../assets/icon/default_profile.svg';
-  constructor(private navCtrl: NavController) { }
+  info$: Observable<UserInfo>;
+  isProfilePicSelected = false;
+  profilePicFile: File;
+
+  constructor(private navCtrl: NavController,
+              private user: UserService) { }
 
   ngOnInit() {
+    this.info$ = this.user.info;
   }
 
   goToPersonalInfo(){
@@ -22,5 +30,9 @@ export class ProfilePage implements OnInit {
   goToPasswordAndSecurity(){
     this.navCtrl.navigateForward('/tabs/profile/security-password')
   }
+
+  // changeProfilePic(){
+
+  // }
 
 }
