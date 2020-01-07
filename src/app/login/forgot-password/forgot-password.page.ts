@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@services/auth.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-forgot-password',
@@ -10,18 +10,20 @@ import { LoadingController, NavController } from '@ionic/angular';
 export class ForgotPasswordPage {
   email: string;
   resetPwdFailedErrorMsg: string;
-  constructor(private auth: AuthService, private loadingController: LoadingController, private navCtrl: NavController) { }
+  constructor(private auth: AuthService, private loadingController: LoadingController, private navCtrl: NavController, private toastController: ToastController) { }
 
   async reset() {
     const loading = await this.createLoadingAlert();
     await loading.present();
-    this.auth.passwordReset(this.email).then(() => {
+    this.auth.passwordReset(this.email).then(async () => {
       loading.dismiss();
-      this.navCtrl.navigateBack('/login', {
-        queryParams: {
-          resetedPwdSuccess: true
-        }
+      const toast = await this.toastController.create({
+        message: 'Reset Password email have been sent. Please check your email.',
+        duration: 5000,
+        color: 'dark'
       });
+      toast.present();
+      this.navCtrl.navigateBack('/login');
     }).catch((err) => {
       this.resetPwdFailedErrorMsg = err.message;
       loading.dismiss();

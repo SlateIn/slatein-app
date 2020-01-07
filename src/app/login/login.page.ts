@@ -17,27 +17,19 @@ export class LoginPage implements OnInit {
   password: string;
   loginErrorMsg: string;
 
-  constructor(public afAuth: AngularFireAuth, private navCtrl: NavController, private route: ActivatedRoute, private toastController: ToastController) { }
+  constructor(public afAuth: AngularFireAuth, private navCtrl: NavController, private route: ActivatedRoute) { }
   
   ngOnInit() {
     Storage.get({ key: 'email' }).then((res) => this.email = res.value);
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     this.loginErrorMsg = '';
-    if(this.route.snapshot.queryParams.resetedPwdSuccess) {
-      const toast = await this.toastController.create({
-        message: 'Reset Password email have been sent. Please check your email.',
-        duration: 5000,
-        color: 'dark'
-      });
-      toast.present();
-    }
   }
 
   login() {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-    .then(() => {this.navCtrl.navigateForward('/tabs/myday')})
+    .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
     .catch(err => this.loginErrorMsg = err.message)
   }
 
