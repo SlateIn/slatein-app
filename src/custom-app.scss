@@ -1,3 +1,35 @@
+app-register, app-login, app-forgot-password {
+    ion-content {
+        --overflow: hidden;
+        --background: #21D4FD;
+        --background: linear-gradient(0deg, #abf7d5 0%, #57F2CC 48%, #4596FB 100%);
+    }
+
+    ion-card {
+        --background: #ffffff !important;
+        margin-bottom: 0px !important;
+        overflow: visible !important;
+
+        ion-card-content {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+    }
+
+    ion-icon {
+        color: #b6b7c1;
+    }
+
+    ion-button.register {
+        --background: #4596FB;
+        color: #ffffff;
+    } 
+}
+
 .margin-bottom {
     margin-bottom: 10px !important;
+}
+
+.float-right {
+    float: right;
 }
