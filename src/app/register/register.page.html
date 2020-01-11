@@ -23,7 +23,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-input autofill="off" placeholder="Email" formControlName="email" type="text"></ion-input>
+              <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username"></ion-input>
               <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
             </ion-item>
             <ion-item *ngIf="controls.email.touched && controls.email.errors" lines="none">
@@ -46,7 +46,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit></ion-input>
+              <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit autocomplete="new-password"></ion-input>
               <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
             </ion-item>
             <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength" lines="none">
@@ -56,7 +56,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-input placeholder="Confirm Password" formControlName="confirmPassword" type="password" clear-on-edit>
+              <ion-input placeholder="Confirm Password" formControlName="confirmPassword" type="password" clear-on-edit autocomplete="new-password">
               </ion-input>
               <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
             </ion-item>

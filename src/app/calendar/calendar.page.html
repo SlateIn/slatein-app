@@ -12,7 +12,6 @@
         [calendarMode]="calendar.mode"
         [currentDate]="calendar.currentDate"
         (onCurrentDateChanged)="onCurrentDateChanged($event)"
-        (onRangeChanged)="reloadSource(startTime, endTime)"
         (onEventSelected)="onEventSelected($event)"
         (onTitleChanged)="onViewTitleChanged($event)"
         (onTimeSelected)="onTimeSelected($event)"
