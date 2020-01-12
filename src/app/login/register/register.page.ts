@@ -108,5 +108,9 @@ export class RegisterPage implements OnInit {
       showBackdrop: true
     })
   }
+
+  goBack() {
+    this.navCtrl.navigateBack('/login');
+  }
   
 }

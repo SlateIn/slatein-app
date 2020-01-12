@@ -1,9 +1,17 @@
+ion-fab-button {
+    --ion-color-base: transparent !important;
+    --box-shadow: none !important;
+}
+
 ion-avatar {
     position: relative;
     margin: 0 auto;
-    margin-top: -60px;
     width: 80px;
     height: 80px;
+}
+
+ion-label.label-color {
+    color: #c1e4e5 !important;
 }
 
 .file-input {
@@ -25,8 +33,6 @@ img.plus-icon {
 
 @media only screen and (min-height: 660px) {
     div.register-card {
-        position: absolute;
         bottom: 15%;
-        width: 100%;
     }
 }
