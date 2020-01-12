@@ -1,28 +1,17 @@
-app-register, app-login, app-forgot-password {
-    ion-content {
-        --overflow: hidden;
-        --background: #21D4FD;
-        --background: linear-gradient(0deg, #30e693 0%, #17ad88 48%, #347ad2 100%);
-    }
-
-    div.register-card {
-        position: absolute;
-        width: 100%;
-        padding: 10px;
-    }
-
-    ion-item {
-        --background: transparent !important;
-    }
-
-    ion-label, ion-icon, input, ion-button, ion-select, ion-datetime {
-        color: #ffffff !important;
-    }
-
-    ion-button.register {
-        --background: #4596FB;
-    }
+// ######################################### Start Global Customization ######################################### 
+ion-content {
+    --ion-text-color: #ffffff;
+    --ion-background-color: #2A2A2E;
 }
+
+ion-icon {
+    color: var(--ion-color-primary-tint);
+}
+// ######################################### End Global Customization ######################################### 
+
+
+
+// ######################################### Start Global Margin & Padding Classes ######################################### 
 
 .margin-bottom {
     margin-bottom: 20px !important;
@@ -32,10 +21,27 @@ app-register, app-login, app-forgot-password {
     margin-top: 20px !important;
 }
 
-.float-right {
-    float: right;
+// ######################################### End Global Margin & Padding Classes ######################################### 
+
+
+
+
+// ######################################### Start Ion Icons ######################################### 
+ion-fab {
+    ion-icon {
+        color: #ffffff;
+    }
+}
+// ######################################### End Ion Icons ######################################### 
+
+app-register, app-login, app-forgot-password {
+    div.register-card {
+        position: absolute;
+        width: 100%;
+        padding: 10px;
+    }
 }
 
-.error-msg {
-    color: #ffb100 !important;
+.float-right {
+    float: right;
 }

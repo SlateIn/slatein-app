@@ -11,20 +11,22 @@
       <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
     </ion-item>
     <div class="ion-text-right margin-top margin-bottom">
-      <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear"
-        style="text-decoration: none; color: #ffffff;">
+      <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear" style="text-decoration: none;">
         Forgot Password?
       </a>
     </div>
-    <ion-text>
-      <ion-label class="error-msg">{{ loginErrorMsg }}</ion-label>
-    </ion-text>
+
+    <div class="margin-bottom">
+      <ion-label color="danger">{{ loginErrorMsg }}</ion-label>
+    </div>
 
     <ion-button expand="block" class="register" fill="solid" size="default" (click)="login()"
       [disabled]="!email || !password">Login</ion-button>
 
-    <ion-button expand="block" routerLink="/login/register" routerDirection="forward" fill="clear" size="default">
-      Don't you have slateIn account?
-    </ion-button>
+    <div class="ion-text-center margin-top margin-bottom">
+      <a routerLink="/login/register" routerDirection="forward" style="text-decoration: none;">
+        Don't have slateIn account?
+      </a>
+    </div>
   </div>
 </ion-content>

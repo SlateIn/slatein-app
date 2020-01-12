@@ -1,6 +1,6 @@
 <ion-content>
   <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button color="light" (click)="goBack()">
+    <ion-fab-button (click)="goBack()">
       <ion-icon name="arrow-dropleft"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -31,9 +31,9 @@
         <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
       <ion-item *ngIf="controls.email.touched && controls.email.errors" lines="none">
-        <ion-text>
-          <ion-label class="error-msg">Email must be valid formate</ion-label>
-        </ion-text>
+        <div>
+          <ion-label color="danger">Email must be valid formate</ion-label>
+        </div>
       </ion-item>
 
       <ion-item>
@@ -55,9 +55,9 @@
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
       <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength" lines="none">
-        <ion-text>
-          <ion-label class="error-msg">Password must be at least 5 characters</ion-label>
-        </ion-text>
+        <div>
+          <ion-label color="danger">Password must be at least 5 characters</ion-label>
+        </div>
       </ion-item>
 
       <ion-item>
@@ -67,22 +67,24 @@
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
       <ion-item *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch" lines="none">
-        <ion-text>
-          <ion-label class="error-msg">Passwords must match</ion-label>
-        </ion-text>
+        <div>
+          <ion-label color="danger">Passwords must match</ion-label>
+        </div>
       </ion-item>
 
-      <ion-text>
-        <ion-label class="error-msg">{{ singUpFailedErrorMsg }}</ion-label>
-      </ion-text>
+      <div>
+        <ion-label color="danger">{{ singUpFailedErrorMsg }}</ion-label>
+      </div>
 
 
       <ion-button expand="block" class="ion-margin-top register" fill="solid" size="default" (click)="register()"
         [disabled]="!registerForm.valid">Register</ion-button>
 
-      <ion-button routerLink="/login" routerDirection="back" expand="block" fill="clear">
-        Already have account? Login
-      </ion-button>
+      <div class="ion-text-center margin-top margin-bottom">
+        <a routerLink="/login" routerDirection="back" style="text-decoration: none;">
+          Already have account? Login
+        </a>
+      </div>
     </form>
 
   </div>
