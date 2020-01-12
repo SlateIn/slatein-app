@@ -1,10 +1,5 @@
-<ion-content>
-  <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button (click)="goBack()">
-      <ion-icon name="arrow-dropleft"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  
+<app-header></app-header>
+<ion-content>  
   <div class="register-card">
     <input type="file" name="file" id="file" class="file-input" (change)="picChange($event)"
       accept="image/gif, image/jpeg, image/png" />
