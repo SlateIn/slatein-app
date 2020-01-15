@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   passwordReset(email) {
-    firebase.auth().sendPasswordResetEmail(email);
+    return firebase.auth().sendPasswordResetEmail(email);
   }
 
   logout() {

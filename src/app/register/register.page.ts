@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-register',
@@ -84,7 +87,11 @@ export class RegisterPage implements OnInit {
     const loading = await this.createLoadingAlert();
     await loading.present();
 
-    this.auth.signUp(this.registerForm.value, this.profilePicFile).then(() => {
+    this.auth.signUp(this.registerForm.value, this.profilePicFile).then(async () => {
+      await Storage.set({
+        key: 'email',
+        value: this.registerForm.value.email
+      });
       loading.dismiss();
       this.navCtrl.navigateForward('/tabs/myday');
     }).catch(err => {
