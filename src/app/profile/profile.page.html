@@ -5,16 +5,16 @@
 </ion-header>
 
 <ion-content fullscreen>
-    <ion-list>
+    <ion-list *ngIf="(info$ |async) as info">
       <ion-item class="default-avatar">
           <ion-avatar>
-            <img #profilePic  [src]="avatarSrc">
+            <img #profilePic  [src]="getAvatar(info.photoURL)">
           </ion-avatar>
       </ion-item>
       <ion-item >
           <ion-label class="name-avatar">
-              <h2>Tanmay</h2>
-              <p>pateltanmay30@gmail.com</p>
+              <h2>{{ info.fname }}</h2>
+              <p>{{info.email}}</p>
             </ion-label>
       </ion-item>
 

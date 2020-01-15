@@ -8,20 +8,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="(info$ |async) as info">
     
     <ion-list-header>
       Name
     </ion-list-header>
     <ion-item lines="full">
-      <ion-label>Tanmay Patel</ion-label>
+      <ion-label>{{info.fname | titlecase}} {{info.lname | titlecase}}</ion-label>
     </ion-item>
 
     <ion-list-header>
       Birthday
     </ion-list-header>
     <ion-item lines="full">
-      <ion-label>01/01/2020</ion-label>
+      <ion-label> {{formatDate(info.birthdate)}}</ion-label>
     </ion-item>
 
 
@@ -29,7 +29,7 @@
       Gender
     </ion-list-header>
     <ion-item lines="full">
-      <ion-label>Male</ion-label>
+      <ion-label>{{info.gender | titlecase}}</ion-label>
     </ion-item>
 
   </ion-list>
