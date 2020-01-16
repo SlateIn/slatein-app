@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Personal Information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="(info$ |async) as info">
+    
+    <ion-list-header>
+      Name
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label>{{info.fname | titlecase}} {{info.lname | titlecase}}</ion-label>
+    </ion-item>
+
+    <ion-list-header>
+      Birthday
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label> {{formatDate(info.birthdate)}}</ion-label>
+    </ion-item>
+
+
+    <ion-list-header>
+      Gender
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label>{{info.gender | titlecase}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
