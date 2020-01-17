@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../services/user-info.service';
@@ -16,6 +16,8 @@ export class ProfilePage implements OnInit {
   isProfilePicSelected = false;
   profilePicFile: File;
 
+  @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
+
   constructor(private navCtrl: NavController,
               private user: UserService) { }
 
@@ -31,8 +33,21 @@ export class ProfilePage implements OnInit {
     this.navCtrl.navigateForward('/tabs/profile/security-password')
   }
 
-  // changeProfilePic(){
+  picChange(event: any) {
+    this.profilePicFile = event.srcElement.files[0];
+    this.previewProfilePic(this.profilePicFile);
+  }
 
-  // }
+
+  previewProfilePic(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = (event) => {
+      this.profilePicRef.nativeElement.src = event.target['result'];
+      this.isProfilePicSelected = true;
+    }
+  }
+
 
 }
+
