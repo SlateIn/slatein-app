@@ -1,40 +1,9 @@
-ion-content {
-    --overflow: hidden;
-    --background: #21D4FD;
-    --background: linear-gradient(0deg, #abf7d5 0%, #57F2CC 48%, #4596FB 100%);
-}
-
-div.register-card {
-    position: absolute;
-    bottom: 25%;
-    width: 100%;
-}
-
-ion-card {
-    --background: #ffffff;
-    margin-bottom: 0px;
-    overflow: visible;
-}
-
-ion-icon {
-    color: #b6b7c1;
-}
-
-ion-button.register {
-    --background: #4596FB;
-    color: #ffffff;
-}
-
 ion-avatar {
     position: relative;
     margin: 0 auto;
     margin-top: -60px;
     width: 80px;
     height: 80px;
-}
-
-.account-exists-label {
-    color: #ffffff;
 }
 
 .file-input {
@@ -54,7 +23,10 @@ img.plus-icon {
     right: -1px;
 }
 
-ion-card-content {
-    padding-left: 8px;
-    padding-right: 8px;
+@media only screen and (min-height: 660px) {
+    div.register-card {
+        position: absolute;
+        bottom: 15%;
+        width: 100%;
+    }
 }

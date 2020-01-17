@@ -1,31 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="register-card">
+    <ion-card class="ion-padding-top">
+      <ion-card-content>
+        <ion-list class="margin-bottom">
+          <ion-item>
+            <ion-input placeholder="Email" type="text" [(ngModel)]="email" autocomplete="username"></ion-input>
+            <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Password" type="password" [(ngModel)]="password" clear-on-edit autocomplete="current-password"></ion-input>
+            <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
+          </ion-item>
+          <ion-button routerLink="/login/forgot-password" routerDirection="forward" fill="clear" color="medium" class="float-right">
+            Forgot Password?
+          </ion-button>
+        </ion-list>
+        <ion-button expand="block" class="register" fill="solid" size="default" (click)="login()"
+          [disabled]="!email || !password">Login</ion-button>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Username/E-mail</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
+        <ion-button expand="block" class="register" color="medium" routerLink="/register" routerDirection="forward"
+          fill="clear" size="default">
+          Don't you have slateIn account?
+        </ion-button>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password" ></ion-input>
-    </ion-item>
-
-  </ion-list>
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Login</ion-button>
-
-  <ion-item>
-    <ion-label position="floating"> Don't you have slateIn account? </ion-label>
-  </ion-item>
-  <ion-button fill="solid" expand="block" color="tertiary" (click)="register()">Register</ion-button>
-
+        <ion-text color="danger">
+          <ion-label>{{ loginErrorMsg }}</ion-label>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
-
-  
-
-

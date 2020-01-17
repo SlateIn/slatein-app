@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -9,5 +8,29 @@
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="(info$ |async) as info">
+    
+    <ion-list-header>
+      Name
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label>{{info.fname | titlecase}} {{info.lname | titlecase}}</ion-label>
+    </ion-item>
 
+    <ion-list-header>
+      Birthday
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label> {{formatDate(info.birthdate)}}</ion-label>
+    </ion-item>
+
+
+    <ion-list-header>
+      Gender
+    </ion-list-header>
+    <ion-item lines="full">
+      <ion-label>{{info.gender | titlecase}}</ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

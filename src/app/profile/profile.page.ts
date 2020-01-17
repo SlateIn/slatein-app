@@ -5,6 +5,7 @@ import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -19,6 +20,7 @@ export class ProfilePage implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(private navCtrl: NavController,
+              private route:Router,
               private user: UserService) { }
 
   ngOnInit() {
@@ -26,11 +28,23 @@ export class ProfilePage implements OnInit {
   }
 
   goToPersonalInfo(){
-    this.navCtrl.navigateForward('/tabs/profile/personal-information')
+    this.navCtrl.navigateForward('/tabs/profile/personal-information');
   }
 
   goToPasswordAndSecurity(){
-    this.navCtrl.navigateForward('/tabs/profile/security-password')
+    this.navCtrl.navigateForward('/tabs/profile/security-password');
+  }
+
+  logout(){
+    this.route.navigateByUrl('login');
+  }
+
+  getAvatar(url: string) {
+    if (url === '') {
+      return this.avatarSrc = '../../assets/icon/default_profile.svg';
+    } else {
+      return this.avatarSrc = url;
+    }
   }
 
   picChange(event: any) {
