@@ -19,8 +19,7 @@ export class ForgotPasswordPage {
       loading.dismiss();
       const toast = await this.toastController.create({
         message: 'Reset Password email have been sent. Please check your email.',
-        duration: 5000,
-        color: 'dark'
+        duration: 5000
       });
       toast.present();
       this.navCtrl.navigateBack('/login');
