@@ -1,0 +1,18 @@
+ion-list-header{
+    --color: var(--ion-color-grey-light);
+
+    .subTitle {
+        padding-left: 0;
+    }
+}
+
+ion-toolbar {
+    --background: #2A2A2E;
+    --border-style: none;
+    --padding-start: 0;
+    --padding-end: 10px;
+}
+
+ion-datetime, ion-select{
+    --padding-start: 0;
+}
