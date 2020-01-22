@@ -29,5 +29,7 @@ img.plus-icon {
 @media only screen and (min-height: 660px) {
     div.register-card {
         bottom: 15%;
+        position: absolute;
+        width:100%;
     }
 }
