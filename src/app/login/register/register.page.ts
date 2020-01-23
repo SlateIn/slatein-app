@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
 import { Plugins } from '@capacitor/core';
+import { PasswordValidatorService } from '@services/password-validator.service';
 
 const { Storage } = Plugins;
 
@@ -15,7 +16,7 @@ export class RegisterPage implements OnInit {
 
   email: string;
   password: string;
-  cpassword: string;
+  cpassword: string; 
   registerForm: FormGroup;
   avatarSrc = 'assets/icon/default_profile.svg';
   isProfilePicSelected = false;
@@ -28,7 +29,8 @@ export class RegisterPage implements OnInit {
     private fb: FormBuilder,
     private navCtrl: NavController,
     private auth: AuthService,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController,
+    private pwdValidator: PasswordValidatorService) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -46,25 +48,8 @@ export class RegisterPage implements OnInit {
       ])),
       confirmPassword: new FormControl('', Validators.required)
     }, {
-      validator: this.mustMatch('password', 'confirmPassword')
+      validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
-  }
-
-  mustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-        return;
-      }
-
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ mustMatch: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    }
   }
 
   get controls() { return this.registerForm.controls; }
