@@ -13,13 +13,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 })
 export class PersonalInformationPage implements OnInit {
   upgateButtonClicked = false;
-  userInfo: UserInfo;
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-  gender: string;
-  email: string;
-  photoURL: string;
+  userInfo = {} as UserInfo;
 
   itemRef: AngularFireObject<UserInfo>;
   item: Observable<UserInfo>;
@@ -32,13 +26,14 @@ export class PersonalInformationPage implements OnInit {
 
   ngOnInit() {
     this.info$ = this.user.info;
+
     this.user.info.subscribe( user => {
-      this.firstName = user.fname;
-      this.lastName = user.lname;
-      this.birthDate = this.formatDate(user.birthdate);
-      this.gender = user.gender;
-      this.email = user.email;
-      this.photoURL = user.photoURL;
+      this.userInfo.fname = user.fname;
+      this.userInfo.lname = user.lname;
+      this.userInfo.birthdate = this.formatDate(user.birthdate);
+      this.userInfo.gender = user.gender;
+      this.userInfo.email = user.email;
+      this.userInfo.photoURL = user.photoURL;
     });
   }
 
@@ -53,14 +48,14 @@ export class PersonalInformationPage implements OnInit {
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
 
-    this.userInfo = {
-      fname: this.firstName,
-      lname: this.lastName,
-      birthdate: this.birthDate,
-      gender: this.gender,
-      email: this.email,
-      photoURL: this.photoURL
-    };
+    // this.userInfo = {
+    //   fname: this.firstName,
+    //   lname: this.lastName,
+    //   birthdate: this.birthDate,
+    //   gender: this.gender,
+    //   email: this.email,
+    //   photoURL: this.photoURL
+    // };
     this.user.updateUserInfo(this.userInfo);
   }
 

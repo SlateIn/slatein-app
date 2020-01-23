@@ -27,21 +27,21 @@
       Name
     </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked">
-      <ion-label>{{firstName | titlecase}} {{lastName | titlecase}}</ion-label>
+      <ion-label>{{userInfo.fname | titlecase}} {{userInfo.lname | titlecase}}</ion-label>
     </ion-item>
     <ion-item lines="full" *ngIf="upgateButtonClicked">
-      <ion-input  type="text" [(ngModel)]="firstName" value="firstName"></ion-input>
-      <ion-input  type="text" [(ngModel)]="lastName" value="lastName"></ion-input>
+      <ion-input  type="text" [(ngModel)]="userInfo.fname" value="userInfo.fname"></ion-input>
+      <ion-input  type="text" [(ngModel)]="userInfo.lname" value="userInfo.lname"></ion-input>
     </ion-item>
 
     <ion-list-header>
       Birthday
     </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked">
-      <ion-label> {{formatDate(birthDate)}}</ion-label>
+      <ion-label> {{formatDate(userInfo.birthdate)}}</ion-label>
     </ion-item>
     <ion-item lines="full" *ngIf="upgateButtonClicked">
-      <ion-datetime value="formatDate(birthDate)" [(ngModel)]="birthDate" displayFormat="MM-DD-YYYY"></ion-datetime>
+      <ion-datetime value="formatDate(birthDate)" [(ngModel)]="userInfo.birthdate" displayFormat="MM-DD-YYYY"></ion-datetime>
     </ion-item>
 
 
@@ -49,10 +49,10 @@
       Gender
     </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked">
-      <ion-label>{{ gender | titlecase}}</ion-label>
+      <ion-label>{{ userInfo.gender | titlecase}}</ion-label>
     </ion-item>
     <ion-item lines="full" *ngIf="upgateButtonClicked">
-      <ion-select placeholder="Select One" mode="ios" [(ngModel)]="gender">
+      <ion-select placeholder="Select One" mode="ios" [(ngModel)]="userInfo.gender">
         <ion-select-option value="female">Female</ion-select-option>
         <ion-select-option value="male">Male</ion-select-option>
       </ion-select>
