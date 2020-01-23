@@ -60,7 +60,7 @@ export class SecurityPasswordPage implements OnInit {
         color: 'success'
       });
       toast.present();
-      this.navCtrl.navigateBack('/profile');
+      this.navCtrl.navigateBack('/tabs/profile');
     }).catch((err) => this.updatePwdErrorMsg = err.message)
   }
 
