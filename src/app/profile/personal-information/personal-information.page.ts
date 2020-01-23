@@ -47,15 +47,6 @@ export class PersonalInformationPage implements OnInit {
 
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
-
-    // this.userInfo = {
-    //   fname: this.firstName,
-    //   lname: this.lastName,
-    //   birthdate: this.birthDate,
-    //   gender: this.gender,
-    //   email: this.email,
-    //   photoURL: this.photoURL
-    // };
     this.user.updateUserInfo(this.userInfo);
   }
 
