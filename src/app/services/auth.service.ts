@@ -7,21 +7,19 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
 
-  
+
   firedata = firebase.database().ref('/users/');
   profilePic: string;
 
   constructor(private afAuth: AngularFireAuth) { }
 
-  signInWithEmail(credentials) {
-    console.log('Sign in with email');
-    return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
-      credentials.password);
+  signInWithEmail(email: string, pwd: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, pwd);
   }
 
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
-      if(profilePic) {
+      if (profilePic) {
         return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
           return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
             return this.updateUserInfo(newUser, profilePicUrl);
@@ -30,7 +28,7 @@ export class AuthService {
       } else {
         return this.updateUserInfo(newUser);
       }
-      
+
     });
   }
 
@@ -51,6 +49,10 @@ export class AuthService {
 
   logout() {
     return firebase.auth().signOut();
+  }
+
+  updatePwd(newPwd: string) {
+    return firebase.auth().currentUser.updatePassword(newPwd);
   }
 
 
