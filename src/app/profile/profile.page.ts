@@ -41,14 +41,6 @@ export class ProfilePage implements OnInit {
     this.route.navigateByUrl('login');
   }
 
-  getAvatar(url: string) {
-    if (url === '') {
-      return this.avatarSrc = '../../assets/icon/default_profile.svg';
-    } else {
-      return this.avatarSrc = url;
-    }
-  }
-
   picChange(event: any) {
     this.profilePicFile = event.srcElement.files[0];
     this.previewProfilePic(this.profilePicFile);
@@ -60,9 +52,7 @@ export class ProfilePage implements OnInit {
     reader.onloadend = (event) => {
       this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
-
       if(this.isProfilePicSelected){
-        console.log(file);
         this.authService.updatePhotoUrl(file);
       }
     }

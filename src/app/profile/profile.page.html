@@ -11,7 +11,7 @@
       accept="image/gif, image/jpeg, image/png" />
         <label for="file">
           <ion-avatar>
-            <img #profilePic [src]="avatarSrc">
+            <img #profilePic [src]="(info.photoURL)?info.photoURL:avatarSrc">
             <img class="plus-icon" src="assets/icon/plus.svg" *ngIf="!isProfilePicSelected">
           </ion-avatar>
         </label>

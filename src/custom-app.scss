@@ -1,7 +1,7 @@
 // ######################################### Start Global Customization ######################################### 
 ion-content {
-    --ion-text-color: #ffffff;
-    --ion-background-color: #2A2A2E;
+    --ion-text-color: #919193;
+    --ion-background-color: #ffffff;
 }
 
 ion-icon {
@@ -36,8 +36,6 @@ ion-fab {
 
 app-register, app-login, app-forgot-password {
     div.register-card {
-        position: absolute;
-        width: 100%;
         padding: 10px;
     }
 }
