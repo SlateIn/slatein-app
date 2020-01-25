@@ -8,11 +8,11 @@
     <ion-list *ngIf="(info$ |async) as info">
       <ion-item class="default-avatar">
         <input type="file" name="file" id="file" class="file-input" (change)="picChange($event)"
-        accept="image/gif, image/jpeg, image/png" />
+      accept="image/gif, image/jpeg, image/png" />
         <label for="file">
           <ion-avatar>
             <img #profilePic [src]="avatarSrc">
-            <img class="plus-icon" src="../../assets/icon/plus.svg" *ngIf="!isProfilePicSelected">
+            <img class="plus-icon" src="assets/icon/plus.svg" *ngIf="!isProfilePicSelected">
           </ion-avatar>
         </label>
       </ion-item>

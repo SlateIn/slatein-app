@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
+import { AuthService } from '@services/auth.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ProfilePage implements OnInit {
 
   constructor(private navCtrl: NavController,
               private route:Router,
-              private user: UserService) { }
+              private user: UserService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.info$ = this.user.info;
@@ -52,13 +54,17 @@ export class ProfilePage implements OnInit {
     this.previewProfilePic(this.profilePicFile);
   }
 
-
   previewProfilePic(file: File) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = (event) => {
       this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
+
+      if(this.isProfilePicSelected){
+        console.log(file);
+        this.authService.updatePhotoUrl(file);
+      }
     }
   }
 
