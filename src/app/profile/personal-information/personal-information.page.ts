@@ -5,6 +5,7 @@ import { UserInfo } from '@models/userInfo';
 import { DatePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-information',
@@ -19,7 +20,11 @@ export class PersonalInformationPage implements OnInit {
   item: Observable<UserInfo>;
   info$: Observable<UserInfo>;
 
-  constructor(private user: UserService, public datepipe: DatePipe, public db: AngularFireDatabase) {
+  constructor(
+    private user: UserService,
+    public datepipe: DatePipe,
+    public db: AngularFireDatabase,
+    private toastController: ToastController) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
    }
@@ -52,7 +57,15 @@ export class PersonalInformationPage implements OnInit {
 
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
-    this.user.updateUserInfo(this.userInfo);
+    this.user.updateUserInfo(this.userInfo).then(async () => {
+      const toast = await this.toastController.create({
+        message: 'Your Personal Information is successfully updated.',
+        duration: 2000,
+        color: 'success',
+        position: 'middle'
+      });
+      toast.present();
+    });
   }
 
 }
