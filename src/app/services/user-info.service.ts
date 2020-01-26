@@ -15,7 +15,7 @@ export class UserService {
    get info(): Observable<UserInfo> {
     return this.afAuth.authState.pipe(
       map(auth => auth.uid),
-      switchMap(res => this.db.object<UserInfo>(`/users/${res}/profile`).valueChanges()));
+      switchMap(res => this.db.object<UserInfo>(`/users/${res}/profile/personalInfo`).valueChanges()));
    }
 
 }
