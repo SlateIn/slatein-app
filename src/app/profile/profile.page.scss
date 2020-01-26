@@ -8,12 +8,25 @@ ion-content {
 .default-avatar{
     --border-style : none;
 
+    label{
+        margin:0 auto;
+        margin-top: 40px;
+    }
+
     ion-avatar {
         position: relative;
-        margin: 0 auto;
-        margin-top: 40px;
+        //text-align: center;
+        //margin: 40px 0px 0px 40px;
         width: 80px;
         height: 80px;
+    }
+
+    img.plus-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        bottom: 3px;
+        right: -1px;
     }
 }
 
@@ -28,3 +41,14 @@ ion-content {
 .logout{
     --min-height: 52px
 }
+
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+

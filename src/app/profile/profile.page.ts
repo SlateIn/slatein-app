@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-
 import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
+import { AuthService } from '@services/auth.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -12,11 +13,17 @@ import { UserInfo } from '@models/userInfo';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
-  avatarSrc: string;
+  avatarSrc = '../../assets/icon/default_profile.svg';
   info$: Observable<UserInfo>;
+  isProfilePicSelected = false;
+  profilePicFile: File;
 
-  constructor(private navCtrl: NavController, private user: UserService) { }
+  @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
+
+  constructor(private navCtrl: NavController,
+              private route:Router,
+              private user: UserService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.info$ = this.user.info;
@@ -30,13 +37,27 @@ export class ProfilePage implements OnInit {
     this.navCtrl.navigateForward('/tabs/profile/security-password');
   }
 
-  getAvatar(url: string) {
-    console.log("this is "+url);
-    if (url === '') {
-      return this.avatarSrc = '../../assets/icon/default_profile.svg';
-    } else {
-      return this.avatarSrc = url;
+  logout(){
+    this.route.navigateByUrl('login');
+  }
+
+  picChange(event: any) {
+    this.profilePicFile = event.srcElement.files[0];
+    this.previewProfilePic(this.profilePicFile);
+  }
+
+  previewProfilePic(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = (event) => {
+      this.profilePicRef.nativeElement.src = event.target['result'];
+      this.isProfilePicSelected = true;
+      if(this.isProfilePicSelected){
+        this.authService.updatePhotoUrl(file);
+      }
     }
   }
 
+
 }
+
