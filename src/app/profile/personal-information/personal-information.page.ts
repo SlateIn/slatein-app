@@ -27,10 +27,10 @@ export class PersonalInformationPage implements OnInit {
   ngOnInit() {
     this.info$ = this.user.info;
 
-    this.user.info.subscribe( user => {
+    this.info$.subscribe( user => {
       this.userInfo.fname = user.fname;
       this.userInfo.lname = user.lname;
-      this.userInfo.birthdate = this.formatDate(user.birthdate);
+      this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;
       this.userInfo.photoURL = user.photoURL;
@@ -38,7 +38,12 @@ export class PersonalInformationPage implements OnInit {
   }
 
   formatDate(date: string) {
-    return this.datepipe.transform(date, 'MM-dd-yyyy');
+    const newDate = new Date(date).getTime();
+    return this.datepipe.transform(newDate, 'MM-dd-yyyy');
+  }
+
+  upDateBirthDate(updatedBirthdate: string) {
+    this.userInfo.birthdate = updatedBirthdate;
   }
 
   onUpdateInfoClick() {
