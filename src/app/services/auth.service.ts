@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
 
 
-  firedata = firebase.database().ref('/users/');
-  profilePic: string;
+  private firedata = firebase.database().ref('/users/');
+  private currentUserUID$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth) { 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUserUID$.next(user.uid);
+      } 
+    });
+  }
+
+  get currentUserUID() {
+    return this.currentUserUID$.asObservable();
+  }
 
   signInWithEmail(email: string, pwd: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, pwd);

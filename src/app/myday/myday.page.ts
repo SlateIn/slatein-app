@@ -15,9 +15,10 @@ export class MydayPage implements OnInit {
 
   async ngOnInit() {
     this.info$ = this.user.info;
-        this.notification.scheduleAt('First Schedule Reminder', 'Successful pop-up one time notification.', 1, new Date(Date.now() + 1000 * 5));
 
-        this.notification.scheduleRepeatingEvery('Second Schedule Reminder', 'Successful pop-up one every minute notification.', 2, 'minute');
+    this.notification.scheduleAt('First Schedule Reminder', 'Successful pop-up one time notification.', new Date(Date.now() + 1000 * 5));
+
+    this.notification.scheduleRepeatingEvery('Second Schedule Reminder', 'Successful pop-up one every minute notification.', 'minute');
   }
 
 }
