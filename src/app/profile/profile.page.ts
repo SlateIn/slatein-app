@@ -37,8 +37,9 @@ export class ProfilePage implements OnInit {
     this.navCtrl.navigateForward('/tabs/profile/security-password');
   }
 
-  logout(){
-    this.route.navigateByUrl('login');
+  logout() {
+    this.authService.logout();
+    this.navCtrl.navigateRoot('login');
   }
 
   picChange(event: any) {
@@ -52,7 +53,7 @@ export class ProfilePage implements OnInit {
     reader.onloadend = (event) => {
       this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
-      if(this.isProfilePicSelected){
+      if(this.profilePicRef.nativeElement.src){
         this.authService.updatePhotoUrl(file);
       }
     }
