@@ -27,14 +27,8 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-<<<<<<< HEAD
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-    .then(() => {this.navCtrl.navigateRoot('/tabs/myday'); })
-    .catch(err => this.loginErrorMsg = err.message);
-=======
     this.auth.signInWithEmail(this.email, this.password)
     .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
     .catch(err => this.loginErrorMsg = err.message)
->>>>>>> develop
   }
 }
