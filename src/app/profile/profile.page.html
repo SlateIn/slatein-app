@@ -7,13 +7,18 @@
 <ion-content fullscreen>
     <ion-list *ngIf="(info$ |async) as info">
       <ion-item class="default-avatar">
+        <input type="file" name="file" id="file" class="file-input" (change)="picChange($event)"
+      accept="image/gif, image/jpeg, image/png" />
+        <label for="file">
           <ion-avatar>
-            <img #profilePic  [src]="getAvatar(info.photoURL)">
+            <img #profilePic [src]="(info.photoURL)?info.photoURL:avatarSrc">
+            <img class="plus-icon" src="assets/icon/plus.svg" *ngIf="!isProfilePicSelected">
           </ion-avatar>
+        </label>
       </ion-item>
       <ion-item >
           <ion-label class="name-avatar">
-              <h2>{{ info.fname }}</h2>
+              <h2>{{info.fname | titlecase  }}</h2>
               <p>{{info.email}}</p>
             </ion-label>
       </ion-item>
@@ -42,7 +47,7 @@
         </ion-avatar>
       </ion-item>
 
-      <ion-item class="logout"> 
+      <ion-item class="logout" (click)="logout()"> 
         <ion-avatar slot="start">
           <img  src="../../assets/icon/icons8-logout-rounded-down-64.png">
         </ion-avatar>

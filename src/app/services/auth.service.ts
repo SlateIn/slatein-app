@@ -62,10 +62,23 @@ export class AuthService {
     return firebase.auth().signOut();
   }
 
+  updatePhotoUrl(profilePic) {
+    if(profilePic) {
+      firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
+        {
+          snapshot.ref.getDownloadURL().then((profilePicUrl) => {
+            this.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
+              'photoURL': profilePicUrl ? profilePicUrl : ''
+            })
+          })
+        }
+      });
+    }
+  
+  }
+
   updatePwd(newPwd: string) {
     return firebase.auth().currentUser.updatePassword(newPwd);
   }
-
-
-
 }
+
