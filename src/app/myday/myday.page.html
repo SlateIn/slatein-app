@@ -5,7 +5,15 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="(info$ |async) as info">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="end">
+      <ion-button [routerLink]="['/tabs/myday/new-task']">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title>Tasks List</ion-title>
+  </ion-toolbar>
+  <!-- <div *ngIf="(info$ |async) as info">
     <ion-label>First Name: {{info.fname}}</ion-label>
     <br>
     <ion-label>Last Name: {{info.lname}}</ion-label>
@@ -16,5 +24,21 @@
     <br>
     <ion-label>Birthdate: {{info.birthdate}}</ion-label>
     <img [src]="info.photoURL" alt="">
-  </div>
+  </div> -->
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-input>{{item.title}}</ion-input>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list> -->
+
+  <!-- <form [formGroup]="taskForm" (ngSubmit)="addNewTask(taskForm.value)">
+    <ion-item *ngFor="let item of items">
+      <ion-input required type="text" formControlName="title">{{item.title}}</ion-input>
+      <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>
+    </ion-item>
+    
+  </form> -->
+
+  <ion-button expand="full" [routerLink]="['/tabs/myday/new-task']" type="submit" color="light">Add a Reminder or Task <ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
 </ion-content>

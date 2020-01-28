@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MydayPageRoutingModule } from './myday-routing.module';
+import { NewTaskPageRoutingModule } from './new-task-routing.module';
 
-import { MydayPage } from './myday.page';
+import { NewTaskPage } from './new-task.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    MydayPageRoutingModule
+    ReactiveFormsModule,
+    NewTaskPageRoutingModule
   ],
-  declarations: [MydayPage]
+  declarations: [NewTaskPage]
 })
-export class MydayPageModule {}
+export class NewTaskPageModule {}

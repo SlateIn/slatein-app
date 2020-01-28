@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: MydayPage
+  },
+  {
+    path: 'new-task',
+    loadChildren: () => import('./new-task/new-task.module').then( m => m.NewTaskPageModule)
+  },
+  {
+    path: 'details',
+    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   }
 ];
 
