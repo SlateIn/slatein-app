@@ -20,7 +20,7 @@ export class AuthService {
     });
   }
 
-  get currentUserUID() {
+  getCurrentUserUID() {
     return this.currentUserUID$.asObservable();
   }
 
@@ -33,13 +33,19 @@ export class AuthService {
       if (profilePic) {
         return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
           return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-            return this.updateUserInfo(newUser, profilePicUrl);
+            return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
           });
         });
       } else {
-        return this.updateUserInfo(newUser);
+        return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
       }
 
+    });
+  }
+
+  private initdata() {
+    return this.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
+      scheduleCounter: 0
     });
   }
 

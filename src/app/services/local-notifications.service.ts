@@ -1,9 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import * as firebase from 'firebase';
 import { Plugins } from '@capacitor/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of, forkJoin } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { switchMap, map, filter, tap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map, filter, tap, withLatestFrom, take, first, combineLatest, flatMap, mergeMap } from 'rxjs/operators';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from './auth.service';
 const { LocalNotifications } = Plugins;
@@ -12,64 +12,72 @@ const { LocalNotifications } = Plugins;
 @Injectable({
   providedIn: 'root'
 })
-export class LocalNotificationsService implements OnDestroy {
+export class LocalNotificationsService {
 
   firedata = firebase.database().ref('/users/');
-  scheduleCounter: number;
-  scheduleCounterSubscription$: Subscription;
+  currentUserUID: string;
 
-  constructor(private auth: AuthService, private db: AngularFireDatabase) { 
-    this.scheduleCounterSubscription$ = 
-      this.getScheduleCounter().subscribe(res => {
-        console.log('Value is: ',res)
-        this.scheduleCounter = res + 1;
-      });
+  constructor(private auth: AuthService, private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
+
+    this.setScheduleCounter().subscribe(res => console.log(res));
   }
 
   getScheduleCounter(): Observable<number> {
-    return this.auth.currentUserUID.pipe(
-      filter(res => !!res),
+    return this.auth.getCurrentUserUID().pipe(
       switchMap(res => this.db.object<number>(`/users/${res}/scheduleCounter`).valueChanges()));
-   }
+  }
 
-  setScheduleCounter(counter: number) {
-    this.auth.currentUserUID.pipe(
-      withLatestFrom(this.auth.currentUserUID, this.getScheduleCounter()),
-      filter(([uid, counter]) => !!uid && !!counter),
-      tap(([uid, counter]) => {
-        this.firedata.child(`${uid}`).update({scheduleCounter: counter});
-      })).subscribe();
-   }
+  setScheduleCounter(): Observable<number> {
+    return this.auth.getCurrentUserUID().pipe(
+      filter((uid) => !!uid),
+      mergeMap((uid) => forkJoin(
+        of(uid),
+        this.db.object<number>(`/users/${uid}/scheduleCounter`).valueChanges().pipe(take(1))
+      )),
+      tap(([uid, counter]) => this.firedata.child(`${uid}`).update({ scheduleCounter: counter + 1 })),
+      mergeMap(([uid, counter]) => {
+        const count = counter + 1;
+        return of(count);
+      }));
+  }
 
-  async scheduleAt(title: string, body: string, scheduelAt: Date) {
-    await this.setScheduleCounter(this.scheduleCounter);
-    return LocalNotifications.schedule({
-      notifications: [
-        {
-          title: title,
-          body: body,
-          id: this.scheduleCounter,
-          schedule: { at: scheduelAt },
-          sound: null,
-          attachments: null,
-          actionTypeId: '',
-          extra: null
-        }
-      ]
+  scheduleAt(title: string, body: string, scheduelAt: Date) {
+    return new Promise((resolve, reject) => {
+      this.setScheduleCounter().pipe(take(1)).subscribe(id => {
+        LocalNotifications.schedule({
+          notifications: [
+            {
+              title: title,
+              body: body,
+              id: id,
+              schedule: { at: scheduelAt },
+              sound: null,
+              attachments: null,
+              actionTypeId: '',
+              extra: null
+            }
+          ]
+        });
+        resolve();
+      });
     });
   }
 
-  async scheduleRepeatingEvery(title: string, body: string, scheduelAt: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
-    await this.setScheduleCounter(this.scheduleCounter);
-    return LocalNotifications.schedule({
-      notifications: [{
-        title: title,
-        body: body,
-        id: this.scheduleCounter,
-        schedule: {
-          every: scheduelAt
-        }
-      }]
+  scheduleRepeatingEvery(title: string, body: string, scheduelAt: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
+    return new Promise((resolve, reject) => {
+      this.setScheduleCounter().pipe(take(1)).subscribe(id => {
+        LocalNotifications.schedule({
+          notifications: [{
+            title: title,
+            body: body,
+            id: id,
+            schedule: {
+              every: scheduelAt
+            }
+          }]
+        });
+        resolve();
+      });
     });
   }
 
@@ -78,8 +86,4 @@ export class LocalNotificationsService implements OnDestroy {
     pendingNotifs && Plugins.LocalNotifications.cancel(pendingNotifs);
   }
 
-  ngOnDestroy() {
-    this.scheduleCounterSubscription$ && this.scheduleCounterSubscription$.unsubscribe();
-  }
-  
 }
