@@ -31,5 +31,4 @@ export class LoginPage implements OnInit {
     .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
     .catch(err => this.loginErrorMsg = err.message)
   }
-  
 }
