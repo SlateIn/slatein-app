@@ -38,7 +38,7 @@ export class ProfilePage implements OnInit {
   }
 
   logout(){
-    this.route.navigateByUrl('login');
+    this.navCtrl.navigateRoot('/login');
   }
 
   picChange(event: any) {
