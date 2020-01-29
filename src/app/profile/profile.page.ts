@@ -1,10 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { AuthService } from '@services/auth.service';
+import { SettingsPage } from './settings/settings.page';
 
 
 @Component({
@@ -21,9 +22,10 @@ export class ProfilePage implements OnInit {
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(private navCtrl: NavController,
-              private route:Router,
               private user: UserService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private modalController: ModalController,
+              public alertController: AlertController) { }
 
   ngOnInit() {
     this.info$ = this.user.info;
@@ -37,9 +39,32 @@ export class ProfilePage implements OnInit {
     this.navCtrl.navigateForward('/tabs/profile/security-password');
   }
 
-  logout() {
-    this.authService.logout();
-    this.navCtrl.navigateRoot('login');
+  async goToSettingsPage() {
+    const settings = await this.modalController.create({
+      component: SettingsPage
+    });
+    return await settings.present();
+  }
+
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Logout',
+      message: 'Do you really want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }, {
+          text: 'Yes',
+          handler: () => {
+            this.authService.logout();
+            this.navCtrl.navigateRoot('login');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   picChange(event: any) {

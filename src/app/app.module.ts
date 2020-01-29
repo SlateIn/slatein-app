@@ -16,12 +16,13 @@ import { environment} from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgCalendarModule  } from 'ionic2-calendar';
+import { SettingsPage } from './profile/settings/settings.page';
 
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, SettingsPage],
+  entryComponents: [SettingsPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
