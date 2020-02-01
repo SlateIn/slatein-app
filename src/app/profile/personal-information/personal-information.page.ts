@@ -5,7 +5,7 @@ import { UserInfo } from '@models/userInfo';
 import { DatePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-information',
@@ -26,7 +26,8 @@ export class PersonalInformationPage implements OnInit {
     private user: UserService,
     public datepipe: DatePipe,
     public db: AngularFireDatabase,
-    private toastController: ToastController) {
+    private toastController: ToastController,
+    private modalController: ModalController) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
    }
@@ -78,4 +79,7 @@ export class PersonalInformationPage implements OnInit {
     }
   }
 
+  async backClicked() {
+    await this.modalController.dismiss();
+  }
 }

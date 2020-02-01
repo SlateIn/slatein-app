@@ -17,12 +17,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgCalendarModule  } from 'ionic2-calendar';
 import { SettingsPage } from './profile/settings/settings.page';
+import { PersonalInformationPage } from './profile/personal-information/personal-information.page';
+import { SecurityPasswordPage } from './profile/security-password/security-password.page';
 
 
 
 @NgModule({
-  declarations: [AppComponent, SettingsPage],
-  entryComponents: [SettingsPage],
+  declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage],
+  entryComponents: [SettingsPage, PersonalInformationPage, SecurityPasswordPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { AuthService } from '@services/auth.service';
 import { SettingsPage } from './settings/settings.page';
+import { PersonalInformationPage } from './personal-information/personal-information.page';
+import { SecurityPasswordPage } from './security-password/security-password.page';
 
 
 @Component({
@@ -31,12 +33,18 @@ export class ProfilePage implements OnInit {
     this.info$ = this.user.info;
   }
 
-  goToPersonalInfo(){
-    this.navCtrl.navigateForward('/tabs/profile/personal-information');
+  async goToPersonalInfo() {
+    const personalInfo = await this.modalController.create({
+      component: PersonalInformationPage
+    });
+    return await personalInfo.present();
   }
 
-  goToPasswordAndSecurity(){
-    this.navCtrl.navigateForward('/tabs/profile/security-password');
+  async goToPasswordAndSecurity() {
+    const security = await this.modalController.create({
+      component: SecurityPasswordPage
+    });
+    return await security.present();
   }
 
   async goToSettingsPage() {
