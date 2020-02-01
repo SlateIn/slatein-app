@@ -86,7 +86,7 @@ export class ProfilePage implements OnInit {
     reader.onloadend = (event) => {
       this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
-      if(this.profilePicRef.nativeElement.src){
+      if(this.profilePicRef.nativeElement.src) {
         this.authService.updatePhotoUrl(file);
       }
     }
