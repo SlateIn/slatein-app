@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar class="header">
-    <ion-title>Personal Information</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start" (click)="backClicked()">
+      <ion-icon name="arrow-back" size="large" ></ion-icon>
+      Back
     </ion-buttons>
+    <ion-title>Personal Information</ion-title>
   </ion-toolbar>
 </ion-header>
 

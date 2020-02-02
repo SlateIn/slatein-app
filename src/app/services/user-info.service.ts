@@ -19,7 +19,7 @@ export class UserService {
    }
 
   updateUserInfo(user: UserInfo) {
-    return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}`).update({
+    return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
       fname: user.fname,
       lname: user.lname,
       email: user.email,

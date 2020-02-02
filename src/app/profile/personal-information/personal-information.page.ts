@@ -5,7 +5,7 @@ import { UserInfo } from '@models/userInfo';
 import { DatePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-personal-information',
@@ -14,17 +14,20 @@ import { ToastController } from '@ionic/angular';
 })
 export class PersonalInformationPage implements OnInit {
   upgateButtonClicked = false;
+  currentUser = {} as UserInfo;
   userInfo = {} as UserInfo;
 
   itemRef: AngularFireObject<UserInfo>;
   item: Observable<UserInfo>;
   info$: Observable<UserInfo>;
+  profileUpdated: boolean;
 
   constructor(
     private user: UserService,
     public datepipe: DatePipe,
     public db: AngularFireDatabase,
-    private toastController: ToastController) {
+    private toastController: ToastController,
+    private modalController: ModalController) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
    }
@@ -33,6 +36,7 @@ export class PersonalInformationPage implements OnInit {
     this.info$ = this.user.info;
 
     this.info$.subscribe( user => {
+      this.currentUser = user;
       this.userInfo.fname = user.fname;
       this.userInfo.lname = user.lname;
       this.userInfo.birthdate = user.birthdate;
@@ -57,15 +61,25 @@ export class PersonalInformationPage implements OnInit {
 
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
-    this.user.updateUserInfo(this.userInfo).then(async () => {
-      const toast = await this.toastController.create({
-        message: 'Your Personal Information is successfully updated.',
-        duration: 2000,
-        color: 'success',
-        position: 'middle'
-      });
-      toast.present();
-    });
+
+    if (this.currentUser.fname !== this.userInfo.fname ||
+      this.currentUser.lname !== this.userInfo.lname ||
+      this.currentUser.birthdate !== this.userInfo.birthdate ||
+      this.currentUser.gender !== this.userInfo.gender) {
+
+        this.user.updateUserInfo(this.userInfo).then(async () => {
+          const toast = await this.toastController.create({
+            message: 'Your Personal Information is successfully updated.',
+            duration: 2000,
+            color: 'success',
+            position: 'middle'
+          });
+          toast.present();
+        });
+    }
   }
 
+  async backClicked() {
+    await this.modalController.dismiss();
+  }
 }
