@@ -6,7 +6,7 @@ import { UserInfo } from '@models/userInfo';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { PasswordValidatorService } from '@services/password-validator.service';
 import { AuthService } from '@services/auth.service';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-security-password',
@@ -18,14 +18,15 @@ export class SecurityPasswordPage implements OnInit {
   userInfo: UserInfo;
   updatePwdForm: FormGroup;
   updatePwdErrorMsg: string;
-  
+
   constructor(
-    private auth: AuthService, 
-    private user: UserService, 
-    private fb: FormBuilder, 
-    private pwdValidator: PasswordValidatorService, 
+    private auth: AuthService,
+    private user: UserService,
+    private fb: FormBuilder,
+    private pwdValidator: PasswordValidatorService,
     private toastController: ToastController,
-    private navCtrl: NavController) { }
+    private navCtrl: NavController,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.user.info.pipe(take(1)).subscribe((userInfo) => {
@@ -64,4 +65,7 @@ export class SecurityPasswordPage implements OnInit {
     }).catch((err) => this.updatePwdErrorMsg = err.message)
   }
 
+  async backClicked() {
+    await this.modalController.dismiss();
+  }
 }
