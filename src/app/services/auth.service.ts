@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
 
 
-  firedata = firebase.database().ref('/users/');
-  profilePic: string;
+  private firedata = firebase.database().ref('/users/');
+  private currentUserUID$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth) { 
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUserUID$.next(user.uid);
+      } 
+    });
+  }
+
+  getCurrentUserUID() {
+    return this.currentUserUID$.asObservable();
+  }
 
   signInWithEmail(email: string, pwd: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, pwd);
@@ -22,18 +33,24 @@ export class AuthService {
       if (profilePic) {
         return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
           return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-            return this.updateUserInfo(newUser, profilePicUrl);
+            return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
           });
         });
       } else {
-        return this.updateUserInfo(newUser);
+        return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
       }
 
     });
   }
 
-  private updateUserInfo(newUser, profilePicUrl?) {
+  private initdata() {
     return this.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
+      scheduleCounter: 0
+    });
+  }
+
+  private updateUserInfo(newUser, profilePicUrl?) {
+    return this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
       fname: newUser.fname,
       lname: newUser.lname,
       email: newUser.email,
