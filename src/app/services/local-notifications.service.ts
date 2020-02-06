@@ -19,7 +19,7 @@ export class LocalNotificationsService {
 
   constructor(private auth: AuthService, private db: AngularFireDatabase, private afAuth: AngularFireAuth) {
 
-    this.setScheduleCounter().subscribe(res => console.log(res));
+    
   }
 
   getScheduleCounter(): Observable<number> {
@@ -41,16 +41,16 @@ export class LocalNotificationsService {
       }));
   }
 
-  scheduleAt(title: string, body: string, scheduelAt: Date) {
+  scheduleAt(data) {
     return new Promise((resolve, reject) => {
       this.setScheduleCounter().pipe(take(1)).subscribe(id => {
         LocalNotifications.schedule({
           notifications: [
             {
-              title: title,
-              body: body,
+              title: data.title,
+              body: data.description,
               id: id,
-              schedule: { at: scheduelAt },
+              schedule: { at: data.reminderdate },
               sound: null,
               attachments: null,
               actionTypeId: '',
@@ -58,7 +58,7 @@ export class LocalNotificationsService {
             }
           ]
         });
-        resolve();
+        resolve(id);
       });
     });
   }
