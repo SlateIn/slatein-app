@@ -42,7 +42,7 @@ export class LocalNotificationsService {
   }
 
   scheduleAt(data) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.setScheduleCounter().pipe(take(1)).subscribe(id => {
         LocalNotifications.schedule({
           notifications: [
@@ -50,7 +50,10 @@ export class LocalNotificationsService {
               title: data.title,
               body: data.description,
               id: id,
-              schedule: { at: data.reminderdate },
+              schedule: {
+                every: data.repeat, 
+                at: data.reminderdate 
+              },
               sound: null,
               attachments: null,
               actionTypeId: '',
@@ -59,24 +62,6 @@ export class LocalNotificationsService {
           ]
         });
         resolve(id);
-      });
-    });
-  }
-
-  scheduleRepeatingEvery(title: string, body: string, scheduelAt: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'hour' | 'minute' | 'second') {
-    return new Promise((resolve, reject) => {
-      this.setScheduleCounter().pipe(take(1)).subscribe(id => {
-        LocalNotifications.schedule({
-          notifications: [{
-            title: title,
-            body: body,
-            id: id,
-            schedule: {
-              every: scheduelAt
-            }
-          }]
-        });
-        resolve();
       });
     });
   }

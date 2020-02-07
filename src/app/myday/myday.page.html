@@ -31,11 +31,23 @@
           <ion-label>Date and Time</ion-label>
           <ion-datetime formControlName="reminderdate" displayFormat="MMM DD, YYYY HH:mm" placeholder="Select Date and Time"></ion-datetime>
         </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label>Repeat</ion-label>
+            <ion-select formControlName="repeat" placeholder="Select One">
+              <ion-select-option value="never">Never</ion-select-option>
+              <ion-select-option value="day">Day</ion-select-option>
+              <ion-select-option value="week">Weekly</ion-select-option>
+              <ion-select-option value="two-weeks">Biweekly</ion-select-option>
+              <ion-select-option value="month">Monthly</ion-select-option>
+              <ion-select-option value="year">Yearly</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
         <ion-button expand="full"  type="submit" color="light">Add</ion-button>
       </ion-card>
     </form>
   </div>
  
-  <ion-button expand="full" (click)="addReminderEnable($event)" [disabled]="remindMeValue" color="light">Add a Reminder for My Day <ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
-  <!-- <ion-button expand="full" [routerLink]="['/tabs/myday/new-task']" type="submit" color="light">Add a Reminder or Task <ion-icon slot="icon-only" name="add"></ion-icon></ion-button> -->
+  <ion-button expand="full" (click)="addReminderEnable()" [disabled]="remindMeValue" color="light">Add a Reminder for My Day <ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
 </ion-content>

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-info.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { LocalNotificationsService } from '@services/local-notifications.service';
 import { TaskService } from '@services/task.service';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TaskReminderInfo } from '@models/taskDetails';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { TaskReminderInfo } from '@models/taskDetails';
   templateUrl: './myday.page.html',
   styleUrls: ['./myday.page.scss'],
 })
-export class MydayPage implements OnInit {
+export class MydayPage implements OnInit, OnDestroy {
   info$: Observable<UserInfo>;
   taskForm: FormGroup;
   taskinfo: any;
@@ -21,49 +22,61 @@ export class MydayPage implements OnInit {
   reminderdate: any;
   remindMeValue: boolean = false;
   taskInfoKeys: string[];
-  constructor(private user: UserService,
-              private notification: LocalNotificationsService,
-              private taskService: TaskService, 
-              private fb: FormBuilder, ) { }
-  
-  async ngOnInit() {
+  todayDate = new Date();
+  getTaskSubscription$: Subscription;
 
-    // Get All Task 
-    this.taskService.getTask.subscribe(res => {
-      this.taskinfo = res;
-      this.taskInfoKeys = Object.keys(res);
-      console.log(this.taskinfo);
+  constructor(
+    private notification: LocalNotificationsService,
+    private taskService: TaskService,
+    private fb: FormBuilder) { }
+
+  async ngOnInit() {
+    // Get today's task 
+    this.getTaskSubscription$ = this.taskService.getTask.subscribe(tasks => {
+      const todayTasks = tasks.filter(task => {
+        const taskScheduleDate = new Date(task.reminderdate);
+        return taskScheduleDate.getDay() === this.todayDate.getDay() &&
+          taskScheduleDate.getMonth() === this.todayDate.getMonth() &&
+          taskScheduleDate.getFullYear() === this.todayDate.getFullYear();
+      })
+      this.taskinfo = todayTasks;
+      this.taskInfoKeys = Object.keys(todayTasks);
     });
-    
-    this.info$ = this.user.info;
+    this.resetTaskForm();
+  }
+
+  resetTaskForm() {
     this.taskForm = this.fb.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       reminderdate: new FormControl('', Validators.required),
+      repeat: new FormControl('', Validators.required),
     });
   }
 
-  async onSubmit(value){
+  async onSubmit(value) {
     this.reminderdate = Date.now();
-    let data: TaskReminderInfo  = {
+    let data: TaskReminderInfo = {
       title: value.title,
       description: value.description,
       image: '',
       reminderdate: value.reminderdate,
       status: 'pending',
-      repeat: '',
+      repeat: value.repeat,
     }
-    this.notification.scheduleAt(data).then(id =>{
-      this.taskService.createTask({...data, reminderdate: data.reminderdate.toString()},id);
+    this.notification.scheduleAt(data).then(id => {
+      this.taskService.createTask({ ...data, reminderdate: data.reminderdate.toString() }, id);
     });
     this.remindMeValue = !this.remindMeValue;
   }
-  addReminderEnable($event){
+
+  addReminderEnable() {
     this.remindMeValue = !this.remindMeValue;
-      this.taskForm = this.fb.group({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      reminderdate: new FormControl('', Validators.required),
-    });
+    this.resetTaskForm();
   }
+
+  ngOnDestroy(): void {
+    this.getTaskSubscription$ && this.getTaskSubscription$.unsubscribe
+  }
+
 }
