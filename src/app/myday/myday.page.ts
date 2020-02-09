@@ -7,6 +7,7 @@ import { TaskService } from '@services/task.service';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TaskReminderInfo } from '@models/taskDetails';
 import { filter } from 'rxjs/operators';
+import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { filter } from 'rxjs/operators';
 export class MydayPage implements OnInit, OnDestroy {
   info$: Observable<UserInfo>;
   taskForm: FormGroup;
-  taskinfo: any;
+  taskDetails: TaskReminderInfo[];
   errorMessage: string;
   reminderdate: any;
   remindMeValue: boolean = false;
@@ -32,16 +33,7 @@ export class MydayPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     // Get today's task 
-    this.getTaskSubscription$ = this.taskService.getTask.subscribe(tasks => {
-      const todayTasks = tasks.filter(task => {
-        const taskScheduleDate = new Date(task.reminderdate);
-        return taskScheduleDate.getDay() === this.todayDate.getDay() &&
-          taskScheduleDate.getMonth() === this.todayDate.getMonth() &&
-          taskScheduleDate.getFullYear() === this.todayDate.getFullYear();
-      })
-      this.taskinfo = todayTasks;
-      this.taskInfoKeys = Object.keys(todayTasks);
-    });
+    this.getTaskSubscription$ = this.taskService.getDailyTask.subscribe(tasks => this.taskDetails = tasks);
     this.resetTaskForm();
   }
 
@@ -55,7 +47,10 @@ export class MydayPage implements OnInit, OnDestroy {
   }
 
   async onSubmit(value) {
-    this.reminderdate = Date.now();
+    const reminderdate = new Date(value.reminderdate);
+    const path = `${reminderdate.getFullYear()}/${reminderdate.getMonth() + 1}/${reminderdate.getDate()}`;
+    const id = `${reminderdate.getFullYear()}${reminderdate.getMonth() + 1}${reminderdate.getDate()}`;
+
     let data: TaskReminderInfo = {
       title: value.title,
       description: value.description,
@@ -63,9 +58,11 @@ export class MydayPage implements OnInit, OnDestroy {
       reminderdate: value.reminderdate,
       status: 'pending',
       repeat: value.repeat,
+      path
     }
-    this.notification.scheduleAt(data).then(id => {
-      this.taskService.createTask({ ...data, reminderdate: data.reminderdate.toString() }, id);
+    this.notification.scheduleAt(data, id).then((id: number) => {
+      data.id = id;
+      this.taskService.createTask(data);
     });
     this.remindMeValue = !this.remindMeValue;
   }

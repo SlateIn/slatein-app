@@ -8,13 +8,18 @@
   <ion-toolbar>
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
+
+  <ng-container *ngFor="let taskDetail of taskDetails">
+    <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
+  </ng-container>
   
-  <ion-list>
+  
+  <!-- <ion-list>
     <ion-item *ngFor="let info of taskInfoKeys">
       <ion-label>{{taskinfo[info].title}}</ion-label>
       <ion-checkbox slot="end"></ion-checkbox>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
   <div *ngIf="remindMeValue">
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
