@@ -6,7 +6,7 @@ import { LocalNotificationsService } from '@services/local-notifications.service
 import { TaskService } from '@services/task.service';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TaskReminderInfo } from '@models/taskDetails';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
 
 
@@ -33,7 +33,9 @@ export class MydayPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     // Get today's task 
-    this.getTaskSubscription$ = this.taskService.getDailyTask.subscribe(tasks => this.taskDetails = tasks);
+    this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
+      map(tasks => tasks.sort((a, b) => new Date(a.reminderdate).getTime() - new Date(b.reminderdate).getTime()))
+    ).subscribe(tasks => this.taskDetails = tasks);
     this.resetTaskForm();
   }
 
