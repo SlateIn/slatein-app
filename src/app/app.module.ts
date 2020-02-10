@@ -33,7 +33,7 @@ import { SecurityPasswordPage } from './profile/security-password/security-passw
     FormsModule,
     IonicModule.forRoot({
       mode: 'ios'
-    }), 
+    }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
