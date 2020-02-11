@@ -5,16 +5,37 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="(info$ |async) as info">
-    <ion-label>First Name: {{info.fname}}</ion-label>
-    <br>
-    <ion-label>Last Name: {{info.lname}}</ion-label>
-    <br>
-    <ion-label>Email: {{info.email}}</ion-label>
-    <br>
-    <ion-label>Gender: {{info.gender}}</ion-label>
-    <br>
-    <ion-label>Birthdate: {{info.birthdate}}</ion-label>
-    <img [src]="info.photoURL" alt="">
+  <ion-toolbar>
+    <ion-title>Tasks List</ion-title>
+  </ion-toolbar>
+  
+  <ion-list>
+    <ion-item *ngFor="let info of taskInfoKeys">
+      <ion-label>{{taskinfo[info].title}}</ion-label>
+      <ion-checkbox slot="end"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="remindMeValue">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
+      <ion-card>
+        <ion-item>
+          <ion-label position="floating" color="primary">Title</ion-label>
+          <ion-input type="text" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating" color="primary">Description</ion-label>
+          <ion-input type="text" formControlName="description"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date and Time</ion-label>
+          <ion-datetime formControlName="reminderdate" displayFormat="MMM DD, YYYY HH:mm" placeholder="Select Date and Time"></ion-datetime>
+        </ion-item>
+        <ion-button expand="full"  type="submit" color="light">Add</ion-button>
+      </ion-card>
+    </form>
   </div>
+ 
+  <ion-button expand="full" (click)="addReminderEnable($event)" [disabled]="remindMeValue" color="light">Add a Reminder for My Day <ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
+  <!-- <ion-button expand="full" [routerLink]="['/tabs/myday/new-task']" type="submit" color="light">Add a Reminder or Task <ion-icon slot="icon-only" name="add"></ion-icon></ion-button> -->
 </ion-content>
