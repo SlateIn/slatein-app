@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+import { AuthService } from '@services/auth.service';
+
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-login',
@@ -10,31 +12,23 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  username: string = "";
-  password: string = "";
+  email: string;
+  password: string;
+  loginErrorMsg: string;
 
-  constructor( public afAuth: AngularFireAuth, private router: Router) { }
-
-  ngOnInit() {
-  }
-
-  async login() {
-    const { username, password } = this
-    //console.log(this);
-    try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password)
-      console.log("successfully login");
-      this.router.navigate(['tabs/myday']);
-    } catch(err) {
-      console.dir(err)
-      if(err.code === "auth/user-not-found"){
-        console.log("User is not authorized");
-      }
-    }
-  }
-
-  register(){
-    this.router.navigate(['register']);
-  }
+  constructor(private auth: AuthService, private navCtrl: NavController) { }
   
+  ngOnInit() {
+    Storage.get({ key: 'email' }).then((res) => this.email = res.value);
+  }
+
+  ionViewWillEnter() {
+    this.loginErrorMsg = '';
+  }
+
+  login() {
+    this.auth.signInWithEmail(this.email, this.password)
+    .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
+    .catch(err => this.loginErrorMsg = err.message)
+  }
 }

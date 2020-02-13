@@ -1,0 +1,35 @@
+ion-avatar {
+    position: relative;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+}
+
+ion-label.label-color {
+    color: #8f8f91 !important;
+}
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+img.plus-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 3px;
+    right: -1px;
+}
+
+@media only screen and (min-height: 660px) {
+    div.register-card {
+        bottom: 15%;
+        position: absolute;
+        width:100%;
+    }
+}

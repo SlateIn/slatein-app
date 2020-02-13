@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="backClicked()">
+      <ion-icon name="arrow-back" size="large" ></ion-icon>
+      Back
+    </ion-buttons>
+
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <ion-item >
+    <ion-label color="primary">Touch ID</ion-label>
+    <ion-toggle color="primary" [(ngModel)]="touchId"></ion-toggle>
+  </ion-item>
+
+  <ion-item >
+    <ion-label color="primary">Dark Mode</ion-label>
+    <ion-toggle color="primary" [(ngModel)]="darkMode"></ion-toggle>
+  </ion-item>
+</ion-content>

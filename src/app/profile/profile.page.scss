@@ -1,0 +1,54 @@
+
+ion-content {
+    --overflow: hidden;
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;   
+}
+
+.default-avatar{
+    --border-style : none;
+
+    label{
+        margin:0 auto;
+        margin-top: 40px;
+    }
+
+    ion-avatar {
+        position: relative;
+        //text-align: center;
+        //margin: 40px 0px 0px 40px;
+        width: 80px;
+        height: 80px;
+    }
+
+    img.plus-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        bottom: 3px;
+        right: -1px;
+    }
+}
+
+.name-avatar{
+    text-align: center;
+}
+
+.arrow-forward{
+    margin-top: 10px;
+}
+
+.logout{
+    --min-height: 52px
+}
+
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+

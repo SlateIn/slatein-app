@@ -1,12 +1,43 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Calender
-    </ion-title>
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Calendar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <li-ionic4-datepicker [(ngModel)]="mydate"
-    [inputDateConfig]="datePickerObj"></li-ionic4-datepicker>
-</ion-content>
+<ion-content class="has-header">
+ 
+ 
+</ion-content> -->
+
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-title>Calendar</ion-title>
+    </ion-toolbar>
+  </ion-header>,
+  <ion-content fullscreen>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-card-subtitle>{{viewTitle}}</ion-card-subtitle>
+          <ion-buttons end>
+              <button ion-button [disabled]="isToday" (click)="today()">Today</button>
+              <button ion-button (click)="changeMode('month')">M</button>
+              <button ion-button (click)="changeMode('week')">W</button>
+              <button ion-button (click)="changeMode('day')">D</button>
+              <button ion-button (click)="loadEvents()">Load Events</button>
+          </ion-buttons>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <calendar [eventSource]="eventSource"
+          [calendarMode]="calendar.mode"
+          [currentDate]="calendar.currentDate"
+          (onCurrentDateChanged)="onCurrentDateChanged($event)"
+          (onEventSelected)="onEventSelected($event)"
+          (onTitleChanged)="onViewTitleChanged($event)"
+          (onTimeSelected)="onTimeSelected($event)"
+          step="30">
+        </calendar>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
