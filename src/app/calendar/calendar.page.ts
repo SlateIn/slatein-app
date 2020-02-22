@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';
@@ -6,10 +6,10 @@ import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepic
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.page.html',
-  styleUrls: ['./calendar.page.scss'],
+  styleUrls: ['./calendar.page.scss']
 })
 export class CalendarPage implements OnInit {
-
+  view: string;
   datePickerObj: any = {};
   selectedDate;
   viewTitle;
@@ -26,6 +26,7 @@ export class CalendarPage implements OnInit {
 
 
   ngOnInit() {
+    this.view = 'month';
     // --- TODO: Only for testing ---
     //this.loadEvents();
   }
@@ -56,6 +57,7 @@ export class CalendarPage implements OnInit {
   }
 
   changeMode(mode) {
+    this.view = mode;
     this.calendar.mode = mode;
   }
 
@@ -123,7 +125,6 @@ export class CalendarPage implements OnInit {
   }
 
   segmentChanged(event: CustomEvent) {
-    console.log(event);
     this.changeMode(event.detail.value);
   }
 
