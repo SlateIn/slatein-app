@@ -17,7 +17,16 @@ const routes: Routes = [
           }
         ]
       },
-      
+      {
+        path: 'todo',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+            import('../todo/todo.module').then(m => m.TodoPageModule)
+          }
+        ]
+      },
       {
         path: 'planner',
         children: [
