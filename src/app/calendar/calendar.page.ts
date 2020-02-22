@@ -26,9 +26,8 @@ export class CalendarPage implements OnInit {
 
 
   ngOnInit() {
-    // this.datePickerObj = {
-    //   dateFormat: 'YYYY-MM-DD'
-    // };
+    // --- TODO: Only for testing ---
+    //this.loadEvents();
   }
 
   loadEvents() {
@@ -40,7 +39,7 @@ export class CalendarPage implements OnInit {
   }
 
   onCurrentDateChanged(event: Date) {
-    var today = new Date();
+    let today = new Date();
     today.setHours(0, 0, 0, 0);
     event.setHours(0, 0, 0, 0);
     this.isToday = today.getTime() === event.getTime();
@@ -53,7 +52,7 @@ export class CalendarPage implements OnInit {
   onTimeSelected(ev) {
     console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
       (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
-    //this.changeMode('day');
+    this.changeMode('day');
   }
 
   changeMode(mode) {
@@ -64,9 +63,9 @@ export class CalendarPage implements OnInit {
   //   const datePickerModal = await this.modalCtrl.create({
   //     component: Ionic4DatepickerModalComponent,
   //     cssClass: 'li-ionic4-datePicker',
-  //     componentProps: { 
-  //        'objConfig': this.datePickerObj, 
-  //        'selectedDate': this.selectedDate 
+  //     componentProps: {
+  //        'objConfig': this.datePickerObj,
+  //        'selectedDate': this.selectedDate
   //     }
   //   });
   //   await datePickerModal.present();
@@ -79,14 +78,14 @@ export class CalendarPage implements OnInit {
   // }
 
   createRandomEvents() {
-    var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
+    let events = [];
+    for (let i = 0; i < 50; i += 1) {
+      let date = new Date();
+      let eventType = Math.floor(Math.random() * 2);
+      let startDay = Math.floor(Math.random() * 90) - 45;
+      let endDay = Math.floor(Math.random() * 2) + startDay;
+      let startTime;
+      let endTime;
       if (eventType === 0) {
         startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
         if (endDay === startDay) {
@@ -95,19 +94,19 @@ export class CalendarPage implements OnInit {
         endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
         events.push({
           title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
+          startTime,
+          endTime,
           allDay: true
         });
       } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
+        let startMinute = Math.floor(Math.random() * 24 * 60);
+        let endMinute = Math.floor(Math.random() * 180) + startMinute;
         startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
         endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
         events.push({
           title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
+          startTime,
+          endTime,
           allDay: false
         });
       }
@@ -118,9 +117,14 @@ export class CalendarPage implements OnInit {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
   markDisabled = (date: Date) => {
-    var current = new Date();
+    let current = new Date();
     current.setHours(0, 0, 0);
     return date < current;
+  }
+
+  segmentChanged(event: CustomEvent) {
+    console.log(event);
+    this.changeMode(event.detail.value);
   }
 
 }
