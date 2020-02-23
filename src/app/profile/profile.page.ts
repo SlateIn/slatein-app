@@ -82,7 +82,9 @@ export class ProfilePage implements OnInit {
 
   previewProfilePic(file: File) {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    if (file && file.type.match('image.*')) {
+      reader.readAsDataURL(file);
+    }
     reader.onloadend = (event) => {
       this.profilePicRef.nativeElement.src = event.target['result'];
       this.isProfilePicSelected = true;
