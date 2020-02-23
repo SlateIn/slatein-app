@@ -12,16 +12,8 @@
   <ng-container *ngFor="let taskDetail of taskDetails">
     <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
   </ng-container>
-  
-  
-  <!-- <ion-list>
-    <ion-item *ngFor="let info of taskInfoKeys">
-      <ion-label>{{taskinfo[info].title}}</ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
-    </ion-item>
-  </ion-list> -->
 
-  <div *ngIf="remindMeValue">
+  <div>
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
       <ion-card>
         <ion-item>
@@ -49,10 +41,8 @@
             </ion-select>
           </ion-item>
         </ion-list>
-        <ion-button expand="full"  type="submit" color="light">Add</ion-button>
+        <ion-button expand="full"  type="submit" color="light" [disabled]="!taskForm.valid">Add</ion-button>
       </ion-card>
     </form>
   </div>
- 
-  <ion-button expand="full" (click)="addReminderEnable()" [disabled]="remindMeValue" color="light">Add a Reminder for My Day <ion-icon slot="icon-only" name="add"></ion-icon></ion-button>
 </ion-content>

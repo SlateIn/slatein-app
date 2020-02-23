@@ -21,7 +21,6 @@ export class MydayPage implements OnInit, OnDestroy {
   taskDetails: TaskReminderInfo[];
   errorMessage: string;
   reminderdate: any;
-  remindMeValue: boolean = false;
   taskInfoKeys: string[];
   todayDate = new Date();
   getTaskSubscription$: Subscription;
@@ -36,10 +35,6 @@ export class MydayPage implements OnInit, OnDestroy {
     this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
       map(tasks => tasks.sort((a, b) => new Date(a.reminderdate).getTime() - new Date(b.reminderdate).getTime()))
     ).subscribe(tasks => this.taskDetails = tasks);
-    this.resetTaskForm();
-  }
-
-  resetTaskForm() {
     this.taskForm = this.fb.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -66,16 +61,11 @@ export class MydayPage implements OnInit, OnDestroy {
       data.id = id;
       this.taskService.createTask(data);
     });
-    this.remindMeValue = !this.remindMeValue;
+    this.taskForm.reset();
   }
-
-  addReminderEnable() {
-    this.remindMeValue = !this.remindMeValue;
-    this.resetTaskForm();
-  }
-
+  
   ngOnDestroy(): void {
-    this.getTaskSubscription$ && this.getTaskSubscription$.unsubscribe
+    this.getTaskSubscription$ && this.getTaskSubscription$.unsubscribe();
   }
 
 }
