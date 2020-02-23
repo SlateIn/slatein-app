@@ -61,24 +61,6 @@ export class CalendarPage implements OnInit {
     this.calendar.mode = mode;
   }
 
-  // async openDatePicker() {
-  //   const datePickerModal = await this.modalCtrl.create({
-  //     component: Ionic4DatepickerModalComponent,
-  //     cssClass: 'li-ionic4-datePicker',
-  //     componentProps: {
-  //        'objConfig': this.datePickerObj,
-  //        'selectedDate': this.selectedDate
-  //     }
-  //   });
-  //   await datePickerModal.present();
-
-  //   datePickerModal.onDidDismiss()
-  //     .then((data) => {
-  //       console.log(data);
-  //       this.selectedDate = data.data.date;
-  //     });
-  // }
-
   createRandomEvents() {
     let events = [];
     for (let i = 0; i < 50; i += 1) {
