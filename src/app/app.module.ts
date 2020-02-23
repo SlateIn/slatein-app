@@ -20,6 +20,9 @@ import { SettingsPage } from './profile/settings/settings.page';
 import { PersonalInformationPage } from './profile/personal-information/personal-information.page';
 import { SecurityPasswordPage } from './profile/security-password/security-password.page';
 
+// ionic4-datepicker
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
+
 
 
 @NgModule({
@@ -33,12 +36,13 @@ import { SecurityPasswordPage } from './profile/security-password/security-passw
     FormsModule,
     IonicModule.forRoot({
       mode: 'ios'
-    }), 
+    }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ionic4DatepickerModule,
   ],
   providers: [
     StatusBar,

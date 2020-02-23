@@ -19,15 +19,17 @@ ion-content {
         //margin: 40px 0px 0px 40px;
         width: 80px;
         height: 80px;
+
+        ion-icon {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            bottom: 3px;
+            right: -3px;
+        }
     }
 
-    img.plus-icon {
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        bottom: 3px;
-        right: -1px;
-    }
+    
 }
 
 .name-avatar{
