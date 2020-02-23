@@ -26,7 +26,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Date and Time</ion-label>
-          <ion-datetime formControlName="reminderdate" displayFormat="MMM DD, YYYY HH:mm" placeholder="Select Date and Time"></ion-datetime>
+          <ion-datetime formControlName="reminderdate" [min]="minDate" [max]="maxyear" displayFormat="MMM DD, YYYY HH:mm" placeholder="Select Date and Time"></ion-datetime>
         </ion-item>
         <ion-list>
           <ion-item>

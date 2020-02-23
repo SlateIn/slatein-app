@@ -23,6 +23,8 @@ export class MydayPage implements OnInit, OnDestroy {
   reminderdate: any;
   taskInfoKeys: string[];
   todayDate = new Date();
+  minDate: string;
+  maxyear: string;
   getTaskSubscription$: Subscription;
 
   constructor(
@@ -31,6 +33,8 @@ export class MydayPage implements OnInit, OnDestroy {
     private fb: FormBuilder) { }
 
   async ngOnInit() {
+    this.minDate = this.todayDate.toISOString();
+    this.maxyear = (this.todayDate.getFullYear() + 15).toString();
     // Get today's task 
     this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
       map(tasks => tasks.sort((a, b) => new Date(a.reminderdate).getTime() - new Date(b.reminderdate).getTime()))
