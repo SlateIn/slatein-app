@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user-info.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { LocalNotificationsService } from '@services/local-notifications.service';
 import { TaskService } from '@services/task.service';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { TaskReminderInfo } from '@models/taskDetails';
+import { filter, map } from 'rxjs/operators';
+import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
 
 
 @Component({
@@ -13,57 +15,61 @@ import { TaskReminderInfo } from '@models/taskDetails';
   templateUrl: './myday.page.html',
   styleUrls: ['./myday.page.scss'],
 })
-export class MydayPage implements OnInit {
+export class MydayPage implements OnInit, OnDestroy {
   info$: Observable<UserInfo>;
   taskForm: FormGroup;
-  taskinfo: any;
+  taskDetails: TaskReminderInfo[];
   errorMessage: string;
   reminderdate: any;
-  remindMeValue: boolean = false;
   taskInfoKeys: string[];
-  constructor(private user: UserService,
-              private notification: LocalNotificationsService,
-              private taskService: TaskService, 
-              private fb: FormBuilder, ) { }
-  
-  async ngOnInit() {
+  todayDate = new Date();
+  minDate: string;
+  maxyear: string;
+  getTaskSubscription$: Subscription;
 
-    // Get All Task 
-    this.taskService.getTask.subscribe(res => {
-      this.taskinfo = res;
-      this.taskInfoKeys = Object.keys(res);
-      console.log(this.taskinfo);
-    });
-    
-    this.info$ = this.user.info;
+  constructor(
+    private notification: LocalNotificationsService,
+    private taskService: TaskService,
+    private fb: FormBuilder) { }
+
+  async ngOnInit() {
+    this.minDate = this.todayDate.toISOString();
+    this.maxyear = (this.todayDate.getFullYear() + 15).toString();
+    // Get today's task 
+    this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
+      map(tasks => tasks.sort((a, b) => new Date(a.reminderdate).getTime() - new Date(b.reminderdate).getTime()))
+    ).subscribe(tasks => this.taskDetails = tasks);
     this.taskForm = this.fb.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       reminderdate: new FormControl('', Validators.required),
+      repeat: new FormControl('', Validators.required),
     });
   }
 
-  async onSubmit(value){
-    this.reminderdate = Date.now();
-    let data: TaskReminderInfo  = {
+  async onSubmit(value) {
+    const reminderdate = new Date(value.reminderdate);
+    const path = `${reminderdate.getFullYear()}/${reminderdate.getMonth() + 1}/${reminderdate.getDate()}`;
+    const id = `${reminderdate.getFullYear()}${reminderdate.getMonth() + 1}${reminderdate.getDate()}`;
+
+    let data: TaskReminderInfo = {
       title: value.title,
       description: value.description,
       image: '',
       reminderdate: value.reminderdate,
       status: 'pending',
-      repeat: '',
+      repeat: value.repeat,
+      path
     }
-    this.notification.scheduleAt(data).then(id =>{
-      this.taskService.createTask({...data, reminderdate: data.reminderdate.toString()},id);
+    this.notification.scheduleAt(data, id).then((id: number) => {
+      data.id = id;
+      this.taskService.createTask(data);
     });
-    this.remindMeValue = !this.remindMeValue;
+    this.taskForm.reset();
   }
-  addReminderEnable($event){
-    this.remindMeValue = !this.remindMeValue;
-      this.taskForm = this.fb.group({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      reminderdate: new FormControl('', Validators.required),
-    });
+  
+  ngOnDestroy(): void {
+    this.getTaskSubscription$ && this.getTaskSubscription$.unsubscribe();
   }
+
 }

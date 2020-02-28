@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MydayPageRoutingModule } from './myday-routing.module';
 
 import { MydayPage } from './myday.page';
+import { TaskInfoCardComponent } from './task-info-card/task-info-card.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { MydayPage } from './myday.page';
     IonicModule,
     MydayPageRoutingModule
   ],
-  declarations: [MydayPage]
+  declarations: [MydayPage, TaskInfoCardComponent]
 })
 export class MydayPageModule {}
