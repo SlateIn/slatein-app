@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, wtfStartTimeRange, wtfEndTimeRange } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';
+import { CalendarService } from './services/calendar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -19,19 +21,28 @@ export class CalendarPage implements OnInit {
     mode: 'month',
     currentDate: new Date()
   };
+  getCalendarEvents$: Subscription;
+
 
   constructor(
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public calService: CalendarService
   ) { }
 
 
   ngOnInit() {
+    const todaysDate = new Date();
+    const year = `${todaysDate.getFullYear()}`;
+    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(
+      tasks => this.loadEvents(tasks)
+    );
+    // this.loadEvents(tasks)
     this.view = 'month';
     // --- TODO: Only for testing ---
-    //this.loadEvents();
+    // this.loadEvents();
   }
 
-  loadEvents() {
+  loadEvents(calendarTasks) {
     this.eventSource = this.createRandomEvents();
   }
 
@@ -53,7 +64,7 @@ export class CalendarPage implements OnInit {
   onTimeSelected(ev) {
     console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
       (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
-    this.changeMode('day');
+    // this.changeMode('day');
   }
 
   changeMode(mode) {
