@@ -46,7 +46,7 @@ export class CalendarPage implements OnInit {
     const year = `${todaysDate.getFullYear()}`;
     this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(
       tasks => this.loadEvents(tasks)
-    );    
+    );
     this.view = 'month';
   }
 
@@ -98,34 +98,37 @@ export class CalendarPage implements OnInit {
 
   getEventsStructure(calendarTasks) {
     let events = [];
-    let propValue;
+    let monthValue;
+    let dayValue;
     let tasksProp;
 
-    calendarTasks.map(function (month) {
-      // console.log(`calendarTasks month: ${JSON.stringify(month)}`);
-
-      // tslint:disable-next-line: forin
-      for (let propName in month) {
-        if (month.hasOwnProperty(propName)) {
-          propValue = month[propName];
-          // console.log(`calendarTasks propValue: ${JSON.stringify(propValue.tasks)}`);
-        }
-        for (let dailyTask in propValue.tasks) {
-          if (propValue.tasks.hasOwnProperty(dailyTask)) {
-            tasksProp = propValue.tasks[dailyTask];
-            events.push({
-              title: tasksProp.title,
-              desc: tasksProp.description,
-              startTime: new Date(tasksProp.startTime),
-              endTime: new Date(tasksProp.endTime),
-              allDay: false,
-            });
+    // tslint:disable-next-line: prefer-const
+    // tslint:disable-next-line: forin
+    for (let propName in calendarTasks) {
+      if (calendarTasks.hasOwnProperty(propName)) {
+        monthValue = calendarTasks[propName];
+      }
+      for (let dayProp in monthValue) {
+        if (monthValue.hasOwnProperty(dayProp)) {
+          dayValue = monthValue[dayProp];
+          for (let dailyTask in dayValue.tasks) {
+            if (dayValue.tasks.hasOwnProperty(dailyTask)) {
+              tasksProp = dayValue.tasks[dailyTask];
+              events.push({
+                title: tasksProp.title,
+                desc: tasksProp.description,
+                startTime: new Date(tasksProp.startDate),
+                endTime: new Date(tasksProp.endDate),
+                allDay: false,
+              });
+            }
           }
         }
       }
-    });
+    }
     return events;
   }
+
   onRangeChanged(ev) {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
