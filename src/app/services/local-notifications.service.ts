@@ -44,8 +44,8 @@ export class LocalNotificationsService {
               body: data.description,
               id: Number(`${id}${counter}`),
               schedule: {
-                every: data.repeat, 
-                at: new Date(data.reminderdate)  
+                every: data.repeat !== 'never' ? data.repeat : null,
+                at: new Date(data.startDate)
               },
               sound: null,
               attachments: null,
