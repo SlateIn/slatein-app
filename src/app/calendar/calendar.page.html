@@ -25,8 +25,12 @@
     <ion-label class="view-title">{{viewTitle}}</ion-label>
   </div>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-    (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
-    (onTimeSelected)="onTimeSelected($event)" step="30">
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" 
+    [currentDate]="calendar.currentDate"
+    (onCurrentDateChanged)="onCurrentDateChanged($event)" 
+    (onEventSelected)="onEventSelected($event)" 
+    (onTitleChanged)="onViewTitleChanged($event)"
+    (onTimeSelected)="onTimeSelected($event)"
+    (click)="changeMode('day')" step="30">
   </calendar>
 </ion-content>
