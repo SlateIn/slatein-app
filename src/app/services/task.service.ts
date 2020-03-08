@@ -38,4 +38,13 @@ export class TaskService {
     return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).remove();
   }
 
+  updateTask(taskInfo: TaskReminderInfo): Promise<void> {
+    return new Promise<any>((resolve, reject) => {
+      return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${taskInfo.path}/tasks/${taskInfo.id}`).update(taskInfo)
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        );
+    });
+  }
 }

@@ -20,8 +20,7 @@ export class TaskInfoCardComponent implements OnInit {
   }
 
   updateTask() {
-    console.log(this.taskinfo);
-    this.alertReminderService.presentAlertPrompt('Update');
+    this.alertReminderService.updateTask(this.taskinfo);
   }
 
   deleteTask() {

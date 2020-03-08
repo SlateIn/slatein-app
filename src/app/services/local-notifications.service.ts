@@ -59,9 +59,12 @@ export class LocalNotificationsService {
     });
   }
 
-  async cancelNotifications() {
+  async cancelNotifications(id: string) {
     const pendingNotifs = await Plugins.LocalNotifications.getPending();
-    pendingNotifs && Plugins.LocalNotifications.cancel(pendingNotifs);
+    pendingNotifs.notifications = pendingNotifs.notifications.filter(notification => notification.id === id);
+    if (pendingNotifs.notifications && pendingNotifs.notifications.length > 0) {
+      await Plugins.LocalNotifications.cancel(pendingNotifs).then(res => {
+      }).catch(err => console.log(err));
+    }
   }
-
 }
