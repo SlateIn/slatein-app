@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ToDoListItem } from '@models/todoListItem';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
+import { TodoItemPage } from '@app/todo-item/todo-item.page';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -8,19 +10,37 @@ import { ToDoListItem } from '@models/todoListItem';
 })
 export class TodoPage implements OnInit {
   taskChecked = false;
-  toDoList: ToDoListItem[] = [
-  { title: 'ToDo1', description: 'Desc1', completed: false},
-  { title: 'ToDo2', description: 'Desc2', completed: false},
-  { title: 'ToDo3', description: 'Desc3', completed: false}
-];
-
-  constructor() { }
+  public items: any = [];
+  constructor(private modalController: ModalController,
+              public router: Router) { }
 
   ngOnInit() {
-    console.log(this.taskChecked);
+    
   }
 
-  onTaskClicked() {
-    this.taskChecked = !this.taskChecked;
+  async addItem() {
+      const addModal =  await this.modalController.create({component: TodoItemPage});
+      addModal.onDidDismiss()
+      .then((item) => {
+        if (item) {
+          console.log('item is', item);
+          this.saveItem(item);
+        }
+      });
+      return await addModal.present();
   }
+
+  async viewItem(todo) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        todo
+      }
+    };
+    this.router.navigate(['/todo/view'], navigationExtras);
+  }
+
+  saveItem(item: any) {
+    this.items.push(item);
+  }
+
 }

@@ -32,7 +32,6 @@ export class MydayPage implements OnInit {
     this.taskService.getTask.subscribe(res => {
       this.taskinfo = res;
       this.taskInfoKeys = Object.keys(res);
-      console.log(this.taskinfo);
     });
     
     this.info$ = this.user.info;
