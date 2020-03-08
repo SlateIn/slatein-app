@@ -76,6 +76,7 @@ export class ProfilePage implements OnInit {
   }
 
   picChange(event: any) {
+    console.log('dsfsfsdfs',event.srcElement.files[0]);
     this.profilePicFile = event.srcElement.files[0];
     this.previewProfilePic(this.profilePicFile);
   }
