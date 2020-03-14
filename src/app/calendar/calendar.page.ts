@@ -15,13 +15,6 @@ export class CalendarPage implements OnInit {
   view: string;
   selectedDate;
   viewTitle;
-  event = {
-    title: '',
-    desc: '',
-    startTime: '',
-    endTime: '',
-    allDay: false
-  };
   minDate = new Date().toISOString();
 
   isToday: boolean;
@@ -50,10 +43,6 @@ export class CalendarPage implements OnInit {
       tasks => this.loadEvents(tasks)
     );
     this.view = 'month';
-  }
-
-  addEvents() {
-
   }
 
   loadEvents(calendarTasks) {
