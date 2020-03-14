@@ -4,33 +4,44 @@
   </ion-toolbar>
   <ion-toolbar>
     <ion-segment class="ion-padding-bottom" (ionChange)="segmentChanged($event)" [(ngModel)]="view">
-      <ion-segment-button value="today">
-        <ion-label>Today</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="day">
-        <ion-label>Day</ion-label>
+      <ion-segment-button value="month">
+        <ion-label>Month</ion-label>
       </ion-segment-button>
       <ion-segment-button value="week">
         <ion-label>Week</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="month">
-        <ion-label>Month</ion-label>
+      <ion-segment-button value="day">
+        <ion-label>Day</ion-label>
       </ion-segment-button>
+
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-padding-bottom">
-    <ion-label class="view-title">{{viewTitle}}</ion-label>
-  </div>
+  <!-- Move back one screen of the slides -->
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-text-center">
+      <ion-col size="2" (click)="back()">
+        <!-- <ion-button fill="clear" > -->
+          <ion-icon name="arrow-back"></ion-icon>
+        <!-- </ion-button> -->
+      </ion-col>
+      <ion-col size="8">
+        <div>
+          <ion-label class="view-title">{{viewTitle}}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="2" (click)="next()">
+        <!-- <ion-button fill="clear" > -->
+          <ion-icon name="arrow-forward"></ion-icon>
+        <!-- </ion-button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" 
-    [currentDate]="calendar.currentDate"
-    (onCurrentDateChanged)="onCurrentDateChanged($event)" 
-    (onEventSelected)="onEventSelected($event)" 
-    (onTitleChanged)="onViewTitleChanged($event)"
-    (onTimeSelected)="onTimeSelected($event)"
-    (click)="changeMode('day')" step="30">
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+    (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
+    (onTimeSelected)="onTimeSelected($event)" (click)="changeMode('day')" step="30">
   </calendar>
 </ion-content>

@@ -4,6 +4,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { CalendarIntervalsService } from '@services/calendar-intervals.service';
 
 @Component({
   selector: 'app-calendar',
@@ -37,6 +38,7 @@ export class CalendarPage implements OnInit {
     public modalCtrl: ModalController,
     public calService: CalendarService,
     private alertCtrl: AlertController,
+    public calendarIntervalsService: CalendarIntervalsService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
@@ -96,37 +98,19 @@ export class CalendarPage implements OnInit {
     this.calendar.mode = mode;
   }
 
-  getEventsStructure(calendarTasks) {
-    let events = [];
-    let monthValue;
-    let dayValue;
-    let tasksProp;
+  // Change current month/week/day
+  next() {
+    let swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slideNext();
+  }
 
-    // tslint:disable-next-line: prefer-const
-    // tslint:disable-next-line: forin
-    for (let propName in calendarTasks) {
-      if (calendarTasks.hasOwnProperty(propName)) {
-        monthValue = calendarTasks[propName];
-      }
-      for (let dayProp in monthValue) {
-        if (monthValue.hasOwnProperty(dayProp)) {
-          dayValue = monthValue[dayProp];
-          for (let dailyTask in dayValue.tasks) {
-            if (dayValue.tasks.hasOwnProperty(dailyTask)) {
-              tasksProp = dayValue.tasks[dailyTask];
-              events.push({
-                title: tasksProp.title,
-                desc: tasksProp.description,
-                startTime: new Date(tasksProp.startDate),
-                endTime: new Date(tasksProp.endDate),
-                allDay: false,
-              });
-            }
-          }
-        }
-      }
-    }
-    return events;
+  back() {
+    let swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slidePrev();
+  }
+
+  getEventsStructure(calendarTasks) {
+    return this.calendarIntervalsService.getIntervalDates(calendarTasks);
   }
 
   onRangeChanged(ev) {
