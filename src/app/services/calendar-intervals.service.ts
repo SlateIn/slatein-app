@@ -38,35 +38,35 @@ export class CalendarIntervalsService {
                 endTime: newEndDate,
                 allDay: false,
               });
-              switch (typeof tasksProp.startDate === 'string') {
-                case (tasksProp.repeat === 'week'):
-                  startTime = new Date(newStartDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-                  endTime = new Date(newEndDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-                  break;
-                case (tasksProp.repeat === 'two-weeks'):
-                  startTime = new Date(newStartDate.getTime() + (14 * 24 * 60 * 60 * 1000));
-                  endTime = new Date(newEndDate.getTime() + (14 * 24 * 60 * 60 * 1000));
-                  break;
-                case (tasksProp.repeat === 'month'):
-                  startTime = new Date(newStartDate.setMonth(newStartDate.getMonth() + 1));
-                  endTime = new Date(newEndDate.setMonth(newEndDate.getMonth() + 1));
-                  console.log(`startTime ::: ${startTime}`);
-                  console.log(`endTime ::: ${endTime}`);
-                  break;
-                case (tasksProp.repeat === 'year'):
-                  startTime = new Date(newStartDate.setMonth(newStartDate.getMonth() + 12));
-                  endTime = new Date(newEndDate.setMonth(newEndDate.getMonth() + 12));
-                  break;
-                default:
-                  startTime = tasksProp.startDate;
-                  endTime = tasksProp.endDate;
-              }
-              events.push({
-                ...tasksProp,
-                startTime: new Date(startTime),
-                endTime: new Date(endTime),
-                allDay: false,
-              });
+              // switch (typeof tasksProp.startDate === 'string') {
+              //   case (tasksProp.repeat === 'week'):
+              //     startTime = new Date(newStartDate.getTime() + (7 * 24 * 60 * 60 * 1000));
+              //     endTime = new Date(newEndDate.getTime() + (7 * 24 * 60 * 60 * 1000));
+              //     break;
+              //   case (tasksProp.repeat === 'two-weeks'):
+              //     startTime = new Date(newStartDate.getTime() + (14 * 24 * 60 * 60 * 1000));
+              //     endTime = new Date(newEndDate.getTime() + (14 * 24 * 60 * 60 * 1000));
+              //     break;
+              //   case (tasksProp.repeat === 'month'):
+              //     startTime = new Date(newStartDate.setMonth(newStartDate.getMonth() + 1));
+              //     endTime = new Date(newEndDate.setMonth(newEndDate.getMonth() + 1));
+              //     console.log(`startTime ::: ${startTime}`);
+              //     console.log(`endTime ::: ${endTime}`);
+              //     break;
+              //   case (tasksProp.repeat === 'year'):
+              //     startTime = new Date(newStartDate.setMonth(newStartDate.getMonth() + 12));
+              //     endTime = new Date(newEndDate.setMonth(newEndDate.getMonth() + 12));
+              //     break;
+              //   default:
+              //     startTime = tasksProp.startDate;
+              //     endTime = tasksProp.endDate;
+              // }
+              // events.push({
+              //   ...tasksProp,
+              //   startTime: new Date(startTime),
+              //   endTime: new Date(endTime),
+              //   allDay: false,
+              // });
             }
           }
         }
