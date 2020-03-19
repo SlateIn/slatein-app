@@ -1,7 +1,7 @@
 export interface TaskReminderInfo {
     id?: number;
     title: string;
-    description: string;
+    desc: string;
     image: string;
     status: string;
     startDate: string;

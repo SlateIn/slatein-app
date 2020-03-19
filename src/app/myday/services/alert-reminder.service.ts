@@ -219,7 +219,7 @@ export class AlertReminderService {
     const endDate = new Date(value.endDate + ' ' + value.endTime).toString();
     const data: TaskReminderInfo = {
       title: value.title,
-      description: value.description,
+      desc: value.description,
       image: '',
       startDate,
       status: 'pending',
