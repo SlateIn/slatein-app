@@ -15,10 +15,22 @@
         <ion-input placeholder="First Name" formControlName="fname" type="text"></ion-input>
         <ion-icon name="person" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
+      <ion-item *ngIf="controls.fname.touched &&controls.fname.errors" lines="none">
+        <div>
+          <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special characters</ion-label>
+        </div>
+      </ion-item>
+
       <ion-item>
         <ion-input placeholder="Last Name" formControlName="lname" type="text"></ion-input>
         <ion-icon name="person" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
+      <ion-item *ngIf="controls.lname.touched &&controls.lname.errors" lines="none">
+        <div>
+          <ion-label class="ion-text-wrap" color="danger">Lastname can not contain whitespace, numbers and special characters</ion-label>
+        </div>
+      </ion-item>
+
 
       <ion-item>
         <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
@@ -41,7 +53,7 @@
 
       <ion-item>
         <ion-label class="label-color">Birth date</ion-label>
-        <ion-datetime placeholder="Select Date" formControlName="birthdate"></ion-datetime>
+        <ion-datetime placeholder="Select Date" max="{{currentDate}}" formControlName="birthdate"></ion-datetime>
       </ion-item>
 
       <ion-item>
@@ -51,7 +63,7 @@
       </ion-item>
       <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength" lines="none">
         <div>
-          <ion-label color="danger">Password must be at least 5 characters</ion-label>
+          <ion-label color="danger">Password must be at least 6 characters</ion-label>
         </div>
       </ion-item>
 

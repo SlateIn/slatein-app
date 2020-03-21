@@ -4,6 +4,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
 import { Plugins } from '@capacitor/core';
 import { PasswordValidatorService } from '@services/password-validator.service';
+import { DatePipe } from '@angular/common';
 
 const { Storage } = Plugins;
 
@@ -22,6 +23,7 @@ export class RegisterPage implements OnInit {
   isProfilePicSelected = false;
   profilePicFile: File;
   singUpFailedErrorMsg: string;
+  currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -30,12 +32,13 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private auth: AuthService,
     private loadingController: LoadingController,
-    private pwdValidator: PasswordValidatorService) { }
+    private pwdValidator: PasswordValidatorService,
+    public datepipe: DatePipe) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      fname: new FormControl('', Validators.required),
-      lname: new FormControl('', Validators.required),
+      fname: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      lname: new FormControl('', Validators.pattern('[a-zA-Z ]*')),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.email
@@ -50,6 +53,8 @@ export class RegisterPage implements OnInit {
     }, {
       validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
+    this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+    console.log( this.currentDate);
   }
 
   get controls() { return this.registerForm.controls; }
