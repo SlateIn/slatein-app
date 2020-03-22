@@ -46,7 +46,7 @@ export class RegisterPage implements OnInit {
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(6),
         Validators.required
       ])),
       confirmPassword: new FormControl('', Validators.required)

@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(6)
       ]))
     });
 
