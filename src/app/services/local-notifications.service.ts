@@ -41,11 +41,11 @@ export class LocalNotificationsService {
           notifications: [
             {
               title: data.title,
-              body: data.description,
+              body: data.desc,
               id: Number(`${id}${counter}`),
               schedule: {
-                every: data.repeat, 
-                at: new Date(data.reminderdate)  
+                every: data.repeat !== 'never' ? data.repeat : null,
+                at: new Date(data.startDate)
               },
               sound: null,
               attachments: null,
