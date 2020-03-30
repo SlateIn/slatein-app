@@ -18,10 +18,6 @@ import { SecurityPasswordPage } from './security-password/security-password.page
 export class ProfilePage implements OnInit {
   avatarSrc = '../../assets/icon/default_profile.svg';
   info$: Observable<UserInfo>;
-  isProfilePicSelected = false;
-  profilePicFile: File;
-
-  @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(private navCtrl: NavController,
               private user: UserService,
@@ -74,27 +70,6 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
-
-  picChange(event: any) {
-    console.log('dsfsfsdfs',event.srcElement.files[0]);
-    this.profilePicFile = event.srcElement.files[0];
-    this.previewProfilePic(this.profilePicFile);
-  }
-
-  previewProfilePic(file: File) {
-    const reader = new FileReader();
-    if (file && file.type.match('image.*')) {
-      reader.readAsDataURL(file);
-    }
-    reader.onloadend = (event) => {
-      this.profilePicRef.nativeElement.src = event.target['result'];
-      this.isProfilePicSelected = true;
-      if(this.profilePicRef.nativeElement.src) {
-        this.authService.updatePhotoUrl(file);
-      }
-    }
-  }
-
 
 }
 
