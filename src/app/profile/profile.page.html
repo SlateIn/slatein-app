@@ -7,14 +7,11 @@
 <ion-content fullscreen>
     <ion-list *ngIf="(info$ |async) as info">
       <ion-item class="default-avatar">
-        <input type="file" name="file" id="file" class="file-input" (change)="picChange($event)"
-      accept="image/gif, image/jpeg, image/png" />
-        <label for="file">
-          <ion-avatar>
-            <img #profilePic [src]="(info.photoURL)?info.photoURL:avatarSrc">
-            <ion-icon mode="md" name="add-circle"></ion-icon>
-          </ion-avatar>
-        </label>
+          <div class="profile_avatar">
+            <ion-avatar>
+              <img #profilePic [src]="(info.photoURL)?info.photoURL:avatarSrc">
+            </ion-avatar>
+          </div>
       </ion-item>
       <ion-item lines="full">
           <ion-label class="name-avatar">

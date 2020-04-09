@@ -10,9 +10,7 @@
 
 <ion-content>
   <ion-list *ngIf="(info$ |async) as info">
-
     <ion-list-header>
-      Name
       <ion-toolbar>
         <ion-chip slot="end" outline color="grey-dark" (click)="onUpdateInfoClick()" *ngIf="!upgateButtonClicked">
           <ion-icon name="create" mode="md" size="small"></ion-icon>
@@ -26,6 +24,29 @@
       </ion-toolbar>
     </ion-list-header>
 
+    <div *ngIf="!upgateButtonClicked; else changePic">
+      <ion-item class="default-avatar">
+        <div class="profile_avatar">
+          <ion-avatar>
+            <img #profilePic [src]="(photo)?photo:avatarSrc">
+          </ion-avatar>
+        </div>
+      </ion-item>
+    </div>
+    <ng-template #changePic>
+      <ion-item class="default-avatar">
+        <div class="profile_avatar">
+          <ion-avatar (click)="onProfilePicClick()">
+            <img #profilePic [src]="(photo)?photo:avatarSrc">
+            <ion-icon mode="md" name="add-circle"></ion-icon>
+          </ion-avatar>
+        </div>
+      </ion-item>
+    </ng-template>
+
+    <ion-list-header>
+      Name
+    </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked; else changeName">
       <ion-label>{{userInfo.fname | titlecase}} {{userInfo.lname | titlecase}}</ion-label>
     </ion-item>

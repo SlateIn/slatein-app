@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { UserService } from '../../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
@@ -6,6 +6,9 @@ import { DatePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { ToastController, ModalController } from '@ionic/angular';
+import { AuthService } from '@services/auth.service';
+import { CameraService } from '@services/camera.service';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-personal-information',
@@ -21,13 +24,23 @@ export class PersonalInformationPage implements OnInit {
   item: Observable<UserInfo>;
   info$: Observable<UserInfo>;
   profileUpdated: boolean;
+  avatarSrc = 'assets/icon/default_profile.svg';
+  isProfilePicSelected = false;
+  profilePicFile: File;
+  profilePicChanged = false;
+  photo: SafeResourceUrl;
+  photoBase64: string;
+
+  @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(
     private user: UserService,
+    private photoService: CameraService,
     public datepipe: DatePipe,
     public db: AngularFireDatabase,
     private toastController: ToastController,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private authService: AuthService ) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
    }
@@ -43,6 +56,7 @@ export class PersonalInformationPage implements OnInit {
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;
       this.userInfo.photoURL = user.photoURL;
+      this.photo = user.photoURL;
     });
   }
 
@@ -65,21 +79,35 @@ export class PersonalInformationPage implements OnInit {
     if (this.currentUser.fname !== this.userInfo.fname ||
       this.currentUser.lname !== this.userInfo.lname ||
       this.currentUser.birthdate !== this.userInfo.birthdate ||
-      this.currentUser.gender !== this.userInfo.gender) {
+      this.currentUser.gender !== this.userInfo.gender ||
+      this.profilePicChanged) {
 
         this.user.updateUserInfo(this.userInfo).then(async () => {
-          const toast = await this.toastController.create({
+            this.authService.updatePhotoString(this.photoBase64);
+            this.profilePicChanged = false;
+
+            const toast = await this.toastController.create({
             message: 'Your Personal Information is successfully updated.',
             duration: 2000,
             color: 'success',
             position: 'middle'
           });
-          toast.present();
+            toast.present();
         });
     }
   }
 
   async backClicked() {
     await this.modalController.dismiss();
+  }
+
+  onProfilePicClick() {
+    this.photoService.getPhoto().then(photo => {
+      this.photo = photo;
+      this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
+      this.profilePicChanged = true;
+    }).catch(error => {
+      console.log(`Error occure when trying get the photo.`);
+    });
   }
 }

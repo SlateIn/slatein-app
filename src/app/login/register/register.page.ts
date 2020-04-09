@@ -5,6 +5,7 @@ import { AuthService } from '@services/auth.service';
 import { Plugins } from '@capacitor/core';
 import { PasswordValidatorService } from '@services/password-validator.service';
 import { Subscription } from 'rxjs';
+import { CameraService } from '@services/camera.service';
 
 const { Storage } = Plugins;
 
@@ -21,9 +22,9 @@ export class RegisterPage implements OnInit {
   registerForm: FormGroup;
   avatarSrc = 'assets/icon/default_profile.svg';
   isProfilePicSelected = false;
-  profilePicFile: File;
   singUpFailedErrorMsg: string;
   formValueChangesSubscription: Subscription;
+  photoBase64: string;
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -33,7 +34,8 @@ export class RegisterPage implements OnInit {
     private auth: AuthService,
     private loadingController: LoadingController,
     private pwdValidator: PasswordValidatorService,
-    private changeDetectionRef: ChangeDetectorRef) { }
+    private changeDetectionRef: ChangeDetectorRef,
+    private photoService: CameraService ) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -65,25 +67,21 @@ export class RegisterPage implements OnInit {
 
   get controls() { return this.registerForm.controls; }
 
-  picChange(event: any) {
-    this.profilePicFile = event.srcElement.files[0];
-    this.previewProfilePic(this.profilePicFile);
-  }
-
-  previewProfilePic(file: File) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = (event) => {
-      this.profilePicRef.nativeElement.src = event.target['result'];
+  onProfilePicClick() {
+    this.photoService.getPhoto().then(photo => {
+      this.profilePicRef.nativeElement.src = photo;
+      this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
       this.isProfilePicSelected = true;
-    }
+    }).catch(error => {
+      console.log(`Error occure when trying get the photo.`);
+    });
   }
 
   async register() {
     const loading = await this.createLoadingAlert();
     await loading.present();
 
-    this.auth.signUp(this.registerForm.value, this.profilePicFile).then(async () => {
+    this.auth.signUp(this.registerForm.value, this.photoBase64).then(async () => {
       await Storage.set({
         key: 'email',
         value: this.registerForm.value.email
