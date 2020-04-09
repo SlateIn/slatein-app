@@ -13,10 +13,11 @@ export class AuthService {
   private currentUserUID$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private afAuth: AngularFireAuth) { 
-    firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.currentUserUID$.next(user.uid);
       } 
+      unsubscribe();
     });
   }
 

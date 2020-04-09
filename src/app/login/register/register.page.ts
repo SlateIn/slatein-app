@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
 import { Plugins } from '@capacitor/core';
 import { PasswordValidatorService } from '@services/password-validator.service';
+import { Subscription } from 'rxjs';
 
 const { Storage } = Plugins;
 
@@ -22,6 +23,7 @@ export class RegisterPage implements OnInit {
   isProfilePicSelected = false;
   profilePicFile: File;
   singUpFailedErrorMsg: string;
+  formValueChangesSubscription: Subscription;
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -30,26 +32,35 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private auth: AuthService,
     private loadingController: LoadingController,
-    private pwdValidator: PasswordValidatorService) { }
+    private pwdValidator: PasswordValidatorService,
+    private changeDetectionRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
       fname: new FormControl('', Validators.required),
       lname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([
-        Validators.required,
         Validators.email
       ])),
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required
+        Validators.minLength(5)
       ])),
-      confirmPassword: new FormControl('', Validators.required)
+      confirmPassword: new FormControl('')
     }, {
       validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
+  }
+
+  ionViewWillEnter() {
+    this.formValueChangesSubscription = this.registerForm.valueChanges.subscribe(() => {
+      this.changeDetectionRef.detectChanges();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.formValueChangesSubscription && this.formValueChangesSubscription.unsubscribe();
   }
 
   get controls() { return this.registerForm.controls; }
@@ -78,7 +89,7 @@ export class RegisterPage implements OnInit {
         value: this.registerForm.value.email
       });
       loading.dismiss();
-      this.navCtrl.navigateForward('/tabs/myday');
+      this.navCtrl.navigateRoot('/tabs/myday');
     }).catch(err => {
       loading.dismiss();
       this.singUpFailedErrorMsg = err.message;
