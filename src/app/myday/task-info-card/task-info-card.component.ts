@@ -12,11 +12,13 @@ export class TaskInfoCardComponent implements OnInit {
 
   @Input()
   taskinfo: TaskReminderInfo;
+  favouriteTask: boolean;
 
 
   constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) { }
 
   ngOnInit() {
+    this.favouriteTask = this.taskinfo.favourite;
   }
 
   updateTask() {
@@ -26,6 +28,11 @@ export class TaskInfoCardComponent implements OnInit {
 
   deleteTask() {
     this.taskService.deleteTask(this.taskinfo.path, this.taskinfo.id);
+  }
+
+  isFavouriteTask() {
+    this.favouriteTask = !this.favouriteTask;
+    this.taskService.selectFavouriteTask(this.taskinfo.path, this.taskinfo.id, this.favouriteTask);
   }
 
 }

@@ -19,6 +19,7 @@ export class MydayPage implements OnInit, OnDestroy {
   info$: Observable<UserInfo>;
   taskForm: FormGroup;
   taskDetails: TaskReminderInfo[];
+  favouriteTaskDetails: TaskReminderInfo[];
   errorMessage: string;
   startDate: any;
   taskInfoKeys: string[];
@@ -26,6 +27,7 @@ export class MydayPage implements OnInit, OnDestroy {
   minDate: string;
   maxyear: string;
   getTaskSubscription$: Subscription;
+  segment: string;
 
   constructor(
     private notification: LocalNotificationsService,
@@ -40,7 +42,16 @@ export class MydayPage implements OnInit, OnDestroy {
     // Get today's task
     this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
       map(tasks => tasks.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()))
-    ).subscribe(tasks => this.taskDetails = tasks);
+    ).subscribe((tasks: TaskReminderInfo[]) => {
+      this.taskDetails = tasks;
+      this.favouriteTaskDetails = [];
+      for (const task of this.taskDetails) {
+        if (task.favourite === true) {
+          this.favouriteTaskDetails.push(task);
+        }
+      }
+    });
+
     this.taskForm = this.fb.group({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -51,6 +62,10 @@ export class MydayPage implements OnInit, OnDestroy {
 
   setReminder() {
     this.alertReminderService.presentAlertPrompt('Add');
+  }
+
+  segmentChanged(ev: any) {
+    this.segment = ev.detail.value;
   }
 
   ngOnDestroy(): void {
