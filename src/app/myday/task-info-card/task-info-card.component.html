@@ -6,7 +6,7 @@
         <p>{{ taskinfo?.description }}</p>
       </ion-label>
       <ion-note slot="end">
-        {{ taskinfo?.reminderdate | date : 'shortTime' }}
+        {{ taskinfo?.startDate | date : 'shortTime' }}
       </ion-note>
     </ion-item>
     <ion-item-options side="start">
@@ -16,7 +16,7 @@
     </ion-item-options>
 
     <ion-item-options side="end">
-      <ion-item-option>
+      <ion-item-option (click)="updateTask()">
         <ion-icon slot="icon-only" name="create" color="light"></ion-icon>
       </ion-item-option>
     </ion-item-options>

@@ -43,3 +43,10 @@ app-register, app-login, app-forgot-password {
 .float-right {
     float: right;
 }
+
+
+input[placeholder="startDate"], input[placeholder="endDate"], input[placeholder="startTime"], input[placeholder="endTime"] {
+    border: none !important;
+    background-color: #f9f9f9 !important;
+    font-size: larger !important;
+}
