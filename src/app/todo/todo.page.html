@@ -11,12 +11,40 @@
     </ion-toolbar>
 </ion-header>
 
+<!-- <form [formGroup]="toDoForm">
+  <ion-content>
+    <ion-list *ngFor="let row of listRows; let i = index">
+        <ion-item>
+         
+          <ion-buttons slot="end">
+              <button ion-button icon-only (click)="addDetails()"><ion-icon name="caret-forward-outline"></ion-icon></button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</form>   -->
+
+
 <ion-content>
+    <ion-list *ngFor="let row of listRows; let i = index">
+      <form [formGroup]="toDoForm" (ngSubmit)="addDetails(toDoForm.value)">
+        <ion-item>
+            <ion-input type="text" name="header" placeholder="enter the todo name" formControlName="header" required></ion-input>
+            <button [disabled]="!toDoForm.valid">submit</button>
+          <!-- <ion-button slot="end">
+              <button ion-button icon-only [disabled]="!toDoForm.value"><ion-icon name="caret-forward-outline"></ion-icon></button>
+            </ion-button> -->
+        </ion-item>
+      </form>  
+    </ion-list>
+  </ion-content>
+
+<!-- <ion-content>
   <ion-list lines="none">
     <ion-item-sliding *ngFor="let todo of items" lines="none" (click)="viewItem(todo)">
       <ion-label color="primary">{{ todo.data.title }}</ion-label>
-      <!-- <ion-icon *ngIf="todo.completed" mode="md" name="checkmark-circle-outline"></ion-icon>
+      <ion-icon *ngIf="todo.completed" mode="md" name="checkmark-circle-outline"></ion-icon>
       <ion-icon *ngIf="!todo.completed" mode="md" name="radio-button-off"></ion-icon> -->
-    </ion-item-sliding>
+    <!-- </ion-item-sliding>
   </ion-list>
-</ion-content>
+</ion-content> -->

@@ -1,13 +1,28 @@
-<ion-header>
+<ion-header class="todoView">
   <ion-toolbar color="secondary">
-    <ion-title>TodoView</ion-title>
+    <button (click)="back()">back</button>
+    <ion-title>{{todo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-card-content>
-      {{todos.data.title}}
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<form [formGroup]="toDoForm">
+  <div formArrayName="new_tasks">  
+      <ion-card *ngFor="let item of newTasks.controls; let pointIndex=index" [formGroupName]="pointIndex">
+        <ion-item-sliding id="item100">
+          <ion-item lines="none">
+            <ion-input
+              type="text" name="text" #inputFocus placeholder="enter the todo task" formControlName="task" (keydown.enter)="addNewTask()">
+            </ion-input>
+          </ion-item>
+          <ion-item-options side="start">
+            <ion-item-option color="danger" (click)="deleteTask(pointIndex)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-card>  
+  </div> 
+</form>  
+
+{{this.toDoForm.value | json}}
+
