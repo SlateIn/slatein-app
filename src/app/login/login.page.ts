@@ -26,12 +26,10 @@ export class LoginPage implements OnInit {
     Storage.get({ key: 'email' }).then((res) => this.email = res.value);
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.email
+        Validators.required
       ])),
       password: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6)
+        Validators.required
       ]))
     });
 
@@ -45,9 +43,16 @@ export class LoginPage implements OnInit {
     this.loginErrorMsg = '';
   }
 
-  login() {
-    this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
-    .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
-    .catch(err => this.loginErrorMsg = err.message)
+  login() { 
+    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
+      this.loginErrorMsg = 'Email must be valid formmats';
+    }else if(this.loginForm.value.password.length < 6) {
+      this.loginErrorMsg = 'Password must be at least 6 characters';
+    } else {
+      this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
+      .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
+      .catch(err => this.loginErrorMsg = err.message);
+    }
+    
   }
 }

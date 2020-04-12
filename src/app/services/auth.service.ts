@@ -13,10 +13,11 @@ export class AuthService {
   private currentUserUID$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private afAuth: AngularFireAuth) { 
-    firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.currentUserUID$.next(user.uid);
       } 
+      unsubscribe();
     });
   }
 
@@ -31,7 +32,7 @@ export class AuthService {
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
-        return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
+        return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).putString(profilePic, 'base64').then((snapshot) => {
           return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
             return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
           });
@@ -68,9 +69,9 @@ export class AuthService {
     return firebase.auth().signOut();
   }
 
-  updatePhotoUrl(profilePic) {
+  updatePhotoString(profilePic) {
     if(profilePic) {
-      firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
+      firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).putString(profilePic, 'base64').then((snapshot) => {
         {
           snapshot.ref.getDownloadURL().then((profilePicUrl) => {
             this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({

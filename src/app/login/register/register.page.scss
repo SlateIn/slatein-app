@@ -1,29 +1,36 @@
 ion-avatar {
     position: relative;
     margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 80px;
     height: 80px;
+
+    ion-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        bottom: 3px;
+        right: -3px;
+    }
 }
 
 ion-label.label-color {
     color: #8f8f91 !important;
 }
 
-.file-input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+.default-avatar{
+    --border-style : none;
+    
+    ion-avatar {
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }   
 }
 
-img.plus-icon {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    bottom: 3px;
-    right: -1px;
+.profile_avatar {
+    margin:0 auto;
 }
 
 @media only screen and (min-height: 660px) {

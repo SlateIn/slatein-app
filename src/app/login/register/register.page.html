@@ -1,14 +1,14 @@
 <app-header></app-header>
 <ion-content>  
   <div class="register-card">
-    <input type="file" name="file" id="file" class="file-input" (change)="picChange($event)"
-      accept="image/gif, image/jpeg, image/png" />
-    <label for="file">
-      <ion-avatar>
-        <img #profilePic [src]="avatarSrc">
-        <img class="plus-icon" src="assets/icon/plus.svg" *ngIf="!isProfilePicSelected">
-      </ion-avatar>
-    </label>
+    <ion-item class="default-avatar">
+      <div class="profile_avatar">
+        <ion-avatar (click)="onProfilePicClick()">
+          <img #profilePic [src]="avatarSrc">
+          <ion-icon mode="md" name="add-circle"></ion-icon>
+        </ion-avatar>
+      </div>
+    </ion-item>
 
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <ion-item>
@@ -37,7 +37,7 @@
         </ion-input>
         <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.email.touched && controls.email.errors" lines="none">
+      <ion-item *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)" lines="none">
         <div>
           <ion-label color="danger">Email must be valid formate</ion-label>
         </div>
@@ -61,7 +61,7 @@
           autocomplete="new-password"></ion-input>
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength" lines="none">
+      <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)" lines="none">
         <div>
           <ion-label color="danger">Password must be at least 6 characters</ion-label>
         </div>
@@ -73,7 +73,7 @@
         </ion-input>
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch" lines="none">
+      <ion-item *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)" lines="none">
         <div>
           <ion-label color="danger">Passwords must match</ion-label>
         </div>
