@@ -20,7 +20,7 @@ export class TaskService {
     // tslint:disable-next-line: max-line-length
     const path = `${todaysDate.getFullYear()}/${String(todaysDate.getMonth() + 1).padStart(2, '0')}/${String(todaysDate.getDate()).padStart(2, '0')}`;
     return this.afAuth.authState.pipe(
-      map(auth => auth.uid),
+      map(auth => auth && auth.uid),
       switchMap(res => this.db.list<TaskReminderInfo>(`/users/${res}/events/${path}/tasks`).valueChanges()));
   }
 
