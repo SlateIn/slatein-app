@@ -26,7 +26,7 @@ export class RegisterPage implements OnInit {
   singUpFailedErrorMsg: string;
   formValueChangesSubscription: Subscription;
   photoBase64: string;
-  public datepipe: DatePipe;
+  currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     private pwdValidator: PasswordValidatorService,
     private changeDetectionRef: ChangeDetectorRef,
-    public currentDate = new Date().toLocaleDateString(),
+    private datepipe: DatePipe,
     private photoService: CameraService ) { }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class RegisterPage implements OnInit {
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5)
+        Validators.minLength(6)
       ])),
       confirmPassword: new FormControl('')
     }, {

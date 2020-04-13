@@ -61,7 +61,7 @@ export class SecurityPasswordPage implements OnInit {
         color: 'success'
       });
       toast.present();
-      this.navCtrl.navigateBack('/tabs/profile');
+      this.backClicked();
     }).catch((err) => this.updatePwdErrorMsg = err.message)
   }
 

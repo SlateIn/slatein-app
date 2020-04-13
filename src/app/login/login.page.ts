@@ -18,9 +18,9 @@ export class LoginPage implements OnInit {
   loginErrorMsg: string;
   loginForm: FormGroup;
 
-  constructor(private auth: AuthService, 
-              private navCtrl: NavController,
-              private fb: FormBuilder) { }
+  constructor(private auth: AuthService,
+    private navCtrl: NavController,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     Storage.get({ key: 'email' }).then((res) => this.email = res.value);
@@ -43,16 +43,16 @@ export class LoginPage implements OnInit {
     this.loginErrorMsg = '';
   }
 
-  login() { 
-    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
+  login() {
+    this.loginErrorMsg = '';
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
       this.loginErrorMsg = 'Email must be valid formmats';
-    }else if(this.loginForm.value.password.length < 6) {
+    } else if (this.loginForm.value.password.length < 6) {
       this.loginErrorMsg = 'Password must be at least 6 characters';
     } else {
       this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
-      .then(() => {this.navCtrl.navigateRoot('/tabs/myday')})
-      .catch(err => this.loginErrorMsg = err.message);
+        .then(() => { this.navCtrl.navigateRoot('/tabs/myday') })
+        .catch(err => this.loginErrorMsg = err.message);
     }
-    
   }
 }
