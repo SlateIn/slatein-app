@@ -26,6 +26,7 @@ export class RegisterPage implements OnInit {
   singUpFailedErrorMsg: string;
   formValueChangesSubscription: Subscription;
   photoBase64: string;
+  public datepipe: DatePipe;
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
