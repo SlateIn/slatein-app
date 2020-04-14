@@ -8,7 +8,7 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item>
-        <ion-input autofill="off" placeholder="email" formControlName="email" type="text" autocomplete="username"></ion-input>
+        <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username"></ion-input>
         <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
 
@@ -41,7 +41,7 @@
 
       <div class="ion-text-center margin-top margin-bottom">
         <a routerLink="/login/register" routerDirection="forward" style="text-decoration: none;">
-          Don't have slateIn account?
+          New to SlateIn? Sign up
         </a>
       </div>  
 

@@ -59,10 +59,11 @@ export class LoginPage implements OnInit {
     this.formValueChangesSubscription && this.formValueChangesSubscription.unsubscribe();
   }
 
-  login() { 
-    if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
+  login() {
+    this.loginErrorMsg = '';
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
       this.loginErrorMsg = 'Email must be valid formmats';
-    }else if(this.loginForm.value.password.length < 6) {
+    } else if (this.loginForm.value.password.length < 6) {
       this.loginErrorMsg = 'Password must be at least 6 characters';
     } else {
       this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
@@ -80,6 +81,5 @@ export class LoginPage implements OnInit {
       })
       .catch(err => this.loginErrorMsg = err.message);
     }
-    
   }
 }
