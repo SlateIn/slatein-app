@@ -36,7 +36,7 @@ export class SecurityPasswordPage implements OnInit {
     this.updatePwdForm = this.fb.group({
       currentPassword: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(6),
         Validators.required
       ])),
       confirmPassword: new FormControl('', Validators.required)
@@ -61,7 +61,7 @@ export class SecurityPasswordPage implements OnInit {
         color: 'success'
       });
       toast.present();
-      this.navCtrl.navigateBack('/tabs/profile');
+      this.backClicked();
     }).catch((err) => this.updatePwdErrorMsg = err.message)
   }
 
