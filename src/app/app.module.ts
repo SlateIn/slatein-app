@@ -19,12 +19,13 @@ import { NgCalendarModule  } from 'ionic2-calendar';
 import { SettingsPage } from './profile/settings/settings.page';
 import { PersonalInformationPage } from './profile/personal-information/personal-information.page';
 import { SecurityPasswordPage } from './profile/security-password/security-password.page';
-import { TodoItemPage } from './todo-item/todo-item.page';
+import { TodoItemPage } from './todo/todo-item/todo-item.page';
+import { TodoListComponent } from './todo/todo-list/todo-list.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoItemPage],
-  entryComponents: [SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoItemPage],
+  declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoItemPage, TodoListComponent],
+  entryComponents: [SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoItemPage, TodoListComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

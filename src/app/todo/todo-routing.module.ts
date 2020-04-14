@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: TodoPage
-  },
-  {
-    path: 'view',
-    loadChildren: () => import('./todo-view/todo-view.module').then( m => m.TodoViewPageModule)
   }
 ];
 
