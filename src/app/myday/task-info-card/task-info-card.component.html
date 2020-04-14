@@ -1,0 +1,24 @@
+<ion-card>
+  <ion-item-sliding id="item100">
+    <ion-item lines="none">
+      <ion-label>
+        <h2>{{ taskinfo?.title }}</h2>
+        <p>{{ taskinfo?.description }}</p>
+      </ion-label>
+      <ion-note slot="end">
+        {{ taskinfo?.reminderdate | date : 'shortTime' }}
+      </ion-note>
+    </ion-item>
+    <ion-item-options side="start">
+      <ion-item-option color="danger" (click)="deleteTask()">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item-options side="end">
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="create" color="light"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-card>

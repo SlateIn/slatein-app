@@ -73,7 +73,7 @@ export class AuthService {
       firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).put(profilePic).then((snapshot) => {
         {
           snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-            this.firedata.child(`${this.afAuth.auth.currentUser.uid}`).update({
+            this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
               'photoURL': profilePicUrl ? profilePicUrl : ''
             })
           })

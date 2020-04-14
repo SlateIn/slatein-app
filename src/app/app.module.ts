@@ -34,12 +34,13 @@ import { TodoListComponent } from './todo/todo-list/todo-list.component';
     FormsModule,
     IonicModule.forRoot({
       mode: 'ios'
-    }), 
+    }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ionic4DatepickerModule,
   ],
   providers: [
     StatusBar,

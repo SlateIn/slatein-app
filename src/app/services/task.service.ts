@@ -5,42 +5,36 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { TaskReminderInfo } from '@models/taskDetails';
 import { Observable } from 'rxjs';
-import { map,switchMap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
-import { UserInfo } from '@models/userInfo';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private snapshotChangesSubscription: any;
   taskInfo$: Observable<TaskReminderInfo>;
 
-  constructor( private auth: AuthService, private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
-   
-  get getTask(){
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
+
+  get getDailyTask(): Observable<TaskReminderInfo[]> {
+    const todaysDate = new Date();
+    const path = `${todaysDate.getFullYear()}/${todaysDate.getMonth() + 1}/${todaysDate.getDate()}`;
     return this.afAuth.authState.pipe(
       map(auth => auth.uid),
-      switchMap(res => this.db.list<TaskReminderInfo>(`/users/${res}/events/`).valueChanges()));
-   }
-   
-  createTask(taskInfo: TaskReminderInfo, id){
+      switchMap(res => this.db.list<TaskReminderInfo>(`/users/${res}/events/${path}/tasks`).valueChanges()));
+  }
+
+  createTask(taskInfo: TaskReminderInfo) {
     return new Promise<any>((resolve, reject) => {
-      let currentUser = firebase.auth().currentUser;
-      let taskInfoData = {
-          title: taskInfo.title,
-          description: taskInfo.description,
-          image: taskInfo.image,
-          status: "pending",
-          reminderdate: taskInfo.reminderdate.toString(),
-          repeat: taskInfo.repeat,
-          //remindmetime: taskInfo.remindmetime
-          }
-      return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${id}`).set(taskInfoData)
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+      return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${taskInfo.path}/tasks/${taskInfo.id}`).set(taskInfo)
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     })
   }
+
+  deleteTask(path: string, id: number): Promise<void> {
+    return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).remove();
   }
+
+}
