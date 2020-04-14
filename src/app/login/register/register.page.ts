@@ -6,6 +6,7 @@ import { Plugins } from '@capacitor/core';
 import { PasswordValidatorService } from '@services/password-validator.service';
 import { Subscription } from 'rxjs';
 import { CameraService } from '@services/camera.service';
+import { DatePipe } from '@angular/common';
 
 const { Storage } = Plugins;
 
@@ -25,6 +26,7 @@ export class RegisterPage implements OnInit {
   singUpFailedErrorMsg: string;
   formValueChangesSubscription: Subscription;
   photoBase64: string;
+  currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -35,24 +37,27 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     private pwdValidator: PasswordValidatorService,
     private changeDetectionRef: ChangeDetectorRef,
+    private datepipe: DatePipe,
     private photoService: CameraService ) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      fname: new FormControl('', Validators.required),
-      lname: new FormControl('', Validators.required),
+      fname: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      lname: new FormControl('', Validators.pattern('[a-zA-Z ]*')),
       email: new FormControl('', Validators.compose([
         Validators.email
       ])),
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5)
+        Validators.minLength(6)
       ])),
       confirmPassword: new FormControl('')
     }, {
       validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
+    this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+    console.log( this.currentDate);
   }
 
   ionViewWillEnter() {
@@ -106,5 +111,4 @@ export class RegisterPage implements OnInit {
   goBack() {
     this.navCtrl.navigateBack('/login');
   }
-  
 }
