@@ -38,4 +38,8 @@ export class TaskService {
     return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).remove();
   }
 
+  selectFavouriteTask(path: string, id: number, status: boolean) {
+    return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).update({favourite: status});
+  }
+
 }

@@ -8,4 +8,5 @@ export interface TaskReminderInfo {
     endDate: string;
     repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day'| 'never';
     path: string;
+    favourite: boolean;
 }

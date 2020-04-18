@@ -205,7 +205,8 @@ export class AlertReminderService {
       status: 'pending',
       repeat,
       path,
-      endDate
+      endDate,
+      favourite: false
     };
     console.log(data);
     this.notification.scheduleAt(data, id).then((identifier: number) => {
