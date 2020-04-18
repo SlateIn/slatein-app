@@ -19,21 +19,27 @@ export class LoginPage implements OnInit {
   loginErrorMsg: string;
   loginForm: FormGroup;
   formValueChangesSubscription: Subscription;
-  
+
   constructor(private auth: AuthService, 
               private navCtrl: NavController,
               private fb: FormBuilder,
               private changeDetectionRef: ChangeDetectorRef,) { }
 
   ngOnInit() {
-    Storage.get({ key: 'email' }).then((res) => this.email = res.value);
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose([
         Validators.required
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required
-      ]))
+      ])),
+      canRemember: new FormControl(false)
+    });
+
+    Storage.get({ key: 'email' }).then((res) => {
+      if(res.value) {
+        this.loginForm.setValue({email: res.value, password: '', canRemember: true});
+      }
     });
 
   }
@@ -61,8 +67,19 @@ export class LoginPage implements OnInit {
       this.loginErrorMsg = 'Password must be at least 6 characters';
     } else {
       this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
-        .then(() => { this.navCtrl.navigateRoot('/tabs/myday') })
-        .catch(err => this.loginErrorMsg = err.message);
+      .then(() => {
+        if(this.loginForm.value.canRemember) {
+          Storage.set({
+            key: 'email',
+            value: this.loginForm.value.email
+          });
+        } else {
+          Storage.remove({key: 'email'});
+        }
+        
+        this.navCtrl.navigateRoot('/tabs/myday')
+      })
+      .catch(err => this.loginErrorMsg = err.message);
     }
   }
 }
