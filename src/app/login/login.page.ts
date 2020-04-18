@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 const { Storage } = Plugins;
 
@@ -17,10 +18,12 @@ export class LoginPage implements OnInit {
   password: string;
   loginErrorMsg: string;
   loginForm: FormGroup;
-
-  constructor(private auth: AuthService,
-    private navCtrl: NavController,
-    private fb: FormBuilder) { }
+  formValueChangesSubscription: Subscription;
+  
+  constructor(private auth: AuthService, 
+              private navCtrl: NavController,
+              private fb: FormBuilder,
+              private changeDetectionRef: ChangeDetectorRef,) { }
 
   ngOnInit() {
     Storage.get({ key: 'email' }).then((res) => this.email = res.value);
@@ -41,6 +44,13 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.loginErrorMsg = '';
+    this.formValueChangesSubscription = this.loginForm.valueChanges.subscribe(() => {
+      this.changeDetectionRef.detectChanges();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.formValueChangesSubscription && this.formValueChangesSubscription.unsubscribe();
   }
 
   login() {

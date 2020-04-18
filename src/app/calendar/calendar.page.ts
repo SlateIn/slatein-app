@@ -1,5 +1,5 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { Component, OnInit, ViewEncapsulation, wtfStartTimeRange, wtfEndTimeRange, ViewChild, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription } from 'rxjs';
