@@ -1,48 +1,45 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>My Day</ion-title>
+    <ion-buttons slot="primary" (click)="setReminder()">
+      <ion-button>
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)"> 
+    <ion-segment-button value="All">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Favourite">
+      <ion-label>Favourite</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <ion-toolbar>
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
-  <ng-container *ngFor="let taskDetail of taskDetails">
+  <!-- <ng-container *ngFor="let taskDetail of taskDetails">
     <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
-  </ng-container>
+  </ng-container> -->
 
-  <div>
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit(taskForm.value)">
-      <ion-card>
-        <ion-item>
-          <ion-label position="floating" color="primary">Title</ion-label>
-          <ion-input type="text" formControlName="title"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating" color="primary">Description</ion-label>
-          <ion-input type="text" formControlName="description"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Date and Time</ion-label>
-          <ion-datetime formControlName="reminderdate" [min]="minDate" [max]="maxyear" displayFormat="MMM DD, YYYY HH:mm" placeholder="Select Date and Time"></ion-datetime>
-        </ion-item>
-        <ion-list>
-          <ion-item>
-            <ion-label>Repeat</ion-label>
-            <ion-select formControlName="repeat" placeholder="Select One">
-              <ion-select-option value="never">Never</ion-select-option>
-              <ion-select-option value="day">Day</ion-select-option>
-              <ion-select-option value="week">Weekly</ion-select-option>
-              <ion-select-option value="two-weeks">Biweekly</ion-select-option>
-              <ion-select-option value="month">Monthly</ion-select-option>
-              <ion-select-option value="year">Yearly</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-        <ion-button expand="full"  type="submit" color="light" [disabled]="!taskForm.valid">Add</ion-button>
-      </ion-card>
-    </form>
+  <div [ngSwitch]="segment">
+    <ion-label *ngSwitchCase="'Favourite'">
+      <ng-container *ngFor="let taskDetail of favouriteTaskDetails">
+        <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
+      </ng-container>
+    </ion-label>
+
+    <ion-label *ngSwitchDefault>
+      <ng-container *ngFor="let taskDetail of taskDetails">
+        <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
+      </ng-container>
+    </ion-label>
   </div>
+
 </ion-content>

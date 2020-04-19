@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, wtfStartTimeRange, wtfEndTimeRange } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-
-import { Ionic4DatepickerModalComponent } from '@logisticinfotech/ionic4-datepicker';
+import { CalendarComponent } from 'ionic2-calendar/calendar';
+import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
+import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription } from 'rxjs';
+import { formatDate } from '@angular/common';
+import { CalendarIntervalsService } from '@services/calendar-intervals.service';
+import { LoaderService } from '@services/loader.service';
 
 @Component({
   selector: 'app-calendar',
@@ -12,38 +14,43 @@ import { Subscription } from 'rxjs';
 })
 export class CalendarPage implements OnInit {
   view: string;
-  datePickerObj: any = {};
   selectedDate;
   viewTitle;
+  minDate = new Date().toISOString();
+
   isToday: boolean;
-  eventSource;
+  eventSource = [];
   calendar = {
     mode: 'month',
     currentDate: new Date()
   };
   getCalendarEvents$: Subscription;
 
+  @ViewChild(CalendarComponent, { static: false }) myCal: CalendarComponent;
 
   constructor(
     public modalCtrl: ModalController,
-    public calService: CalendarService
+    public calService: CalendarService,
+    private alertCtrl: AlertController,
+    private loaderService: LoaderService,
+    public calendarIntervalsService: CalendarIntervalsService,
+    @Inject(LOCALE_ID) private locale: string
   ) { }
 
 
   ngOnInit() {
     const todaysDate = new Date();
     const year = `${todaysDate.getFullYear()}`;
-    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(
-      tasks => this.loadEvents(tasks)
-    );
-    // this.loadEvents(tasks)
+    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(tasks => {
+      this.loadEvents(tasks);
+      this.loaderService.dismiss();
+    });
     this.view = 'month';
-    // --- TODO: Only for testing ---
-    // this.loadEvents();
+    this.loaderService.present('Loading Your Calendar Data');
   }
 
   loadEvents(calendarTasks) {
-    this.eventSource = this.createRandomEvents();
+    this.eventSource = this.getEventsStructure(calendarTasks);
   }
 
   onViewTitleChanged(title) {
@@ -57,14 +64,26 @@ export class CalendarPage implements OnInit {
     this.isToday = today.getTime() === event.getTime();
   }
 
-  onEventSelected(event) {
-    console.log('Event selected:' + event.startTime + '-' + event.endTime + ',' + event.title);
+  // Calendar event was clicked
+  async onEventSelected(event) {
+    // Use Angular date pipe for conversion
+    let start = formatDate(event.startTime, 'medium', this.locale);
+    let end = formatDate(event.endTime, 'medium', this.locale);
+
+    const alert = await this.alertCtrl.create({
+      header: event.title,
+      subHeader: event.desc,
+      message: 'From: ' + start + '<br><br>To: ' + end,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
   onTimeSelected(ev) {
-    console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
-      (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
-    // this.changeMode('day');
+    // let selected = new Date(ev.selecedTime);
+    // this.event.startTime = selected.toISOString();
+    // selected.setHours(selected.getHours() + 1);
+    // this.event.endTime = (selected.toISOString());
   }
 
   changeMode(mode) {
@@ -72,42 +91,21 @@ export class CalendarPage implements OnInit {
     this.calendar.mode = mode;
   }
 
-  createRandomEvents() {
-    let events = [];
-    for (let i = 0; i < 50; i += 1) {
-      let date = new Date();
-      let eventType = Math.floor(Math.random() * 2);
-      let startDay = Math.floor(Math.random() * 90) - 45;
-      let endDay = Math.floor(Math.random() * 2) + startDay;
-      let startTime;
-      let endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        events.push({
-          title: 'All Day - ' + i,
-          startTime,
-          endTime,
-          allDay: true
-        });
-      } else {
-        let startMinute = Math.floor(Math.random() * 24 * 60);
-        let endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        events.push({
-          title: 'Event - ' + i,
-          startTime,
-          endTime,
-          allDay: false
-        });
-      }
-    }
-    return events;
+  // Change current month/week/day
+  next() {
+    let swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slideNext();
   }
+
+  back() {
+    let swiper = document.querySelector('.swiper-container')['swiper'];
+    swiper.slidePrev();
+  }
+
+  getEventsStructure(calendarTasks) {
+    return this.calendarIntervalsService.getIntervalDates(calendarTasks);
+  }
+
   onRangeChanged(ev) {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }

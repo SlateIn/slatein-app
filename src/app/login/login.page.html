@@ -8,13 +8,8 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item>
-        <ion-input autofill="off" placeholder="email" formControlName="email" type="text" autocomplete="username"></ion-input>
+        <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username"></ion-input>
         <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
-      </ion-item>
-      <ion-item *ngIf="controls.email.touched && controls.email.errors" lines="none">
-        <div>
-          <ion-label color="danger">Email must be valid formmat</ion-label>
-        </div>
       </ion-item>
 
       <ion-item>
@@ -23,27 +18,30 @@
         </ion-input>
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength" lines="none">
-        <div>
-          <ion-label color="danger">Password must be at least 5 characters</ion-label>
-        </div>
-      </ion-item> 
-      <div class="ion-text-right margin-top margin-bottom">
+      
+      <div class="ion-text-right margin-top">
         <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear" style="text-decoration: none;">
           Forgot Password?
         </a>
       </div>
 
+      <ion-list class="margin-bottom">
+        <ion-item lines="none">
+          <ion-label>Remember Me</ion-label>
+          <ion-checkbox slot="start" formControlName="canRemember"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+
       <ion-button expand="block" class="register" fill="solid" size="default" (click)="login()"
        [disabled]="!loginForm.valid">Login</ion-button>
 
-       <div class="margin-bottom">
+       <div class="margin-bottom margin-top">
          <ion-label color="danger">{{loginErrorMsg}}</ion-label>
        </div>
 
       <div class="ion-text-center margin-top margin-bottom">
         <a routerLink="/login/register" routerDirection="forward" style="text-decoration: none;">
-          Don't have slateIn account?
+          New to SlateIn? Sign up
         </a>
       </div>  
 

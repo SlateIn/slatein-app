@@ -17,9 +17,10 @@ export class TaskService {
 
   get getDailyTask(): Observable<TaskReminderInfo[]> {
     const todaysDate = new Date();
-    const path = `${todaysDate.getFullYear()}/${todaysDate.getMonth() + 1}/${todaysDate.getDate()}`;
+    // tslint:disable-next-line: max-line-length
+    const path = `${todaysDate.getFullYear()}/${String(todaysDate.getMonth() + 1).padStart(2, '0')}/${String(todaysDate.getDate()).padStart(2, '0')}`;
     return this.afAuth.authState.pipe(
-      map(auth => auth.uid),
+      map(auth => auth && auth.uid),
       switchMap(res => this.db.list<TaskReminderInfo>(`/users/${res}/events/${path}/tasks`).valueChanges()));
   }
 
@@ -29,12 +30,16 @@ export class TaskService {
         .then(
           res => resolve(res),
           err => reject(err)
-        )
-    })
+        );
+    });
   }
 
   deleteTask(path: string, id: number): Promise<void> {
     return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).remove();
+  }
+
+  selectFavouriteTask(path: string, id: number, status: boolean) {
+    return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`).update({favourite: status});
   }
 
 }

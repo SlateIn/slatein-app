@@ -1,10 +1,12 @@
 export interface TaskReminderInfo {
     id?: number;
     title: string;
-    description: string;
+    desc: string;
     image: string;
     status: string;
-    reminderdate: Date | string;
-    repeat: "year" | "month" | "two-weeks" | "week" | "day" | "hour" | "minute" | "second";
+    startDate: string;
+    endDate: string;
+    repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day'| 'never';
     path: string;
+    favourite: boolean;
 }
