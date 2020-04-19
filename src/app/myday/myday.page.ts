@@ -8,6 +8,7 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { TaskReminderInfo } from '@models/taskDetails';
 import { filter, map, tap } from 'rxjs/operators';
 import { AlertReminderService } from './services/alert-reminder.service';
+import { LoaderService } from '@services/loader.service';
 
 
 @Component({
@@ -33,10 +34,10 @@ export class MydayPage implements OnInit, OnDestroy {
     private notification: LocalNotificationsService,
     private taskService: TaskService,
     private fb: FormBuilder,
+    private loaderService: LoaderService,
     private alertReminderService: AlertReminderService) { }
 
   async ngOnInit() {
-
     this.minDate = this.todayDate.toISOString();
     this.maxyear = (this.todayDate.getFullYear() + 15).toString();
     // Get today's task
@@ -50,6 +51,7 @@ export class MydayPage implements OnInit, OnDestroy {
           this.favouriteTaskDetails.push(task);
         }
       }
+      this.loaderService.dismiss();
     });
 
     this.taskForm = this.fb.group({
@@ -58,6 +60,7 @@ export class MydayPage implements OnInit, OnDestroy {
       startDate: new FormControl('', Validators.required),
       repeat: new FormControl('', Validators.required),
     });
+    this.loaderService.present('Loading Your Tasklists');
   }
 
   setReminder() {
