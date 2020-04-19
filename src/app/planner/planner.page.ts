@@ -24,19 +24,19 @@ export class PlannerPage implements OnInit {
   ngOnInit() {
     this.item1 = {
       id: 1,
-      listItem: 'First List',
+      title: 'First List',
       completed: false
     };
 
     this.item2 = {
       id: 1,
-      listItem: 'Second List',
+      title: 'Second List',
       completed: false
     };
 
     this.item3 = {
       id: 1,
-      listItem: 'Third List',
+      title: 'Third List',
       completed: false
     };
 

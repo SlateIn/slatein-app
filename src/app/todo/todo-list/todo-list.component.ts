@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToDoService } from '../services/todo.service';
+import { ToDoItem } from '@models/todoItem';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,8 +11,8 @@ import { ToDoService } from '../services/todo.service';
 export class TodoListComponent implements OnInit {
 
   header: string;
-  list: {id: number, title: string, todos: []};
-  todos: {id: number, title: string, completed: boolean} [] = [];
+  list: ToDoItem [];
+  id: number;
   public cnt: number;
   addingToDo = false;
 
@@ -19,7 +20,6 @@ export class TodoListComponent implements OnInit {
               private modalController: ModalController) { }
 
   ngOnInit() {
-    this.todos = this.list.todos;
   }
 
   async close() {
@@ -35,7 +35,7 @@ export class TodoListComponent implements OnInit {
     if (value.target.value !== '') {
       this.cnt++;
       const todo = {id: this.cnt, title: value.target.value, completed: false};
-      this.toDoService.addToDoInList(todo);
+      this.toDoService.addToDoInList(this.id, todo);
     } else {
       this.addingToDo = false;
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ToDoService } from '../services/todo.service';
+import { ToDoItem } from '@models/todoItem';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ToDoService } from '../services/todo.service';
 export class TodoItemPage implements OnInit {
 
   header: string;
-  list: {id: number, title: string, completed: boolean} [] = [];
+  list: ToDoItem [] = [];
   public cnt: number;
   addingToDo = false;
 
@@ -33,9 +34,8 @@ export class TodoItemPage implements OnInit {
     console.log(value);
     if (value.target.value !== '') {
       this.cnt++;
-      const todo = {id: this.cnt, title: value.target.value, completed: false};
-      this.toDoService.addToDoInList(todo);
-      //this.todos.unshift(todo);
+      const todo: ToDoItem = {id: this.cnt, title: value.target.value, completed: false};
+      this.toDoService.addToDoInCommonList(todo);
     } else {
       this.addingToDo = false;
     }

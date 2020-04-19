@@ -1,5 +1,5 @@
 export interface ToDoItem {
     id?: number;
-    listItem: string;
+    title: string;
     completed: boolean;
 }

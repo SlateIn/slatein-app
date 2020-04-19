@@ -22,6 +22,8 @@ import { SecurityPasswordPage } from './profile/security-password/security-passw
 import { TodoItemPage } from './todo/todo-item/todo-item.page';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 
+// ionic4-datepicker
+import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 @NgModule({
   declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoItemPage, TodoListComponent],

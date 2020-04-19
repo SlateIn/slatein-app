@@ -5,6 +5,8 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToDoService } from './services/todo.service';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { ToDoList } from '@models/todoList';
+import { ToDoItem } from '@models/todoItem';
 
 
 @Component({
@@ -14,45 +16,24 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 })
 export class TodoPage implements OnInit {
   taskChecked = false;
-  todos = [];
+  todos: ToDoItem[] = [];
   index: number;
   addingToDo = false;
+  addingList = false;
   viewAllLinkDisplay = true;
-  listRow: {id: number,
-            title: string,
-            todos: []};
-  public listRows = [];
+  listRows: ToDoList[] = [];
   public cnt = 0;
   public listData: any = [];
   public toDoForm: FormGroup;
 
   constructor(private toDoService: ToDoService,
-              public router: Router,
-              public fb: FormBuilder,
-              private route: ActivatedRoute,
-              private modalController: ModalController) {
-                this.route.queryParams.subscribe(params => {
-                  if (this.router.getCurrentNavigation().extras) {
-                    this.listData = this.router.getCurrentNavigation().extras;
-                    console.log('reverse1111', this.listData);
-                  }
-                });
-  }
+              private modalController: ModalController) {}
 
   ngOnInit() {
-    this.todos = this.toDoService.getToDoList();
+    this.todos = this.toDoService.getAllToDos();
     this.cnt = this.todos.length;
     this.viewAllLinkDisplay = this.todos.length > 0 ? true : false;
-
-    this.toDoForm = this.fb.group ({
-      todoInput: new FormControl('',  Validators.required)
-    });
-
-    this.listRows =  [
-      {id: 1, title: '1st List', todos: []},
-      {id: 2, title: '2st List', todos: []},
-      {id: 3, title: '3st List', todos: []}
-    ];
+    this.listRows = this.toDoService.getAllLists();
   }
 
   addTodo() {
@@ -63,9 +44,8 @@ export class TodoPage implements OnInit {
     console.log(value);
     if (value.target.value !== '') {
       this.cnt++;
-      const todo = {id: this.cnt, title: value.target.value, completed: false};
-      this.toDoService.addToDoInList(todo);
-      //this.todos.unshift(todo);
+      const todo: ToDoItem = {id: this.cnt, title: value.target.value, completed: false};
+      this.toDoService.addToDoInCommonList(todo);
       this.viewAllLinkDisplay = true;
     } else {
       this.addingToDo = false;
@@ -81,13 +61,30 @@ export class TodoPage implements OnInit {
     }
   }
 
+  addList() {
+    this.addingList = true;
+  }
+
+  newlistEntered(value: any) {
+    console.log(value);
+    if (value.target.value !== '') {
+      this.cnt++;
+      const listToDos: ToDoItem[] = [];
+      const newList: ToDoList = {id: this.cnt, listName: value.target.value, listItems: listToDos};
+      this.toDoService.addNewList(newList);
+    } else {
+      this.addingList = false;
+    }
+    this.addingList = false;
+  }
+
   async gotoToDoModal() {
     const commonToDoPage = await this.modalController.create({
       component: TodoItemPage,
       componentProps: {
         header: 'ToDo',
         cnt: this.cnt,
-        list: this.toDoService.getToDoList()
+        list: this.toDoService.getAllToDos()
       }
     });
     return await commonToDoPage.present();
@@ -97,23 +94,11 @@ export class TodoPage implements OnInit {
     const commonToDoList = await this.modalController.create({
       component: TodoListComponent,
       componentProps: {
-        header: list.title,
-        list: list.todos
+        header: list.listName,
+        id: list.id,
+        list: list.listItems
       }
     });
     return await commonToDoList.present();
-  }
-
-  async addItem() {
-    this.listRows.push(this.cnt++);
-  }
-
-  async addDetails(headerName) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        header: headerName.header
-      }
-    };
-    this.router.navigate(['/todo/view'], navigationExtras);
   }
 }
