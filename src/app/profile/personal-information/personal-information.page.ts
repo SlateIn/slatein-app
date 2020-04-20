@@ -30,6 +30,7 @@ export class PersonalInformationPage implements OnInit {
   profilePicChanged = false;
   photo: SafeResourceUrl;
   photoBase64: string;
+  currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
@@ -58,11 +59,12 @@ export class PersonalInformationPage implements OnInit {
       this.userInfo.photoURL = user.photoURL;
       this.photo = user.photoURL;
     });
+    this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
   formatDate(date: string) {
     const newDate = new Date(date).getTime();
-    return this.datepipe.transform(newDate, 'MM-dd-yyyy');
+    return this.datepipe.transform(newDate, 'MM/dd/yyyy');
   }
 
   upDateBirthDate(updatedBirthdate: string) {

@@ -48,7 +48,7 @@
       Name
     </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked; else changeName">
-      <ion-label>{{userInfo.fname | titlecase}} {{userInfo.lname | titlecase}}</ion-label>
+      <ion-label>{{userInfo.fname | capitalize}} {{userInfo.lname | capitalize}}</ion-label>
     </ion-item>
     <ng-template #changeName>
       <ion-item lines="full">
@@ -65,7 +65,7 @@
     </ion-item>
     <ng-template #changeDate>
       <ion-item lines="full">
-        <ion-datetime displayFormat="MM-DD-YYYY" [value]="userInfo.birthdate" (ionChange)="upDateBirthDate($event.detail.value)"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" [value]="userInfo.birthdate" max="{{currentDate}}" (ionChange)="upDateBirthDate($event.detail.value)"></ion-datetime>
       </ion-item>
     </ng-template>
     
