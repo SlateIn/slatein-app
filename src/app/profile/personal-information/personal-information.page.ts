@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { UserService } from '../../services/user-info.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { ToastController, ModalController } from '@ionic/angular';
@@ -51,8 +51,8 @@ export class PersonalInformationPage implements OnInit {
 
     this.info$.subscribe( user => {
       this.currentUser = user;
-      this.userInfo.fname = user.fname;
-      this.userInfo.lname = user.lname;
+      this.userInfo.fname = user.fname.toLocaleUpperCase();
+      this.userInfo.lname = user.lname.toLocaleUpperCase();
       this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;

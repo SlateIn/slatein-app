@@ -48,7 +48,7 @@
       Name
     </ion-list-header>
     <ion-item lines="full" *ngIf="!upgateButtonClicked; else changeName">
-      <ion-label>{{userInfo.fname | capitalize}} {{userInfo.lname | capitalize}}</ion-label>
+      <ion-label>{{userInfo.fname | uppercase}} {{userInfo.lname | uppercase}}</ion-label>
     </ion-item>
     <ng-template #changeName>
       <ion-item lines="full">
