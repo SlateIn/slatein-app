@@ -1,9 +1,39 @@
 img {
-    margin-top: 80px;
+    // margin-top: 80px;
 }
+
 
 ion-text.logo-text {
     font-size: 2em;
     font-weight: bold;
     color: #31e8e9;
+}
+
+.logo-size {
+    margin: 1rem 0rem 0rem 2.9rem;
+    width: 80%;
+    height: 100%;
+}
+
+.col-pad {
+    padding: 1.5rem;
+}
+
+.login-text-margin-one {
+    margin: 0.8rem 1rem 1.5rem;
+}
+
+.login-text-margin-two {
+    margin: 1.5rem 1rem 0.8rem;
+}
+
+.app-btn {
+    margin: 2.5rem 1rem 0.8rem;
+}
+
+ion-item {
+    --color: #050608;
+    --border-color: #050608; // default underline color
+    --highlight-color-invalid: red; // invalid underline color
+    --highlight-color-valid: green; // valid underline color
 }

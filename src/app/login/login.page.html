@@ -1,43 +1,68 @@
-<ion-content text-center>
+<ion-content>
 
-  
-  <div class="register-card">
-    <img src="../../assets/icon/logo.svg" alt="" width="150px" height="150px">
-    <div>
-      <ion-text class="logo-text">SlateIn</ion-text>
-    </div>
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <ion-item>
-        <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username"></ion-input>
-        <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
-      </ion-item>
+  <div class="full-height grad-bg">
+    <ion-row>
+      <ion-col size='12'>
+        <header>
+          <!--<img class="m-top-zero logo-size" src="../../assets/icon/ex_Logo.png" alt="">-->
+          <img class="m-top-zero logo-size" src="../../assets/icon/Logo_Red.svg" alt="">
+        </header>
+      </ion-col>
+      <ion-col size='12' class="col-pad">
+        <section class="slatIn-card">
+          <!-- <img 
+          src="../../assets/icon/logo.svg" alt="" 
+          width="150px" 
+          height="150px">
+          <div>
+            <ion-text class="logo-text">SlateIn</ion-text>
+          </div> -->
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <ion-item>
+              <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
+              </ion-input>
+              <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
+            </ion-item>
 
-      <ion-item>
-        <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit
-          autocomplete="new-password">
-        </ion-input>
-        <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
-      </ion-item>
-      
-      <div class="ion-text-right margin-top margin-bottom">
-        <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear" style="text-decoration: none;">
-          Forgot Password?
-        </a>
-      </div>
+            <ion-item>
+              <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit
+                autocomplete="new-password">
+              </ion-input>
+              <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
+            </ion-item>
 
-      <ion-button expand="block" class="register" fill="solid" size="default" (click)="login()"
-       [disabled]="!loginForm.valid">Login</ion-button>
+            <div class="align-text-center login-text-margin-one">
+              <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
+                <span>
+                  Forgot Password?
+                </span>
+              </a>
+            </div>
 
-       <div class="margin-bottom margin-top">
-         <ion-label color="danger">{{loginErrorMsg}}</ion-label>
-       </div>
+            <ion-button expand="block" class="register app-btn" fill="solid" size="default" (click)="login()"
+              [ngClass]="!loginForm.valid ? 'btn-disabled' : 'btn-regular'" [disabled]="!loginForm.valid">
+              <span>
+                Login
+              </span>
+            </ion-button>
 
-      <div class="ion-text-center margin-top margin-bottom">
-        <a routerLink="/login/register" routerDirection="forward" style="text-decoration: none;">
-          New to SlateIn? Sign up
-        </a>
-      </div>  
+            <div class="margin-bottom margin-top">
+              <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+            </div>
 
-    </form>    
+            <div class="ion-text-center login-text-margin-two">
+              <span>New to SlateIn?</span>
+              <a routerLink="/login/register" routerDirection="forward">
+                <span>
+                  Sign up
+                </span>
+              </a>
+            </div>
+
+          </form>
+        </section>
+      </ion-col>
+    </ion-row>
+
   </div>
 </ion-content>

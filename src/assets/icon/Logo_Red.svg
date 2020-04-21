@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="312" height="181" viewBox="0 0 312 181">
+  <defs>
+    <filter id="SlateIn" x="0" y="0" width="312" height="181" filterUnits="userSpaceOnUse">
+      <feOffset dx="14" dy="14" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feFlood flood-color="#1d1e3a" flood-opacity="0"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Logo_Red" transform="translate(-46 -2)">
+    <g transform="matrix(1, 0, 0, 1, 46, 2)" filter="url(#SlateIn)">
+      <text id="SlateIn-2" data-name="SlateIn" transform="translate(142 104)" fill="#050608" font-size="80" font-family="Calibri-Bold, Calibri" font-weight="700" text-decoration="underline"><tspan x="-113.75" y="0">Slate</tspan><tspan y="0" fill="#fc2600">I</tspan><tspan y="0">n</tspan></text>
+    </g>
+    <g id="Rectangle_538" data-name="Rectangle 538" transform="translate(242 38)" fill="#1eb7a8" stroke="#1d1e3a" stroke-width="0.5">
+      <rect width="12" height="12" stroke="none"/>
+      <rect x="0.25" y="0.25" width="11.5" height="11.5" fill="none"/>
+    </g>
+    <path id="Path_17" data-name="Path 17" d="M2.972,8.682-.5,3.588,1.217,1.012,2.972,3.588l8.372-7.58,1.313-1.2Z" transform="translate(243.844 39.836)" fill="#ff2700" stroke="#1d1e3a" stroke-width="0.5"/>
+  </g>
+</svg>

@@ -28,3 +28,76 @@
 
 
 @import "./custom-app.scss";
+@import "theme/mixins.scss";
+
+html,
+body {
+  // height: 100vh;
+
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  color: #050608;
+}
+
+.full-height {
+  // height: 100vh;
+  height: -webkit-fill-available;
+}
+
+.m-top-zero {
+  margin-top: 0rem;
+}
+
+.m-top {
+  margin-top: 0.5rem;
+}
+
+.app-btn {
+  border-radius: 10px;
+  font-size: 1.3rem;
+}
+
+.btn-regular {
+  --background: #1CBBA4;
+}
+
+.btn-disabled {
+  --background: darkGray;
+}
+
+.grad-bg {
+  background: linear-gradient(180deg, #1CBBA4 20%, #2CA3BF 42%, #1E486B 100%);
+}
+
+.align-text-center {
+  text-align: center;
+}
+
+.align-text-left {
+  text-align: left;
+}
+
+.align-text-right {
+  text-align: right;
+}
+
+.slatIn-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 1rem 0.5rem;
+  box-shadow: 9px 9px 12px #050608, -9px -9px 10px #A6EEE4;
+  ;
+}
+
+form {
+  ion-item {
+    margin: 0.6rem 0rem;
+  }
+}
