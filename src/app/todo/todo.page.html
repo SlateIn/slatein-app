@@ -13,7 +13,7 @@
     </ion-fab-button>
     <ion-fab-list side="start">
       <ion-fab-button (click)="addList()" color="grey-light">
-        <ion-icon name="list-box"></ion-icon>
+        <ion-icon name="reader"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="addTodo()" color="grey-light">
         <ion-icon name="checkmark-circle"></ion-icon>
@@ -29,7 +29,7 @@
     </ion-list-header>
     <ion-card>
     <ion-item *ngIf="addingToDo" lines="none">
-      <ion-icon slot="start" name="done-all"></ion-icon>
+      <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
       <ion-input type="text" placeholder="+ Add Todo" required (ionBlur)="toDoEntered($event)"></ion-input>
     </ion-item>
 
@@ -45,7 +45,7 @@
 
     <ion-item lines="none" (click)="gotoToDoModal()" *ngIf="viewAllLinkDisplay">
       <ion-label slot="end" class="viewmore-text">View All</ion-label>
-      <ion-icon slot="end" size="large" name="arrow-round-forward"></ion-icon>
+      <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
     </ion-item>
     </ion-card>
   </ion-list>
@@ -68,7 +68,7 @@
       <ion-item lines="none" (click)="gotoToDoListModal(row)">
       <ion-icon slot="start" name="list"></ion-icon>
       <ion-label>{{ row.listName }}</ion-label>
-      <ion-icon slot="end" size="large" name="arrow-round-forward"></ion-icon>
+      <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
       </ion-item>
     </ion-card>
     
