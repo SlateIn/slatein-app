@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
   constructor(private auth: AuthService, 
               private navCtrl: NavController,
               private fb: FormBuilder,
-              private changeDetectionRef: ChangeDetectorRef,) { }
+              private changeDetectionRef: ChangeDetectorRef ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

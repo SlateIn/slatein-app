@@ -42,22 +42,17 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      fname: ['', Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      lname: new FormControl('', Validators.pattern('[a-zA-Z ]*')),
-      email: new FormControl('', Validators.compose([
-        Validators.email
-      ])),
+      fname: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
+      lname: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
+      email: ['', Validators.compose([Validators.email, Validators.required])],
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(6)
-      ])),
+      password: new FormControl('', Validators.compose([Validators.minLength(6)])),
       confirmPassword: new FormControl('')
     }, {
       validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
-    console.log( this.currentDate);
   }
 
   ionViewWillEnter() {
@@ -85,7 +80,7 @@ export class RegisterPage implements OnInit {
   async register() {
     const loading = await this.createLoadingAlert();
     await loading.present();
-
+    console.log(this.registerForm.value);
     this.auth.signUp(this.registerForm.value, this.photoBase64).then(async () => {
       await Storage.set({
         key: 'email',
