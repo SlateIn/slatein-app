@@ -17,7 +17,7 @@
       </ion-item>
       <ion-item *ngIf="controls.fname.touched &&controls.fname.errors" lines="none">
         <div>
-          <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special characters</ion-label>
+          <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special characters.</ion-label>
         </div>
       </ion-item>
 
@@ -27,7 +27,7 @@
       </ion-item>
       <ion-item *ngIf="controls.lname.touched &&controls.lname.errors" lines="none">
         <div>
-          <ion-label class="ion-text-wrap" color="danger">Lastname can not contain whitespace, numbers and special characters</ion-label>
+          <ion-label class="ion-text-wrap" color="danger">Lastname can not contain whitespace, numbers and special characters.</ion-label>
         </div>
       </ion-item>
 
@@ -39,7 +39,7 @@
       </ion-item>
       <ion-item *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)" lines="none">
         <div>
-          <ion-label color="danger">Email must be valid formate</ion-label>
+          <ion-label color="danger">The email address is badly formatted.</ion-label>
         </div>
       </ion-item>
 
@@ -63,7 +63,7 @@
       </ion-item>
       <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)" lines="none">
         <div>
-          <ion-label color="danger">Password must be at least 6 characters</ion-label>
+          <ion-label color="danger">Password must be at least 6 characters long.</ion-label>
         </div>
       </ion-item>
 
@@ -75,7 +75,7 @@
       </ion-item>
       <ion-item *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)" lines="none">
         <div>
-          <ion-label color="danger">Passwords must match</ion-label>
+          <ion-label color="danger">Passwords must match.</ion-label>
         </div>
       </ion-item>
 

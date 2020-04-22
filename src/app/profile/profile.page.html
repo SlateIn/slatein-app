@@ -15,7 +15,7 @@
       </ion-item>
       <ion-item lines="full">
           <ion-label class="name-avatar">
-              <h2>{{info.fname | titlecase  }}</h2>
+              <h2>{{info.fname | uppercase }} {{info.lname | uppercase}}</h2>
               <p>{{info.email}}</p>
             </ion-label>
       </ion-item>
@@ -32,7 +32,7 @@
       </ion-item>
 
       <ion-item lines="full" (click)="goToPasswordAndSecurity()">
-        <ion-icon slot="start" mode="ios" name="lock"></ion-icon>
+        <ion-icon slot="start" mode="ios" name="lock-closed"></ion-icon>
         <ion-label>
           <h2>Password & Security</h2>
         </ion-label>

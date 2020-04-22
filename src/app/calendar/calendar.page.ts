@@ -1,10 +1,11 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { Component, OnInit, ViewEncapsulation, wtfStartTimeRange, wtfEndTimeRange, ViewChild, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { CalendarIntervalsService } from '@services/calendar-intervals.service';
+import { LoaderService } from '@services/loader.service';
 
 @Component({
   selector: 'app-calendar',
@@ -31,6 +32,7 @@ export class CalendarPage implements OnInit {
     public modalCtrl: ModalController,
     public calService: CalendarService,
     private alertCtrl: AlertController,
+    private loaderService: LoaderService,
     public calendarIntervalsService: CalendarIntervalsService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
@@ -39,10 +41,12 @@ export class CalendarPage implements OnInit {
   ngOnInit() {
     const todaysDate = new Date();
     const year = `${todaysDate.getFullYear()}`;
-    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(
-      tasks => this.loadEvents(tasks)
-    );
+    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(tasks => {
+      this.loadEvents(tasks);
+      this.loaderService.dismiss();
+    });
     this.view = 'month';
+    this.loaderService.present('Loading Your Calendar Data');
   }
 
   loadEvents(calendarTasks) {
