@@ -11,5 +11,4 @@ export class PlannerPage implements OnInit {
 
   ngOnInit() {
   }
-
 }
