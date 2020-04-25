@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { TaskReminderInfo } from '@models/taskDetails';
 import { TaskService } from '@services/task.service';
 import { AlertReminderService } from '../services/alert-reminder.service';
@@ -9,16 +9,15 @@ import { AlertReminderService } from '../services/alert-reminder.service';
   styleUrls: ['./task-info-card.component.scss'],
 })
 export class TaskInfoCardComponent implements OnInit {
-
   @Input()
   taskinfo: TaskReminderInfo;
-  favouriteTask: boolean;
-
+  @Output()
+  favoriteChange: EventEmitter<TaskReminderInfo> = new EventEmitter();
 
   constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) { }
+  
 
   ngOnInit() {
-    this.favouriteTask = this.taskinfo.favourite;
   }
 
   updateTask() {
@@ -27,12 +26,13 @@ export class TaskInfoCardComponent implements OnInit {
   }
 
   deleteTask() {
-    // this.taskService.deleteTask(this.taskinfo.path, this.taskinfo.id);
+    this.taskService.deleteTask(this.taskinfo.id);
   }
 
   isFavouriteTask() {
-    this.favouriteTask = !this.favouriteTask;
-    // this.taskService.selectFavouriteTask(this.taskinfo.path, this.taskinfo.id, this.favouriteTask);
+    this.taskinfo.favourite = !this.taskinfo.favourite;
+    this.taskService.selectFavouriteTask(this.taskinfo.id, this.taskinfo.favourite);
+    this.favoriteChange.emit(this.taskinfo);
   }
 
 }

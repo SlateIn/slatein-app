@@ -1,22 +1,29 @@
 import { Injectable } from "@angular/core";
-import * as firebase from "firebase/app";
-import { AngularFirestore } from "@angular/fire/firestore";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireDatabase } from "@angular/fire/database";
 import { TaskReminderInfo } from "@models/taskDetails";
-import { Observable, forkJoin, of } from "rxjs";
-import { map, switchMap, mergeMap, take } from "rxjs/operators";
+import { BehaviorSubject } from "rxjs";
+import { map, switchMap, mergeMap, take, tap } from "rxjs/operators";
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class TaskService {
-  taskInfo$: Observable<TaskReminderInfo>;
+  private taskInfo$ = new BehaviorSubject<TaskReminderInfo[]>([]);
 
   constructor(
     private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase
-  ) {}
+    private db: AngularFireDatabase,
+    private loaderService: LoaderService,
+  ) {
+    this.getAllTasks();
+  }
+
+
+  getAllTasksInfo() {
+    return this.taskInfo$.asObservable();
+  }
 
 
   createTask(taskInfo: TaskReminderInfo) {
@@ -33,26 +40,27 @@ export class TaskService {
     });
   }
 
-  deleteTask(path: string, id: number): Promise<void> {
+  deleteTask(id: number): Promise<void> {
     return this.db
       .object(
-        `/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`
+        `/users/${this.afAuth.auth.currentUser.uid}/events/tasks/${id}`
       )
       .remove();
   }
 
-  selectFavouriteTask(path: string, id: number, status: boolean) {
+  selectFavouriteTask( id: number, status: boolean) {
     return this.db
       .object(
-        `/users/${this.afAuth.auth.currentUser.uid}/events/${path}/tasks/${id}`
+        `/users/${this.afAuth.auth.currentUser.uid}/events/tasks/${id}`
       )
       .update({ favourite: status });
   }
 
   getAllTasks() {
-    return this.afAuth.authState
+    this.afAuth.authState
       .pipe(
         map((auth) => auth && auth.uid),
+        tap(async () => await this.loaderService.present("Loading Your Tasklists")),
         switchMap((uid) =>
           this.db
             .list<TaskReminderInfo>(`/users/${uid}/events/tasks`)
@@ -156,10 +164,11 @@ export class TaskService {
 
           console.log(displayTaks);
           return displayTaks;
-        })
-      );
+        }),
+        take(1)
+      ).subscribe(async res => {
+        this.taskInfo$.next(res);
+        await this.loaderService.dismiss();
+      });
   }
 }
-
-
-// date === task.startDate && 

@@ -20,7 +20,7 @@ export class LocalNotificationsService {
           id: data.id,
           schedule: {
             every: data.repeat !== 'never' ? data.repeat : null,
-            // at: new Date(data.startDate)
+            at: new Date(data.startTimePeriod)
           },
           sound: null,
           attachments: null,

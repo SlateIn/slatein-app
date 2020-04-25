@@ -5,7 +5,6 @@ import { CalendarService } from './services/calendar.service';
 import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { CalendarIntervalsService } from '@services/calendar-intervals.service';
-import { LoaderService } from '@services/loader.service';
 import { TaskService } from '@services/task.service';
 import { take } from 'rxjs/operators';
 
@@ -34,7 +33,6 @@ export class CalendarPage implements OnInit {
     public modalCtrl: ModalController,
     public calService: CalendarService,
     private alertCtrl: AlertController,
-    private loaderService: LoaderService,
     public calendarIntervalsService: CalendarIntervalsService,
     private taskService: TaskService,
     @Inject(LOCALE_ID) private locale: string
@@ -43,11 +41,9 @@ export class CalendarPage implements OnInit {
 
   ngOnInit() {
 
-    this.taskService.getAllTasks().pipe(take(1)).subscribe(tasks => {
+    this.taskService.getAllTasksInfo().pipe(take(1)).subscribe(tasks => {
       this.loadEvents(tasks);
-      this.loaderService.dismiss();
     });
-    this.loaderService.present('Loading Your Calendar Data');
   }
 
   loadEvents(calendarTasks) {
@@ -78,13 +74,6 @@ export class CalendarPage implements OnInit {
       buttons: ['OK']
     });
     alert.present();
-  }
-
-  onTimeSelected(ev) {
-    // let selected = new Date(ev.selecedTime);
-    // this.event.startTime = selected.toISOString();
-    // selected.setHours(selected.getHours() + 1);
-    // this.event.endTime = (selected.toISOString());
   }
 
   changeMode(mode) {

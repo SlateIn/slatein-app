@@ -9,8 +9,6 @@ export class CalendarIntervalsService {
 
   getIntervalDates(calendarTasks) {
     let events = [];
-
-
     calendarTasks.forEach(task => {
       events.push({
         ...task,

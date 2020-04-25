@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { UserService } from "../services/user-info.service";
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { UserInfo } from "@models/userInfo";
 import { LocalNotificationsService } from "@services/local-notifications.service";
@@ -11,9 +10,8 @@ import {
   FormGroup,
 } from "@angular/forms";
 import { TaskReminderInfo } from "@models/taskDetails";
-import { filter, map, tap, take } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { AlertReminderService } from "./services/alert-reminder.service";
-import { LoaderService } from "@services/loader.service";
 
 @Component({
   selector: "app-myday",
@@ -24,7 +22,7 @@ export class MydayPage implements OnInit, OnDestroy {
   info$: Observable<UserInfo>;
   taskForm: FormGroup;
   taskDetails: TaskReminderInfo[];
-  favouriteTaskDetails: TaskReminderInfo[];
+  favouriteTaskDetails: TaskReminderInfo[] = [];
   errorMessage: string;
   startDate: any;
   taskInfoKeys: string[];
@@ -35,27 +33,26 @@ export class MydayPage implements OnInit, OnDestroy {
   segment: string;
 
   constructor(
-    private notification: LocalNotificationsService,
     private taskService: TaskService,
     private fb: FormBuilder,
-    private loaderService: LoaderService,
-    private alertReminderService: AlertReminderService
+    private alertReminderService: AlertReminderService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     const todaysDate = new Date();
     this.taskService
-      .getAllTasks()
+      .getAllTasksInfo()
       .pipe(
-        take(1),
         map((res) => {
           const todaysTask = [];
 
-          res.forEach(task => {
+          res.forEach((task) => {
             const taskStartTimePeriod = new Date(task.startTimePeriod);
-            if(todaysDate.getFullYear() === taskStartTimePeriod.getFullYear() &&
-            todaysDate.getMonth() === taskStartTimePeriod.getMonth() &&
-            todaysDate.getDate() === taskStartTimePeriod.getDate()
+            if (
+              todaysDate.getFullYear() === taskStartTimePeriod.getFullYear() &&
+              todaysDate.getMonth() === taskStartTimePeriod.getMonth() &&
+              todaysDate.getDate() === taskStartTimePeriod.getDate()
             ) {
               todaysTask.push(task);
             }
@@ -65,25 +62,13 @@ export class MydayPage implements OnInit, OnDestroy {
       )
       .subscribe((tasks) => {
         this.taskDetails = tasks;
-        this.loaderService.dismiss();
+        this.favouriteTaskDetails = [];
+        for (const task of this.taskDetails) {
+          if (task.favourite === true) {
+            this.favouriteTaskDetails.push(task);
+          }
+        }
       });
-
-    // this.taskService.getAllTodaysTask();
-    this.minDate = this.todayDate.toISOString();
-    this.maxyear = (this.todayDate.getFullYear() + 15).toString();
-    // Get today's task
-    // this.getTaskSubscription$ = this.taskService.getDailyTask.pipe(
-    //   map(tasks => tasks.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()))
-    // ).subscribe((tasks: TaskReminderInfo[]) => {
-    //   this.taskDetails = tasks;
-    //   this.favouriteTaskDetails = [];
-    //   for (const task of this.taskDetails) {
-    //     if (task.favourite === true) {
-    //       this.favouriteTaskDetails.push(task);
-    //     }
-    //   }
-    //   this.loaderService.dismiss();
-    // });
 
     this.taskForm = this.fb.group({
       title: new FormControl("", Validators.required),
@@ -91,7 +76,6 @@ export class MydayPage implements OnInit, OnDestroy {
       startDate: new FormControl("", Validators.required),
       repeat: new FormControl("", Validators.required),
     });
-    this.loaderService.present("Loading Your Tasklists");
   }
 
   setReminder() {
@@ -100,6 +84,16 @@ export class MydayPage implements OnInit, OnDestroy {
 
   segmentChanged(ev: any) {
     this.segment = ev.detail.value;
+  }
+
+  updateFavorite(task) {
+    const getIndex = this.favouriteTaskDetails.findIndex(value => value.id === task.id);
+    if(getIndex === -1 || task.favourite) {
+      this.favouriteTaskDetails.push(task)
+    } else if(!task.favourite) {
+      this.favouriteTaskDetails.splice(getIndex, 1);
+    }
+
   }
 
   ngOnDestroy(): void {
