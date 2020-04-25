@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { CalendarIntervalsService } from '@services/calendar-intervals.service';
 import { LoaderService } from '@services/loader.service';
+import { TaskService } from '@services/task.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendar',
@@ -34,18 +36,17 @@ export class CalendarPage implements OnInit {
     private alertCtrl: AlertController,
     private loaderService: LoaderService,
     public calendarIntervalsService: CalendarIntervalsService,
+    private taskService: TaskService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
 
 
   ngOnInit() {
-    const todaysDate = new Date();
-    const year = `${todaysDate.getFullYear()}`;
-    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(tasks => {
+
+    this.taskService.getAllTasks().pipe(take(1)).subscribe(tasks => {
       this.loadEvents(tasks);
       this.loaderService.dismiss();
     });
-    this.view = 'month';
     this.loaderService.present('Loading Your Calendar Data');
   }
 

@@ -27,12 +27,12 @@ export class TaskInfoCardComponent implements OnInit {
   }
 
   deleteTask() {
-    this.taskService.deleteTask(this.taskinfo.path, this.taskinfo.id);
+    // this.taskService.deleteTask(this.taskinfo.path, this.taskinfo.id);
   }
 
   isFavouriteTask() {
     this.favouriteTask = !this.favouriteTask;
-    this.taskService.selectFavouriteTask(this.taskinfo.path, this.taskinfo.id, this.favouriteTask);
+    // this.taskService.selectFavouriteTask(this.taskinfo.path, this.taskinfo.id, this.favouriteTask);
   }
 
 }
