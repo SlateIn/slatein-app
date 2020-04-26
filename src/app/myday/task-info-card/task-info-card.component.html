@@ -7,7 +7,7 @@
       </ion-label>
 
       <ion-note slot="end">
-        {{ taskinfo?.startDate | date : 'shortTime' }}
+        {{ taskinfo?.startTimePeriod | date : 'shortTime' }}
       </ion-note>
       
       <ion-icon slot="end" (click)="isFavouriteTask()" color="secondary" *ngIf="!taskinfo?.favourite" name="star-outline"></ion-icon>
