@@ -33,7 +33,7 @@ export class AlertReminderService {
   // tslint:disable-next-line: max-line-length
   async presentAlertPrompt(type: 'Add' | 'Update', reminderData?: Reminder, repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never') {
     const alert = await this.alertController.create({
-      header: 'Schedule task',
+      header: 'Schedule new task',
       backdropDismiss: false,
       inputs: [
         {
