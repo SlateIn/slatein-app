@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
     if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
       this.loginErrorMsg = 'Email must be valid formmats';
     } else if (this.loginForm.value.password.length < 6) {
-      this.loginErrorMsg = 'Password must be at least 6 characters';
+      this.loginErrorMsg = 'Password must be at least 6 characters long.';
     } else {
       this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
       .then(() => {
@@ -76,7 +76,6 @@ export class LoginPage implements OnInit {
         } else {
           Storage.remove({key: 'email'});
         }
-        
         this.navCtrl.navigateRoot('/tabs/myday')
       })
       .catch(err => this.loginErrorMsg = err.message);
