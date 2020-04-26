@@ -41,6 +41,7 @@ export class PersonalInformationPage implements OnInit {
     public db: AngularFireDatabase,
     private toastController: ToastController,
     private modalController: ModalController,
+    private titleCase: TitleCasePipe,
     private authService: AuthService ) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
@@ -51,8 +52,8 @@ export class PersonalInformationPage implements OnInit {
 
     this.info$.subscribe( user => {
       this.currentUser = user;
-      this.userInfo.fname = user.fname.toLocaleUpperCase();
-      this.userInfo.lname = user.lname.toLocaleUpperCase();
+      this.userInfo.fname = this.titleCase.transform(user.fname);
+      this.userInfo.lname = user.lname;
       this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;
