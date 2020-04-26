@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/cor
 import { UserService } from '../../services/user-info.service';
 import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { ToastController, ModalController } from '@ionic/angular';
@@ -31,6 +31,8 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
   photo: SafeResourceUrl;
   photoBase64: string;
   userSubscription: Subscription;
+  currentDate = new Date().toLocaleDateString();
+
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(
@@ -40,6 +42,7 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
     public db: AngularFireDatabase,
     private toastController: ToastController,
     private modalController: ModalController,
+    private titleCase: TitleCasePipe,
     private authService: AuthService ) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
@@ -50,7 +53,7 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
 
     this.userSubscription = this.info$.subscribe( user => {
       this.currentUser = user;
-      this.userInfo.fname = user.fname;
+      this.userInfo.fname = this.titleCase.transform(user.fname);
       this.userInfo.lname = user.lname;
       this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
@@ -58,11 +61,12 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
       this.userInfo.photoURL = user.photoURL;
       this.photo = user.photoURL;
     });
+    this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
   formatDate(date: string) {
     const newDate = new Date(date).getTime();
-    return this.datepipe.transform(newDate, 'MM-dd-yyyy');
+    return this.datepipe.transform(newDate, 'MM/dd/yyyy');
   }
 
   upDateBirthDate(updatedBirthdate: string) {
