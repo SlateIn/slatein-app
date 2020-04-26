@@ -24,20 +24,16 @@
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
-  <!-- <ng-container *ngFor="let taskDetail of taskDetails">
-    <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
-  </ng-container> -->
-
   <div [ngSwitch]="segment">
     <ion-label *ngSwitchCase="'Favourite'">
       <ng-container *ngFor="let taskDetail of favouriteTaskDetails">
-        <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
+        <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
       </ng-container>
     </ion-label>
 
     <ion-label *ngSwitchDefault>
       <ng-container *ngFor="let taskDetail of taskDetails">
-        <app-task-info-card [taskinfo]="taskDetail"></app-task-info-card>
+        <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
       </ng-container>
     </ion-label>
   </div>

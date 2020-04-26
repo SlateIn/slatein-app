@@ -4,9 +4,8 @@ export interface TaskReminderInfo {
     desc: string;
     image: string;
     status: string;
-    startDate: string;
-    endDate: string;
+    startTimePeriod: string;
+    endTimePeriod: string;
     repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day'| 'never';
-    path: string;
     favourite: boolean;
 }
