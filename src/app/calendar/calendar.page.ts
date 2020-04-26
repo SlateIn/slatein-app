@@ -1,16 +1,16 @@
-import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
-import { CalendarService } from './services/calendar.service';
-import { Subscription } from 'rxjs';
-import { formatDate } from '@angular/common';
-import { CalendarIntervalsService } from '@services/calendar-intervals.service';
-import { LoaderService } from '@services/loader.service';
+import {CalendarComponent} from 'ionic2-calendar/calendar';
+import {Component, OnInit, ViewChild, Inject, LOCALE_ID} from '@angular/core';
+import {ModalController, AlertController} from '@ionic/angular';
+import {CalendarService} from './services/calendar.service';
+import {Subscription} from 'rxjs';
+import {formatDate} from '@angular/common';
+import {CalendarIntervalsService} from '@services/calendar-intervals.service';
+import {LoaderService} from '@services/loader.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.page.html',
-  styleUrls: ['./calendar.page.scss']
+  styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
   view: string;
@@ -22,11 +22,11 @@ export class CalendarPage implements OnInit {
   eventSource = [];
   calendar = {
     mode: 'month',
-    currentDate: new Date()
+    currentDate: new Date(),
   };
   getCalendarEvents$: Subscription;
 
-  @ViewChild(CalendarComponent, { static: false }) myCal: CalendarComponent;
+  @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
 
   constructor(
     public modalCtrl: ModalController,
@@ -34,14 +34,13 @@ export class CalendarPage implements OnInit {
     private alertCtrl: AlertController,
     private loaderService: LoaderService,
     public calendarIntervalsService: CalendarIntervalsService,
-    @Inject(LOCALE_ID) private locale: string
-  ) { }
-
+    @Inject(LOCALE_ID) private locale: string,
+  ) {}
 
   ngOnInit() {
     const todaysDate = new Date();
     const year = `${todaysDate.getFullYear()}`;
-    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(tasks => {
+    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe((tasks) => {
       this.loadEvents(tasks);
       this.loaderService.dismiss();
     });
@@ -74,7 +73,7 @@ export class CalendarPage implements OnInit {
       header: event.title,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     alert.present();
   }
@@ -113,10 +112,9 @@ export class CalendarPage implements OnInit {
     let current = new Date();
     current.setHours(0, 0, 0);
     return date < current;
-  }
+  };
 
   segmentChanged(event: CustomEvent) {
     this.changeMode(event.detail.value);
   }
-
 }
