@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { TaskService } from '@services/task.service';
 
 const { Storage } = Plugins;
 
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit {
   constructor(private auth: AuthService, 
               private navCtrl: NavController,
               private fb: FormBuilder,
-              private changeDetectionRef: ChangeDetectorRef,) { }
+              private taskService: TaskService,) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -50,9 +51,6 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.loginErrorMsg = '';
-    this.formValueChangesSubscription = this.loginForm.valueChanges.subscribe(() => {
-      this.changeDetectionRef.detectChanges();
-    });
   }
 
   ionViewWillLeave() {
@@ -76,8 +74,8 @@ export class LoginPage implements OnInit {
         } else {
           Storage.remove({key: 'email'});
         }
-        
-        this.navCtrl.navigateRoot('/tabs/myday')
+        this.taskService.getAllTasks();
+        this.navCtrl.navigateRoot('/tabs/myday');
       })
       .catch(err => this.loginErrorMsg = err.message);
     }

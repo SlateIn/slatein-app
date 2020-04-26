@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import { UserService } from '../../services/user-info.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { DatePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
@@ -15,7 +15,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './personal-information.page.html',
   styleUrls: ['./personal-information.page.scss'],
 })
-export class PersonalInformationPage implements OnInit {
+export class PersonalInformationPage implements OnInit, OnDestroy {
   upgateButtonClicked = false;
   currentUser = {} as UserInfo;
   userInfo = {} as UserInfo;
@@ -30,7 +30,7 @@ export class PersonalInformationPage implements OnInit {
   profilePicChanged = false;
   photo: SafeResourceUrl;
   photoBase64: string;
-
+  userSubscription: Subscription;
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
 
   constructor(
@@ -48,7 +48,7 @@ export class PersonalInformationPage implements OnInit {
   ngOnInit() {
     this.info$ = this.user.info;
 
-    this.info$.subscribe( user => {
+    this.userSubscription = this.info$.subscribe( user => {
       this.currentUser = user;
       this.userInfo.fname = user.fname;
       this.userInfo.lname = user.lname;
@@ -109,5 +109,9 @@ export class PersonalInformationPage implements OnInit {
     }).catch(error => {
       console.log(`Error occure when trying get the photo.`);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription && this.userSubscription.unsubscribe();
   }
 }

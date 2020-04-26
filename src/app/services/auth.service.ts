@@ -10,19 +10,8 @@ export class AuthService {
 
 
   private firedata = firebase.database().ref('/users/');
-  private currentUserUID$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private afAuth: AngularFireAuth) { 
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.currentUserUID$.next(user.uid);
-      } 
-      unsubscribe();
-    });
-  }
-
-  getCurrentUserUID() {
-    return this.currentUserUID$.asObservable();
   }
 
   signInWithEmail(email: string, pwd: string) {

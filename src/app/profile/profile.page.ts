@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { UserService } from '../services/user-info.service';
@@ -23,7 +23,8 @@ export class ProfilePage implements OnInit {
               private user: UserService,
               private authService: AuthService,
               private modalController: ModalController,
-              public alertController: AlertController) { }
+              public alertController: AlertController,
+              private ngZone: NgZone) { }
 
   ngOnInit() {
     this.info$ = this.user.info;
@@ -61,8 +62,9 @@ export class ProfilePage implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            this.authService.logout();
-            this.navCtrl.navigateRoot('login');
+            this.ngZone.run(()=> {
+              this.authService.logout().then(()=>this.navCtrl.navigateRoot('/login'));
+            });
           }
         }
       ]
