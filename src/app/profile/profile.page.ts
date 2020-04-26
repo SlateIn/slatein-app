@@ -1,5 +1,4 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { UserService } from '../services/user-info.service';
 import { Observable } from 'rxjs';

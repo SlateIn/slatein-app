@@ -14,22 +14,6 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'myday',
-    loadChildren: () => import('./myday/myday.module').then( m => m.MydayPageModule)
-  },
-  {
-    path: 'planner',
-    loadChildren: () => import('./planner/planner.module').then( m => m.PlannerPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
   }
 ];
 @NgModule({
