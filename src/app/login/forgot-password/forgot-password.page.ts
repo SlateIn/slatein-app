@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 
@@ -10,7 +10,11 @@ import { LoadingController, NavController, ToastController } from '@ionic/angula
 export class ForgotPasswordPage {
   email: string;
   resetPwdFailedErrorMsg: string;
-  constructor(private auth: AuthService, private loadingController: LoadingController, private navCtrl: NavController, private toastController: ToastController) { }
+  constructor(
+    private auth: AuthService, 
+    private loadingController: LoadingController, 
+    private navCtrl: NavController, 
+    private toastController: ToastController) { }
 
   async reset() {
     const loading = await this.createLoadingAlert();

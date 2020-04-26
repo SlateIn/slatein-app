@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '@services/auth.service';
@@ -9,7 +9,6 @@ import { CameraService } from '@services/camera.service';
 import { DatePipe } from '@angular/common';
 
 const { Storage } = Plugins;
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -36,7 +35,6 @@ export class RegisterPage implements OnInit {
     private auth: AuthService,
     private loadingController: LoadingController,
     private pwdValidator: PasswordValidatorService,
-    private changeDetectionRef: ChangeDetectorRef,
     private datepipe: DatePipe,
     private photoService: CameraService ) { }
 
@@ -47,18 +45,15 @@ export class RegisterPage implements OnInit {
       email: ['', Validators.compose([Validators.email, Validators.required])],
       gender: new FormControl('', Validators.required),
       birthdate: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.compose([Validators.minLength(6)])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(6)
+      ])),
       confirmPassword: new FormControl('')
     }, {
       validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
     });
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
-  }
-
-  ionViewWillEnter() {
-    this.formValueChangesSubscription = this.registerForm.valueChanges.subscribe(() => {
-      this.changeDetectionRef.detectChanges();
-    });
   }
 
   ionViewWillLeave() {
@@ -82,10 +77,7 @@ export class RegisterPage implements OnInit {
     await loading.present();
     console.log(this.registerForm.value);
     this.auth.signUp(this.registerForm.value, this.photoBase64).then(async () => {
-      await Storage.set({
-        key: 'email',
-        value: this.registerForm.value.email
-      });
+      Storage.clear();
       loading.dismiss();
       this.navCtrl.navigateRoot('/tabs/myday');
     }).catch(err => {

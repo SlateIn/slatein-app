@@ -1,9 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { TaskService } from '@services/task.service';
 
 const { Storage } = Plugins;
 
@@ -23,7 +24,7 @@ export class LoginPage implements OnInit {
   constructor(private auth: AuthService, 
               private navCtrl: NavController,
               private fb: FormBuilder,
-              private changeDetectionRef: ChangeDetectorRef ) { }
+              private taskService: TaskService,) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -50,9 +51,6 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.loginErrorMsg = '';
-    this.formValueChangesSubscription = this.loginForm.valueChanges.subscribe(() => {
-      this.changeDetectionRef.detectChanges();
-    });
   }
 
   ionViewWillLeave() {
@@ -64,7 +62,7 @@ export class LoginPage implements OnInit {
     if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.loginForm.value.email))) {
       this.loginErrorMsg = 'Email must be valid formmats';
     } else if (this.loginForm.value.password.length < 6) {
-      this.loginErrorMsg = 'Password must be at least 6 characters';
+      this.loginErrorMsg = 'Password must be at least 6 characters long.';
     } else {
       this.auth.signInWithEmail(this.loginForm.value.email, this.loginForm.value.password)
       .then(() => {
@@ -76,8 +74,8 @@ export class LoginPage implements OnInit {
         } else {
           Storage.remove({key: 'email'});
         }
-        
-        this.navCtrl.navigateRoot('/tabs/myday')
+        this.taskService.getAllTasks();
+        this.navCtrl.navigateRoot('/tabs/myday');
       })
       .catch(err => this.loginErrorMsg = err.message);
     }
