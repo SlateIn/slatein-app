@@ -5,16 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from './header.component';
 
-const components = [
-    HeaderComponent
-]
+const components = [HeaderComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule],
   declarations: components,
   exports: components
 })

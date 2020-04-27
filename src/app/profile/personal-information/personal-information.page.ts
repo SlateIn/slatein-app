@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user-info.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { MaxLengthValidator } from '@angular/forms';
@@ -13,9 +13,9 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.page.html',
-  styleUrls: ['./personal-information.page.scss'],
+  styleUrls: ['./personal-information.page.scss']
 })
-export class PersonalInformationPage implements OnInit {
+export class PersonalInformationPage implements OnInit, OnDestroy {
   upgateButtonClicked = false;
   currentUser = {} as UserInfo;
   userInfo = {} as UserInfo;
@@ -30,6 +30,7 @@ export class PersonalInformationPage implements OnInit {
   profilePicChanged = false;
   photo: SafeResourceUrl;
   photoBase64: string;
+  userSubscription: Subscription;
   currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
@@ -41,18 +42,20 @@ export class PersonalInformationPage implements OnInit {
     public db: AngularFireDatabase,
     private toastController: ToastController,
     private modalController: ModalController,
-    private authService: AuthService ) {
+    private titleCase: TitleCasePipe,
+    private authService: AuthService
+  ) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
-   }
+  }
 
   ngOnInit() {
     this.info$ = this.user.info;
 
-    this.info$.subscribe( user => {
+    this.userSubscription = this.info$.subscribe((user) => {
       this.currentUser = user;
-      this.userInfo.fname = user.fname.toLocaleUpperCase();
-      this.userInfo.lname = user.lname.toLocaleUpperCase();
+      this.userInfo.fname = this.titleCase.transform(user.fname);
+      this.userInfo.lname = user.lname;
       this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;
@@ -78,24 +81,25 @@ export class PersonalInformationPage implements OnInit {
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
 
-    if (this.currentUser.fname !== this.userInfo.fname ||
+    if (
+      this.currentUser.fname !== this.userInfo.fname ||
       this.currentUser.lname !== this.userInfo.lname ||
       this.currentUser.birthdate !== this.userInfo.birthdate ||
       this.currentUser.gender !== this.userInfo.gender ||
-      this.profilePicChanged) {
+      this.profilePicChanged
+    ) {
+      this.user.updateUserInfo(this.userInfo).then(async () => {
+        this.authService.updatePhotoString(this.photoBase64);
+        this.profilePicChanged = false;
 
-        this.user.updateUserInfo(this.userInfo).then(async () => {
-            this.authService.updatePhotoString(this.photoBase64);
-            this.profilePicChanged = false;
-
-            const toast = await this.toastController.create({
-            message: 'Your Personal Information is successfully updated.',
-            duration: 2000,
-            color: 'success',
-            position: 'middle'
-          });
-            toast.present();
+        const toast = await this.toastController.create({
+          message: 'Your Personal Information is successfully updated.',
+          duration: 2000,
+          color: 'success',
+          position: 'middle'
         });
+        toast.present();
+      });
     }
   }
 
@@ -104,12 +108,19 @@ export class PersonalInformationPage implements OnInit {
   }
 
   onProfilePicClick() {
-    this.photoService.getPhoto().then(photo => {
-      this.photo = photo;
-      this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
-      this.profilePicChanged = true;
-    }).catch(error => {
-      console.log(`Error occure when trying get the photo.`);
-    });
+    this.photoService
+      .getPhoto()
+      .then((photo) => {
+        this.photo = photo;
+        this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
+        this.profilePicChanged = true;
+      })
+      .catch((error) => {
+        console.log(`Error occure when trying get the photo.`);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription && this.userSubscription.unsubscribe();
   }
 }

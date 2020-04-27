@@ -1,29 +1,29 @@
 .li-ionic4-datePicker {
-    .modal-wrapper {
-        height: 470px;
-        max-height: 100%;
-        width: 312px;
-    }
+  .modal-wrapper {
+    height: 470px;
+    max-height: 100%;
+    width: 312px;
+  }
 }
 
 ion-label.view-title {
-    font-size: 24px;
+  font-size: 24px;
 }
 
-::ng-deep .monthview-datetable td{
-    border: 2px solid white !important; 
-    line-height: 55px !important;
-    border-radius: 50px  !important;
+::ng-deep .monthview-datetable td {
+  border: 2px solid white !important;
+  line-height: 55px !important;
+  border-radius: 50px !important;
 }
 
-
-::ng-deep .monthview-datetable th{
-    border-top: 2px solid white !important; 
-    border-left: 2px solid white !important; 
-    border-right: 2px solid white !important; 
-    line-height: 25px !important;
+::ng-deep .monthview-datetable th {
+  border-top: 2px solid white !important;
+  border-left: 2px solid white !important;
+  border-right: 2px solid white !important;
+  line-height: 25px !important;
 }
 
-ion-icon[name="arrow-back"], ion-icon[name="arrow-forward"] {
-    font-size: 1.5rem;
+ion-icon[name='arrow-back'],
+ion-icon[name='arrow-forward'] {
+  font-size: 1.5rem;
 }
