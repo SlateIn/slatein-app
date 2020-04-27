@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="header">
     <ion-buttons slot="start" (click)="backClicked()">
-      <ion-icon name="arrow-back" size="large" ></ion-icon>
+      <ion-icon name="arrow-back" size="large"></ion-icon>
       Back
     </ion-buttons>
     <ion-title>Personal Information</ion-title>
@@ -28,7 +28,7 @@
       <ion-item class="default-avatar">
         <div class="profile_avatar">
           <ion-avatar>
-            <img #profilePic [src]="(photo)?photo:avatarSrc">
+            <img #profilePic [src]="(photo)?photo:avatarSrc" />
           </ion-avatar>
         </div>
       </ion-item>
@@ -37,7 +37,7 @@
       <ion-item class="default-avatar">
         <div class="profile_avatar">
           <ion-avatar (click)="onProfilePicClick()">
-            <img #profilePic [src]="(photo)?photo:avatarSrc">
+            <img #profilePic [src]="(photo)?photo:avatarSrc" />
             <ion-icon mode="md" name="add-circle"></ion-icon>
           </ion-avatar>
         </div>
@@ -52,8 +52,8 @@
     </ion-item>
     <ng-template #changeName>
       <ion-item lines="full">
-        <ion-input  type="text" [(ngModel)]="userInfo.fname" value="userInfo.fname"></ion-input>
-        <ion-input  type="text" [(ngModel)]="userInfo.lname" value="userInfo.lname"></ion-input>
+        <ion-input type="text" [(ngModel)]="userInfo.fname" value="userInfo.fname"></ion-input>
+        <ion-input type="text" [(ngModel)]="userInfo.lname" value="userInfo.lname"></ion-input>
       </ion-item>
     </ng-template>
 
@@ -65,11 +65,13 @@
     </ion-item>
     <ng-template #changeDate>
       <ion-item lines="full">
-        <ion-datetime [value]="userInfo.birthdate" max="{{currentDate}}" (ionChange)="upDateBirthDate($event.detail.value)"></ion-datetime>
+        <ion-datetime
+          [value]="userInfo.birthdate"
+          max="{{currentDate}}"
+          (ionChange)="upDateBirthDate($event.detail.value)"
+        ></ion-datetime>
       </ion-item>
     </ng-template>
-    
-
 
     <ion-list-header>
       Gender
@@ -84,7 +86,6 @@
           <ion-select-option value="male">Male</ion-select-option>
         </ion-select>
       </ion-item>
-  </ng-template>
-
+    </ng-template>
   </ion-list>
 </ion-content>

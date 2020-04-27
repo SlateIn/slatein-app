@@ -5,7 +5,6 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class PasswordValidatorService {
-
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -20,6 +19,6 @@ export class PasswordValidatorService {
       } else {
         matchingControl.setErrors(null);
       }
-    }
+    };
   }
 }

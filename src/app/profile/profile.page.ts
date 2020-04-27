@@ -8,22 +8,23 @@ import { SettingsPage } from './settings/settings.page';
 import { PersonalInformationPage } from './personal-information/personal-information.page';
 import { SecurityPasswordPage } from './security-password/security-password.page';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
   avatarSrc = '../../assets/icon/default_profile.svg';
   info$: Observable<UserInfo>;
 
-  constructor(private navCtrl: NavController,
-              private user: UserService,
-              private authService: AuthService,
-              private modalController: ModalController,
-              public alertController: AlertController,
-              private ngZone: NgZone) { }
+  constructor(
+    private navCtrl: NavController,
+    private user: UserService,
+    private authService: AuthService,
+    private modalController: ModalController,
+    public alertController: AlertController,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit() {
     this.info$ = this.user.info;
@@ -58,11 +59,12 @@ export class ProfilePage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel'
-        }, {
+        },
+        {
           text: 'Yes',
           handler: () => {
-            this.ngZone.run(()=> {
-              this.authService.logout().then(()=>this.navCtrl.navigateRoot('/login'));
+            this.ngZone.run(() => {
+              this.authService.logout().then(() => this.navCtrl.navigateRoot('/login'));
             });
           }
         }
@@ -71,6 +73,4 @@ export class ProfilePage implements OnInit {
 
     await alert.present();
   }
-
 }
-

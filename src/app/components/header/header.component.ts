@@ -4,16 +4,14 @@ import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {}
 
   goBack() {
     this.navCtrl.pop();
   }
-
 }

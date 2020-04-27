@@ -1,20 +1,17 @@
-import { Injectable } from "@angular/core";
-import { AngularFireDatabase } from "@angular/fire/database";
-import { TaskReminderInfo } from "@models/taskDetails";
-import { BehaviorSubject } from "rxjs";
-import { map, take } from "rxjs/operators";
-import { LoaderService } from "./loader.service";
-import * as firebase from "firebase";
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { TaskReminderInfo } from '@models/taskDetails';
+import { BehaviorSubject } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { LoaderService } from './loader.service';
+import * as firebase from 'firebase';
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root'
 })
 export class TaskService {
   private taskInfo$ = new BehaviorSubject<TaskReminderInfo[]>([]);
 
-  constructor(
-    private db: AngularFireDatabase,
-    private loaderService: LoaderService
-  ) {}
+  constructor(private db: AngularFireDatabase, private loaderService: LoaderService) {}
 
   getAllTasksInfo() {
     return this.taskInfo$.asObservable();
@@ -23,9 +20,7 @@ export class TaskService {
   createTask(taskInfo: TaskReminderInfo) {
     return new Promise<any>((resolve, reject) => {
       return this.db
-        .object(
-          `/users/${firebase.auth().currentUser.uid}/events/tasks/${taskInfo.id}`
-        )
+        .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${taskInfo.id}`)
         .set(taskInfo)
         .then(
           (res) => {
@@ -53,9 +48,7 @@ export class TaskService {
 
   getAllTasks() {
     this.db
-      .list<TaskReminderInfo>(
-        `/users/${firebase.auth().currentUser.uid}/events/tasks`
-      )
+      .list<TaskReminderInfo>(`/users/${firebase.auth().currentUser.uid}/events/tasks`)
       .valueChanges()
       .pipe(
         take(1),
@@ -64,10 +57,10 @@ export class TaskService {
 
           res.forEach((task) => {
             switch (task.repeat) {
-              case "never":
+              case 'never':
                 displayTaks.push(task);
                 break;
-              case "day":
+              case 'day':
                 const startDailyData = new Date(task.startTimePeriod);
                 const endDailyData = new Date(task.endTimePeriod);
                 let dailyDate = startDailyData;
@@ -80,12 +73,10 @@ export class TaskService {
                   dailyEnd.setFullYear(dailyDate.getFullYear());
                   newTask.endTimePeriod = new Date(dailyEnd).toString();
                   displayTaks.push(newTask);
-                  dailyDate = new Date(
-                    startDailyData.setDate(startDailyData.getDate() + 1)
-                  );
+                  dailyDate = new Date(startDailyData.setDate(startDailyData.getDate() + 1));
                 }
                 break;
-              case "month":
+              case 'month':
                 const startMonthlyData = new Date(task.startTimePeriod);
                 const endMonthlyData = new Date(task.endTimePeriod);
                 let monthlyDate = startMonthlyData;
@@ -99,12 +90,10 @@ export class TaskService {
                   monthlyEnd.setFullYear(monthlyDate.getFullYear());
                   newTask.endTimePeriod = new Date(monthlyEnd).toString();
                   displayTaks.push(newTask);
-                  monthlyDate = new Date(
-                    startMonthlyData.setMonth(startMonthlyData.getMonth() + 1)
-                  );
+                  monthlyDate = new Date(startMonthlyData.setMonth(startMonthlyData.getMonth() + 1));
                 }
                 break;
-              case "two-weeks":
+              case 'two-weeks':
                 const startBiWeeklyData = new Date(task.startTimePeriod);
                 const endBiWeeklyData = new Date(task.endTimePeriod);
                 let biWeeklyDate = startBiWeeklyData;
@@ -117,12 +106,10 @@ export class TaskService {
                   biWeekEnd.setFullYear(biWeeklyDate.getFullYear());
                   newTask.endTimePeriod = new Date(biWeekEnd).toString();
                   displayTaks.push(newTask);
-                  biWeeklyDate = new Date(
-                    startBiWeeklyData.setDate(startBiWeeklyData.getDate() + 14)
-                  );
+                  biWeeklyDate = new Date(startBiWeeklyData.setDate(startBiWeeklyData.getDate() + 14));
                 }
                 break;
-              case "week":
+              case 'week':
                 const startWeeklyData = new Date(task.startTimePeriod);
                 const endWeeklyData = new Date(task.endTimePeriod);
                 let weeklyDate = startWeeklyData;
@@ -136,12 +123,10 @@ export class TaskService {
                   weeklyEnd.setFullYear(weeklyDate.getFullYear());
                   newTask.endTimePeriod = new Date(weeklyEnd).toString();
                   displayTaks.push(newTask);
-                  weeklyDate = new Date(
-                    startWeeklyData.setDate(startWeeklyData.getDate() + 7)
-                  );
+                  weeklyDate = new Date(startWeeklyData.setDate(startWeeklyData.getDate() + 7));
                 }
                 break;
-              case "year":
+              case 'year':
                 const startYearlyData = new Date(task.startTimePeriod);
                 const endYearlyData = new Date(task.endTimePeriod);
                 let yearlyDate = startYearlyData;
@@ -155,11 +140,7 @@ export class TaskService {
                   yearEnd.setFullYear(yearlyDate.getFullYear());
                   newTask.endTimePeriod = new Date(yearEnd).toString();
                   displayTaks.push(newTask);
-                  yearlyDate = new Date(
-                    startYearlyData.setFullYear(
-                      startYearlyData.getFullYear() + 1
-                    )
-                  );
+                  yearlyDate = new Date(startYearlyData.setFullYear(startYearlyData.getFullYear() + 1));
                 }
                 break;
             }

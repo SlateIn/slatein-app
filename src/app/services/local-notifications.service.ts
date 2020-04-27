@@ -3,13 +3,11 @@ import { Plugins } from '@capacitor/core';
 import { TaskReminderInfo } from '@models/taskDetails';
 const { LocalNotifications } = Plugins;
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class LocalNotificationsService {
-
-  constructor() { }
+  constructor() {}
 
   scheduleAt(data: TaskReminderInfo) {
     LocalNotifications.schedule({
@@ -35,5 +33,4 @@ export class LocalNotificationsService {
     const pendingNotifs = await Plugins.LocalNotifications.getPending();
     pendingNotifs && Plugins.LocalNotifications.cancel(pendingNotifs);
   }
-
 }

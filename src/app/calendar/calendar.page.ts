@@ -38,11 +38,11 @@ export class CalendarPage implements OnInit {
     private taskService: TaskService,
     @Inject(LOCALE_ID) private locale: string
   ) {}
-  
+
   ngOnInit() {
-    this.getAllTasks$ = this.taskService.getAllTasksInfo().pipe(
-      map(res => this.calendarIntervalsService.getIntervalDates(res))
-    );
+    this.getAllTasks$ = this.taskService
+      .getAllTasksInfo()
+      .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)));
   }
 
   onViewTitleChanged(title) {
@@ -94,7 +94,7 @@ export class CalendarPage implements OnInit {
     let current = new Date();
     current.setHours(0, 0, 0);
     return date < current;
-  }
+  };
 
   segmentChanged(event: CustomEvent) {
     this.changeMode(event.detail.value);
