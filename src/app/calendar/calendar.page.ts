@@ -1,17 +1,17 @@
-import {CalendarComponent} from 'ionic2-calendar/calendar';
-import {Component, OnInit, ViewChild, Inject, LOCALE_ID} from '@angular/core';
-import {ModalController, AlertController} from '@ionic/angular';
-import {CalendarService} from './services/calendar.service';
-import {Subscription, Observable} from 'rxjs';
-import {formatDate} from '@angular/common';
-import {CalendarIntervalsService} from '@services/calendar-intervals.service';
-import {TaskService} from '@services/task.service';
-import {map} from 'rxjs/operators';
+import { CalendarComponent } from 'ionic2-calendar/calendar';
+import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
+import { ModalController, AlertController } from '@ionic/angular';
+import { CalendarService } from './services/calendar.service';
+import { Subscription, Observable } from 'rxjs';
+import { formatDate } from '@angular/common';
+import { CalendarIntervalsService } from '@services/calendar-intervals.service';
+import { TaskService } from '@services/task.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.page.html',
-  styleUrls: ['./calendar.page.scss'],
+  styleUrls: ['./calendar.page.scss']
 })
 export class CalendarPage implements OnInit {
   view: string;
@@ -23,12 +23,12 @@ export class CalendarPage implements OnInit {
   eventSource = [];
   calendar = {
     mode: 'month',
-    currentDate: new Date(),
+    currentDate: new Date()
   };
   getCalendarEvents$: Subscription;
   getAllTasks$: Observable<any[]>;
 
-  @ViewChild(CalendarComponent, {static: false}) myCal: CalendarComponent;
+  @ViewChild(CalendarComponent, { static: false }) myCal: CalendarComponent;
 
   constructor(
     public modalCtrl: ModalController,
@@ -36,7 +36,7 @@ export class CalendarPage implements OnInit {
     private alertCtrl: AlertController,
     public calendarIntervalsService: CalendarIntervalsService,
     private taskService: TaskService,
-    @Inject(LOCALE_ID) private locale: string,
+    @Inject(LOCALE_ID) private locale: string
   ) {}
 
   ngOnInit() {
@@ -66,7 +66,7 @@ export class CalendarPage implements OnInit {
       header: event.title,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK'],
+      buttons: ['OK']
     });
     alert.present();
   }

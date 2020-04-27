@@ -6,7 +6,7 @@ import { AlertReminderService } from '../services/alert-reminder.service';
 @Component({
   selector: 'app-task-info-card',
   templateUrl: './task-info-card.component.html',
-  styleUrls: ['./task-info-card.component.scss'],
+  styleUrls: ['./task-info-card.component.scss']
 })
 export class TaskInfoCardComponent implements OnInit {
   @Input()
@@ -14,11 +14,9 @@ export class TaskInfoCardComponent implements OnInit {
   @Output()
   favoriteChange: EventEmitter<TaskReminderInfo> = new EventEmitter();
 
-  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) { }
-  
+  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   updateTask() {
     console.log(this.taskinfo);
@@ -34,5 +32,4 @@ export class TaskInfoCardComponent implements OnInit {
     this.taskService.selectFavouriteTask(this.taskinfo.id, this.taskinfo.favourite);
     this.favoriteChange.emit(this.taskinfo);
   }
-
 }

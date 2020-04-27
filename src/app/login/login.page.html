@@ -1,24 +1,33 @@
 <ion-content text-center>
-
-  
   <div class="register-card">
-    <img src="../../assets/icon/logo.svg" alt="" width="150px" height="150px">
+    <img src="../../assets/icon/logo.svg" alt="" width="150px" height="150px" />
     <div>
       <ion-text class="logo-text">SlateIn</ion-text>
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <ion-item>
-        <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username"></ion-input>
+        <ion-input
+          autofill="off"
+          placeholder="Email"
+          formControlName="email"
+          type="text"
+          autocomplete="username"
+        ></ion-input>
         <ion-icon name="mail" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit
-          autocomplete="new-password">
+        <ion-input
+          placeholder="Password"
+          formControlName="password"
+          type="password"
+          clear-on-edit
+          autocomplete="new-password"
+        >
         </ion-input>
         <ion-icon name="key" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      
+
       <div class="ion-text-right margin-top">
         <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear" style="text-decoration: none;">
           Forgot Password?
@@ -32,19 +41,25 @@
         </ion-item>
       </ion-list>
 
-      <ion-button expand="block" class="register" fill="solid" size="default" (click)="login()"
-       [disabled]="!loginForm.valid">Login</ion-button>
+      <ion-button
+        expand="block"
+        class="register"
+        fill="solid"
+        size="default"
+        (click)="login()"
+        [disabled]="!loginForm.valid"
+        >Login</ion-button
+      >
 
-       <div class="margin-bottom margin-top">
-         <ion-label color="danger">{{loginErrorMsg}}</ion-label>
-       </div>
+      <div class="margin-bottom margin-top">
+        <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+      </div>
 
       <div class="ion-text-center margin-top margin-bottom">
         <a routerLink="/login/register" routerDirection="forward" style="text-decoration: none;">
           New to SlateIn? Sign up
         </a>
-      </div>  
-
-    </form>    
+      </div>
+    </form>
   </div>
 </ion-content>

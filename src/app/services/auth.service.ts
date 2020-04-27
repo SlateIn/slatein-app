@@ -7,12 +7,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-
-
   private firedata = firebase.database().ref('/users/');
 
-  constructor(private afAuth: AngularFireAuth) { 
-  }
+  constructor(private afAuth: AngularFireAuth) {}
 
   signInWithEmail(email: string, pwd: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, pwd);
@@ -21,15 +18,18 @@ export class AuthService {
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
-        return firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).putString(profilePic, 'base64').then((snapshot) => {
-          return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-            return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
+        return firebase
+          .storage()
+          .ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`)
+          .putString(profilePic, 'base64')
+          .then((snapshot) => {
+            return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
+              return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
+            });
           });
-        });
       } else {
         return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
       }
-
     });
   }
 
@@ -46,7 +46,7 @@ export class AuthService {
       email: newUser.email,
       gender: newUser.gender,
       birthdate: newUser.birthdate,
-      'photoURL': profilePicUrl ? profilePicUrl : ''
+      photoURL: profilePicUrl ? profilePicUrl : ''
     });
   }
 
@@ -59,22 +59,24 @@ export class AuthService {
   }
 
   updatePhotoString(profilePic) {
-    if(profilePic) {
-      firebase.storage().ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`).putString(profilePic, 'base64').then((snapshot) => {
-        {
-          snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-            this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
-              'photoURL': profilePicUrl ? profilePicUrl : ''
-            })
-          })
-        }
-      });
+    if (profilePic) {
+      firebase
+        .storage()
+        .ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`)
+        .putString(profilePic, 'base64')
+        .then((snapshot) => {
+          {
+            snapshot.ref.getDownloadURL().then((profilePicUrl) => {
+              this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
+                photoURL: profilePicUrl ? profilePicUrl : ''
+              });
+            });
+          }
+        });
     }
-  
   }
 
   updatePwd(newPwd: string) {
     return firebase.auth().currentUser.updatePassword(newPwd);
   }
 }
-

@@ -11,10 +11,9 @@ import { ToastController, NavController, ModalController } from '@ionic/angular'
 @Component({
   selector: 'app-security-password',
   templateUrl: './security-password.page.html',
-  styleUrls: ['./security-password.page.scss'],
+  styleUrls: ['./security-password.page.scss']
 })
 export class SecurityPasswordPage implements OnInit {
-
   userInfo: UserInfo;
   updatePwdForm: FormGroup;
   updatePwdErrorMsg: string;
@@ -26,43 +25,50 @@ export class SecurityPasswordPage implements OnInit {
     private pwdValidator: PasswordValidatorService,
     private toastController: ToastController,
     private navCtrl: NavController,
-    private modalController: ModalController) { }
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.user.info.pipe(take(1)).subscribe((userInfo) => {
       this.userInfo = userInfo;
     });
 
-    this.updatePwdForm = this.fb.group({
-      currentPassword: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.compose([
-        Validators.minLength(6),
-        Validators.required
-      ])),
-      confirmPassword: new FormControl('', Validators.required)
-    }, {
-      validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
-    });
+    this.updatePwdForm = this.fb.group(
+      {
+        currentPassword: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.compose([Validators.minLength(6), Validators.required])),
+        confirmPassword: new FormControl('', Validators.required)
+      },
+      {
+        validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
+      }
+    );
   }
 
-  get controls() { return this.updatePwdForm.controls; }
+  get controls() {
+    return this.updatePwdForm.controls;
+  }
 
   async validateAndUpdatePwd() {
-    this.auth.signInWithEmail(this.userInfo.email, this.updatePwdForm.value.currentPassword)
-    .then(() => this.updatePwd())
-    .catch(err => this.updatePwdErrorMsg = err.message)
+    this.auth
+      .signInWithEmail(this.userInfo.email, this.updatePwdForm.value.currentPassword)
+      .then(() => this.updatePwd())
+      .catch((err) => (this.updatePwdErrorMsg = err.message));
   }
 
   updatePwd() {
-    this.auth.updatePwd(this.updatePwdForm.value.password).then(async () => {
-      const toast = await this.toastController.create({
-        message: 'Successfully updated password',
-        duration: 5000,
-        color: 'success'
-      });
-      toast.present();
-      this.backClicked();
-    }).catch((err) => this.updatePwdErrorMsg = err.message)
+    this.auth
+      .updatePwd(this.updatePwdForm.value.password)
+      .then(async () => {
+        const toast = await this.toastController.create({
+          message: 'Successfully updated password',
+          duration: 5000,
+          color: 'success'
+        });
+        toast.present();
+        this.backClicked();
+      })
+      .catch((err) => (this.updatePwdErrorMsg = err.message));
   }
 
   async backClicked() {

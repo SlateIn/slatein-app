@@ -4,21 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CalendarIntervalsService {
-
-  constructor() { }
+  constructor() {}
 
   getIntervalDates(calendarTasks) {
     let events = [];
-    calendarTasks.forEach(task => {
+    calendarTasks.forEach((task) => {
       events.push({
         ...task,
         startTime: new Date(task.startTimePeriod),
         endTime: new Date(task.endTimePeriod),
-        allDay: false,
+        allDay: false
       });
     });
     console.log(events);
     return events;
   }
-
 }

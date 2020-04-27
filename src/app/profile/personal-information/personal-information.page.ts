@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user-info.service';
 import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
@@ -13,7 +13,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.page.html',
-  styleUrls: ['./personal-information.page.scss'],
+  styleUrls: ['./personal-information.page.scss']
 })
 export class PersonalInformationPage implements OnInit, OnDestroy {
   upgateButtonClicked = false;
@@ -43,15 +43,16 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
     private toastController: ToastController,
     private modalController: ModalController,
     private titleCase: TitleCasePipe,
-    private authService: AuthService ) {
+    private authService: AuthService
+  ) {
     this.itemRef = db.object('item');
     this.item = this.itemRef.valueChanges();
-   }
+  }
 
   ngOnInit() {
     this.info$ = this.user.info;
 
-    this.userSubscription = this.info$.subscribe( user => {
+    this.userSubscription = this.info$.subscribe((user) => {
       this.currentUser = user;
       this.userInfo.fname = this.titleCase.transform(user.fname);
       this.userInfo.lname = user.lname;
@@ -80,24 +81,25 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
   onSaveInfoClicked() {
     this.upgateButtonClicked = false;
 
-    if (this.currentUser.fname !== this.userInfo.fname ||
+    if (
+      this.currentUser.fname !== this.userInfo.fname ||
       this.currentUser.lname !== this.userInfo.lname ||
       this.currentUser.birthdate !== this.userInfo.birthdate ||
       this.currentUser.gender !== this.userInfo.gender ||
-      this.profilePicChanged) {
+      this.profilePicChanged
+    ) {
+      this.user.updateUserInfo(this.userInfo).then(async () => {
+        this.authService.updatePhotoString(this.photoBase64);
+        this.profilePicChanged = false;
 
-        this.user.updateUserInfo(this.userInfo).then(async () => {
-            this.authService.updatePhotoString(this.photoBase64);
-            this.profilePicChanged = false;
-
-            const toast = await this.toastController.create({
-            message: 'Your Personal Information is successfully updated.',
-            duration: 2000,
-            color: 'success',
-            position: 'middle'
-          });
-            toast.present();
+        const toast = await this.toastController.create({
+          message: 'Your Personal Information is successfully updated.',
+          duration: 2000,
+          color: 'success',
+          position: 'middle'
         });
+        toast.present();
+      });
     }
   }
 
@@ -106,13 +108,16 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
   }
 
   onProfilePicClick() {
-    this.photoService.getPhoto().then(photo => {
-      this.photo = photo;
-      this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
-      this.profilePicChanged = true;
-    }).catch(error => {
-      console.log(`Error occure when trying get the photo.`);
-    });
+    this.photoService
+      .getPhoto()
+      .then((photo) => {
+        this.photo = photo;
+        this.photoBase64 = photo.replace('data:image/jpeg;base64,', '');
+        this.profilePicChanged = true;
+      })
+      .catch((error) => {
+        console.log(`Error occure when trying get the photo.`);
+      });
   }
 
   ngOnDestroy(): void {

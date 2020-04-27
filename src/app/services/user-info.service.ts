@@ -9,15 +9,15 @@ import { UserInfo } from '@models/userInfo';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) {}
 
   get info(): Observable<UserInfo> {
     return this.afAuth.authState.pipe(
-      filter(auth => !!auth),
-      map(auth => auth.uid),
-      switchMap(res => this.db.object<UserInfo>(`/users/${res}/profile/personalInfo`).valueChanges()));
-   }
+      filter((auth) => !!auth),
+      map((auth) => auth.uid),
+      switchMap((res) => this.db.object<UserInfo>(`/users/${res}/profile/personalInfo`).valueChanges())
+    );
+  }
 
   updateUserInfo(user: UserInfo) {
     return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
@@ -26,7 +26,7 @@ export class UserService {
       email: user.email,
       gender: user.gender,
       birthdate: user.birthdate,
-      photoURL: user.photoURL,
+      photoURL: user.photoURL
     });
   }
 }
