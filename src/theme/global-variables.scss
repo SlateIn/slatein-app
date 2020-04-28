@@ -4,15 +4,15 @@
 /** Ionic CSS Variables **/
 :root {
 
-  --ion-font-family: -apple-system, 
-  BlinkMacSystemFont, 
-  "Helvetica Neue", 
-  "Roboto",
-  "PlayfairDisplayBlack",
-  "PlayfairDisplayBlackItalic",
-  "PlayfairDisplayBold",
-  "PlayfairDisplayBoldItalic",
-  "PlayfairDisplayItalic",
+  // APP Text Color
+  --ion-text-color: --ion-color-slateIn-primary;
+  // APP Text Color RGB
+  --ion-text-color-rgb: --ion-color-slateIn-primary-rgb;
+  // APP Font Family
+  --ion-font-family: -apple-system,
+  BlinkMacSystemFont,
+  ionic,
+  "roboto",
   "RobotoBlack",
   "RobotoBlackItalic",
   "RobotoBold",
@@ -24,7 +24,15 @@
   "RobotoMediumItalic",
   "RobotoRegular",
   "RobotoThin",
-  "RobotoThinItalic";
+  "RobotoThinItalic",
+  "Helvetica Neue", 
+  "Roboto",
+  "PlayfairDisplayBlack",
+  "PlayfairDisplayBlackItalic",
+  "PlayfairDisplayBold",
+  "PlayfairDisplayBoldItalic", 
+  "PlayfairDisplayItalic";
+  
 
   /* Primary: SlateIn default font/border/dark shadow color */
   --ion-color-slateIn-primary: #1D1E3A;
