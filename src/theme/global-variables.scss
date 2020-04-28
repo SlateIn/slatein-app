@@ -3,6 +3,57 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  --ion-font-family: -apple-system, 
+  BlinkMacSystemFont, 
+  "Helvetica Neue", 
+  "Roboto",
+  "PlayfairDisplayBlack",
+  "PlayfairDisplayBlackItalic",
+  "PlayfairDisplayBold",
+  "PlayfairDisplayBoldItalic",
+  "PlayfairDisplayItalic",
+  "RobotoBlack",
+  "RobotoBlackItalic",
+  "RobotoBold",
+  "RobotoBoldItalic",
+  "RobotoItalic",
+  "RobotoLight",
+  "RobotoLightItalic",
+  "RobotoMedium",
+  "RobotoMediumItalic",
+  "RobotoRegular",
+  "RobotoThin",
+  "RobotoThinItalic";
+
+  /* Primary: SlateIn default font/border/dark shadow color */
+  --ion-color-primary: #1D1E3A;
+  --ion-color-primary-rgb: 29, 30, 58;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1a1a33;
+  --ion-color-primary-tint: #34354e;
+
+
+  /* Danger: SlateIn Error,warning color */
+  --ion-color-primary: #FF4E60;
+  --ion-color-primary-rgb: 255, 78, 96;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #e04554;
+  --ion-color-primary-tint: #ff6070;
+
+
+
+  /* Success: SlateIn  action color*/
+  --ion-color-primary-rgb: 0, 144, 158;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #007f8b;
+  --ion-color-primary-tint: #1a9ba8;
+
+
+
   --ion-color-primary: #4d4646;
   --ion-color-primary-rgb: 77, 70, 70;
   --ion-color-primary-contrast: #ffffff;
@@ -215,4 +266,144 @@ body.dark {
 /* Optional CSS, this is added for the flashing that happens when toggling between themes */
 ion-item {
   --transition: none;
+}
+
+
+/* Fonts Face Variable*/
+@font-face {
+  font-family: PlayfairDisplayBlack;
+  src: url(../assets/fonts/PlayfairDisplay-Black.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: PlayfairDisplayBlackItalic;
+  src: url(../assets/fonts/PlayfairDisplay-BlackItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: PlayfairDisplayBold;
+  src: url(../assets/fonts/PlayfairDisplay-Bold.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: PlayfairDisplayBoldItalic;
+  src: url(../assets/fonts/PlayfairDisplay-BoldItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: PlayfairDisplayItalic;
+  src: url(../assets/fonts/PlayfairDisplay-Italic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoBlack;
+  src: url(../assets/fonts/Roboto-Black.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+
+@font-face {
+  font-family: RobotoBlackItalic;
+  src: url(../assets/fonts/Roboto-BlackItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url(../assets/fonts/Roboto-Bold.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoBoldItalic;
+  src: url(../assets/fonts/Roboto-BoldItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoItalic;
+  src: url(../assets/fonts/Roboto-Italic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoLight;
+  src: url(../assets/fonts/Roboto-Light.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+
+@font-face {
+  font-family: RobotoLightItalic;
+  src: url(../assets/fonts/Roboto-LightItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoMedium;
+  src: url(../assets/fonts/Roboto-Medium.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoMediumItalic;
+  src: url(../assets/fonts/Roboto-MediumItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoRegular;
+  src: url(../assets/fonts/Roboto-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoThin;
+  src: url(../assets/fonts/Roboto-Thin.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+}
+
+@font-face {
+  font-family: RobotoThinItalic;
+  src: url(../assets/fonts/Roboto-ThinItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  color: black;
 }
