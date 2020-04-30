@@ -35,6 +35,15 @@
         margin-right: 0.5rem;
     }
 
+    .fg-pass-label {
+        text-align: right;
+        margin-right: 0px;
+    }
+
+    .error-div {
+        text-align: center;
+        margin-bottom: 2%;
+    }
     .login-button {
         margin: 1.5rem 0.7rem;
         color: white;
@@ -45,7 +54,7 @@
     }
 
     .signUp-text {
-        font-size: 1.3em;
+        font-size: 1em;
     }
 
     a,

@@ -39,11 +39,11 @@
                Remember Me
               </ion-label>
 
-              <ion-text>
+              <ion-label class="fg-pass-label">
                 <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
                    <ion-label>Forgot Password</ion-label>
                   </a>
-              </ion-text>
+              </ion-label>
             </ion-item>
           </ion-list>
 
@@ -53,15 +53,17 @@
           </ion-label>  
           </ion-button>
 
-          <section class="margin-bottom margin-top">
-            <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+          <section class="margin-bottom margin-top text-center">
+            <div class="error-div">
+              <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+            </div>
           </section>
 
           <section class="ion-text-center margin-top margin-bottom">
-            <h4> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
+            <ion-label> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
                  <ion-label class="signUp-text">Sign Up</ion-label>
               </a>
-            </h4>
+            </ion-label>
           </section>
         </form>
       </ion-card-content>
