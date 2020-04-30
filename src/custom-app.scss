@@ -4,6 +4,7 @@ ion-button {
   --background: var(--ion-color-slateIn-success);
 }
 
+// Bottom-Tab bar style, Applied Globally
 ion-tab-bar {
   border: 1px solid var(--ion-color-slateIn-primary);
   background-color: var(--ion-color-light);
@@ -20,22 +21,24 @@ ion-tab-bar {
       height: 22px;
     }
   }
-}
 
-.tab-selected {
-  // border: 1px solid red;
-  box-shadow: none;
-  color: var(--ion-color-slateIn-success);
-  font-family: RobotoBold;
-
-  ion-icon {
+  .tab-selected {
+    // border: 1px solid red;
+    box-shadow: none;
     color: var(--ion-color-slateIn-success);
-  }
-
-  ion-label {
-    font-size: medium;
+    font-family: RobotoBold;
+  
+    ion-icon {
+      color: var(--ion-color-slateIn-success);
+    }
+  
+    ion-label {
+      font-size: medium;
+    }
   }
 }
+
+
 
 .fab-add {
   height: 70px;
