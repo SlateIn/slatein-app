@@ -1,34 +1,56 @@
-.app-logo {
-    margin-top: 30%;
-    margin-bottom: 7rem;
+.login-page {
+    --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
 
-    img{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%; 
+    .app-logo {
+        img {
+            width: 55%;
+        }
+
+        margin: 5rem 0rem;
+
+        .app-logo-col {
+            text-align: center;
+        }
+
+        .logo-text {
+            margin-top: 2rem;
+            font-size: 3em;
+            font-weight: bold;
+        }
     }
-    
-    .logo-text {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%; 
-        margin-top: 5%;
-        font-size: 2em;
-        font-weight: bold;
-        text-align: center;
-        //color: var(--ion-color-green-light-tint);
-        color: #516395;
-            
+
+    .remember-me-row {
+        background: transparent;
     }
-}
 
-.remember-me-row {
-    background: transparent;
-}
+    ion-list {
+        ion-item {
+            --padding-end: 0px;
+            --inner-padding-end: 0px;
+            --padding-start: 0;
+        }
+    }
 
-ion-checkbox{
-    margin-right: 0.5rem;
-}
+    ion-checkbox {
+        margin-right: 0.5rem;
+    }
 
+    .login-button {
+        margin: 1.5rem 0.7rem;
+        color: white;
+
+        ion-label {
+            font-size: 1.3em;
+        }
+    }
+
+    .signUp-text {
+        font-size: 1.3em;
+    }
+
+    a,
+    h4 {
+        color: var(--ion-color-slateIn-primary);
+    }
+
+}

@@ -3,46 +3,30 @@ ion-icon{
   color: var(--ion-color-slateIn-primary);
 }
 
-ion-icon {
-    color: var(--ion-color-primary-tint);
+ion-button {
+  --background: var(--ion-color-slateIn-success);
 }
 
-.login-page {
-    --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
-
-    .login-card{
-        margin: 0.4rem 0.7rem;
-        padding: 0;
-        border-bottom: 1.5px solid;
-
-        .card-input-title {
-            padding-left: 1rem;
-            padding-top: 0.4rem;
-            margin: 0;
-            font-size: 0.9rem;
-            color: var(--ion-color-primary);
-        }
-
-        .card-input-box{
-            padding: 0px;
-            margin: 0px;
-               
-           color: var(--ion-color-primary);
-           opacity: 80%;
-           --border-style: none;
-
-           ion-input {
-               padding: 0px;
-               margin: 0px;
-           }
-
-        }
-    }
-
-    .login-button {
-        margin: 1.5rem 0.7rem;
+// SlateIn - CARD DEFAULT CSS
+.slateIn-card{
+    background : none;
+    padding: 0.2rem 0.2rem;
+    ion-card-content{
+      padding: 0.2rem 0.2rem;
     }
 }
+
+// SlateIn - FORM DEFAULT CSS
+.slateIn-form {
+  .form-field {
+    margin: 0.8rem 0rem;
+    padding: 0;
+    border-bottom: 1.5px solid;
+    border-radius: 10px;
+  }
+}
+
+
 // ######################################### End Global Customization ######################################### 
 
 
