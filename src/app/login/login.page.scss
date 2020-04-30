@@ -1,9 +1,59 @@
-img {
-    margin-top: 80px;
+// .login-page{
+
+//     --background: linear-gradient(to bottom, #f2fcfe 20%, #8Fa5cf 100%);
+    
+//     ion-card {
+//         margin: 0px;
+//         margin-top: 7rem;
+//         padding-top: 1rem;
+//         //--background: var(--ion-color-green-light-tint);
+
+//         ion-item{
+//            // --background: var(--ion-color-green-light-tint); 
+//            opacity: 100%;
+//         }
+//     }
+
+//     ion-checkbox{
+//         margin-right: 0.5rem;
+//     }
+
+//     ion-button {
+//         margin: 0 1rem;
+//     }
+//}
+
+.app-logo {
+    margin-top: 30%;
+    margin-bottom: 7rem;
+
+    img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%; 
+    }
+    
+    .logo-text {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%; 
+        margin-top: 5%;
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        //color: var(--ion-color-green-light-tint);
+        color: #516395;
+            
+    }
 }
 
-ion-text.logo-text {
-    font-size: 2em;
-    font-weight: bold;
-    color: #31e8e9;
+.remember-me-row {
+    background: transparent;
 }
+
+ion-checkbox{
+    margin-right: 0.5rem;
+}
+

@@ -7,6 +7,43 @@ ion-content {
 ion-icon {
     color: var(--ion-color-primary-tint);
 }
+
+.login-page {
+    --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
+
+    .login-card{
+        margin: 0.4rem 0.7rem;
+        padding: 0;
+        border-bottom: 1.5px solid;
+
+        .card-input-title {
+            padding-left: 1rem;
+            padding-top: 0.4rem;
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--ion-color-primary);
+        }
+
+        .card-input-box{
+            padding: 0px;
+            margin: 0px;
+               
+           color: var(--ion-color-primary);
+           opacity: 80%;
+           --border-style: none;
+
+           ion-input {
+               padding: 0px;
+               margin: 0px;
+           }
+
+        }
+    }
+
+    .login-button {
+        margin: 1.5rem 0.7rem;
+    }
+}
 // ######################################### End Global Customization ######################################### 
 
 

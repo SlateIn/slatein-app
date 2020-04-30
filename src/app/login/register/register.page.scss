@@ -19,18 +19,8 @@ ion-label.label-color {
     color: #8f8f91 !important;
 }
 
-.default-avatar{
-    --border-style : none;
-    
-    ion-avatar {
-        position: relative;
-        width: 80px;
-        height: 80px;
-    }   
-}
-
 .profile_avatar {
-    margin:0 auto;
+    margin:5rem auto;
 }
 
 @media only screen and (min-height: 660px) {
@@ -39,4 +29,17 @@ ion-label.label-color {
         position: absolute;
         width:100%;
     }
+}
+
+.register-icon {
+    font-size: 6rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.register-title{
+    color: var(--ion-color-primary);
+    text-align: center;
+    margin-top: 3rem;
 }
