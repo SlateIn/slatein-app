@@ -1,22 +1,22 @@
 ion-avatar {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 80px;
-    height: 80px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 80px;
+  height: 80px;
 
-    ion-icon {
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        bottom: 3px;
-        right: -3px;
-    }
+  ion-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 3px;
+    right: -3px;
+  }
 }
 
 ion-label.label-color {
-    color: #8f8f91 !important;
+  color: #8f8f91 !important;
 }
 
 .profile_avatar {

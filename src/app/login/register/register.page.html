@@ -1,13 +1,5 @@
 <app-header></app-header>
 <ion-content class="login-page">  
-    <!-- <div class="profile_avatar">
-      <ion-avatar (click)="onProfilePicClick()">
-        <img #profilePic [src]="avatarSrc">
-        <ion-icon mode="md" name="add-circle"></ion-icon>
-      </ion-avatar>
-    </div> -->
-
-    <!-- <h2 class="register-title">Sign Up</h2> -->
     <ion-icon class="register-icon" name="person-circle-sharp"></ion-icon>
 
     <form [formGroup]="registerForm" (ngSubmit)="register()">
@@ -18,7 +10,9 @@
       </ion-item>
       <ion-item *ngIf="controls.fname.touched &&controls.fname.errors" lines="none">
         <div>
-          <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special characters</ion-label>
+          <ion-label class="ion-text-wrap" color="danger"
+            >Firstname can not contain whitespace, numbers and special characters.</ion-label
+          >
         </div>
       </ion-item>
       </ion-card>
@@ -30,7 +24,9 @@
       </ion-item>
       <ion-item *ngIf="controls.lname.touched &&controls.lname.errors" lines="none">
         <div>
-          <ion-label class="ion-text-wrap" color="danger">Lastname can not contain whitespace, numbers and special characters</ion-label>
+          <ion-label class="ion-text-wrap" color="danger"
+            >Lastname can not contain whitespace, numbers and special characters.</ion-label
+          >
         </div>
       </ion-item>
       </ion-card>
@@ -43,7 +39,7 @@
       </ion-item>
       <ion-item *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)" lines="none">
         <div>
-          <ion-label color="danger">Email must be valid formate</ion-label>
+          <ion-label color="danger">The email address is badly formatted.</ion-label>
         </div>
       </ion-item>
       </ion-card>
@@ -73,9 +69,12 @@
           autocomplete="new-password"></ion-input>
         <ion-icon name="key-outline" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)" lines="none">
+      <ion-item
+        *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)"
+        lines="none"
+      >
         <div>
-          <ion-label color="danger">Password must be at least 6 characters</ion-label>
+          <ion-label color="danger">Password must be at least 6 characters long.</ion-label>
         </div>
       </ion-item>
       </ion-card>
@@ -87,9 +86,12 @@
         </ion-input>
         <ion-icon name="key-outline" mode="ios" slot="end" align-self-end></ion-icon>
       </ion-item>
-      <ion-item *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)" lines="none">
+      <ion-item
+        *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)"
+        lines="none"
+      >
         <div>
-          <ion-label color="danger">Passwords must match</ion-label>
+          <ion-label color="danger">Passwords must match.</ion-label>
         </div>
       </ion-item>
       </ion-card>

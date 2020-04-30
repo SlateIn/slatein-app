@@ -1,34 +1,32 @@
-
 ion-content {
-    --overflow: hidden;
-    --ion-safe-area-top: 20px;
-    --ion-safe-area-bottom: 22px;   
+  --overflow: hidden;
+  --ion-safe-area-top: 20px;
+  --ion-safe-area-bottom: 22px;
 }
 
-.default-avatar{
-    --border-style : none;
-    
-    ion-avatar {
-        position: relative;
-        width: 80px;
-        height: 80px;
-    }   
+.default-avatar {
+  --border-style: none;
+
+  ion-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .profile_avatar {
-    margin:0 auto;
-    margin-top: 40px;
+  margin: 0 auto;
+  margin-top: 40px;
 }
 
-.name-avatar{
-    text-align: center;
+.name-avatar {
+  text-align: center;
 }
 
-.arrow-forward{
-    margin-top: 10px;
+.arrow-forward {
+  margin-top: 10px;
 }
 
-.logout{
-    --min-height: 52px
+.logout {
+  --min-height: 52px;
 }
-

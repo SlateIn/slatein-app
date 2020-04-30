@@ -13,7 +13,6 @@
       <ion-segment-button value="day">
         <ion-label>Day</ion-label>
       </ion-segment-button>
-
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -24,7 +23,7 @@
     <ion-row class="ion-align-items-center ion-text-center">
       <ion-col size="2" (click)="back()">
         <!-- <ion-button fill="clear" > -->
-          <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon name="arrow-back"></ion-icon>
         <!-- </ion-button> -->
       </ion-col>
       <ion-col size="8">
@@ -34,14 +33,21 @@
       </ion-col>
       <ion-col size="2" (click)="next()">
         <!-- <ion-button fill="clear" > -->
-          <ion-icon name="arrow-forward"></ion-icon>
+        <ion-icon name="arrow-forward"></ion-icon>
         <!-- </ion-button> -->
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
-    (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
-    (onTimeSelected)="onTimeSelected($event)" (click)="changeMode('day')" step="30">
+  <calendar
+    [eventSource]="getAllTasks$ | async"
+    [calendarMode]="calendar.mode"
+    [currentDate]="calendar.currentDate"
+    (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onViewTitleChanged($event)"
+    (click)="changeMode('day')"
+    step="30"
+  >
   </calendar>
 </ion-content>
