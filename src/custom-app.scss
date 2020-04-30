@@ -12,8 +12,7 @@ ion-tab-bar {
 
   ion-tab-button {
     margin: 2%;
-    box-shadow: 3px 3px 10px var(--ion-color-slateIn-primary);
-    border-radius: 10%;
+    border-radius: 10px;
 
     ion-icon {
       color: var(--ion-color-slateIn-primary);
@@ -27,6 +26,7 @@ ion-tab-bar {
     box-shadow: none;
     color: var(--ion-color-slateIn-success);
     font-family: RobotoBold;
+    box-shadow: 3px 3px 10px var(--ion-color-slateIn-primary);
   
     ion-icon {
       color: var(--ion-color-slateIn-success);
