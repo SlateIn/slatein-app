@@ -3,10 +3,36 @@ ion-icon{
   color: var(--ion-color-slateIn-primary);
 }
 
-ion-button{
+ion-button {
   --background: var(--ion-color-slateIn-success);
-};
+}
 
+// SlateIn - CARD DEFAULT CSS
+.slateIn-card{
+    background : none;
+    padding: 0.2rem 0.2rem;
+    ion-card-content{
+      padding: 0.2rem 0.2rem;
+    }
+}
+
+// SlateIn - FORM DEFAULT CSS
+.slateIn-form {
+}
+
+.form-field {
+  margin: 0.8rem 0rem;
+  padding: 0;
+  border-bottom: 1.5px solid;
+  border-radius: 10px;
+}
+
+
+// ######################################### End Global Customization ######################################### 
+
+
+
+// ######################################### Start Global Margin & Padding Classes ######################################### 
 .tab-selected{
   color: var(--ion-color-slateIn-success);
   font-family: RobotoBold;
