@@ -5,6 +5,7 @@ import { TaskService } from '@services/task.service';
 import { TaskReminderInfo } from '@models/taskDetails';
 import { map } from 'rxjs/operators';
 import { AlertReminderService } from './services/alert-reminder.service';
+import { GoogleCalnedarService } from '@services/google-calnedar.service';
 
 @Component({
   selector: 'app-myday',
@@ -24,8 +25,11 @@ export class MydayPage implements OnInit, OnDestroy {
   getTaskSubscription$: Subscription;
   segment: string;
   getAllTasksInfoSubscription: Subscription;
-
-  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) {}
+  calendarItems: any[];
+  constructor(
+    private taskService: TaskService, 
+    private alertReminderService: AlertReminderService,
+    private googleCalendarApi: GoogleCalnedarService) {}
 
   ngOnInit() {
     const todaysDate = new Date();
@@ -74,6 +78,18 @@ export class MydayPage implements OnInit, OnDestroy {
     } else if (!task.favourite) {
       this.favouriteTaskDetails.splice(getIndex, 1);
     }
+  }
+
+  calendarLogin() {
+    this.googleCalendarApi.login();
+  }
+
+  async getCalendar() {
+    this.calendarItems = await this.googleCalendarApi.getCalendar();
+  }
+
+  calendarLogout() {
+    this.googleCalendarApi.logout();
   }
 
   ngOnDestroy(): void {
