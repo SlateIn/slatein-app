@@ -4,10 +4,11 @@
 /** Ionic CSS Variables **/
 :root {
 
+  // --ion-background-color: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
   // APP Text Color
-  --ion-text-color: --ion-color-slateIn-primary;
+  --ion-text-color: var(--ion-color-slateIn-primary);
   // APP Text Color RGB
-  --ion-text-color-rgb: --ion-color-slateIn-primary-rgb;
+  --ion-text-color-rgb: var(--ion-color-slateIn-primary-rgb);
   // APP Font Family
   --ion-font-family: -apple-system,
   BlinkMacSystemFont,
