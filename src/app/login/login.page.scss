@@ -3,10 +3,10 @@
 
     .app-logo {
         img {
-            width: 55%;
+            width: 40vw;
         }
 
-        margin: 5rem 0rem;
+        margin: 3rem 0rem 2rem;
 
         .app-logo-col {
             text-align: center;
@@ -29,10 +29,6 @@
             --inner-padding-end: 0px;
             --padding-start: 0;
         }
-    }
-
-    ion-checkbox {
-        margin-right: 0.5rem;
     }
 
     .fg-pass-label {
