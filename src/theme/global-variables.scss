@@ -10,10 +10,7 @@
   // APP Text Color RGB
   --ion-text-color-rgb: var(--ion-color-slateIn-primary-rgb);
   // APP Font Family
-  --ion-font-family: -apple-system,
-  BlinkMacSystemFont,
-  ionic,
-  "roboto",
+  --ion-font-family: "roboto",
   "RobotoBlack",
   "RobotoBlackItalic",
   "RobotoBold",
@@ -32,7 +29,10 @@
   "PlayfairDisplayBlackItalic",
   "PlayfairDisplayBold",
   "PlayfairDisplayBoldItalic", 
-  "PlayfairDisplayItalic";
+  "PlayfairDisplayItalic",
+  -apple-system,
+  BlinkMacSystemFont,
+  ionic;
   
 
   /* Primary: SlateIn default font/border/dark shadow color */
