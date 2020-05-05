@@ -1,9 +1,63 @@
-img {
-  margin-top: 80px;
-}
+.login-page {
+    --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
 
-ion-text.logo-text {
-  font-size: 2em;
-  font-weight: bold;
-  color: #31e8e9;
+    .app-logo {
+        img {
+            width: 40vw;
+        }
+
+        margin: 3rem 0rem 2rem;
+        .app-logo-col {
+            text-align: center;
+        }
+
+        .logo-text {
+            margin-top: 2rem;
+            font-size: 3em;
+            font-weight: bold;
+        }
+    }
+
+    .remember-me-row {
+        background: transparent;
+    }
+
+    ion-list {
+        ion-item {
+            --padding-end: 0px;
+            --inner-padding-end: 0px;
+            --padding-start: 0;
+        }
+    }
+
+    ion-checkbox {
+        margin-right: 0.5rem;
+    }
+    .fg-pass-label {
+        text-align: right;
+        margin-right: 0px;
+    }
+
+    .error-div {
+        text-align: center;
+        margin-bottom: 2%;
+    }
+    .login-button {
+        margin: 1.5rem 0.7rem;
+        color: white;
+
+        ion-label {
+            font-size: 1.3em;
+        }
+    }
+
+    .signUp-text {
+        font-size: 1em;
+    }
+
+    a,
+    h4 {
+        color: var(--ion-color-slateIn-primary);
+    }
+
 }
