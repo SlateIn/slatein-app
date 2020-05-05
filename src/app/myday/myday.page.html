@@ -1,15 +1,18 @@
+<ion-content style="border: 2px solid red;">
+
 <ion-header>
   <ion-toolbar>
     <ion-title>My Day</ion-title>
-    <ion-buttons slot="primary" (click)="setReminder()">
+    <!-- <ion-buttons slot="primary" (click)="setReminder()">
       <ion-button>
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<section>
   <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="All">
       <ion-label>All</ion-label>
@@ -36,4 +39,5 @@
       </ng-container>
     </ion-label>
   </div>
+</section>
 </ion-content>
