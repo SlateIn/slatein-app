@@ -12,6 +12,7 @@ import { AlertReminderService } from './services/alert-reminder.service';
   styleUrls: ['./myday.page.scss']
 })
 export class MydayPage implements OnInit, OnDestroy {
+  tile: boolean = true;
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];
@@ -58,6 +59,10 @@ export class MydayPage implements OnInit, OnDestroy {
         }
       });
   }
+
+  /**
+   * TODO : Provide data(All task from my day) to displayData component
+   */
 
   setReminder() {
     this.alertReminderService.presentAlertPrompt('Add');
