@@ -2,9 +2,11 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { CalendarIntervalsService } from '@services/calendar-intervals.service';
+import { TaskService } from '@services/task.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendar',
@@ -24,6 +26,7 @@ export class CalendarPage implements OnInit {
     currentDate: new Date()
   };
   getCalendarEvents$: Subscription;
+  getAllTasks$: Observable<any[]>;
 
   @ViewChild(CalendarComponent, { static: false }) myCal: CalendarComponent;
 
@@ -32,21 +35,14 @@ export class CalendarPage implements OnInit {
     public calService: CalendarService,
     private alertCtrl: AlertController,
     public calendarIntervalsService: CalendarIntervalsService,
+    private taskService: TaskService,
     @Inject(LOCALE_ID) private locale: string
-  ) { }
-
+  ) {}
 
   ngOnInit() {
-    const todaysDate = new Date();
-    const year = `${todaysDate.getFullYear()}`;
-    this.getCalendarEvents$ = this.calService.getEvents(year).subscribe(
-      tasks => this.loadEvents(tasks)
-    );
-    this.view = 'month';
-  }
-
-  loadEvents(calendarTasks) {
-    this.eventSource = this.getEventsStructure(calendarTasks);
+    this.getAllTasks$ = this.taskService
+      .getAllTasksInfo()
+      .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)));
   }
 
   onViewTitleChanged(title) {
@@ -75,13 +71,6 @@ export class CalendarPage implements OnInit {
     alert.present();
   }
 
-  onTimeSelected(ev) {
-    // let selected = new Date(ev.selecedTime);
-    // this.event.startTime = selected.toISOString();
-    // selected.setHours(selected.getHours() + 1);
-    // this.event.endTime = (selected.toISOString());
-  }
-
   changeMode(mode) {
     this.view = mode;
     this.calendar.mode = mode;
@@ -98,10 +87,6 @@ export class CalendarPage implements OnInit {
     swiper.slidePrev();
   }
 
-  getEventsStructure(calendarTasks) {
-    return this.calendarIntervalsService.getIntervalDates(calendarTasks);
-  }
-
   onRangeChanged(ev) {
     console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
   }
@@ -109,10 +94,9 @@ export class CalendarPage implements OnInit {
     let current = new Date();
     current.setHours(0, 0, 0);
     return date < current;
-  }
+  };
 
   segmentChanged(event: CustomEvent) {
     this.changeMode(event.detail.value);
   }
-
 }

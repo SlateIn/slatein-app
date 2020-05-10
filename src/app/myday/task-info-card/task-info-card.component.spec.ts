@@ -9,7 +9,7 @@ describe('TaskInfoCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskInfoCardComponent ],
+      declarations: [TaskInfoCardComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

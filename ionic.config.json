@@ -1,7 +1,7 @@
 {
-  "name": "slatein-app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
+	"name": "slatein-app",
+	"integrations": {
+		"capacitor": {}
+	},
+	"type": "angular"
 }

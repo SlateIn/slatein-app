@@ -20,18 +20,26 @@ export class AlertReminderService {
   todayDate = new Date();
 
   // tslint:disable-next-line: max-line-length
-  minDate = `${this.todayDate.getFullYear()}-${String(this.todayDate.getMonth() + 1).padStart(2, '0')}-${String(this.todayDate.getDate()).padStart(2, '0')}`;
+  minDate = `${this.todayDate.getFullYear()}-${String(this.todayDate.getMonth() + 1).padStart(2, '0')}-${String(
+    this.todayDate.getDate()
+  ).padStart(2, '0')}`;
   // tslint:disable-next-line: max-line-length
-  maxDate = `${this.todayDate.getFullYear() + 15}-${String(this.todayDate.getMonth() + 1).padStart(2, '0')}-${String(this.todayDate.getDate()).padStart(2, '0')}`;
-
+  maxDate = `${this.todayDate.getFullYear() + 15}-${String(this.todayDate.getMonth() + 1).padStart(2, '0')}-${String(
+    this.todayDate.getDate()
+  ).padStart(2, '0')}`;
 
   constructor(
     private alertController: AlertController,
     private notification: LocalNotificationsService,
-    private taskService: TaskService, ) { }
+    private taskService: TaskService
+  ) {}
 
   // tslint:disable-next-line: max-line-length
-  async presentAlertPrompt(type: 'Add' | 'Update', reminderData?: Reminder, repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never') {
+  async presentAlertPrompt(
+    type: 'Add' | 'Update',
+    reminderData?: Reminder,
+    repeat?: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never'
+  ) {
     const alert = await this.alertController.create({
       header: 'Schedule new task',
       backdropDismiss: false,
@@ -71,7 +79,7 @@ export class AlertReminderService {
           placeholder: 'Start Time',
           label: 'Start Time',
           type: 'time',
-          value: reminderData && reminderData.startTime,
+          value: reminderData && reminderData.startTime
         },
         {
           placeholder: 'endDate',
@@ -95,8 +103,8 @@ export class AlertReminderService {
           name: 'endTime',
           label: 'End Time',
           type: 'time',
-          value: reminderData && reminderData.endTime,
-        },
+          value: reminderData && reminderData.endTime
+        }
       ],
       buttons: [
         {
@@ -122,7 +130,7 @@ export class AlertReminderService {
           handler: () => {
             console.log('Confirm Cancel');
           }
-        },
+        }
       ]
     });
 
@@ -180,7 +188,8 @@ export class AlertReminderService {
           handler: () => {
             this.presentAlertPrompt('Add', data);
           }
-        }, {
+        },
+        {
           text: 'Ok',
           handler: (repeat: 'year' | 'month' | 'two-weeks' | 'week' | 'day') => {
             this.presentAlertPrompt('Add', data, repeat);
@@ -192,27 +201,21 @@ export class AlertReminderService {
   }
 
   async onSubmit(value: Reminder, repeat: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never' = 'never') {
-    const getPaths = value.startDate.split('-');
-    const path = `${getPaths[0]}/${getPaths[1]}/${getPaths[2]}`;
-    const id = `${getPaths[0]}${getPaths[1]}${getPaths[2]}`;
-    const startDate = new Date(value.startDate + ' ' + value.startTime).toString();
-    const endDate = new Date(value.endDate + ' ' + value.endTime).toString();
+    const startTimePeriod = new Date(value.startDate + ' ' + value.startTime).toString();
+    const endTimePeriod = new Date(value.endDate + ' ' + value.endTime).toString();
     const data: TaskReminderInfo = {
       title: value.title,
       desc: value.description,
       image: '',
-      startDate,
       status: 'pending',
       repeat,
-      path,
-      endDate,
-      favourite: false
+      favourite: false,
+      id: Date.now(),
+      startTimePeriod,
+      endTimePeriod
     };
     console.log(data);
-    this.notification.scheduleAt(data, id).then((identifier: number) => {
-      data.id = identifier;
-      this.taskService.createTask(data);
-    });
+    this.taskService.createTask(data);
+    this.notification.scheduleAt(data);
   }
-
 }

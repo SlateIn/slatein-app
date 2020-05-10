@@ -10,13 +10,7 @@ import { MydayPage } from './myday.page';
 import { TaskInfoCardComponent } from './task-info-card/task-info-card.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IonicModule,
-    MydayPageRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, MydayPageRoutingModule],
   declarations: [MydayPage, TaskInfoCardComponent]
 })
 export class MydayPageModule {}
