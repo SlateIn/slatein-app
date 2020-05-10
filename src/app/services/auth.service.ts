@@ -1,18 +1,30 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, Observable  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private firedata = firebase.database().ref('/users/');
+  private userLoggedIn = new Subject<boolean>();
 
-  constructor(private afAuth: AngularFireAuth) {}
+  constructor(private afAuth: AngularFireAuth) {
+    this.userLoggedIn.next(false);
+  }
 
   signInWithEmail(email: string, pwd: string) {
+    this.setUserLoggedIn(true);
     return this.afAuth.auth.signInWithEmailAndPassword(email, pwd);
+  }
+
+  setUserLoggedIn(userLoggedIn: boolean) {
+    this.userLoggedIn.next(userLoggedIn);
+  }
+
+  getUserLoggedIn(): Observable<boolean> {
+    return this.userLoggedIn.asObservable();
   }
 
   signUp(newUser, profilePic) {
