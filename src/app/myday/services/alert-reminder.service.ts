@@ -116,7 +116,7 @@ export class AlertReminderService {
         {
           text: type,
           handler: (data) => {
-            if (data.title && data.description && data.startDate && data.startTime && data.endDate && data.endTime) {
+            if (data.title && data.description && data.startDate && data.startTime && data.endTime) {
               this.onSubmit(data, repeat);
               return true;
             }
@@ -202,7 +202,10 @@ export class AlertReminderService {
 
   async onSubmit(value: Reminder, repeat: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never' = 'never') {
     const startTimePeriod = new Date(value.startDate + ' ' + value.startTime).toString();
-    const endTimePeriod = new Date(value.endDate + ' ' + value.endTime).toString();
+    const endTimePeriod = (!value.endDate || value.endDate == 'never') ? 'never' : new Date(value.endDate + ' ' + value.endTime).toString();
+
+    const onlyEndTime = value.endTime;
+
     const data: TaskReminderInfo = {
       title: value.title,
       desc: value.description,
@@ -212,7 +215,9 @@ export class AlertReminderService {
       favourite: false,
       id: Date.now(),
       startTimePeriod,
-      endTimePeriod
+      endTimePeriod,
+      onlyEndTime,
+      neverEnd: endTimePeriod === 'never'
     };
     console.log(data);
     this.taskService.createTask(data);
