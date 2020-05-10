@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject, Subject, Observable  } from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AlertController, NavController } from '@ionic/angular';
@@ -23,7 +23,7 @@ export class AuthService {
     public alertController: AlertController,
     private keepalive: Keepalive,
     private navCtrl: NavController
-    ) {
+  ) {
     this.userLoggedIn.next(false);
   }
 
@@ -107,7 +107,6 @@ export class AuthService {
   }
 
   initializeIdleTimeOut() {
-
     this.idle.setIdle(5);
 
     this.idle.setTimeout(900);
@@ -155,5 +154,5 @@ export class AuthService {
       ]
     });
     await alert.present();
-}
+  }
 }
