@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject, Subject, Observable  } from 'rxjs';
+import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
+import { Keepalive } from '@ng-idle/keepalive';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +12,18 @@ import { BehaviorSubject, Subject, Observable  } from 'rxjs';
 export class AuthService {
   private firedata = firebase.database().ref('/users/');
   private userLoggedIn = new Subject<boolean>();
+  idleState = 'Not started.';
+  timedOut = false;
+  lastPing?: Date = null;
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private idle: Idle,
+    private ngZone: NgZone,
+    public alertController: AlertController,
+    private keepalive: Keepalive,
+    private navCtrl: NavController
+    ) {
     this.userLoggedIn.next(false);
   }
 
@@ -67,6 +80,7 @@ export class AuthService {
   }
 
   logout() {
+    this.idle.stop();
     return firebase.auth().signOut();
   }
 
@@ -91,4 +105,55 @@ export class AuthService {
   updatePwd(newPwd: string) {
     return firebase.auth().currentUser.updatePassword(newPwd);
   }
+
+  initializeIdleTimeOut() {
+
+    this.idle.setIdle(5);
+
+    this.idle.setTimeout(900);
+
+    this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+
+    this.idle.onIdleEnd.subscribe(() => {
+      this.reset();
+    });
+
+    this.idle.onTimeout.subscribe(() => {
+      this.idleTimeout();
+    });
+
+    // sets the ping interval to 15 seconds
+    this.keepalive.interval(15);
+
+    this.keepalive.onPing.subscribe(() => (this.lastPing = new Date()));
+
+    this.getUserLoggedIn().subscribe((userLoggedIn) => {
+      if (userLoggedIn) {
+        this.idle.watch();
+      } else {
+        this.idle.stop();
+      }
+    });
+  }
+  reset() {
+    this.idle.watch();
+    this.timedOut = false;
+  }
+  async idleTimeout() {
+    const alert = await this.alertController.create({
+      header: 'Session Timeout',
+      message: 'Your session has been timed out.',
+      buttons: [
+        {
+          text: 'Login Again',
+          handler: () => {
+            this.ngZone.run(() => {
+              this.logout().then(() => this.navCtrl.navigateRoot('/login'));
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+}
 }
