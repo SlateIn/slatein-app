@@ -40,7 +40,7 @@
   </ion-grid>
 
   <calendar
-    [eventSource]="getAllTasks$ | async"
+    [eventSource]="getAllTasks"
     [calendarMode]="calendar.mode"
     [currentDate]="calendar.currentDate"
     (onCurrentDateChanged)="onCurrentDateChanged($event)"
