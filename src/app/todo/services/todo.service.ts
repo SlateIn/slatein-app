@@ -54,4 +54,11 @@ export class ToDoService {
     updateToDoList() {
         console.log(this.toDos);
     }
+
+    deleteToDoList(row: ToDoList) {
+        const index: number = this.listRows.indexOf(row);
+        if (index !== -1) {
+            this.listRows.splice(index, 1);
+        }
+    }
 }

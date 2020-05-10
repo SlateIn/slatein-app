@@ -1,32 +1,32 @@
 <ion-header>
     <ion-toolbar>
       <ion-title>
-        Todos!
+        ToDo
       </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="orange-medium">
+    <ion-fab-button (click)="gotoNewListModal()" color="orange-medium">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="start">
+    <!-- <ion-fab-list side="start">
       <ion-fab-button (click)="addList()" color="grey-light">
         <ion-icon name="reader"></ion-icon>
       </ion-fab-button>
       <ion-fab-button (click)="addTodo()" color="grey-light">
         <ion-icon name="checkmark-circle"></ion-icon>
       </ion-fab-button>
-    </ion-fab-list>
+    </ion-fab-list> -->
   </ion-fab>
 
   
-  <ion-list>
+  <!-- <ion-list> -->
     
-    <ion-list-header>
+    <!-- <ion-list-header>
       ToDos
-    </ion-list-header>
+    </ion-list-header> -->
     <ion-card>
     <ion-item *ngIf="addingToDo" lines="none">
       <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
@@ -48,7 +48,7 @@
       <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
     </ion-item>
     </ion-card>
-  </ion-list>
+  <!-- </ion-list> -->
   
 
   
@@ -57,20 +57,31 @@
       ToDo Lists
     </ion-list-header>
 
-    <ion-card *ngIf="addingList">
+    <!-- <ion-card *ngIf="addingList">
       <ion-item lines="none">
         <ion-icon slot="start" name="list"></ion-icon>
         <ion-input type="text" placeholder="+ Add List" required (ionBlur)="newlistEntered($event)"></ion-input>
       </ion-item>
+    </ion-card> -->
+
+    <!-- Sliding item with expandable options on both sides -->
+  
+
+    
+    <ion-card *ngFor="let row of listRows" >
+      <ion-item-sliding>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteRow(row)" color="danger" expandable>
+            Delete
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item lines="none" (click)="gotoToDoListModal(row)">
+          <ion-icon slot="start" name="list"></ion-icon>
+          <ion-label>{{ row.listName }}</ion-label>
+          <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-item-sliding>
     </ion-card>
 
-    <ion-card *ngFor="let row of listRows" >
-      <ion-item lines="none" (click)="gotoToDoListModal(row)">
-      <ion-icon slot="start" name="list"></ion-icon>
-      <ion-label>{{ row.listName }}</ion-label>
-      <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
-      </ion-item>
-    </ion-card>
-    
   </ion-list>
   </ion-content>

@@ -24,7 +24,6 @@ export class TodoPage implements OnInit {
   listRows: ToDoList[] = [];
   public cnt = 0;
   public listData: any = [];
-  public toDoForm: FormGroup;
 
   constructor(private toDoService: ToDoService,
               private modalController: ModalController) {}
@@ -65,6 +64,11 @@ export class TodoPage implements OnInit {
     this.addingList = true;
   }
 
+  deleteRow(row: any) {
+    console.log(row);
+    this.toDoService.deleteToDoList(row);
+  }
+
   newlistEntered(value: any) {
     console.log(value);
     if (value.target.value !== '') {
@@ -94,11 +98,23 @@ export class TodoPage implements OnInit {
     const commonToDoList = await this.modalController.create({
       component: TodoListComponent,
       componentProps: {
+        isNewList: false,
+        todoList: list,
         header: list.listName,
         id: list.id,
         list: list.listItems
       }
     });
     return await commonToDoList.present();
+  }
+
+  async gotoNewListModal() {
+      const commonToDoList = await this.modalController.create({
+      component: TodoListComponent,
+      componentProps: {
+        isNewList: true
+      }
+    });
+      return await commonToDoList.present();
   }
 }
