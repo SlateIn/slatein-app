@@ -6,24 +6,25 @@
       <ion-label>My Day</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="planner">
+    <ion-tab-button class="margin-extra-right" tab="planner">
       <ion-icon name="bookmarks"></ion-icon>
       <ion-label>Planner</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="calendar">
+
+    <ion-tab-button class="margin-extra-left" tab="calendar">
       <ion-icon name="calendar"></ion-icon>
       <ion-label>Calendar</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="profile">
-      <ion-icon name="contact"></ion-icon>
+      <ion-icon name="person"></ion-icon>
       <ion-label>Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 
-<ion-fab class="fab-add" horizontal="center" vertical="bottom" size='small'>
+<ion-fab class="fab-add" horizontal="center" vertical="bottom">
   <ion-fab-button (click)="setReminder()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
