@@ -1,0 +1,39 @@
+<article class="todo-display animated fadeInLeft">
+  <ion-card class="slateIn-card ">
+    <ion-card-content>
+      <div class="icon-area">
+        <ion-button (click)="tile = !tile">
+          <span *ngIf="tile" class="">
+            <ion-icon name="list"></ion-icon>
+          </span>
+          <span *ngIf="!tile" class="">
+            <ion-icon name="grid"></ion-icon>
+          </span>
+        </ion-button>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="task-grid animated someClass" 
+            *ngFor="let list of allToDoForDisplay" 
+            [attr.size]="tile? '6': '12'" 
+            [ngClass]="tile? 'createCol' : 'createRow'">
+            <section [ngClass]="tile? 'list-section-tile' : 'list-section-row'">
+              <p>
+                {{list.title}}
+              </p>
+              <div @fade *ngIf="tile" class="animated allItems">
+                <ol>
+                  <li *ngFor="let item of list.items">
+                    <span>
+                      {{item}}
+                    </span>
+                  </li>
+                </ol>
+              </div>
+              </section>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</article>

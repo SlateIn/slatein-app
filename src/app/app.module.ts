@@ -19,6 +19,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { SettingsPage } from './profile/settings/settings.page';
 import { PersonalInformationPage } from './profile/personal-information/personal-information.page';
 import { SecurityPasswordPage } from './profile/security-password/security-password.page';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ionic4-datepicker
 import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
@@ -40,7 +41,8 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
     AngularFireDatabaseModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    Ionic4DatepickerModule
+    Ionic4DatepickerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

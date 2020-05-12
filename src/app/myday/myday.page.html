@@ -23,82 +23,8 @@
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
-  <ion-card class="slateIn-card">
-    <ion-card-content>
-      <ion-button (click)="tile = !tile">
-       toggl-tile-view {{tile}}
-      </ion-button>
-        <ion-grid>
-          <ion-row>
-            <ion-col [attr.size]="!tile? '12': '6'" class="task-grid">
-              <section>
-                <h4>
-                  Grocery 1
-                </h4>
-                <div *ngIf="tile">
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                  <p>Okra 1</p>
-                </div>
-              </section>
-            </ion-col>
-            <ion-col [attr.size]="!tile? '12': '6'" class="task-grid">
-              <section>
-                <h4>
-                  Grocery 2
-                </h4>
-                <div *ngIf="tile">
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                  <p>Okra 2</p>
-                </div>
-              </section>
-            </ion-col>
-            <ion-col [attr.size]="!tile? '12': '6'" class="task-grid">
-              <section>
-                <h4>
-                  Grocery 3
-                </h4>
-                <div *ngIf="tile">
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                  <p>Okra 3</p>
-                </div>
-              </section>
-            </ion-col>
-            <ion-col [attr.size]="!tile? '12': '6'" class="task-grid">
-              <section>
-                <h4>
-                  Grocery 4
-                </h4>
-                <div *ngIf="tile">
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                  <p>Okra 4</p>
-                </div>
-              </section>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-    </ion-card-content>
-  </ion-card>
-
+  <app-task-display [allTaskForDisplay]="allTask" ></app-task-display>
+  
   <div [ngSwitch]="segment">
     <ion-label *ngSwitchCase="'Favourite'">
       <ng-container *ngFor="let taskDetail of favouriteTaskDetails">

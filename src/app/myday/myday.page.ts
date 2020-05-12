@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { TaskService } from '@services/task.service';
@@ -12,7 +12,35 @@ import { AlertReminderService } from './services/alert-reminder.service';
   styleUrls: ['./myday.page.scss']
 })
 export class MydayPage implements OnInit, OnDestroy {
-  tile: boolean = true;
+  allTask = [{
+    category: 'task',
+    title: 'our date night',
+    time : '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    category: 'task',
+    title: 'our date night',
+    time : '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    category: 'task',
+    title: 'our date night',
+    time : '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    category: 'task',
+    title: 'our date night',
+    time : '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  }];
+  
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];
