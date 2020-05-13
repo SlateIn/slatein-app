@@ -4,8 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Todo Display component start -->
 <ion-content> 
-
-
-  <app-todo-display [allToDoForDisplay]="allList"></app-todo-display>
+  <app-todo-display [allToDoForDisplay]="allTodo" (todoIdEmit)="clickedTodoId($event)"></app-todo-display>
 </ion-content>
+<!-- Todo Display component end -->
+
