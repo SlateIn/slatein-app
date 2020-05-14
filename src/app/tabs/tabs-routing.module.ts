@@ -26,16 +26,6 @@ const routes: Routes = [
           }
         ]
       },
-
-      {
-        path: 'planner',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../planner/planner.module').then((m) => m.PlannerPageModule)
-          }
-        ]
-      },
       {
         path: 'calendar',
         children: [
