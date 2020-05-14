@@ -4,6 +4,9 @@ import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -19,10 +22,14 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { SettingsPage } from './profile/settings/settings.page';
 import { PersonalInformationPage } from './profile/personal-information/personal-information.page';
 import { SecurityPasswordPage } from './profile/security-password/security-password.page';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ionic4-datepicker
 import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
+
+
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'angular2-moment';
+
 
 @NgModule({
   declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage],
@@ -42,7 +49,10 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
     AppRoutingModule,
     ReactiveFormsModule,
     Ionic4DatepickerModule,
-    BrowserAnimationsModule
+    MomentModule,
+    BrowserAnimationsModule,
+    NgIdleKeepaliveModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
