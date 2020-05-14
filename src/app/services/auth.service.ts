@@ -20,7 +20,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private idle: Idle,
     private ngZone: NgZone,
-    public alertController: AlertController,
+    private alertController: AlertController,
     private keepalive: Keepalive,
     private navCtrl: NavController
   ) {

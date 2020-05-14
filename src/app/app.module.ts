@@ -26,11 +26,9 @@ import { SecurityPasswordPage } from './profile/security-password/security-passw
 // ionic4-datepicker
 import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
-// this includes the core NgIdleModule but includes keepalive providers for easy wireup
+
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
-// optional, provides moment-style pipes for date formatting
 import { MomentModule } from 'angular2-moment';
-import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -58,7 +56,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
     HttpClientModule,
-    ModalModule.forRoot(),
   ],
   providers: [
     StatusBar,
