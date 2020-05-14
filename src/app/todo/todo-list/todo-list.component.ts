@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, IonReorderGroup } from '@ionic/angular';
 import { ToDoService } from '../services/todo.service';
 import { ToDoItem } from '@models/todoItem';
 import { ToDoList } from '@models/todoList';
@@ -22,6 +22,8 @@ export class TodoListComponent implements OnInit {
   addingToDo = false;
   inputValue = '';
 
+  @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
+  
   constructor(private toDoService: ToDoService,
               private modalController: ModalController) {}
 
@@ -83,13 +85,9 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  toDoClicked(todo: any) {
-    this.allowEditToDo = true;
-  }
-
-  
   addToDoInCommonList(todo: ToDoItem) {
     this.list.push(todo);
     console.log(this.list);
 }
+
 }
