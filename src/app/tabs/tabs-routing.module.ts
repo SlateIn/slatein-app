@@ -12,8 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../myday/myday.module').then(m => m.MydayPageModule)
+            loadChildren: () => import('../myday/myday.module').then((m) => m.MydayPageModule)
           }
         ]
       },
@@ -27,13 +26,13 @@ const routes: Routes = [
           }
         ]
       },
+
       {
         path: 'planner',
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../planner/planner.module').then(m => m.PlannerPageModule)
+            loadChildren: () => import('../planner/planner.module').then((m) => m.PlannerPageModule)
           }
         ]
       },
@@ -42,8 +41,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../calendar/calendar.module').then(m => m.CalendarPageModule)
+            loadChildren: () => import('../calendar/calendar.module').then((m) => m.CalendarPageModule)
           }
         ]
       },
@@ -52,8 +50,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../profile/profile.module').then(m => m.ProfilePageModule)
+            loadChildren: () => import('../profile/profile.module').then((m) => m.ProfilePageModule)
           }
         ]
       },

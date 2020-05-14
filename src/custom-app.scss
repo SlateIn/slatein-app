@@ -1,52 +1,132 @@
-// ######################################### Start Global Customization ######################################### 
-ion-content {
-    --ion-text-color: #919193;
-    --ion-background-color: #ffffff;
+// ######################################### Start Global Customization #########################################
+
+ion-button {
+  --background: var(--ion-color-slateIn-success);
 }
 
-ion-icon {
-    color: var(--ion-color-primary-tint);
+// Bottom-Tab bar style, Applied Globally
+ion-tab-bar {
+  padding: 3% 0%;
+
+  ion-tab-button {
+    margin: 2%;
+    border-radius: 10px;
+    box-shadow: 0px 23px 23px -10px rgb(29, 30, 58, 0.25);
+
+    ion-icon {
+      color: var(--ion-color-slateIn-primary);
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .tab-selected {
+
+    box-shadow: none;
+  }
 }
+
+// SlateIn - CARD DEFAULT CSS
+.slateIn-card {
+  background: none;
+  padding: 0.2rem 0.2rem;
+
+  ion-card-content {
+    padding: 0.2rem 0.2rem;
+  }
+}
+
+// SlateIn - FORM DEFAULT CSS
+.slateIn-form {}
+
+.form-field {
+  margin: 0.8rem 0rem;
+  padding: 0;
+  border-bottom: 1.5px solid;
+  border-radius: 10px;
+}
+
 // ######################################### End Global Customization ######################################### 
 
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
+.tab-selected {
+  color: var(--ion-color-slateIn-success);
+  font-family: RobotoBold;
 
-.margin-bottom {
-    margin-bottom: 20px !important;
-}
+  ion-icon {
+    color: var(--ion-color-slateIn-success);
+    font-family: RobotoBold;
 
-.margin-top {
-    margin-top: 20px !important;
-}
-
-// ######################################### End Global Margin & Padding Classes ######################################### 
-
-
-
-
-// ######################################### Start Ion Icons ######################################### 
-ion-fab {
     ion-icon {
-        color: #ffffff;
+      color: var(--ion-color-slateIn-success);
     }
-}
-// ######################################### End Ion Icons ######################################### 
 
-app-register, app-login, app-forgot-password {
-    div.register-card {
-        padding: 10px;
+    ion-label {
+      font-size: medium;
     }
+  }
+}
+
+
+
+.fab-add {
+  // border-bottom: 0.5px solid black;
+  border-radius: 50%;
+  box-shadow: 0px 23px 23px -10px rgb(29, 30, 58, 0.25);
+  height: 80px;
+  width: 80px;
+  margin-left: -43px;
+
+  ion-fab-button {
+    --background: var(--ion-color-slateIn-success);
+    border: 10px solid #fff;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ######################################### End Global Customization #########################################
+
+// ######################################### Start Global Margin & Padding Classes #########################################
+
+// .margin-bottom {
+//   margin-bottom: 20px !important;
+// }
+
+// .margin-top {
+//   margin-top: 20px !important;
+// }
+
+// ######################################### End Global Margin & Padding Classes #########################################
+
+// ######################################### Start Ion Icons #########################################
+// ion-fab {
+//   ion-icon {
+//     color: #ffffff;
+//   }
+// }
+// ######################################### End Ion Icons #########################################
+
+app-register,
+app-login,
+app-forgot-password {
+  div.register-card {
+    padding: 10px;
+  }
 }
 
 .float-right {
-    float: right;
+  float: right;
 }
 
-
-input[placeholder="startDate"], input[placeholder="endDate"], input[placeholder="startTime"], input[placeholder="endTime"] {
-    border: none !important;
-    background-color: #f9f9f9 !important;
-    font-size: larger !important;
+input[placeholder='startDate'],
+input[placeholder='endDate'],
+input[placeholder='startTime'],
+input[placeholder='endTime'] {
+  border: none !important;
+  background-color: #f9f9f9 !important;
+  font-size: larger !important;
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AlertReminderService } from '@app/myday/services/alert-reminder.service';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+  constructor(private alertReminderService: AlertReminderService) {}
 
-  constructor() {}
-
+  setReminder() {
+    this.alertReminderService.presentAlertPrompt('Add');
+  }
 }

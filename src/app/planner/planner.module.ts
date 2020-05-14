@@ -9,12 +9,7 @@ import { PlannerPageRoutingModule } from './planner-routing.module';
 import { PlannerPage } from './planner.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    PlannerPageRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, PlannerPageRoutingModule],
   declarations: [PlannerPage]
 })
 export class PlannerPageModule {}

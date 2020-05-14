@@ -10,13 +10,7 @@ import { ForgotPasswordPage } from './forgot-password.page';
 import { ComponentsModule } from '@app/components/header';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ForgotPasswordPageRoutingModule,
-    ComponentsModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, ForgotPasswordPageRoutingModule, ComponentsModule],
   declarations: [ForgotPasswordPage]
 })
 export class ForgotPasswordPageModule {}
