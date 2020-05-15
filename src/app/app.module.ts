@@ -49,10 +49,7 @@ import { MomentModule } from 'angular2-moment';
     AppRoutingModule,
     ReactiveFormsModule,
     Ionic4DatepickerModule,
-    NgIdleKeepaliveModule.forRoot(),
     MomentModule,
-
-
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
     HttpClientModule,
