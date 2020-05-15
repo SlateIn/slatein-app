@@ -4,6 +4,9 @@ import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -23,6 +26,11 @@ import { SecurityPasswordPage } from './profile/security-password/security-passw
 // ionic4-datepicker
 import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
+
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'angular2-moment';
+
+
 @NgModule({
   declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage],
   entryComponents: [SettingsPage, PersonalInformationPage, SecurityPasswordPage],
@@ -40,7 +48,14 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
     AngularFireDatabaseModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    Ionic4DatepickerModule
+    Ionic4DatepickerModule,
+    NgIdleKeepaliveModule.forRoot(),
+    MomentModule,
+
+
+    BrowserAnimationsModule,
+    NgIdleKeepaliveModule.forRoot(),
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

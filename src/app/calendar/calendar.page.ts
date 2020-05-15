@@ -1,5 +1,5 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
-import { Component, OnInit, ViewChild, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, LOCALE_ID, OnDestroy } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription, Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './calendar.page.html',
   styleUrls: ['./calendar.page.scss']
 })
-export class CalendarPage implements OnInit {
+export class CalendarPage implements OnInit, OnDestroy {
   view: string;
   selectedDate;
   viewTitle;
@@ -26,7 +26,8 @@ export class CalendarPage implements OnInit {
     currentDate: new Date()
   };
   getCalendarEvents$: Subscription;
-  getAllTasks$: Observable<any[]>;
+  getAllTasks$: Subscription;
+  getAllTasks: any[];
 
   @ViewChild(CalendarComponent, { static: false }) myCal: CalendarComponent;
 
@@ -42,7 +43,8 @@ export class CalendarPage implements OnInit {
   ngOnInit() {
     this.getAllTasks$ = this.taskService
       .getAllTasksInfo()
-      .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)));
+      .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)))
+      .subscribe((res) => (this.getAllTasks = res));
   }
 
   onViewTitleChanged(title) {
@@ -50,6 +52,18 @@ export class CalendarPage implements OnInit {
   }
 
   onCurrentDateChanged(event: Date) {
+    const startDateOfMonth = new Date(event.getFullYear(), event.getMonth(), 0, 24);
+    const lastDateOfMonth = new Date(event.getFullYear(), event.getMonth() + 1, 0, 24);
+    const isDataAvailable = this.getAllTasks.find(task => task.neverEnd && (task.startTime.getTime() < lastDateOfMonth.getTime() && task.startTime.getTime() > startDateOfMonth.getTime()));
+
+    if(!isDataAvailable) {
+      this.taskService.getUntilDateNeverEndTasks(startDateOfMonth, lastDateOfMonth)
+      .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)))
+      .subscribe((res) => {
+        this.getAllTasks = [...this.getAllTasks, ...res];
+      });
+    }
+   
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     event.setHours(0, 0, 0, 0);
@@ -98,5 +112,9 @@ export class CalendarPage implements OnInit {
 
   segmentChanged(event: CustomEvent) {
     this.changeMode(event.detail.value);
+  }
+
+  ngOnDestroy(): void {
+    this.getAllTasks$ && this.getAllTasks$.unsubscribe();
   }
 }
