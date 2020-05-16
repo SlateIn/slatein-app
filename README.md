@@ -1,6 +1,9 @@
 ## slatein-app
 Planner and Schedule for daily activities
 
+## Web page URL
+https://slatein.web.app/login
+
 ## Firebase Deploy
 To deploy app to firebase web, following command need to executed:
 ```
