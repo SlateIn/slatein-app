@@ -109,7 +109,7 @@ export class AuthService {
   initializeIdleTimeOut() {
     this.idle.setIdle(5);
 
-    this.idle.setTimeout(15);
+    this.idle.setTimeout(900);
 
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
