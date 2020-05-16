@@ -109,7 +109,7 @@ export class AuthService {
   initializeIdleTimeOut() {
     this.idle.setIdle(5);
 
-    this.idle.setTimeout(900);
+    this.idle.setTimeout(15);
 
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
@@ -142,6 +142,7 @@ export class AuthService {
     const alert = await this.alertController.create({
       header: 'Session Timeout',
       message: 'Your session has been timed out.',
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Login Again',
