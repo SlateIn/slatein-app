@@ -8,9 +8,10 @@ import { MydayPageRoutingModule } from './myday-routing.module';
 
 import { MydayPage } from './myday.page';
 import { TaskInfoCardComponent } from './task-info-card/task-info-card.component';
+import { TaskDisplayComponent } from '@app/components/task-display/task-display.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, MydayPageRoutingModule],
-  declarations: [MydayPage, TaskInfoCardComponent]
+  declarations: [MydayPage, TaskInfoCardComponent, TaskDisplayComponent]
 })
 export class MydayPageModule {}

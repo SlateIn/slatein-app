@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
+  <!-- below ion-segment might be removed after refactoring UI -->
+<ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="All">
       <ion-label>All</ion-label>
     </ion-segment-button>
@@ -23,6 +24,12 @@
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
+  <!-- Task Display component start -->
+  <app-task-display 
+  [allTaskForDisplay]="allTask" 
+  (taskIdEmit)="clickedTaskId($event)"></app-task-display>
+  <!-- Task Display component end -->
+  
   <div [ngSwitch]="segment">
     <ion-label *ngSwitchCase="'Favourite'">
       <ng-container *ngFor="let taskDetail of favouriteTaskDetails">
