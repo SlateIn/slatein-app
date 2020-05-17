@@ -142,6 +142,7 @@ export class AuthService {
     const alert = await this.alertController.create({
       header: 'Session Timeout',
       message: 'Your session has been timed out.',
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Login Again',
