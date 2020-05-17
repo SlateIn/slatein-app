@@ -15,21 +15,9 @@ export class ToDoService {
     listRows: ToDoList[] =  [];
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
-    getAllToDos() {
-        console.log(this.toDos);
-        return this.toDos;
-    }
-
     getAllLists() {
         console.log(this.listRows);
         return this.listRows;
-    }
-
-    addToDoInCommonList(todo: ToDoItem) {
-        this.toDos.unshift(todo);
-
-        console.log(this.toDos);
-        return this.toDos;
     }
 
     addToDoInList(id: number, todo: ToDoItem) {

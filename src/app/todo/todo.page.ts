@@ -26,7 +26,6 @@ export class TodoPage implements OnInit {
               private modalController: ModalController) {}
 
   ngOnInit() {
-    this.todos = this.toDoService.getAllToDos();
     this.cnt = this.todos.length;
     this.viewAllLinkDisplay = this.todos.length > 0 ? true : false;
     this.listRows = this.toDoService.getAllLists();
