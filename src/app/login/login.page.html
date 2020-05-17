@@ -29,8 +29,7 @@
             <ion-input placeholder="Password" formControlName="password" [type]="!showPassword ? 'password' : 'text'"
               clear-on-edit autocomplete="new-password">
             </ion-input>
-            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline">
-            </ion-icon>
+            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
             <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
           </ion-item>
 
