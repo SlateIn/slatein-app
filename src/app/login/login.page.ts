@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   password: string;
   loginErrorMsg: string;
   loginForm: FormGroup;
+  showPassword = false;
   formValueChangesSubscription: Subscription;
 
   constructor(
@@ -76,5 +77,8 @@ export class LoginPage implements OnInit {
         })
         .catch((err) => (this.loginErrorMsg = err.message));
     }
+  }
+  toggleShowPassowrd() {
+    this.showPassword = !this.showPassword;
   }
 }
