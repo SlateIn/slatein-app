@@ -5,48 +5,41 @@
       Back
     </ion-buttons>
     <ion-title>New Task</ion-title>
-    <ion-buttons slot="end" (click)="backClicked()">
+    <ion-buttons slot="end" type="submit" (click)="documentEditForm.ngSubmit.emit()">
       Done
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Title</ion-label>
-      <ion-input ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Description</ion-label>
-      <ion-input ></ion-input>
-    </ion-item>
-    <br>
-    <ion-item-divider></ion-item-divider>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
-      <ion-datetime value="" display-format="MMM DD, YYYY HH:mm" picker-format="MMM DD, YYYY HH:mm" placeholder="Select Date"></ion-datetime>
-    </ion-item>
-    <!-- <ion-item>
-      <ion-label>Start Time</ion-label>
-      <ion-datetime display-format="MMM DD, YYYY HH:mm" picker-format="MMM DD, YYYY HH:mm" value="1990-02-19T07:43Z"></ion-datetime>
-    </ion-item> -->
-    <ion-item>
-      <ion-label>End Date</ion-label>
-      <ion-datetime value="" display-format="HH:mm" picker-format="MMM DD, YYYY HH:mm" placeholder="Select Date"></ion-datetime>
-    </ion-item>
-    <ion-item (click)="openRepeationPicker()">
-      <ion-label>Repeat</ion-label>
-      <span placeHolder = "Never" fill="clear">{{repetationPicker}}</span>
-    </ion-item>
-    <!-- <ion-item>
-      <ion-label>Travel Time</ion-label>
-      <ion-datetime placeholder="None" disabled></ion-datetime>
-    </ion-item>
-    <ion-item-divider></ion-item-divider>
-    <ion-item>
-      <ion-label>Alert</ion-label>
-      <ion-datetime placeholder="None" disabled></ion-datetime>
-    </ion-item> -->
-  </ion-list>
+  <form class="slateIn-form" #documentEditForm="ngForm" [formGroup]="updateNewTaskForm" (ngSubmit)="register()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input formControlName="title" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input formControlName="description" type="text"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item-divider></ion-item-divider>
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime value="" display-format="MMM DD, YYYY hh:mm a" picker-format="MMM DD, YYYY hh:mm a"
+          formControlName="startDate" type="text" placeholder="Select Date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End Date</ion-label>
+        <ion-datetime value="" display-format="MMM DD, YYYY hh:mm a" picker-format="MMM DD, YYYY hh:mm a"
+          formControlName="endDate" type="text" placeholder="Select Date"></ion-datetime>
+      </ion-item>
+
+      <ion-item (click)="openRepeationPicker()">
+        <ion-label>Repeat</ion-label>
+        <span class="repetationPicker" formControlName="repetationPicker" type="text" name="repetationPicker" ngDefaultControl
+          data-placeholder="Make a new tag">{{repetationPicker}}</span>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>
