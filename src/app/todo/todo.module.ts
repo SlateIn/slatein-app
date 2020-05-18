@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { TodoPageRoutingModule } from './todo-routing.module';
 
 import { TodoPage } from './todo.page';
+import { TodoDisplayComponent } from '@app/components/todo-display/todo-display.component';
+import { HeaderComponent } from '@app/components/header/header.component';
 
 @NgModule({
   imports: [
@@ -14,9 +16,10 @@ import { TodoPage } from './todo.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    TodoPageRoutingModule
+    TodoPageRoutingModule,
+    HeaderComponent
   ],
-  declarations: [TodoPage],
+  declarations: [TodoPage,TodoDisplayComponent, ],
   entryComponents: []
 })
 export class TodoPageModule {}

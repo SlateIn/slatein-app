@@ -1,4 +1,7 @@
 // ######################################### Start Global Customization #########################################
+* {
+  font-weight: normal;
+}
 
 ion-button {
   --background: var(--ion-color-slateIn-success);
@@ -109,23 +112,14 @@ ion-tab-bar {
 // }
 // ######################################### End Ion Icons #########################################
 
-app-register,
-app-login,
-app-forgot-password {
-  div.register-card {
-    padding: 10px;
-  }
-}
+// app-register,
+// app-login,
+// app-forgot-password {
+//   div.register-card {
+//     padding: 10px;
+//   }
+// }
 
 .float-right {
   float: right;
-}
-
-input[placeholder='startDate'],
-input[placeholder='endDate'],
-input[placeholder='startTime'],
-input[placeholder='endTime'] {
-  border: none !important;
-  background-color: #f9f9f9 !important;
-  font-size: larger !important;
 }

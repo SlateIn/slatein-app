@@ -14,6 +14,8 @@ import { ToastController, NavController, ModalController } from '@ionic/angular'
   styleUrls: ['./security-password.page.scss']
 })
 export class SecurityPasswordPage implements OnInit {
+  pageTitle = 'Security';
+  typeOfComponent = 'modal';
   userInfo: UserInfo;
   updatePwdForm: FormGroup;
   updatePwdErrorMsg: string;

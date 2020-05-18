@@ -14,6 +14,8 @@ import { SecurityPasswordPage } from './security-password/security-password.page
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
+  pageTitle = 'Profile';
+  typeOfComponent = 'page'
   avatarSrc = '../../assets/icon/default_profile.svg';
   info$: Observable<UserInfo>;
 

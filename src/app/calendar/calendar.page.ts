@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./calendar.page.scss']
 })
 export class CalendarPage implements OnInit, OnDestroy {
+  pageTitle = 'Calendar';
   view: string;
   selectedDate;
   viewTitle;

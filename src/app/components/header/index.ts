@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { HeaderComponent } from './header.component';
+import {  } from './header.component';
 
-const components = [HeaderComponent];
+const components = [];
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule],

@@ -49,6 +49,7 @@ export class MydayPage implements OnInit, OnDestroy {
     description: 'Priyanka will pick me up after her clinic hours'
   }];
 
+  pageTitle = 'My Day';
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];

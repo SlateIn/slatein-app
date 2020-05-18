@@ -1,25 +1,15 @@
 <ion-content>
 
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>My Day</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
+<!-- header of the page --> 
+<app-page-header  [pageTitle]="pageTitle" [backButton]="false"></app-page-header>
 
 <section>
-  <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="All">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Favourite">
-      <ion-label>Favourite</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
-  <ion-toolbar>
-    <ion-title>Tasks List</ion-title>
-  </ion-toolbar>
 
   <!-- Task Display component start -->
   <app-task-display 

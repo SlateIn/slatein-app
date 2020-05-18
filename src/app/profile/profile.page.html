@@ -1,9 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
 
+<!-- header of the page --> 
+<app-page-header  [pageTitle]="pageTitle" [backButton]="false"></app-page-header>
 <ion-content fullscreen>
   <ion-list *ngIf="(info$ |async) as info">
     <ion-item class="default-avatar">
