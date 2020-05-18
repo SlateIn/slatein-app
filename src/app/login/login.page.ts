@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   password: string;
   loginErrorMsg: string;
   loginForm: FormGroup;
+  showPassword: boolean;
   formValueChangesSubscription: Subscription;
 
   constructor(
@@ -28,6 +29,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showPassword = false;
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose([Validators.required])),
       password: new FormControl('', Validators.compose([Validators.required])),
@@ -76,5 +78,8 @@ export class LoginPage implements OnInit {
         })
         .catch((err) => (this.loginErrorMsg = err.message));
     }
+  }
+  toggleShowPassowrd() {
+    this.showPassword = !this.showPassword;
   }
 }

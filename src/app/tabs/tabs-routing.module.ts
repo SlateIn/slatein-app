@@ -16,13 +16,13 @@ const routes: Routes = [
           }
         ]
       },
-
       {
-        path: 'planner',
+        path: 'todo',
         children: [
           {
             path: '',
-            loadChildren: () => import('../planner/planner.module').then((m) => m.PlannerPageModule)
+            loadChildren: () =>
+            import('../todo/todo.module').then(m => m.TodoPageModule)
           }
         ]
       },

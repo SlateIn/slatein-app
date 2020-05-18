@@ -21,6 +21,12 @@
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
+  <!-- Task Display component start -->
+  <app-task-display 
+  [allTaskForDisplay]="allTask" 
+  (taskIdEmit)="clickedTaskId($event)"></app-task-display>
+  <!-- Task Display component end -->
+  
   <div [ngSwitch]="segment">
     <ion-label *ngSwitchCase="'Favourite'">
       <ng-container *ngFor="let taskDetail of favouriteTaskDetails">

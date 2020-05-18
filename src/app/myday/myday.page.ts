@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from '@models/userInfo';
 import { TaskService } from '@services/task.service';
@@ -12,6 +12,43 @@ import { AlertReminderService } from './services/alert-reminder.service';
   styleUrls: ['./myday.page.scss']
 })
 export class MydayPage implements OnInit, OnDestroy {
+ /**
+  * Below allTask array is a mock data for UI purpose only
+  * 
+  */
+  allTask = [{
+    id: 1,
+    category: 'task',
+    title: 'our date night',
+    time: '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: 'our date night',
+    time: '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: 'our date night',
+    time: '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'our date night',
+    time: '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours'
+  }];
+
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];
@@ -25,7 +62,7 @@ export class MydayPage implements OnInit, OnDestroy {
   segment: string;
   getAllTasksInfoSubscription: Subscription;
 
-  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) {}
+  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) { }
 
   ngOnInit() {
     const todaysDate = new Date();
@@ -57,6 +94,14 @@ export class MydayPage implements OnInit, OnDestroy {
           }
         }
       });
+  }
+
+  /**
+   * Task ID, Incoming form task-display component
+   * @param event
+   */
+  clickedTaskId(id: number ) {
+    console.log('This is id of clicked Task', id);
   }
 
   setReminder() {

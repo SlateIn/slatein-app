@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="close()">
+      <ion-icon name="arrow-back" size="large" ></ion-icon>
+      Back
+    </ion-buttons>
+    <ion-title>{{header}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-text>
+        <h2><ion-input type="text" placeholder="List Title" autofocus="true" color="primary" [(ngModel)]="header"></ion-input></h2>
+        </ion-text>
+      </ion-item>
+      
+      <ion-list *ngFor="let todo of list; let i = index">
+        <ion-item-sliding>
+          <ion-item-options side="end">
+            <ion-item-option (click)="deleteToDo(todo)" color="danger">
+              Delete
+            </ion-item-option>
+          </ion-item-options>
+
+          <div *ngIf="!todo.completed; else ToDoompleted">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+            <ion-input type="text" [(ngModel)]="todo.title"></ion-input>
+            <ion-icon *ngIf="!todo.completed" slot="end" name="radio-button-off" (click)="todoCompleted(todo)"></ion-icon>
+          </ion-item>
+          </div>
+
+          <ng-template #ToDoompleted>
+            <ion-item lines="none">
+              <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
+              <ion-label *ngIf="todo.completed"><s>{{ todo.title }}</s></ion-label>
+              <ion-icon *ngIf="todo.completed" slot="end"  mode="md" name="checkmark-circle-outline" (click)="todoCompleted(todo)"></ion-icon>
+            </ion-item>
+          </ng-template>
+          
+        </ion-item-sliding>
+      </ion-list>
+
+      <ion-item lines="none">
+        <ion-icon slot="end" name="add-outline"(click)="toDoEntered()"></ion-icon>
+        <ion-input type="text" value="" placeholder="Add Todo" clearInput [(ngModel)]="inputValue" (keyup.enter)="toDoEntered()" >
+        </ion-input>
+      </ion-item>
+    </ion-list>
+    
+  </section>
+</ion-content>
