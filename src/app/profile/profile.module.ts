@@ -7,10 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
-import { HeaderComponent } from '@app/components/header/header.component';
+import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule],
-  declarations: [ProfilePage, HeaderComponent]
+  imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule, SharedcomponentModule],
+  declarations: [ProfilePage]
 })
 export class ProfilePageModule {}

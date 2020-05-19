@@ -30,7 +30,6 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
-import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -39,8 +38,7 @@ import { HeaderComponent } from './components/header/header.component';
     SettingsPage,
     PersonalInformationPage,
     SecurityPasswordPage,
-    TodoListComponent,
-    HeaderComponent
+    TodoListComponent
   ],
   entryComponents: [
     SettingsPage,
@@ -66,11 +64,9 @@ import { HeaderComponent } from './components/header/header.component';
     MomentModule,
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
-    HttpClientModule,
+    HttpClientModule
   ],
-  exports:[
-    HeaderComponent
-  ],
+  exports: [],
 
   providers: [
     StatusBar,

@@ -9,6 +9,7 @@ import { TodoPageRoutingModule } from './todo-routing.module';
 import { TodoPage } from './todo.page';
 import { TodoDisplayComponent } from '@app/components/todo-display/todo-display.component';
 import { HeaderComponent } from '@app/components/header/header.component';
+import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
 
 @NgModule({
   imports: [
@@ -17,9 +18,9 @@ import { HeaderComponent } from '@app/components/header/header.component';
     ReactiveFormsModule,
     IonicModule,
     TodoPageRoutingModule,
-    HeaderComponent
+    SharedcomponentModule
   ],
-  declarations: [TodoPage,TodoDisplayComponent, ],
+  declarations: [TodoPage],
   entryComponents: []
 })
 export class TodoPageModule {}
