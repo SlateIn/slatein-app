@@ -13,29 +13,34 @@ export class TodoListComponent implements OnInit {
 
   isNewList: boolean;
   newList: ToDoList;
+  id = 0;
   header: string;
-  toDoList: ToDoList;
-  list: ToDoItem[];
-  id: number;
+  list: ToDoItem[] = [];
+  previousHeader: string;
+  previousList: ToDoItem[] = [];
   allowEditToDo = false;
-  cnt = 0;
+  cnt: number;
+  previousTotalList: number;
+  isCurrentDataChanged = false;
   addingToDo = false;
   inputValue = '';
 
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
-  
+
   constructor(private toDoService: ToDoService,
               private modalController: ModalController) {}
 
   ngOnInit() {
+    this.previousTotalList = this.cnt;
     if (this.isNewList) {
       this.header = '';
       this.list = [];
-      this.newList = {id: 0, listName: this.header, listItems: this.list};
+      this.newList = {id: new Date().getTime(), listName: this.header, listItems: this.list};
     }
   }
 
   async close() {
+
     if (this.isNewList && (this.header !== '' || this.list.length > 0)) {
 
       if (this.header === '') {
@@ -47,13 +52,11 @@ export class TodoListComponent implements OnInit {
 
       this.newList.listItems = this.list;
       this.toDoService.addNewList(this.newList);
+    } else if (this.isCurrentDataChanged) {
+      this.toDoService.updateToDoList(this.id, this.header, this.list);
     }
 
     await this.modalController.dismiss();
-  }
-
-  addTodo() {
-    this.addingToDo = true;
   }
 
   deleteToDo(todo: any) {
@@ -61,16 +64,17 @@ export class TodoListComponent implements OnInit {
     const index: number = this.list.indexOf(todo);
     if (index !== -1) {
           this.list.splice(index, 1);
+          this.isCurrentDataChanged = true;
     }
   }
 
   toDoEntered() {
     if (this.inputValue !== '') {
       this.cnt++;
-      const todo = {id: this.cnt, title: this.inputValue, completed: false};
-      console.log(todo);
-      this.addToDoInCommonList(todo);
+      const todo = {id: new Date().getTime(), title: this.inputValue, completed: false};
+      this.list.push(todo);
       this.inputValue = '';
+      this.isCurrentDataChanged = true;
     } else {
       this.addingToDo = false;
     }
@@ -78,16 +82,19 @@ export class TodoListComponent implements OnInit {
   }
 
   todoCompleted(todo: any) {
-    if (!todo.completed) {
-      todo.completed = true;
-    } else {
-      todo.completed = false;
-    }
+      this.list.forEach(item => {
+        if (item === todo) {
+          if (!todo.completed) {
+            item.completed = true;
+          } else {
+            item.completed = false;
+          }
+          this.isCurrentDataChanged = true;
+        }
+      });
   }
 
-  addToDoInCommonList(todo: ToDoItem) {
-    this.list.push(todo);
-    console.log(this.list);
-}
-
+  headerChanged() {
+    this.isCurrentDataChanged = true;
+  }
 }
