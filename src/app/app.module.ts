@@ -30,6 +30,7 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
+import { SharedcomponentModule } from './components/sharedcomponent.module';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { MomentModule } from 'angular2-moment';
     MomentModule,
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    SharedcomponentModule
   ],
   exports: [],
 
