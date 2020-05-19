@@ -11,42 +11,23 @@ export class ToDoService {
 
     toDo: ToDoItem;
     toDos: ToDoItem[] = [];
-
+    todolist: ToDoList;
     listRows: ToDoList[] =  [];
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { }
 
     getAllLists() {
-        console.log(this.listRows);
-        return this.listRows;
-    }
-
-    addToDoInList(id: number, todo: ToDoItem) {
-        this.listRows.forEach(row => {
-            if (row.id === id) {
-                row.listItems.unshift(todo);
-            }
-        });
-
-        console.log(this.listRows);
-        return this.listRows;
+        return this.db.list(`/users/${this.afAuth.auth.currentUser.uid}/todo`).valueChanges();
     }
 
     addNewList(list: ToDoList) {
-        this.listRows.unshift(list);
-
-        console.log(this.listRows);
-        return this.listRows;
-
+        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).set(list);
     }
 
-    updateToDoList() {
-        console.log(this.toDos);
+    updateToDoList(id: number, header: string, list: ToDoItem[]) {
+        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${id}`).update({listName: header, listItems: list});
     }
 
-    deleteToDoList(row: ToDoList) {
-        const index: number = this.listRows.indexOf(row);
-        if (index !== -1) {
-            this.listRows.splice(index, 1);
-        }
+    deleteToDoList(list: ToDoList) {
+        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).remove();
     }
 }

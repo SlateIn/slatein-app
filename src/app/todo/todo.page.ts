@@ -26,25 +26,32 @@ export class TodoPage implements OnInit {
               private modalController: ModalController) {}
 
   ngOnInit() {
-    this.cnt = this.todos.length;
-    this.viewAllLinkDisplay = this.todos.length > 0 ? true : false;
-    this.listRows = this.toDoService.getAllLists();
+    this.toDoService.getAllLists().subscribe((lists: ToDoList[]) => {
+      if (lists !== null) {
+          this.listRows = lists;
+          this.cnt = this.listRows.length;
+      }
+  });
+
   }
 
   deleteRow(row: any) {
-    console.log(row);
     this.toDoService.deleteToDoList(row);
   }
 
-  async gotoToDoListModal(list: any) {
+  async gotoToDoListModal(list: ToDoList) {
+    if (list.listItems === undefined) {
+      list.listItems = [];
+    }
+
     const commonToDoList = await this.modalController.create({
       component: TodoListComponent,
       componentProps: {
         isNewList: false,
-        todoList: list,
-        header: list.listName,
         id: list.id,
-        list: list.listItems
+        header: list.listName,
+        list: list.listItems,
+        cnt: this.cnt
       }
     });
     return await commonToDoList.present();
@@ -54,7 +61,8 @@ export class TodoPage implements OnInit {
       const commonToDoList = await this.modalController.create({
       component: TodoListComponent,
       componentProps: {
-        isNewList: true
+        isNewList: true,
+        cnt: this.cnt
       }
     });
       return await commonToDoList.present();
