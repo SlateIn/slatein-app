@@ -30,6 +30,7 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
+import { OfflineModePageModule } from './offline-mode/offline-mode.module';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { MomentModule } from 'angular2-moment';
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
     HttpClientModule,
+    OfflineModePageModule
   ],
   providers: [
     StatusBar,
