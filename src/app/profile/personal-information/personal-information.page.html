@@ -1,12 +1,5 @@
-<ion-header>
-  <ion-toolbar class="header">
-    <ion-buttons slot="start" (click)="backClicked()">
-      <ion-icon name="arrow-back" size="large"></ion-icon>
-      Back
-    </ion-buttons>
-    <ion-title>Personal Information</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- header of the page -->
+<app-page-header [pageTitle]="pageTitle" [backButton]="true" [typeOfComponent]="typeOfComponent"></app-page-header>
 
 <ion-content>
   <ion-list *ngIf="(info$ |async) as info">

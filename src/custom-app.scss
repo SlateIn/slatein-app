@@ -1,4 +1,7 @@
 // ######################################### Start Global Customization #########################################
+* {
+  font-weight: normal;
+}
 
 ion-button {
   --background: var(--ion-color-slateIn-success);
@@ -11,7 +14,7 @@ ion-tab-bar {
   ion-tab-button {
     margin: 2%;
     border-radius: 10px;
-    box-shadow: 0px 23px 23px -10px rgb(29, 30, 58, 0.25);
+    box-shadow: var(--slateIn-button-Shadow);
 
     ion-icon {
       color: var(--ion-color-slateIn-primary);
@@ -73,7 +76,7 @@ ion-tab-bar {
 .fab-add {
   // border-bottom: 0.5px solid black;
   border-radius: 50%;
-  box-shadow: 0px 23px 23px -10px rgb(29, 30, 58, 0.25);
+  box-shadow: var(--slateIn-button-Shadow);
   height: 80px;
   width: 80px;
   margin-left: -43px;
@@ -109,23 +112,14 @@ ion-tab-bar {
 // }
 // ######################################### End Ion Icons #########################################
 
-app-register,
-app-login,
-app-forgot-password {
-  div.register-card {
-    padding: 10px;
-  }
-}
+// app-register,
+// app-login,
+// app-forgot-password {
+//   div.register-card {
+//     padding: 10px;
+//   }
+// }
 
 .float-right {
   float: right;
-}
-
-input[placeholder='startDate'],
-input[placeholder='endDate'],
-input[placeholder='startTime'],
-input[placeholder='endTime'] {
-  border: none !important;
-  background-color: #f9f9f9 !important;
-  font-size: larger !important;
 }

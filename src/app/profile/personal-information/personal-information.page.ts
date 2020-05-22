@@ -16,6 +16,8 @@ import { SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./personal-information.page.scss']
 })
 export class PersonalInformationPage implements OnInit, OnDestroy {
+  pageTitle = 'Personal Information';
+  typeOfComponent = 'modal';
   upgateButtonClicked = false;
   currentUser = {} as UserInfo;
   userInfo = {} as UserInfo;
