@@ -68,7 +68,7 @@ import { SharedcomponentModule } from './components/sharedcomponent.module';
     NgIdleKeepaliveModule.forRoot(),
     HttpClientModule,
     SharedcomponentModule
-  exports: [],
+  ],
   providers: [
     StatusBar,
     SplashScreen,

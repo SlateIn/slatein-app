@@ -12,6 +12,7 @@ import { OfflineModePage } from './offline-mode.page';
     FormsModule,
     IonicModule,
   ],
-  declarations: [OfflineModePage]
+  declarations: [OfflineModePage],
+  entryComponents: [OfflineModePage]
 })
 export class OfflineModePageModule {}
