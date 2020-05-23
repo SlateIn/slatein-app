@@ -31,11 +31,23 @@ import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { OfflineModePageModule } from './offline-mode/offline-mode.module';
+import { SharedcomponentModule } from './components/sharedcomponent.module';
 
 
 @NgModule({
-  declarations: [AppComponent, SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoListComponent],
-  entryComponents: [SettingsPage, PersonalInformationPage, SecurityPasswordPage, TodoListComponent],
+  declarations: [
+    AppComponent,
+    SettingsPage,
+    PersonalInformationPage,
+    SecurityPasswordPage,
+    TodoListComponent
+  ],
+  entryComponents: [
+    SettingsPage,
+    PersonalInformationPage,
+    SecurityPasswordPage,
+    TodoListComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -55,8 +67,8 @@ import { OfflineModePageModule } from './offline-mode/offline-mode.module';
     BrowserAnimationsModule,
     NgIdleKeepaliveModule.forRoot(),
     HttpClientModule,
-    OfflineModePageModule
-  ],
+    SharedcomponentModule
+  exports: [],
   providers: [
     StatusBar,
     SplashScreen,
@@ -66,4 +78,4 @@ import { OfflineModePageModule } from './offline-mode/offline-mode.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
