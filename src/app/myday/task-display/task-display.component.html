@@ -1,0 +1,51 @@
+<article class="task-display animated fadeInLeft">
+  <!-- List or Grid button-->
+  <div class="icon-area">
+    <ion-button (click)="tile = !tile">
+      <span *ngIf="tile" class="">
+        <ion-icon name="list"></ion-icon>
+      </span>
+      <span *ngIf="!tile" class="">
+        <ion-icon name="grid"></ion-icon>
+      </span>
+    </ion-button>
+  </div>
+  <!-- All task grid start-->
+  <ion-grid>
+    <ion-row>
+      <!-- Column has loop and clicked event as well as style binding related to child class  -->
+      <ion-col class="task-grid animated someClass" *ngFor="let task of allTaskForDisplay" [attr.size]="tile? '6': '12'"
+        [ngClass]="tile? 'createCol' : 'createRow'" (click)="getTaskId(task.id)">
+        <!-- If feature is Todo start -->
+        <section [ngClass]="tile? 'task-section-tile' : 'task-section-row'">
+          <p>
+            {{task.title}}
+          </p>
+          <div @fade *ngIf="tile" class="animated allItems">
+            <div>
+              <strong>Time</strong>
+              <span>
+                {{task.startTimePeriod}}
+              </span>
+            </div>
+            <!-- <div>
+              <strong>Location</strong>
+              <span>
+                {{task.location}}
+              </span>
+            </div> -->
+            <div>
+              <strong>Description</strong>
+              <span>
+                {{task.desc}}
+              </span>
+            </div>
+          </div>
+        </section>
+        <!-- If feature is Todo end-->
+      </ion-col>
+      <!-- Column Ends-->
+    </ion-row>
+  </ion-grid>
+  <!-- Grid Ends-->
+</article>

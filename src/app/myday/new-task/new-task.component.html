@@ -26,19 +26,35 @@
       <ion-item-divider></ion-item-divider>
       <ion-item>
         <ion-label>Start Date</ion-label>
-        <ion-datetime value="" display-format="MMM DD, YYYY hh:mm a" picker-format="MMM DD, YYYY hh:mm a"
+        <ion-datetime value="" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"
           formControlName="startDate" type="text" placeholder="Select Date"></ion-datetime>
       </ion-item>
       <ion-item>
+        <ion-label>Start Time</ion-label>
+        <ion-datetime value="" display-format="hh:mm a" picker-format="hh:mm a"
+          formControlName="startTime" type="text" placeholder="Select Time"></ion-datetime>
+      </ion-item>
+      <ion-item>
         <ion-label>End Date</ion-label>
-        <ion-datetime value="" display-format="MMM DD, YYYY hh:mm a" picker-format="MMM DD, YYYY hh:mm a"
+        <ion-datetime value="" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"
           formControlName="endDate" type="text" placeholder="Select Date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End Time</ion-label>
+        <ion-datetime value="" display-format="hh:mm a" picker-format="hh:mm a"
+          formControlName="endTime" type="text" placeholder="Select Time"></ion-datetime>
       </ion-item>
 
       <ion-item (click)="openRepeationPicker()">
         <ion-label>Repeat</ion-label>
-        <span class="repetationPicker" formControlName="repetationPicker" type="text" name="repetationPicker" ngDefaultControl
-          data-placeholder="Make a new tag">{{repetationPicker}}</span>
+        <span class="repetationPicker" contentEditable=true data-text="Never" formControlName="repetationPicker" type="text" name="repetationPicker" ngDefaultControl
+          >{{repetationPicker}}</span>
+      </ion-item>
+
+      <ion-item (click)="openEndRepeationPicker()">
+        <ion-label>End Repeat</ion-label>
+        <span class="repetationPicker" contentEditable=true data-text="Never" formControlName="endRepetationPicker" type="text" name="endRepetationPicker" ngDefaultControl
+          >{{endRepetationPicker}}</span>
       </ion-item>
     </ion-list>
   </form>

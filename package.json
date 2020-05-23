@@ -40,12 +40,13 @@
     "core-js": "^2.5.4",
     "firebase": "^7.14.2",
     "ionic2-calendar": "^0.5.10",
-    "moment": "^2.25.1",
-    "ngx-bootstrap": "^5.6.1",
     "magic.css": "^1.4.5",
+    "moment": "^2.25.3",
+    "ngx-bootstrap": "^5.6.1",
     "number-flip": "^1.1.8",
     "rxjs": "^6.5.5",
     "tslib": "^1.9.0",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

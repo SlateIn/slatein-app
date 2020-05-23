@@ -55,7 +55,7 @@ export class PersonalInformationPage implements OnInit, OnDestroy {
     this.userSubscription = this.info$.subscribe((user) => {
       this.currentUser = user;
       this.userInfo.fname = this.titleCase.transform(user.fname);
-      this.userInfo.lname = user.lname;
+      this.userInfo.lname = this.titleCase.transform(user.lname);
       this.userInfo.birthdate = user.birthdate;
       this.userInfo.gender = user.gender;
       this.userInfo.email = user.email;

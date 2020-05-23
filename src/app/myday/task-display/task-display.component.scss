@@ -1,0 +1,66 @@
+.task-display {
+
+    .icon-area {
+        text-align: right;
+        //margin-right: 2%;
+    }
+
+    .task-grid {
+        border-radius: 10px;
+
+        section {
+            border: 0.5px solid var(--ion-color-slateIn-primary);
+            border-radius: 10px;
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+
+
+    @mixin list-section-tile {
+        section {
+            transition: all 400ms ease;
+            p {
+                border-bottom: 0.3px solid var(--ion-color-slateIn-primary);
+                padding: 5%;
+                font-size: large;
+            }
+
+            strong{
+                display: block;
+            }
+            .allItems {
+                padding: 4%;
+                div{
+                    margin: 3% 2%;
+                }
+            }
+        }
+    }
+
+    @mixin list-section-row {
+        section {
+            transition: all 400ms ease;
+            p {
+                
+                padding: 3%;
+                font-size: larger;
+            }
+            .allItems {
+                transition: all 800ms ease;
+            }
+        }
+    }
+
+    .createCol {
+        transition: all 800ms ease;
+        @include list-section-tile();
+    }
+
+    .createRow {
+        transition: all 800ms ease;
+        @include list-section-row();
+    }
+
+  
+}

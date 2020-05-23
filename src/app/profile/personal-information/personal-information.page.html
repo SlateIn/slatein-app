@@ -65,11 +65,8 @@
     </ion-item>
     <ng-template #changeDate>
       <ion-item lines="full">
-        <ion-datetime
-          [value]="userInfo.birthdate"
-          max="{{currentDate}}"
-          (ionChange)="upDateBirthDate($event.detail.value)"
-        ></ion-datetime>
+        <ion-datetime [value]="userInfo.birthdate" max="{{currentDate}}"
+          (ionChange)="upDateBirthDate($event.detail.value)"></ion-datetime>
       </ion-item>
     </ng-template>
 

@@ -1,15 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>My Day</ion-title>
-    <ion-buttons slot="primary" (click)="setReminder()">
+    <!-- <ion-buttons slot="primary" (click)="setReminder()">
       <ion-button>
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- below ion-segment might be removed after refactoring UI -->
   <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="All">
       <ion-label>All</ion-label>
@@ -23,7 +24,13 @@
     <ion-title>Tasks List</ion-title>
   </ion-toolbar>
 
-  <div [ngSwitch]="segment">
+  <!-- Task Display component start -->
+  <ng-container>
+    <app-task-display [allTaskForDisplay]="taskDetails" (taskIdEmit)="clickedTaskId($event)"></app-task-display>
+  </ng-container>
+  <!-- Task Display component end -->
+
+  <!-- <div [ngSwitch]="segment">
     <ion-label *ngSwitchCase="'Favourite'">
       <ng-container *ngFor="let taskDetail of favouriteTaskDetails">
         <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
@@ -35,5 +42,5 @@
         <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
       </ng-container>
     </ion-label>
-  </div>
+  </div> -->
 </ion-content>

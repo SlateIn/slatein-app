@@ -16,7 +16,6 @@ export class CalendarIntervalsService {
         allDay: false
       });
     });
-    console.log(events);
     return events;
   }
 }

@@ -52,8 +52,8 @@ export class TaskService {
       .pipe(
         take(1),
         map((res) => {
-          const displayTaks = this.getDisplayTasks(res);
-          return displayTaks;
+          const displayTask = this.getDisplayTasks(res);
+          return displayTask;
         }),
         take(1)
       )
@@ -107,6 +107,7 @@ export class TaskService {
         ? new Date(date.getFullYear(), date.getMonth() + 1, 0, 24)
         : new Date(task.endTimePeriod);
 
+      // console.log(task.onlyEndTime);
       const endTime = task.onlyEndTime.split(':');
       if (task.repeat === 'never' && !repeatForNever) {
         displayTaks.push(task);

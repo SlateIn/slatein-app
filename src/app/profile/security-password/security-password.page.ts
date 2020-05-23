@@ -17,6 +17,8 @@ export class SecurityPasswordPage implements OnInit {
   userInfo: UserInfo;
   updatePwdForm: FormGroup;
   updatePwdErrorMsg: string;
+  showPassword: boolean;
+  showConfPassword: boolean;
 
   constructor(
     private auth: AuthService,
@@ -29,6 +31,8 @@ export class SecurityPasswordPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showPassword = false;
+    this.showConfPassword = false;
     this.user.info.pipe(take(1)).subscribe((userInfo) => {
       this.userInfo = userInfo;
     });
@@ -73,5 +77,12 @@ export class SecurityPasswordPage implements OnInit {
 
   async backClicked() {
     await this.modalController.dismiss();
+  }
+
+  toggleShowPassowrd() {
+    this.showPassword = !this.showPassword;
+  }
+  toggleConfShowPassowrd() {
+    this.showConfPassword = !this.showConfPassword;
   }
 }

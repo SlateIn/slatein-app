@@ -54,16 +54,16 @@ export class CalendarPage implements OnInit, OnDestroy {
   onCurrentDateChanged(event: Date) {
     const startDateOfMonth = new Date(event.getFullYear(), event.getMonth(), 0, 24);
     const lastDateOfMonth = new Date(event.getFullYear(), event.getMonth() + 1, 0, 24);
+    // tslint:disable-next-line:max-line-length
     const isDataAvailable = this.getAllTasks.find(task => task.neverEnd && (task.startTime.getTime() < lastDateOfMonth.getTime() && task.startTime.getTime() > startDateOfMonth.getTime()));
-
-    if(!isDataAvailable) {
+    if (!isDataAvailable) {
       this.taskService.getUntilDateNeverEndTasks(startDateOfMonth, lastDateOfMonth)
       .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)))
       .subscribe((res) => {
         this.getAllTasks = [...this.getAllTasks, ...res];
       });
     }
-   
+
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     event.setHours(0, 0, 0, 0);
