@@ -1,12 +1,19 @@
-import { firebaseConfig } from './firebase-config';
-
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: true,
-  firebaseConfig: firebaseConfig
+  firebaseConfig: {
+    apiKey: 'AIzaSyAtYmEX0pz4OgIjV8PTi8tOJYhhFJwnt2o',
+    authDomain: 'slatein-54eff.firebaseapp.com',
+    databaseURL: 'https://slatein-54eff.firebaseio.com',
+    projectId: 'slatein-54eff',
+    storageBucket: 'slatein-54eff.appspot.com',
+    messagingSenderId: '152329003038',
+    appId: '1:152329003038:web:806fa9d3b18dc0f3ce4e0f',
+    measurementId: 'G-Z37ZDBZ8FS'
+  }
 };
 
 /*
