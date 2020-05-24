@@ -19,34 +19,165 @@ export class MydayPage implements OnInit, OnDestroy {
   allTask = [{
     id: 1,
     category: 'task',
-    title: 'our date night',
-    time: '4:PM', // This can be date stamp which cna handle in child component using directive
-    location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
   },
   {
     id: 2,
     category: 'task',
-    title: 'our date night',
-    time: '4:PM', // This can be date stamp which cna handle in child component using directive
-    location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
   },
   {
     id: 3,
     category: 'task',
-    title: 'our date night',
-    time: '4:PM', // This can be date stamp which cna handle in child component using directive
-    location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
   },
   {
     id: 4,
     category: 'task',
-    title: 'our date night',
-    time: '4:PM', // This can be date stamp which cna handle in child component using directive
-    location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
+  },{
+    id: 1,
+    category: 'task',
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
+  },{
+    id: 1,
+    category: 'task',
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
+  },{
+    id: 1,
+    category: 'task',
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
+  },{
+    id: 1,
+    category: 'task',
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
+  },{
+    id: 1,
+    category: 'task',
+    title: 'Watch Moive',
+    time: '4:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Watch any movie on netflix, iptv or youtube'
+  },
+  {
+    id: 2,
+    category: 'task',
+    title: '600 Class',
+    time: '4:00AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for midterm exam'
+  },
+  {
+    id: 3,
+    category: 'task',
+    title: '603 Class',
+    time: '1:00PM', // This can be date stamp which cna handle in child component using directive
+    description: 'Prepare for final exam'
+  },
+  {
+    id: 4,
+    category: 'task',
+    title: 'Homework',
+    time: '9:20AM', // This can be date stamp which cna handle in child component using directive
+    description: 'Start homework for both subjects'
   }];
 
   pageTitle = 'My Day';

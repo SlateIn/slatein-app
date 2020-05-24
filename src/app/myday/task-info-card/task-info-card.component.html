@@ -1,41 +1,29 @@
-<ion-card>
-  <ion-item-sliding id="item100">
-    <ion-item lines="none">
-      <ion-label>
-        <h2>{{ taskinfo?.title }}</h2>
-        <p>{{ taskinfo?.desc }}</p>
-      </ion-label>
+<ion-item-sliding id="item100">
+  <ion-item lines="none">
+    <ion-label>
+      <h2>{{ taskinfo?.title }}</h2>
+      <p>{{ taskinfo?.desc }}</p>
+    </ion-label>
 
-      <ion-note slot="end">
-        {{ taskinfo?.startTimePeriod | date: 'shortTime' }}
-      </ion-note>
+    <ion-note slot="end">
+      {{ taskinfo?.startTimePeriod | date: 'shortTime' }}
+    </ion-note>
 
-      <ion-icon
-        slot="end"
-        (click)="isFavouriteTask()"
-        color="secondary"
-        *ngIf="!taskinfo?.favourite"
-        name="star-outline"
-      ></ion-icon>
-      <ion-icon
-        slot="end"
-        (click)="isFavouriteTask()"
-        color="secondary"
-        *ngIf="taskinfo?.favourite"
-        name="star"
-      ></ion-icon>
-    </ion-item>
+    <ion-icon slot="end" (click)="isFavouriteTask()" color="secondary" *ngIf="!taskinfo?.favourite" name="star-outline">
+    </ion-icon>
+    <ion-icon slot="end" (click)="isFavouriteTask()" color="secondary" *ngIf="taskinfo?.favourite" name="star">
+    </ion-icon>
+  </ion-item>
 
-    <ion-item-options side="start">
-      <ion-item-option color="danger" (click)="deleteTask()">
-        <ion-icon slot="icon-only" name="trash"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
+  <ion-item-options side="start">
+    <ion-item-option color="danger" (click)="deleteTask()">
+      <ion-icon slot="icon-only" name="trash"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
 
-    <ion-item-options side="end">
-      <ion-item-option (click)="updateTask()">
-        <ion-icon slot="icon-only" name="create" color="light"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-card>
+  <ion-item-options side="end">
+    <ion-item-option (click)="updateTask()">
+      <ion-icon slot="icon-only" name="create" color="light"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
