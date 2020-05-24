@@ -16,9 +16,6 @@ export class TodoListComponent implements OnInit {
   id = 0;
   header: string;
   list: ToDoItem[] = [];
-  previousHeader: string;
-  previousList: ToDoItem[] = [];
-  allowEditToDo = false;
   cnt: number;
   previousTotalList: number;
   isCurrentDataChanged = false;
