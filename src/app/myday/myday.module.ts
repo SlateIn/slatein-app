@@ -9,7 +9,8 @@ import { MydayPageRoutingModule } from './myday-routing.module';
 import { MydayPage } from './myday.page';
 import { TaskInfoCardComponent } from './task-info-card/task-info-card.component';
 import { NewTaskComponent } from './new-task/new-task.component';
-import { TaskDisplayComponent } from '@app/myday/task-display/task-display.component';
+import { TaskDisplayComponent } from './task-display/task-display.component';
+
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, MydayPageRoutingModule],

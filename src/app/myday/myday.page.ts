@@ -12,10 +12,6 @@ import { AlertReminderService } from './services/alert-reminder.service';
   styleUrls: ['./myday.page.scss']
 })
 export class MydayPage implements OnInit, OnDestroy {
-  /**
-   * Below allTask array is a mock data for UI purpose only
-   * 
-   */
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];

@@ -3,7 +3,7 @@
 
 /** Ionic CSS Variables **/
 :root {
-
+  font-weight: normal;
   // --ion-background-color: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
   // APP Text Color
   --ion-text-color: var(--ion-color-slateIn-primary);
@@ -34,6 +34,7 @@
   BlinkMacSystemFont,
   ionic;
   
+  --slateIn-button-Shadow: 0px 23px 23px -10px rgb(29, 30, 58, 0.25);
 
   /* Primary: SlateIn default font/border/dark shadow color */
   --ion-color-slateIn-primary: #1D1E3A;
