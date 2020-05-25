@@ -1,58 +1,71 @@
-<article class="task-display animated fadeInLeft">
-  <ion-card class="slateIn-card ">
-    <ion-card-content>
-      <!-- List or Grid button-->
-      <div class="icon-area">
-        <ion-button (click)="tile = !tile">
-          <span *ngIf="tile" class="">
-            <ion-icon name="list"></ion-icon>
-          </span>
-          <span *ngIf="!tile" class="">
-            <ion-icon name="grid"></ion-icon>
-          </span>
-        </ion-button>
-      </div>
-      <!-- All task grid start-->
-      <ion-grid>
-        <ion-row>
-          <!-- Column has loop and clicked event as well as style binding related to child class  -->
-          <ion-col class="task-grid animated someClass" 
-            *ngFor="let task of allTaskForDisplay" 
-            [attr.size]="tile? '6': '12'" 
-            [ngClass]="tile? 'createCol' : 'createRow'"
-            (click)="getTaskId(task.id)">
-            <!-- If feature is Todo start -->
-            <section [ngClass]="tile? 'task-section-tile' : 'task-section-row'">
+<article class="task-display">
+  <!-- List or Grid button-->
+
+  <!-- All task grid start-->
+  <ion-grid>
+    <ion-row>
+      <ion-col class="margin-auto">
+        <h3 class="task-title">
+          <span *ngIf=!favourite>All Task</span>
+          <span *ngIf=favourite>Favourite Task</span>
+        </h3>
+      </ion-col>
+      <ion-col class="margin-auto text-right">
+        <div class="icon-area">
+          <ion-button class="fav-button" size="default" (click)="favourite = !favourite" [ngClass]="!favourite? 'notSelected': 'none'">
+            <ion-icon size="large" [attr.name]="!favourite ? 'heart-outline' : 'heart'"></ion-icon>
+          </ion-button>
+          <ion-button class="display-button" size="default" (click)="tile = !tile">
+            <ion-icon size="large" [attr.name]="tile ? 'list' : 'grid'"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <!-- Column has loop and clicked event as well as style binding related to child class  -->
+      <ion-col class="task-grid" *ngFor="let task of allTaskForDisplay" [attr.size]="tile? '6': '12'"
+        [ngClass]="tile? 'createCol' : 'createRow'" (click)="getTaskId(task.id)">
+        <!-- If feature is Todo start -->
+        <section>
+          <ion-row>
+            <ion-col size="9" class="task-title-col">
               <p>
                 {{task.title}}
               </p>
-              <div @fade *ngIf="tile" class="animated allItems">
+            </ion-col>
+            <ion-col size="3" class="add-fav-col margin-auto">
+                <ion-button class="add-fav" size="small" (click)="addToFav(task)">
+                <ion-icon size="default"  [attr.name]="!task.favourite? 'heart-outline' : 'heart'"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="12" *ngIf="tile" class="task-detail-col">
+              <div class="allItems">
                 <div>
-                  <strong>Time</strong> 
+                  <strong>Time</strong>
                   <span>
-                    {{task.time}}
+                    {{task.startTimePeriod | date:"h:mm a"}}
                   </span>
                 </div>
-                <div>
-                  <strong>Location</strong> 
+                <!-- <div>
+                  <strong>Location</strong>
                   <span>
                     {{task.location}}
                   </span>
-                </div>
+                </div> -->
                 <div>
-                  <strong>Description</strong> 
+                  <strong>Description</strong>
                   <span>
-                    {{task.description}}
+                    {{task.desc}}
                   </span>
                 </div>
               </div>
-              </section>
-             <!-- If feature is Todo end-->
-          </ion-col>
-          <!-- Column Ends-->
-        </ion-row>
-      </ion-grid>
-      <!-- Grid Ends-->
-    </ion-card-content>
-  </ion-card>
+            </ion-col>
+          </ion-row>
+        </section>
+        <!-- If feature is Todo end-->
+      </ion-col>
+      <!-- Column Ends-->
+    </ion-row>
+  </ion-grid>
+  <!-- Grid Ends-->
 </article>

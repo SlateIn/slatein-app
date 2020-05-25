@@ -1,7 +1,16 @@
 .todo-display {
 
+    .task-title {
+        margin: 0px;
+        padding-left: 10%;
+    }
+
     .icon-area {
         text-align: right;
+        .fav-button,.display-button {
+            --background: white;
+           color: var(--ion-color-slateIn-success);
+       }
     }
 
     .task-grid {
@@ -18,12 +27,13 @@
 
     @mixin list-section-tile {
         section {
-            transition: all 400ms ease;
+            // transition: all 400ms ease;
             p {
                 
                 border-bottom: 0.3px solid var(--ion-color-slateIn-primary);
                 padding: 5%;
                 font-size: large;
+                margin: 0px;
             }
 
             ol {
@@ -39,25 +49,22 @@
 
     @mixin list-section-row {
         section {
-            transition: all 400ms ease;
+            // transition: all 400ms ease;
             p {
-                
                 padding: 3%;
                 font-size: larger;
-            }
-            .allItems {
-                transition: all 800ms ease;
+                margin: 0px;
             }
         }
     }
 
     .createCol {
-        transition: all 800ms ease;
+        // transition: all 800ms ease;
         @include list-section-tile();
     }
 
     .createRow {
-        transition: all 800ms ease;
+        // transition: all 800ms ease;
         @include list-section-row();
     }
 

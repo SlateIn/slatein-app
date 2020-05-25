@@ -1,63 +1,87 @@
 .task-display {
+    padding: 2%;
+
+     .task-title {
+        margin: 0px;
+        padding-left: 10%;
+    }
+
 
     .icon-area {
-        text-align: right;
-    }
+        .fav-button,.display-button {
+             --background: white;
+            color: var(--ion-color-slateIn-success);
+        }
+    }   
 
     .task-grid {
         border-radius: 10px;
 
         section {
-            border: 0.5px solid var(--ion-color-slateIn-primary);
+            // border: 0.5px solid var(--ion-color-slateIn-primary);
             border-radius: 10px;
             height: 100%;
-            overflow: hidden;
+            overflow: scroll;
+            max-height: 200px;
+        }
+    }
+
+    .add-fav-col{
+        .add-fav {
+           --padding-start: 0px;
+           --padding-end:0px;
+           width: 100%;
+            --background: white;
+            color: var(--ion-color-slateIn-success);
         }
     }
 
 
     @mixin list-section-tile {
-        section {
-            transition: all 400ms ease;
+        
             p {
-                border-bottom: 0.3px solid var(--ion-color-slateIn-primary);
                 padding: 5%;
                 font-size: large;
+                margin: 0px;
+            }
+
+            .fav-btn{
+                --padding-start: 2px;
             }
 
             strong{
                 display: block;
             }
             .allItems {
-                padding: 4%;
                 div{
                     margin: 3% 2%;
                 }
             }
-        }
     }
 
     @mixin list-section-row {
-        section {
-            transition: all 400ms ease;
+        
             p {
-                
                 padding: 3%;
                 font-size: larger;
-            }
-            .allItems {
-                transition: all 800ms ease;
-            }
-        }
+                margin: 0px;
+            }        
     }
 
     .createCol {
-        transition: all 800ms ease;
+        section {
+            box-shadow: 10px 10px 23px -10px rgb(29, 30, 58, 0.25);
+            .task-detail-col {
+                // border-top : 0.5px solid var(--ion-color-slateIn-primary);
+            }
+        }
         @include list-section-tile();
     }
 
     .createRow {
-        transition: all 800ms ease;
+        section{
+            box-shadow: 0px 15px 23px -10px rgb(29, 30, 58, 0.2)
+        }
         @include list-section-row();
     }
 

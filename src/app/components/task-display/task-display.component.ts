@@ -11,8 +11,10 @@ import { fade } from '@app/animations';
 })
 export class TaskDisplayComponent implements OnInit {
   tile: boolean = true;
+  favourite: boolean = false;
   @Input() allTaskForDisplay: any;
   @Output() taskIdEmit: EventEmitter<[]> = new EventEmitter();
+  @Output() makeItFavEmit: EventEmitter<[]> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +33,15 @@ export class TaskDisplayComponent implements OnInit {
    * @param id
    */
   getTaskId(id) {
-    console.log(id);
+    console.log(id, this.allTaskForDisplay);
     this.taskIdEmit.emit(id);
+  }
+
+  addToFav(task) {
+    task.favourite = !task.favourite;
+    this.makeItFavEmit.emit(task);
+    // this.taskService.selectFavouriteTask(this.taskinfo.id, this.taskinfo.favourite);
+    // this.favouriteChange.emit(this.taskinfo);
+    // this.makeItFavEmit.emit(id);
   }
 }

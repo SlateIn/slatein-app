@@ -12,7 +12,7 @@ export class TaskInfoCardComponent implements OnInit {
   @Input()
   taskinfo: TaskReminderInfo;
   @Output()
-  favoriteChange: EventEmitter<TaskReminderInfo> = new EventEmitter();
+  favouriteChange: EventEmitter<TaskReminderInfo> = new EventEmitter();
 
   constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) {}
 
@@ -30,6 +30,6 @@ export class TaskInfoCardComponent implements OnInit {
   isFavouriteTask() {
     this.taskinfo.favourite = !this.taskinfo.favourite;
     this.taskService.selectFavouriteTask(this.taskinfo.id, this.taskinfo.favourite);
-    this.favoriteChange.emit(this.taskinfo);
+    this.favouriteChange.emit(this.taskinfo);
   }
 }

@@ -22,7 +22,8 @@ export class MydayPage implements OnInit, OnDestroy {
     title: 'our date night',
     time: '4:PM', // This can be date stamp which cna handle in child component using directive
     location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    description: 'Priyanka will pick me up after her clinic hours',
+    favourite: true
   },
   {
     id: 2,
@@ -30,7 +31,8 @@ export class MydayPage implements OnInit, OnDestroy {
     title: 'our date night',
     time: '4:PM', // This can be date stamp which cna handle in child component using directive
     location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    description: 'Priyanka will pick me up after her clinic hours',
+    favourite: false
   },
   {
     id: 3,
@@ -38,7 +40,8 @@ export class MydayPage implements OnInit, OnDestroy {
     title: 'our date night',
     time: '4:PM', // This can be date stamp which cna handle in child component using directive
     location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    description: 'Priyanka will pick me up after her clinic hours',
+    favourite: false
   },
   {
     id: 4,
@@ -46,7 +49,17 @@ export class MydayPage implements OnInit, OnDestroy {
     title: 'our date night',
     time: '4:PM', // This can be date stamp which cna handle in child component using directive
     location: 'lucky Stark Tobacco Factory',
-    description: 'Priyanka will pick me up after her clinic hours'
+    description: 'Priyanka will pick me up after her clinic hours',
+    favourite: true
+  },
+  {
+    id: 5,
+    category: 'task',
+    title: 'our date night',
+    time: '4:PM', // This can be date stamp which cna handle in child component using directive
+    location: 'lucky Stark Tobacco Factory',
+    description: 'Priyanka will pick me up after her clinic hours',
+    favourite: true
   }];
 
   info$: Observable<UserInfo>;
@@ -87,6 +100,8 @@ export class MydayPage implements OnInit, OnDestroy {
       )
       .subscribe((tasks) => {
         this.taskDetails = tasks;
+        console.log('This Actual Task', this.taskDetails);
+        // Can We just send the full task array to child and do filter action based on response? 
         this.favouriteTaskDetails = [];
         for (const task of this.taskDetails) {
           if (task.favourite === true) {
@@ -101,7 +116,7 @@ export class MydayPage implements OnInit, OnDestroy {
    * @param event
    */
   clickedTaskId(id: number ) {
-    console.log('This is id of clicked Task', id);
+    // console.log('This is id of clicked Task', id);
   }
 
   setReminder() {
@@ -112,8 +127,10 @@ export class MydayPage implements OnInit, OnDestroy {
     this.segment = ev.detail.value;
   }
 
-  updateFavorite(task) {
+  updatefavourite(task) {
+    console.log(task)
     const getIndex = this.favouriteTaskDetails.findIndex((value) => value.id === task.id);
+    console.log(getIndex);
     if (getIndex === -1 || task.favourite) {
       this.favouriteTaskDetails.push(task);
     } else if (!task.favourite) {

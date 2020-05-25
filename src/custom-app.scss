@@ -1,6 +1,7 @@
 // ######################################### Start Global Customization #########################################
 
 ion-button {
+  --background-activated: transparent;
   --background: var(--ion-color-slateIn-success);
 }
 
@@ -121,6 +122,13 @@ app-forgot-password {
   float: right;
 }
 
+.text-right{
+  text-align: right;
+}
+
+.margin-auto {
+  margin: auto;
+}
 input[placeholder='startDate'],
 input[placeholder='endDate'],
 input[placeholder='startTime'],
