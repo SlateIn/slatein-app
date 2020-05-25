@@ -6,6 +6,7 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AlertController, NavController } from '@ionic/angular';
 import { auth } from 'firebase/app';
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
   idleState = 'Not started.';
   timedOut = false;
   lastPing?: Date = null;
+  user: User;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -26,6 +28,7 @@ export class AuthService {
     private navCtrl: NavController
   ) {
     this.userLoggedIn.next(false);
+    this.setUserLocalStorage();
   }
 
   signInWithEmail(email: string, pwd: string) {
@@ -41,15 +44,41 @@ export class AuthService {
     return this.userLoggedIn.asObservable();
   }
 
-  logInWithGoogle() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+  async logInWithGoogle() {
+    return await this.AuthLogin(new auth.GoogleAuthProvider());
   }
-
-  AuthLogin(provider) {
-    return this.afAuth.auth
+  async logInWithFacebook() {
+    return await this.AuthLogin(new auth.FacebookAuthProvider());
+  }
+  setUserLocalStorage() {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        console.log(this.user);
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', null);
+      }
+    });
+  }
+  async AuthLogin(provider) {
+    localStorage.setItem('user', JSON.stringify(this.user));
+    return await this.afAuth.auth
       .signInWithPopup(provider)
       .then((result) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const uname = user.displayName.split(' ');
+        console.log(user);
+        const newUser = {
+          fname: uname[0],
+          lname: uname[1],
+          email: user.email,
+          gender: '',
+          birthdate: '',
+          photoURL: ''
+        };
         console.log('You have been successfully logged in!');
+        return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
       })
       .catch((error) => {
         console.log(error);

@@ -1,7 +1,7 @@
 <article class="todo-display animated fadeInLeft">
-  <ion-card class="slateIn-card ">
+  <ion-card class="slateIn-card">
     <ion-card-content>
-       <!-- List or Grid button-->
+      <!-- List or Grid button-->
       <div class="icon-area">
         <ion-button (click)="tile = !tile">
           <span *ngIf="tile" class="">
@@ -16,11 +16,8 @@
       <ion-grid>
         <ion-row>
           <!-- Column has loop and clicked event as well as style binding related to child class  -->
-          <ion-col class="task-grid animated someClass" 
-            *ngFor="let list of allToDoForDisplay" 
-            [attr.size]="tile? '6': '12'" 
-            [ngClass]="tile? 'createCol' : 'createRow'"
-            (click)="getTodoId(list.id)">
+          <ion-col class="task-grid animated someClass" *ngFor="let list of allToDoForDisplay"
+            [attr.size]="tile? '6': '12'" [ngClass]="tile? 'createCol' : 'createRow'" (click)="getTodoId(list.id)">
             <section [ngClass]="tile? 'list-section-tile' : 'list-section-row'">
               <p>
                 {{list.title}}
@@ -34,12 +31,12 @@
                   </li>
                 </ol>
               </div>
-              </section>
+            </section>
           </ion-col>
-           <!-- Column Ends-->
+          <!-- Column Ends-->
         </ion-row>
       </ion-grid>
-       <!-- Grid Ends-->
+      <!-- Grid Ends-->
     </ion-card-content>
   </ion-card>
 </article>
