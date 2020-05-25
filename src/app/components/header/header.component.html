@@ -1,7 +1,17 @@
-<ion-header>
-  <ion-fab vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button (click)="goBack()">
-      <ion-icon name="arrow-dropleft"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</ion-header>
+<section class="pageHeader">
+  <ion-header>
+    <ion-toolbar>
+      <section *ngIf="backButton">
+        <ion-buttons *ngIf="typeOfComponent == 'modal'" slot="start" (click)="backClicked()">
+          <ion-icon name="arrow-back" size="large"></ion-icon>
+        </ion-buttons>
+        <ion-buttons *ngIf="typeOfComponent === 'page'" slot="start">
+          <ion-back-button defaultHref="tabs/myday"></ion-back-button>
+        </ion-buttons>
+      </section>
+      <ion-title>
+        {{pageTitle}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+</section>

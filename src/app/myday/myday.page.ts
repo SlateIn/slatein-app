@@ -62,6 +62,7 @@ export class MydayPage implements OnInit, OnDestroy {
     favourite: true
   }];
 
+  pageTitle = 'My Day';
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];

@@ -12,6 +12,7 @@ import { ToDoItem } from '@models/todoItem';
   styleUrls: ['./todo.page.scss'],
 })
 export class TodoPage implements OnInit {
+  pageTitle = 'To Do';
   taskChecked = false;
   todos: ToDoItem[] = [];
   index: number;

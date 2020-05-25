@@ -21,8 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-            import('../todo/todo.module').then(m => m.TodoPageModule)
+            loadChildren: () => import('../todo/todo.module').then((m) => m.TodoPageModule)
           }
         ]
       },
