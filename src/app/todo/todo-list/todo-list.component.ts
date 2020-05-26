@@ -16,6 +16,8 @@ export class TodoListComponent implements OnInit {
   id = 0;
   header: string;
   list: ToDoItem[] = [];
+  completedToDos: ToDoItem[] = [];
+  pendingToDos: ToDoItem[] = [];
   cnt: number;
   previousTotalList: number;
   isCurrentDataChanged = false;
@@ -29,10 +31,19 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     this.previousTotalList = this.cnt;
+
     if (this.isNewList) {
       this.header = '';
       this.list = [];
       this.newList = {id: new Date().getTime(), listName: this.header, listItems: this.list};
+    } else {
+      this.list.forEach((todo: ToDoItem) => {
+        if (todo.completed === true) {
+          this.completedToDos.push(todo);
+        } else {
+          this.pendingToDos.push(todo);
+        }
+      });
     }
   }
 
@@ -83,12 +94,19 @@ export class TodoListComponent implements OnInit {
         if (item === todo) {
           if (!todo.completed) {
             item.completed = true;
+            this.completedToDos.push(todo);
+            this.pendingToDos.splice(todo, 1);
           } else {
             item.completed = false;
+            this.pendingToDos.push(todo);
+            this.completedToDos.splice(todo, 1);
           }
           this.isCurrentDataChanged = true;
         }
       });
+      console.log(this.list);
+      console.log(this.completedToDos);
+      console.log(this.pendingToDos);
   }
 
   headerChanged() {
