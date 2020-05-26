@@ -15,7 +15,7 @@
     <ion-row>
       <!-- Column has loop and clicked event as well as style binding related to child class  -->
       <ion-col class="task-grid animated someClass" *ngFor="let task of allTaskForDisplay" [attr.size]="tile? '6': '12'"
-        [ngClass]="tile? 'createCol' : 'createRow'" (click)="getTaskId(task.id)">
+        [ngClass]="tile? 'createCol' : 'createRow'" (click)="getTaskId(task)">
         <!-- If feature is Todo start -->
         <section [ngClass]="tile? 'task-section-tile' : 'task-section-row'">
           <p>

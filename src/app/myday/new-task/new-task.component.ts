@@ -1,6 +1,6 @@
 import { async } from '@angular/core/testing';
 import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ModalController, PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core';
 import { collectExternalReferences } from '@angular/compiler';
@@ -17,7 +17,9 @@ export class NewTaskComponent implements OnInit {
   repetationPicker = '';
   endRepetationPicker = '';
   repetationPickerValue = '';
+  updateTitle = '';
   @ViewChild('documentEditForm') documentEditForm: FormGroupDirective;
+  @Input() taskData: any;
 
   constructor(private modalController: ModalController,
               private pickerController: PickerController,
@@ -25,6 +27,7 @@ export class NewTaskComponent implements OnInit {
               private alertReminderService: AlertReminderService) { }
 
   ngOnInit() {
+    this.updateTitle = 'New Task';
     this.updateNewTaskForm = this.fb.group(
       {
         title: ['', Validators.compose([Validators.required])],
@@ -37,6 +40,22 @@ export class NewTaskComponent implements OnInit {
         endRepetationPicker: new FormControl('', Validators.required)
       },
     );
+
+    if (this.taskData !== undefined) {
+      console.log('This is TaskData');
+      console.log(this.taskData);
+      this.updateTitle = 'Update Task';
+      this.updateNewTaskForm.patchValue({
+        title: this.taskData.title,
+        description: this.taskData.desc,
+        startDate: this.taskData.startTimePeriod,
+        startTime: this.taskData.startTimePeriod,
+        endDate : this.taskData.endTimePeriod,
+        endTime : this.taskData.endTimePeriod,
+      });
+
+      this.repetationPicker = this.taskData.repeat;
+    }
   }
 
   async backClicked() {
@@ -112,7 +131,8 @@ export class NewTaskComponent implements OnInit {
   }
 
   register() {
-    this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue);
+    // const type = this.taskData !== undefined ? 'update' : 'add' ;
+    this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, this.taskData.id);
     this.modalController.dismiss();
   }
 

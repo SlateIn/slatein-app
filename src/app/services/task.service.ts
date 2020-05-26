@@ -31,6 +31,23 @@ export class TaskService {
     });
   }
 
+  updateTask(taskInfo: TaskReminderInfo) {
+    const id = taskInfo.id;
+    return this.db
+      .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${id}`)
+      .update({ desc: taskInfo.desc,
+      endTimePeriod: taskInfo.endTimePeriod,
+      favourite: taskInfo.endTimePeriod,
+      image: '',
+      neverEnd: false,
+      onlyEndTime: taskInfo.onlyEndTime,
+      repeat: taskInfo.repeat,
+      startTimePeriod: taskInfo.startTimePeriod,
+      status: 'pending',
+      title: taskInfo.title})
+      .then(() => this.getAllTasks());
+  }
+
   deleteTask(id: number): Promise<void> {
     return this.db
       .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${id}`)
