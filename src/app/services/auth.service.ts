@@ -54,36 +54,34 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
-        console.log(this.user);
         localStorage.setItem('user', JSON.stringify(this.user));
+        const userInfo = JSON.parse(localStorage.getItem('user'));
+        const uname = userInfo.displayName.split(' ');
+        const newUser = {
+          fname: uname[0],
+          lname: uname[1],
+          email: userInfo.email,
+          gender: '',
+          birthdate: '',
+          photoURL: ''
+        };
+        this.updateUserInfo(newUser, '');
+        this.initdata();
       } else {
         localStorage.setItem('user', null);
       }
     });
   }
-  async AuthLogin(provider) {
-    localStorage.setItem('user', JSON.stringify(this.user));
-    return await this.afAuth.auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const uname = user.displayName.split(' ');
-        console.log(user);
-        const newUser = {
-          fname: uname[0],
-          lname: uname[1],
-          email: user.email,
-          gender: '',
-          birthdate: '',
-          photoURL: ''
-        };
-        console.log('You have been successfully logged in!');
-        return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
-      })
-      .catch((error) => {
+
+  AuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+    .then((result) => {
+        console.log(`You have been successfully logged in!`);
+    }).catch((error) => {
         console.log(error);
-      });
+    });
   }
+  
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
@@ -125,6 +123,7 @@ export class AuthService {
 
   logout() {
     this.idle.stop();
+    localStorage.removeItem('user');
     return firebase.auth().signOut();
   }
 
