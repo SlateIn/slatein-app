@@ -207,7 +207,8 @@ export class AlertReminderService {
     // tslint:disable-next-line:max-line-length
     const endTimePeriod = (!value.endDate || value.endDate === 'never') ? 'never' : new Date(value.endDate).toString();
     const onlyEndTime = `${new Date(value.endTime).getHours()} : ${new Date(value.endTime).getMinutes()}`;
-    if (type === undefined) {
+
+    if (type === undefined || type === null) {
       const data: TaskReminderInfo = {
         title: value.title,
         desc: value.description,

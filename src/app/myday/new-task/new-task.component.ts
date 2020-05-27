@@ -132,7 +132,11 @@ export class NewTaskComponent implements OnInit {
 
   register() {
     // const type = this.taskData !== undefined ? 'update' : 'add' ;
-    this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, this.taskData.id);
+    if (this.taskData !== undefined) {
+      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, this.taskData.id);
+    } else {
+      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, null);
+    }
     this.modalController.dismiss();
   }
 

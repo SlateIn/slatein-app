@@ -37,7 +37,7 @@ export class TaskService {
       .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${id}`)
       .update({ desc: taskInfo.desc,
       endTimePeriod: taskInfo.endTimePeriod,
-      favourite: taskInfo.endTimePeriod,
+      favourite: false,
       image: '',
       neverEnd: false,
       onlyEndTime: taskInfo.onlyEndTime,
