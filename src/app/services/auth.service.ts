@@ -1,12 +1,14 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AlertController, NavController } from '@ionic/angular';
 import { auth } from 'firebase/app';
 import { User } from 'firebase';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { UserService } from './user-info.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +20,19 @@ export class AuthService {
   timedOut = false;
   lastPing?: Date = null;
   user: User;
+  userInfo;
 
   constructor(
     private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private idle: Idle,
     private ngZone: NgZone,
     private alertController: AlertController,
     private keepalive: Keepalive,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userService: UserService
   ) {
     this.userLoggedIn.next(false);
-    this.setUserLocalStorage();
   }
 
   signInWithEmail(email: string, pwd: string) {
@@ -50,12 +54,11 @@ export class AuthService {
   async logInWithFacebook() {
     return await this.AuthLogin(new auth.FacebookAuthProvider());
   }
-  setUserLocalStorage() {
+  getProviderUser() {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
-        const userInfo = JSON.parse(localStorage.getItem('user'));
+        const userInfo = JSON.parse(JSON.stringify(this.user));
         const uname = userInfo.displayName.split(' ');
         const newUser = {
           fname: uname[0],
@@ -63,12 +66,16 @@ export class AuthService {
           email: userInfo.email,
           gender: '',
           birthdate: '',
-          photoURL: ''
+          photoURL: '',
+          provider: userInfo.providerData[0].providerId
         };
-        this.updateUserInfo(newUser, '');
-        this.initdata();
-      } else {
-        localStorage.setItem('user', null);
+        this.userService.info.subscribe( user => {
+          this.userInfo = user;
+          if (this.userInfo === null){
+            this.updateUserInfo(newUser, '');
+            this.initdata();
+          }
+          });
       }
     });
   }
@@ -76,12 +83,12 @@ export class AuthService {
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
     .then((result) => {
-        console.log(`You have been successfully logged in!`);
+      this.getProviderUser();
+      console.log(`You have been successfully logged in!`);
     }).catch((error) => {
         console.log(error);
     });
   }
-  
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
@@ -113,7 +120,8 @@ export class AuthService {
       email: newUser.email,
       gender: newUser.gender,
       birthdate: newUser.birthdate,
-      photoURL: profilePicUrl ? profilePicUrl : ''
+      photoURL: profilePicUrl ? profilePicUrl : '',
+      provider: newUser.provider ? newUser.provider : ''
     });
   }
 
@@ -123,7 +131,6 @@ export class AuthService {
 
   logout() {
     this.idle.stop();
-    localStorage.removeItem('user');
     return firebase.auth().signOut();
   }
 
