@@ -3,30 +3,31 @@
   font-weight: normal;
 }
 
+strong{
+  font-weight: 500;
+}
+
+.item-label {
+  font-size: 16px;
+}
+
+.item-text {
+  font-size: 14px;
+}
+
+// Title in side page
+.page-title {
+  font-size: 18px;
+}
+
+// Title in Header
+.page-header {
+  font-size: 20px;
+}
+
 ion-button {
   --background-activated: transparent;
   --background: var(--ion-color-slateIn-success);
-}
-
-// Bottom-Tab bar style, Applied Globally
-ion-tab-bar {
-  padding: 3% 0%;
-
-  ion-tab-button {
-    margin: 2%;
-    border-radius: 10px;
-    box-shadow: var(--slateIn-button-Shadow);
-
-    ion-icon {
-      color: var(--ion-color-slateIn-primary);
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .tab-selected {
-    box-shadow: none;
-  }
 }
 
 // SlateIn - CARD DEFAULT CSS
@@ -40,7 +41,7 @@ ion-tab-bar {
 }
 
 // SlateIn - FORM DEFAULT CSS
-.slateIn-form {}
+// .slateIn-form {}
 
 .form-field {
   margin: 0.8rem 0rem;
@@ -49,47 +50,44 @@ ion-tab-bar {
   border-radius: 10px;
 }
 
+
+
+
+
 // ######################################### End Global Customization ######################################### 
 
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
-.tab-selected {
-  color: var(--ion-color-slateIn-success);
-  font-family: RobotoBold;
 
-  ion-icon {
-    color: var(--ion-color-slateIn-success);
-    font-family: RobotoBold;
-
-    ion-icon {
-      color: var(--ion-color-slateIn-success);
-    }
-
-    ion-label {
-      font-size: medium;
-    }
-  }
+.text-center {
+  text-align: center;
 }
 
-
-
-.fab-add {
-  // border-bottom: 0.5px solid black;
-  border-radius: 50%;
-  box-shadow: var(--slateIn-button-Shadow);
-  height: 80px;
-  width: 80px;
-  margin-left: -43px;
-
-  ion-fab-button {
-    --background: var(--ion-color-slateIn-success);
-    border: 10px solid #fff;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-  }
+.text-right {
+  text-align: right;
 }
+
+.text-left {
+  text-align: left;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.float-right {
+  float: right;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
 
 // ######################################### End Global Customization #########################################
 
@@ -120,7 +118,3 @@ ion-tab-bar {
 //     padding: 10px;
 //   }
 // }
-
-.float-right {
-  float: right;
-}

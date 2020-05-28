@@ -1,11 +1,59 @@
+.tab-bar {
+
+    .margin-extra-right {
+        margin-right: 7%;
+    }
+
+    .margin-extra-left {
+        margin-left: 7%;
+    }
+
+    // Bottom-Tab bar style, Applied Globally
+    ion-tab-bar {
+        padding: 3% 0%;
+
+        ion-tab-button {
+            margin: 2%;
+            border-radius: 10px;
+            box-shadow: var(--slateIn-button-Shadow);
+            color: var(--ion-color-slateIn-primary);
+
+            ion-icon {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        .tab-selected {
+            box-shadow: none;
+
+            ion-icon {
+                color: var(--ion-color-slateIn-success);
+                font-family: RobotoBold;
+            }
+
+            ion-label {
+                color: var(--ion-color-slateIn-success);
+                font-size: small;
+            }
+        }
+    }
+
+}
+
 .fab-add {
     margin-bottom: 12%;
-}
+    border-radius: 50%;
+    box-shadow: var(--slateIn-button-Shadow);
+    height: 80px;
+    width: 80px;
+    margin-left: -43px;
 
-.margin-extra-right {
-    margin-right: 7%;
-}
-
-.margin-extra-left {
-    margin-left: 7%;
+    ion-fab-button {
+        --background: var(--ion-color-slateIn-success);
+        border: 10px solid #fff;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+    }
 }

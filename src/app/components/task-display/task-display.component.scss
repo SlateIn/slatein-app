@@ -1,89 +1,81 @@
 .task-display {
     padding: 2%;
 
-     .task-title {
-        margin: 0px;
-        padding-left: 10%;
+    .icon-area {
+
+        .fav-button,
+        .display-button {
+            --background: white;
+            color: var(--ion-color-slateIn-success);
+            --padding-start: 2px;
+            --padding-end: 2px;
+        }
     }
 
-
-    .icon-area {
-        .fav-button,.display-button {
-             --background: white;
-            color: var(--ion-color-slateIn-success);
-        }
-    }   
-
+    // Grid start
     .task-grid {
         border-radius: 10px;
 
-        section {
+        // Default section
+        .tile-section {
             // border: 0.5px solid var(--ion-color-slateIn-primary);
+            
+        }
+    }
+
+    .createCol {
+        .tile-section {
             border-radius: 10px;
             height: 100%;
             overflow: scroll;
             max-height: 200px;
-        }
-    }
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
 
-    .add-fav-col{
-        .add-fav {
-           --padding-start: 0px;
-           --padding-end:0px;
-           width: 100%;
-            --background: white;
-            color: var(--ion-color-slateIn-success);
-        }
-    }
+            .task-title-div {
+                width: 100%;
+                display: inline-block;
 
-
-    @mixin list-section-tile {
-        
-            p {
-                padding: 5%;
-                font-size: large;
-                margin: 0px;
+                // H4 of task title
+                .task-title {
+                    margin: 0px;
+                    font-weight: normal;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
             }
 
-            .fav-btn{
-                --padding-start: 2px;
+            .fav-btn-div {
+                width: 100%;
+                display: inline-block;
             }
 
-            strong{
-                display: block;
+            .border-bottom {
+                border-bottom: 0.5px solid var(--ion-color-slateIn-primary);
             }
+
             .allItems {
-                div{
+                div {
                     margin: 3% 2%;
                 }
             }
-    }
+        }
 
-    @mixin list-section-row {
-        
-            p {
-                padding: 3%;
-                font-size: larger;
+    }
+    .createRow {
+        .row-section {
+            ion-card{
                 margin: 0px;
-            }        
-    }
-
-    .createCol {
-        section {
-            box-shadow: 10px 10px 23px -10px rgb(29, 30, 58, 0.25);
-            .task-detail-col {
-                // border-top : 0.5px solid var(--ion-color-slateIn-primary);
             }
         }
-        @include list-section-tile();
     }
 
-    .createRow {
-        section{
-            box-shadow: 0px 15px 23px -10px rgb(29, 30, 58, 0.2)
-        }
-        @include list-section-row();
+    .add-fav {
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --background: white;
+        width: auto;
+        margin: 0px;
+        color: var(--ion-color-slateIn-success);
     }
-
-  
 }
