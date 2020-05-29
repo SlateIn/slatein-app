@@ -32,6 +32,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { OfflineModePageModule } from './offline-mode/offline-mode.module';
 import { SharedcomponentModule } from './components/sharedcomponent.module';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+
 
 
 @NgModule({
@@ -74,7 +76,8 @@ import { SharedcomponentModule } from './components/sharedcomponent.module';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     DatePipe,
-    TitleCasePipe
+    TitleCasePipe,
+    EmailComposer
   ],
   bootstrap: [AppComponent]
 })
