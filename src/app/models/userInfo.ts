@@ -5,4 +5,5 @@ export interface UserInfo {
   gender: string;
   birthdate: string;
   photoURL: string;
+  provider: string;
 }

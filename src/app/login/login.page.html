@@ -54,6 +54,16 @@
               Login
             </ion-label>
           </ion-button>
+          <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithGoogle()">
+            <ion-label>
+              <ion-icon color="danger" title="Google" name="logo-google"></ion-icon>
+            </ion-label>
+          </ion-button>
+          <!-- <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithFb()">
+            <ion-label>
+              <ion-icon color="primary" name="logo-facebook" title="Facebook"></ion-icon>
+            </ion-label>
+          </ion-button> -->
 
           <section class="margin-bottom margin-top text-center">
             <div class="error-div">
@@ -66,11 +76,6 @@
                 <ion-label class="signUp-text">Sign Up</ion-label>
               </a>
             </ion-label>
-            <!-- <div class="formGroup">
-              <button type="button" (click)="loginWithGoogle()">
-                Log in with Google
-              </button>
-            </div> -->
           </section>
         </form>
       </ion-card-content>
