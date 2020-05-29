@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { fade } from '@app/animations';
+import { ModalController } from '@ionic/angular';
+import { NewTaskComponent } from '../new-task/new-task.component';
 
 @Component({
   selector: 'app-task-display',
@@ -13,7 +15,8 @@ export class TaskDisplayComponent implements OnInit {
   tile: boolean = true;
   @Input() allTaskForDisplay: any;
   @Output() taskIdEmit: EventEmitter<[]> = new EventEmitter();
-  constructor() { }
+
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
     this.showData();
@@ -27,11 +30,16 @@ export class TaskDisplayComponent implements OnInit {
   }
 
   /**
-   * Getting ID of task form click event on column
-   * @param id
+   * Getting taskData of task form click event on column
+   * @param taskData
    */
-  getTaskId(id) {
-    console.log(id);
-    this.taskIdEmit.emit(id);
+  async getTaskId(taskData) {
+    console.log(taskData);
+    // this.taskIdEmit.emit(taskData);
+    const myDayNewTask = await this.modalController.create({
+      component: NewTaskComponent,
+      componentProps: {taskData}
+    });
+    return await myDayNewTask.present();
   }
 }

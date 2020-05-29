@@ -31,6 +31,23 @@ export class TaskService {
     });
   }
 
+  updateTask(taskInfo: TaskReminderInfo) {
+    const id = taskInfo.id;
+    return this.db
+      .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${id}`)
+      .update({ desc: taskInfo.desc,
+      endTimePeriod: taskInfo.endTimePeriod,
+      favourite: false,
+      image: '',
+      neverEnd: false,
+      onlyEndTime: taskInfo.onlyEndTime,
+      repeat: taskInfo.repeat,
+      startTimePeriod: taskInfo.startTimePeriod,
+      status: 'pending',
+      title: taskInfo.title})
+      .then(() => this.getAllTasks());
+  }
+
   deleteTask(id: number): Promise<void> {
     return this.db
       .object(`/users/${firebase.auth().currentUser.uid}/events/tasks/${id}`)
@@ -52,8 +69,8 @@ export class TaskService {
       .pipe(
         take(1),
         map((res) => {
-          const displayTaks = this.getDisplayTasks(res);
-          return displayTaks;
+          const displayTask = this.getDisplayTasks(res);
+          return displayTask;
         }),
         take(1)
       )
@@ -107,6 +124,7 @@ export class TaskService {
         ? new Date(date.getFullYear(), date.getMonth() + 1, 0, 24)
         : new Date(task.endTimePeriod);
 
+      // console.log(task.onlyEndTime);
       const endTime = task.onlyEndTime.split(':');
       if (task.repeat === 'never' && !repeatForNever) {
         displayTaks.push(task);

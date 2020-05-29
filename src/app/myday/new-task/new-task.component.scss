@@ -1,0 +1,8 @@
+span.repetationPicker {
+    margin-right: 3%;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+        content:attr(data-text);
+        opacity: 0.5;
+    }

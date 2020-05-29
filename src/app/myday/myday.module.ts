@@ -8,11 +8,12 @@ import { MydayPageRoutingModule } from './myday-routing.module';
 
 import { MydayPage } from './myday.page';
 import { TaskInfoCardComponent } from './task-info-card/task-info-card.component';
-import { TaskDisplayComponent } from '@app/components/task-display/task-display.component';
-import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { TaskDisplayComponent } from './task-display/task-display.component';
+
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, MydayPageRoutingModule, SharedcomponentModule],
-  declarations: [MydayPage, TaskInfoCardComponent]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, MydayPageRoutingModule],
+  declarations: [MydayPage, TaskInfoCardComponent, TaskDisplayComponent, NewTaskComponent]
 })
 export class MydayPageModule {}
