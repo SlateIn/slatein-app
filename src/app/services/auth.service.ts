@@ -1,11 +1,14 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AlertController, NavController } from '@ionic/angular';
 import { auth } from 'firebase/app';
+import { User } from 'firebase';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { UserService } from './user-info.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +19,18 @@ export class AuthService {
   idleState = 'Not started.';
   timedOut = false;
   lastPing?: Date = null;
+  user: User;
+  userInfo;
 
   constructor(
     private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private idle: Idle,
     private ngZone: NgZone,
     private alertController: AlertController,
     private keepalive: Keepalive,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private userService: UserService
   ) {
     this.userLoggedIn.next(false);
   }
@@ -41,19 +48,46 @@ export class AuthService {
     return this.userLoggedIn.asObservable();
   }
 
-  logInWithGoogle() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+  async logInWithGoogle() {
+    return await this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+  async logInWithFacebook() {
+    return await this.AuthLogin(new auth.FacebookAuthProvider());
+  }
+  getProviderUser() {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        const userInfo = JSON.parse(JSON.stringify(this.user));
+        const uname = userInfo.displayName.split(' ');
+        const newUser = {
+          fname: uname[0],
+          lname: uname[1],
+          email: userInfo.email,
+          gender: '',
+          birthdate: '',
+          photoURL: '',
+          provider: userInfo.providerData[0].providerId
+        };
+        this.userService.info.subscribe( user => {
+          this.userInfo = user;
+          if (this.userInfo === null){
+            this.updateUserInfo(newUser, '');
+            this.initdata();
+          }
+          });
+      }
+    });
   }
 
   AuthLogin(provider) {
-    return this.afAuth.auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log('You have been successfully logged in!');
-      })
-      .catch((error) => {
+    return this.afAuth.auth.signInWithPopup(provider)
+    .then((result) => {
+      this.getProviderUser();
+      console.log(`You have been successfully logged in!`);
+    }).catch((error) => {
         console.log(error);
-      });
+    });
   }
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
@@ -86,7 +120,8 @@ export class AuthService {
       email: newUser.email,
       gender: newUser.gender,
       birthdate: newUser.birthdate,
-      photoURL: profilePicUrl ? profilePicUrl : ''
+      photoURL: profilePicUrl ? profilePicUrl : '',
+      provider: newUser.provider ? newUser.provider : ''
     });
   }
 

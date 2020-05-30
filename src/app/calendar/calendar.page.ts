@@ -1,12 +1,13 @@
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { Component, OnInit, ViewChild, Inject, LOCALE_ID, OnDestroy } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, PopoverController } from '@ionic/angular';
 import { CalendarService } from './services/calendar.service';
 import { Subscription, Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { CalendarIntervalsService } from '@services/calendar-intervals.service';
 import { TaskService } from '@services/task.service';
 import { map } from 'rxjs/operators';
+import { CalenderPopoverComponent } from './calender-popover/calender-popover.component';
 
 @Component({
   selector: 'app-calendar',
@@ -35,9 +36,10 @@ export class CalendarPage implements OnInit, OnDestroy {
   constructor(
     public modalCtrl: ModalController,
     public calService: CalendarService,
-    private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController,
     public calendarIntervalsService: CalendarIntervalsService,
     private taskService: TaskService,
+    private modalController: ModalController,
     @Inject(LOCALE_ID) private locale: string
   ) {}
 
@@ -55,16 +57,16 @@ export class CalendarPage implements OnInit, OnDestroy {
   onCurrentDateChanged(event: Date) {
     const startDateOfMonth = new Date(event.getFullYear(), event.getMonth(), 0, 24);
     const lastDateOfMonth = new Date(event.getFullYear(), event.getMonth() + 1, 0, 24);
+    // tslint:disable-next-line:max-line-length
     const isDataAvailable = this.getAllTasks.find(task => task.neverEnd && (task.startTime.getTime() < lastDateOfMonth.getTime() && task.startTime.getTime() > startDateOfMonth.getTime()));
-
-    if(!isDataAvailable) {
+    if (!isDataAvailable) {
       this.taskService.getUntilDateNeverEndTasks(startDateOfMonth, lastDateOfMonth)
       .pipe(map((res) => this.calendarIntervalsService.getIntervalDates(res)))
       .subscribe((res) => {
         this.getAllTasks = [...this.getAllTasks, ...res];
       });
     }
-   
+
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     event.setHours(0, 0, 0, 0);
@@ -74,16 +76,14 @@ export class CalendarPage implements OnInit, OnDestroy {
   // Calendar event was clicked
   async onEventSelected(event) {
     // Use Angular date pipe for conversion
+    console.log(event);
     let start = formatDate(event.startTime, 'medium', this.locale);
     let end = formatDate(event.endTime, 'medium', this.locale);
 
-    const alert = await this.alertCtrl.create({
-      header: event.title,
-      subHeader: event.desc,
-      message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
+    await (this.popoverCtrl.create({component: CalenderPopoverComponent,
+      showBackdrop: false, componentProps: { calenderTaskData: event}})).then((popoverEement) => {
+        popoverEement.present();
     });
-    alert.present();
   }
 
   changeMode(mode) {

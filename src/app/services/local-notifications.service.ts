@@ -17,7 +17,7 @@ export class LocalNotificationsService {
           body: data.desc,
           id: data.id,
           schedule: {
-            every: data.repeat !== 'never' ? data.repeat : null,
+            // every: data.repeat !== 'never' ? data.repeat : null,
             at: new Date(data.startTimePeriod)
           },
           sound: null,
@@ -31,6 +31,7 @@ export class LocalNotificationsService {
 
   async cancelNotifications() {
     const pendingNotifs = await Plugins.LocalNotifications.getPending();
+    // tslint:disable-next-line:no-unused-expression
     pendingNotifs && Plugins.LocalNotifications.cancel(pendingNotifs);
   }
 }

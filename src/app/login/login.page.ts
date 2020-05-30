@@ -83,6 +83,38 @@ export class LoginPage implements OnInit {
     this.showPassword = !this.showPassword;
   }
   loginWithGoogle() {
-    this.auth.logInWithGoogle();
+    this.auth
+      .logInWithGoogle()
+      .then(() => {
+        if (this.loginForm.value.canRemember) {
+          Storage.set({
+            key: 'email',
+            value: this.loginForm.value.email
+          });
+        } else {
+          Storage.remove({ key: 'email' });
+        }
+        this.taskService.getAllTasks();
+        this.navCtrl.navigateRoot('/tabs/myday');
+      })
+      .catch((err) => (this.loginErrorMsg = err.message));
   }
+
+  // loginWithFb() {
+  //   this.auth
+  //     .logInWithFacebook()
+  //     .then(() => {
+  //       if (this.loginForm.value.canRemember) {
+  //         Storage.set({
+  //           key: 'email',
+  //           value: this.loginForm.value.email
+  //         });
+  //       } else {
+  //         Storage.remove({ key: 'email' });
+  //       }
+  //       this.taskService.getAllTasks();
+  //       this.navCtrl.navigateRoot('/tabs/myday');
+  //     })
+  //     .catch((err) => (this.loginErrorMsg = err.message));
+  // }
 }

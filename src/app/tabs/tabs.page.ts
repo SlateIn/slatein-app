@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertReminderService } from '@app/myday/services/alert-reminder.service';
+import { ModalController } from '@ionic/angular';
+import { NewTaskComponent } from '@app/myday/new-task/new-task.component';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +9,13 @@ import { AlertReminderService } from '@app/myday/services/alert-reminder.service
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  constructor(private alertReminderService: AlertReminderService) {}
+  constructor(private modalController: ModalController) {}
 
-  setReminder() {
-    this.alertReminderService.presentAlertPrompt('Add');
+  async setReminder() {
+    // this.alertReminderService.presentAlertPrompt('Add');
+    const myDayNewTask = await this.modalController.create({
+      component: NewTaskComponent
+    });
+    return await myDayNewTask.present();
   }
 }
