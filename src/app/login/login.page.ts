@@ -82,4 +82,7 @@ export class LoginPage implements OnInit {
   toggleShowPassowrd() {
     this.showPassword = !this.showPassword;
   }
+  loginWithGoogle() {
+    this.auth.logInWithGoogle();
+  }
 }

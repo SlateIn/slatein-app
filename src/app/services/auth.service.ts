@@ -5,6 +5,7 @@ import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { AlertController, NavController } from '@ionic/angular';
+import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,20 @@ export class AuthService {
     return this.userLoggedIn.asObservable();
   }
 
+  logInWithGoogle() {
+    return this.AuthLogin(new auth.GoogleAuthProvider());
+  }
+
+  AuthLogin(provider) {
+    return this.afAuth.auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log('You have been successfully logged in!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   signUp(newUser, profilePic) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
