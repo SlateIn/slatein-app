@@ -7,6 +7,7 @@ import { PasswordValidatorService } from '@services/password-validator.service';
 import { Subscription } from 'rxjs';
 import { CameraService } from '@services/camera.service';
 import { DatePipe } from '@angular/common';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 const { Storage } = Plugins;
 @Component({
@@ -24,6 +25,7 @@ export class RegisterPage implements OnInit {
   singUpFailedErrorMsg: string;
   formValueChangesSubscription: Subscription;
   photoBase64: string;
+  photo: SafeResourceUrl;
   currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
