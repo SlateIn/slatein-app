@@ -69,9 +69,9 @@ export class AuthService {
           photoURL: '',
           provider: userInfo.providerData[0].providerId
         };
-        this.userService.info.subscribe( user => {
-          this.userInfo = user;
-          if (this.userInfo === null){
+        this.userService.info.subscribe( userDetails => {
+          this.userInfo = userDetails;
+          if (this.userInfo === null) {
             this.updateUserInfo(newUser, '');
             this.initdata();
           }
