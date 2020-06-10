@@ -12,7 +12,8 @@ import { IonicModule } from '@ionic/angular';
     HeaderComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ],
   exports: [
     TodoDisplayComponent,
