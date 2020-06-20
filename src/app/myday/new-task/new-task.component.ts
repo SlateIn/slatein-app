@@ -13,6 +13,7 @@ import { AlertReminderService } from '../services/alert-reminder.service';
   styleUrls: ['./new-task.component.scss'],
 })
 export class NewTaskComponent implements OnInit {
+  title;
   updateNewTaskForm: FormGroup;
   repetationPicker = '';
   endRepetationPicker = '';
