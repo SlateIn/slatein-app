@@ -79,9 +79,6 @@ export class LoginPage implements OnInit {
         .catch((err) => (this.loginErrorMsg = err.message));
     }
   }
-  signUp() {
-    this.navCtrl.navigateForward('/login/register');
-  }
   toggleShowPassowrd() {
     this.showPassword = !this.showPassword;
   }
