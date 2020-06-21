@@ -1,7 +1,11 @@
 
 <ion-content class="signUp-page">
-  <ion-icon class="register-icon" name="person-circle-sharp"></ion-icon>
-
+    <ion-item class="default-avatar">
+        <ion-avatar (click)="onProfilePicClick()">
+          <img #profilePic [src]="(photo)?photo:avatarSrc" />
+          <ion-icon mode="md" name="add-circle"></ion-icon>
+        </ion-avatar>
+    </ion-item>
   <section>
     <ion-card class="slateIn-card">
       <ion-card-content>

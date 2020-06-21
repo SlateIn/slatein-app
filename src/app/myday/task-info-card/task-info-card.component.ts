@@ -19,7 +19,6 @@ export class TaskInfoCardComponent implements OnInit {
   ngOnInit() {}
 
   updateTask() {
-    console.log(this.taskinfo);
     this.alertReminderService.presentAlertPrompt('Update');
   }
 

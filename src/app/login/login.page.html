@@ -75,13 +75,16 @@
               <ion-label color="danger">{{loginErrorMsg}}</ion-label>
             </div>
           </section>
-
-          <section class="ion-text-center margin-top margin-bottom">
-            <ion-label> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
-                <ion-label class="signUp-text">Sign Up</ion-label>
-              </a>
-            </ion-label>
-          </section>
+              <ion-item class= "ion-text-center" lines="none" color="none">
+                <ion-label > 
+                  <span>New to SlateIn? </span>
+                  <span>
+                    <a routerLink="/login/register" routerDirection="forward">
+                     Sign Up
+                    </a>
+                  </span>
+                </ion-label>
+              </ion-item>
         </form>
       </ion-card-content>
     </ion-card>

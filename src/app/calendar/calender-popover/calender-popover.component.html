@@ -1,0 +1,19 @@
+<ion-card class="ion-no-margin">
+  <ion-card-content>
+    <header>
+      <ion-toolbar>
+        <span>{{calenderTaskData.title}}</span>
+        <span class="edit-icon" slot="end" (click)="editCalender()">
+          <ion-icon name="create-outline"></ion-icon>
+        </span>
+      </ion-toolbar>
+    </header>
+
+    <div class="task-description">
+      {{calenderTaskData.desc}}
+    </div>
+    <span class="time">
+      {{calenderTaskData.endTimePeriod | date :'shortTime'}}
+    </span>
+  </ion-card-content>
+</ion-card>

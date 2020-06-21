@@ -8,6 +8,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 // ionic4-datepicker
 import { Ionic4DatepickerModule } from '@logisticinfotech/ionic4-datepicker';
 import { HeaderComponent } from '@app/components/header/header.component';
+import { CalenderPopoverComponent } from './calender-popover/calender-popover.component';
+import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
 
 @NgModule({
   imports: [
@@ -16,8 +18,10 @@ import { HeaderComponent } from '@app/components/header/header.component';
     IonicModule,
     NgCalendarModule,
     CalendarPageRoutingModule,
-    Ionic4DatepickerModule
+    Ionic4DatepickerModule,
+    SharedcomponentModule
   ],
-  declarations: [CalendarPage, HeaderComponent]
+  declarations: [CalendarPage, CalenderPopoverComponent],
+  entryComponents: [CalenderPopoverComponent]
 })
 export class CalendarPageModule {}

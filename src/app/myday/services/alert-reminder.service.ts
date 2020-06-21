@@ -5,12 +5,14 @@ import { LocalNotificationsService } from '@services/local-notifications.service
 import { TaskService } from '@services/task.service';
 
 export interface Reminder {
+  repetationPicker?: any;
   title: string;
   description: string;
   startDate: string;
   startTime: string;
   endDate: string;
   endTime: string;
+  id?: number;
 }
 
 @Injectable({
@@ -32,7 +34,7 @@ export class AlertReminderService {
     private alertController: AlertController,
     private notification: LocalNotificationsService,
     private taskService: TaskService
-  ) {}
+  ) { }
 
   // tslint:disable-next-line: max-line-length
   async presentAlertPrompt(
@@ -117,7 +119,7 @@ export class AlertReminderService {
           text: type,
           handler: (data) => {
             if (data.title && data.description && data.startDate && data.startTime && data.endTime) {
-              this.onSubmit(data, repeat);
+              this.onSubmit(data, repeat, 'add');
               return true;
             }
             return false;
@@ -200,27 +202,43 @@ export class AlertReminderService {
     await alert.present();
   }
 
-  async onSubmit(value: Reminder, repeat: 'year' | 'month' | 'two-weeks' | 'week' | 'day' | 'never' = 'never') {
-    const startTimePeriod = new Date(value.startDate + ' ' + value.startTime).toString();
-    const endTimePeriod = (!value.endDate || value.endDate == 'never') ? 'never' : new Date(value.endDate + ' ' + value.endTime).toString();
+  async onSubmit(value: Reminder, repeat, type: any) {
+    const startTimePeriod = new Date(value.startDate).toString();
+    // tslint:disable-next-line:max-line-length
+    const endTimePeriod = (!value.endDate || value.endDate === 'never') ? 'never' : new Date(value.endDate).toString();
+    const onlyEndTime = `${new Date(value.endTime).getHours()} : ${new Date(value.endTime).getMinutes()}`;
 
-    const onlyEndTime = value.endTime;
-
-    const data: TaskReminderInfo = {
-      title: value.title,
-      desc: value.description,
-      image: '',
-      status: 'pending',
-      repeat,
-      favourite: false,
-      id: Date.now(),
-      startTimePeriod,
-      endTimePeriod,
-      onlyEndTime,
-      neverEnd: endTimePeriod === 'never'
-    };
-    console.log(data);
-    this.taskService.createTask(data);
-    this.notification.scheduleAt(data);
+    if (type === undefined || type === null) {
+      const data: TaskReminderInfo = {
+        title: value.title,
+        desc: value.description,
+        image: '',
+        status: 'pending',
+        repeat,
+        favourite: false,
+        id: Date.now(),
+        startTimePeriod,
+        endTimePeriod,
+        onlyEndTime,
+        neverEnd: endTimePeriod === 'never'
+      };
+      this.taskService.createTask(data);
+      this.notification.scheduleAt(data);
+    } else {
+      const data = {
+        title: value.title,
+        desc: value.description,
+        image: '',
+        status: 'pending',
+        repeat : value.repetationPicker,
+        favourite: false,
+        id: type,
+        startTimePeriod,
+        endTimePeriod,
+        onlyEndTime,
+        neverEnd: endTimePeriod === 'never'
+      };
+      this.taskService.updateTask(data);
+    }
   }
 }
