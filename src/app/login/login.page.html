@@ -7,79 +7,75 @@
           <div>
             <img src="../../assets/icon/logo.svg" alt="slateInLogo">
           </div>
-          <h1 class="logo-text">SlateIn</h1>
+          <h1 class="app-title">SlateIn</h1>
         </ion-col>
       </ion-row>
     </ion-grid>
   </section>
 
   <section>
-    <ion-card class="slateIn-card">
-      <ion-card-content>
-        <form class="slateIn-form" [formGroup]="loginForm" (ngSubmit)="login()">
-          <!-- Form field Username-->
-          <ion-item class="form-field">
-            <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
-            </ion-input>
-            <ion-icon name="mail-outline"></ion-icon>
-          </ion-item>
+    <form class="login-form slateIn-form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <!-- Form field Username-->
+      <ion-item>
+        <ion-input class="app-form-field" autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
+        </ion-input>
+        <ion-icon name="mail-outline"></ion-icon>
+      </ion-item>
 
-          <!-- Form field Password-->
-          <ion-item class="form-field">
-            <ion-input placeholder="Password" formControlName="password" [type]="!showPassword ? 'password' : 'text'"
-              clear-on-edit autocomplete="new-password">
-            </ion-input>
-            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
-            <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
-          </ion-item>
+      <!-- Form field Password-->
+      <ion-item>
+        <ion-input class="app-form-field" placeholder="Password" formControlName="password" [type]="!showPassword ? 'password' : 'text'"
+          clear-on-edit autocomplete="new-password">
+        </ion-input>
+        <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
+        <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
+      </ion-item>
 
-          <ion-list class="margin-bottom remember-me-row">
-            <ion-item lines="none" color="none">
-              <ion-checkbox size="small" slot="start" formControlName="canRemember" color="slateInPrimary">
-              </ion-checkbox>
-              <ion-label>
-                Remember Me
-              </ion-label>
+      <ion-list class="margin-bottom remember-me-row">
+        <ion-item lines="none" color="none">
+          <ion-checkbox size="small" slot="start" formControlName="canRemember" color="slateInPrimary">
+          </ion-checkbox>
+          <ion-label class="notice-text-level-1">
+            Remember Me
+          </ion-label>
 
-              <ion-label class="fg-pass-label">
-                <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
-                  <ion-label>Forgot Password</ion-label>
-                </a>
-              </ion-label>
-            </ion-item>
-          </ion-list>
+          <ion-label class="fg-pass-label">
+            <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
+              <ion-label class="notice-text-level-1">Forgot Password</ion-label>
+            </a>
+          </ion-label>
+        </ion-item>
+      </ion-list>
 
-          <ion-button expand="block" class="login-button" fill="solid" (click)="login()" [disabled]="!loginForm.valid">
-            <ion-label>
-              Login
-            </ion-label>
-          </ion-button>
-          <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithGoogle()">
-            <ion-label>
-              <ion-icon color="danger" title="Google" name="logo-google"></ion-icon>
-            </ion-label>
-          </ion-button>
-          <!-- <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithFb()">
+      <ion-button expand="block" class="login-button btn-primary" fill="solid" (click)="login()" [disabled]="!loginForm.valid">
+        <ion-label class="btn-label">
+          Login
+        </ion-label>
+      </ion-button>
+      <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithGoogle()">
+        <ion-label>
+          <ion-icon color="danger" title="Google" name="logo-google"></ion-icon>
+        </ion-label>
+      </ion-button>
+      <!-- <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithFb()">
             <ion-label>
               <ion-icon color="primary" name="logo-facebook" title="Facebook"></ion-icon>
             </ion-label>
           </ion-button> -->
 
-          <section class="margin-bottom margin-top text-center">
-            <div class="error-div">
-              <ion-label color="danger">{{loginErrorMsg}}</ion-label>
-            </div>
-          </section>
+      <section class="margin-bottom margin-top text-center">
+        <div class="error-div">
+          <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+        </div>
+      </section>
 
-          <section class="ion-text-center margin-top margin-bottom">
-            <ion-label> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
-                <ion-label class="signUp-text">Sign Up</ion-label>
-              </a>
-            </ion-label>
-          </section>
-        </form>
-      </ion-card-content>
-    </ion-card>
+      <section class="ion-text-center margin-top margin-bottom">
+        <ion-label> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
+            <ion-label class="signUp-text">Sign Up</ion-label>
+          </a>
+        </ion-label>
+      </section>
+    </form>
   </section>
 
 </ion-content>

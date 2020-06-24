@@ -1,29 +1,81 @@
 // ######################################### Start Global Customization #########################################
 
+/* Ion-button start*/
 ion-button {
   --background: var(--ion-color-slateIn-success);
 }
 
-// Bottom-Tab bar style, Applied Globally
-ion-tab-bar {
-  padding: 3% 0%;
-
-  ion-tab-button {
-    margin: 2%;
-    border-radius: 10px;
-
-
-    ion-icon {
-      color: var(--ion-color-slateIn-primary);
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .tab-selected {
-    box-shadow: none;
+.btn-primary {
+  .btn-label {
+    color: var(--ion-color-slateIn-primary);
+    font-weight: 600;
+    font-size: 1.0625rem; // ~17px;
+    line-height: 22px;
+    padding: 1rem 1.0625rem; // ~16px 17px
   }
 }
+
+/* Ion-button End*/
+
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+  --padding-start: 0;
+}
+
+;
+
+// Text use for notice ex."Remember Me", "Forget password" 
+.notice-text-level-1 {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.notice-text-level-2 {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+// SlateIn - FORM DEFAULT CSS
+
+ion-input {
+  --padding-start:0px;
+  --padding-end:0px;
+  --padding-top:0px;
+  --padding-bottom:0px;
+};
+.slateIn-form {
+  border: 1px solid red;
+}
+
+// Form Field Style
+.app-form-field {
+  font-size: 1.0625rem; // ~17px;
+  width: 100%;
+  border: 1px solid blue;
+  padding: 1.1875rem 1rem; // ~19px 16px
+}
+
+// Bottom-Tab bar style, Applied Globally
+// ion-tab-bar {
+//   padding: 3% 0%;
+
+//   ion-tab-button {
+//     margin: 2%;
+//     border-radius: 10px;
+
+
+//     ion-icon {
+//       color: var(--ion-color-slateIn-primary);
+//       width: 22px;
+//       height: 22px;
+//     }
+//   }
+
+//   .tab-selected {
+//     box-shadow: none;
+//   }
+// }
 
 // SlateIn - CARD DEFAULT CSS
 .slateIn-card {
@@ -35,56 +87,87 @@ ion-tab-bar {
   }
 }
 
-// SlateIn - FORM DEFAULT CSS
-.slateIn-form {}
+// .form-field {
+//   margin: 0.8rem 0rem;
+//   padding: 0;
+//   // border-bottom: 1.5px solid;
+//   border-radius: 10px;
+// }
 
-.form-field {
-  margin: 0.8rem 0rem;
-  padding: 0;
-  // border-bottom: 1.5px solid;
-  border-radius: 10px;
-}
+/* 
+    * Values that can go to global CSS 
+    * font size
+        -> App logo
+        -> Form field text
+        -> Remember Me text
+        -> Button height/ width
+        -> Button text size
+        -> Already have an account Text ? 
+        -> Forgot password text
+*/
 
 // ######################################### End Global Customization ######################################### 
 
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
-.tab-selected {
-  color: var(--ion-color-slateIn-success);
-  font-family: RobotoBold;
 
-  ion-icon {
-    color: var(--ion-color-slateIn-success);
-    font-family: RobotoBold;
+.margin-auto {
+  margin: auto;
+}
 
-    ion-icon {
-      color: var(--ion-color-slateIn-success);
-    }
+.align-center {
+  align-items: center;
+}
 
-    ion-label {
-      font-size: medium;
-    }
-  }
+.align-left {
+  align-items: left;
+}
+
+.align-right {
+  align-items: right;
+}
+
+width-100 {
+  width: 100%;
 }
 
 
+// .tab-selected {
+//   color: var(--ion-color-slateIn-success);
+//   font-family: RobotoBold;
 
-.fab-add {
-  // border-bottom: 0.5px solid black;
-  border-radius: 50%;
-  height: 80px;
-  width: 80px;
-  margin-left: -43px;
+//   ion-icon {
+//     color: var(--ion-color-slateIn-success);
+//     font-family: RobotoBold;
 
-  ion-fab-button {
-    --background: var(--ion-color-slateIn-success);
-    border: 10px solid #fff;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-  }
-}
+//     ion-icon {
+//       color: var(--ion-color-slateIn-success);
+//     }
+
+//     ion-label {
+//       font-size: medium;
+//     }
+//   }
+// }
+
+
+
+// .fab-add {
+//   // border-bottom: 0.5px solid black;
+//   border-radius: 50%;
+//   height: 80px;
+//   width: 80px;
+//   margin-left: -43px;
+
+//   ion-fab-button {
+//     --background: var(--ion-color-slateIn-success);
+//     border: 10px solid #fff;
+//     border-radius: 50%;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
 
 // ######################################### End Global Customization #########################################
 
@@ -108,23 +191,14 @@ ion-tab-bar {
 // }
 // ######################################### End Ion Icons #########################################
 
-app-register,
-app-login,
-app-forgot-password {
-  div.register-card {
-    padding: 10px;
-  }
-}
+// app-register,
+// app-login,
+// app-forgot-password {
+//   div.register-card {
+//     padding: 10px;
+//   }
+// }
 
-.float-right {
-  float: right;
-}
-
-input[placeholder='startDate'],
-input[placeholder='endDate'],
-input[placeholder='startTime'],
-input[placeholder='endTime'] {
-  border: none !important;
-  background-color: #f9f9f9 !important;
-  font-size: larger !important;
-}
+// .float-right {
+//   float: right;
+// }

@@ -55,12 +55,20 @@
 
 
 
-  /* Success: SlateIn  action color*/
+  /* Success: SlateIn action color*/
   --ion-color-slateIn-success: #00909E;
   --ion-color-slateIn-primary-rgb: 0,144,158;
   --ion-color-slateIn-primary-contrast: #ffffff;
   --ion-color-slateIn-primary-contrast-rgb: 255,255,255;
   --ion-color-slateIn-primary-shade: #007f8b;
+
+  /* Default White: SlateIn color*/
+  --ion-color-default-white: #ffffff;
+  --ion-color-default-white-rgb: 255,255,255;
+  --ion-color-default-white-contrast: #000000;
+  --ion-color-default-white-contrast-rgb: 0,0,0;
+  --ion-color-default-white-shade: #e0e0e0;
+  --ion-color-default-white-tint: #ffffff;
 
 
 
