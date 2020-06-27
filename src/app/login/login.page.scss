@@ -1,9 +1,13 @@
 
 .login-page {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
     // --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
 
     /* Logo and title class start */
     .app-logo {
+        flex: 0 1 auto;
         img {
             width: 40vw;
         }
@@ -22,14 +26,12 @@
     /* Logo and title class End */
 
     /* Form Style start */
-    .login-form {
-        .list-ios {
-            background-color: transparent;
-        }
+    .someSection {
+        flex: 1 1 auto;
     }
-
-    ion-checkbox {
-        margin-right: 0.5rem;
+    .login-form {
+        // display: flex;
+        // flex-direction: column;
     }
     
     .fg-pass-label {
@@ -41,18 +43,10 @@
         text-align: center;
         margin-bottom: 2%;
      }
-    // .login-button {
-    //     margin: 1.5rem 0.7rem;
-    //     color: white;
 
-    //     ion-label {
-    //         font-size: 1.3em;
-    //     }
+    // a,
+    // h4 {
+    //     color: var(--ion-color-slateIn-primary);
     // }
-
-    a,
-    h4 {
-        color: var(--ion-color-slateIn-primary);
-    }
 
 }

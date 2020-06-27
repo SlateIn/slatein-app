@@ -17,67 +17,52 @@ ion-button {
 
 /* Ion-button End*/
 
+/* Ion-items start */
+// Default remove all padding from ion-item
 ion-item {
-  --padding-end: 0px;
-  --inner-padding-end: 0px;
-  --padding-start: 0;
-}
+   --padding-start: 0;
+};
+/* Ion-items ends*/
 
-;
-
+/* Type of Text start */
 // Text use for notice ex."Remember Me", "Forget password" 
 .notice-text-level-1 {
-  font-size: 13px;
+  // Need to find solution for !important
+  font-size: 13px !important;
   line-height: 18px;
 }
 
 .notice-text-level-2 {
-  font-size: 15px;
+  font-size: 15px !important;
   line-height: 20px;
 }
+/* Type of Text ends */
 
-// SlateIn - FORM DEFAULT CSS
 
-ion-input {
-  --padding-start:0px;
-  --padding-end:0px;
-  --padding-top:0px;
-  --padding-bottom:0px;
-};
+
+/* SlateIn - FORM */
 .slateIn-form {
-  border: 1px solid red;
+  ion-item.item-input-field {
+    // min-height: 60px;
+    --padding-top:15px;
+    --border-color: var(--ion-color-grey-light);
+
+    // Form Field Style
+    .app-form-field {
+      font-size: 1.0625rem; // ~17px;
+      width: 100%;
+      // min-height: 60px;
+      padding: 1.1875rem 1rem; // ~19px 16px
+    }
+
+    ion-icon {
+      color:var(--ion-color-grey-light);
+    }
+  }
 }
 
-// Form Field Style
-.app-form-field {
-  font-size: 1.0625rem; // ~17px;
-  width: 100%;
-  border: 1px solid blue;
-  padding: 1.1875rem 1rem; // ~19px 16px
-}
 
-// Bottom-Tab bar style, Applied Globally
-// ion-tab-bar {
-//   padding: 3% 0%;
-
-//   ion-tab-button {
-//     margin: 2%;
-//     border-radius: 10px;
-
-
-//     ion-icon {
-//       color: var(--ion-color-slateIn-primary);
-//       width: 22px;
-//       height: 22px;
-//     }
-//   }
-
-//   .tab-selected {
-//     box-shadow: none;
-//   }
-// }
-
-// SlateIn - CARD DEFAULT CSS
+/* SlateIn - CARD DEFAULT CSS start */
 .slateIn-card {
   background: none;
   padding: 0.2rem 0.2rem;
@@ -87,24 +72,7 @@ ion-input {
   }
 }
 
-// .form-field {
-//   margin: 0.8rem 0rem;
-//   padding: 0;
-//   // border-bottom: 1.5px solid;
-//   border-radius: 10px;
-// }
-
-/* 
-    * Values that can go to global CSS 
-    * font size
-        -> App logo
-        -> Form field text
-        -> Remember Me text
-        -> Button height/ width
-        -> Button text size
-        -> Already have an account Text ? 
-        -> Forgot password text
-*/
+/* SlateIn - CARD DEFAULT CSS end */
 
 // ######################################### End Global Customization ######################################### 
 
@@ -112,10 +80,36 @@ ion-input {
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
 
+// Margin Start //
 .margin-auto {
   margin: auto;
 }
 
+.margin-bottom16 {
+  margin-bottom: 1rem;
+}
+
+.margin-top16 {
+  margin-bottom: 1rem;
+}
+
+.margin-v-16 {
+  margin: 1rem 0rem;
+}
+
+.margin-h-16 {
+  margin-bottom: 0rem 1rem;
+}
+
+// Margin Ends //
+
+// Padding Start //
+
+.padding16 {
+  padding: 1rem;
+}
+
+// Padding Ends // 
 .align-center {
   align-items: center;
 }
@@ -133,72 +127,13 @@ width-100 {
 }
 
 
-// .tab-selected {
-//   color: var(--ion-color-slateIn-success);
-//   font-family: RobotoBold;
-
-//   ion-icon {
-//     color: var(--ion-color-slateIn-success);
-//     font-family: RobotoBold;
-
-//     ion-icon {
-//       color: var(--ion-color-slateIn-success);
-//     }
-
-//     ion-label {
-//       font-size: medium;
-//     }
-//   }
-// }
-
-
-
-// .fab-add {
-//   // border-bottom: 0.5px solid black;
-//   border-radius: 50%;
-//   height: 80px;
-//   width: 80px;
-//   margin-left: -43px;
-
-//   ion-fab-button {
-//     --background: var(--ion-color-slateIn-success);
-//     border: 10px solid #fff;
-//     border-radius: 50%;
-//     width: 100%;
-//     height: 100%;
-//   }
-// }
-
 // ######################################### End Global Customization #########################################
 
 // ######################################### Start Global Margin & Padding Classes #########################################
 
-// .margin-bottom {
-//   margin-bottom: 20px !important;
-// }
-
-// .margin-top {
-//   margin-top: 20px !important;
-// }
 
 // ######################################### End Global Margin & Padding Classes #########################################
 
 // ######################################### Start Ion Icons #########################################
-// ion-fab {
-//   ion-icon {
-//     color: #ffffff;
-//   }
-// }
+
 // ######################################### End Ion Icons #########################################
-
-// app-register,
-// app-login,
-// app-forgot-password {
-//   div.register-card {
-//     padding: 10px;
-//   }
-// }
-
-// .float-right {
-//   float: right;
-// }
