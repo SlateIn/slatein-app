@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '@services/auth.service';
@@ -13,13 +13,14 @@ const { Storage } = Plugins;
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   email: string;
   password: string;
   loginErrorMsg: string;
   loginForm: FormGroup;
   showPassword: boolean;
   formValueChangesSubscription: Subscription;
+  subscription: Subscription;
 
   constructor(
     private auth: AuthService,
@@ -134,5 +135,8 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateRoot('/tabs/myday');
       })
       .catch((err) => (this.loginErrorMsg = err.message));
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
