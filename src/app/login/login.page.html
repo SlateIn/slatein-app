@@ -1,86 +1,106 @@
 <ion-content class="login-page">
+  <article class="parent padding16">
+    <section class="app-logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="app-logo-col">
+            <div>
+              <img src="../../assets/icon/logo.svg" alt="slateInLogo">
+            </div>
+            <h1 class="app-title page-header-level-1">Welcome Back</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
 
-  <section class="app-logo" style="border: 1px solid orange;">
-    <ion-grid>
-      <ion-row>
-        <ion-col class="app-logo-col">
-          <!-- <div>
-            <img src="../../assets/icon/logo.svg" alt="slateInLogo">
-          </div> -->
-          <h1 class="app-title">SlateIn</h1>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </section>
+    <section class="form-section">
+      <form class="login-form slateIn-form" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div>
+          <!-- Form field Username-->
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Email" formControlName="email" type="text"
+              autocomplete="username">
+            </ion-input>
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-item>
 
+          <!-- Form field Password-->
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" placeholder="Password" formControlName="password"
+              [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password">
+            </ion-input>
+            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
+            <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
+          </ion-item>
 
-  <section class="someSection padding16" style="border: 1px solid greenyellow;">
-    <form class="login-form slateIn-form" [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="start" style="border:1px solid red;align-items: flex-start;">
-        <!-- Form field Username-->
-      <ion-item class="item-input-field">
-        <ion-input class="app-form-field" autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
-        </ion-input>
-        <ion-icon name="mail-outline"></ion-icon>
-      </ion-item>
+          <ion-item lines="none" class="">
+            <ion-label class="fg-pass-label margin-v-16">
+              <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
+                <ion-label class="notice-text-level-1">Forgot password?</ion-label>
+              </a>
+            </ion-label>
+          </ion-item>
 
-      <!-- Form field Password-->
-      <ion-item class="item-input-field" >
-        <ion-input class="app-form-field" placeholder="Password" formControlName="password" [type]="!showPassword ? 'password' : 'text'"
-          clear-on-edit autocomplete="new-password">
-        </ion-input>
-        <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
-        <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
-      </ion-item>
+          <section class="margin-bottom margin-top text-center">
+            <div class="error-div">
+              <ion-label color="danger">{{loginErrorMsg}}</ion-label>
+            </div>
+          </section>
+        </div>
 
-      <!-- <ion-list class="margin-bottom remember-me-row"> -->
-        <ion-item lines="none" class="">
-          <ion-label class="fg-pass-label margin-v-16">
-            <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear">
-              <ion-label class="notice-text-level-1">Forgot Password</ion-label>
-            </a>
-          </ion-label>
-        </ion-item>
-        <!-- </ion-list> -->
-      </div>
+        <!-- button section-->
+        <div>
+          <ion-button expand="block" class="action-button-full" fill="solid" (click)="login()"
+            [disabled]="!loginForm.valid">
+            <ion-label class="btn-label notice-text-level-3">
+              Sign In
+            </ion-label>
+          </ion-button>
 
-      <!-- button section-->
-      <div class="end" style="border:1px solid blue;align-items: flex-end;">
-        <ion-button expand="block" class="login-button btn-primary" fill="solid" (click)="login()" [disabled]="!loginForm.valid">
-          <ion-label class="btn-label">
-            Login
-          </ion-label>
-        </ion-button>
-        <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithGoogle()">
-          <ion-label>
-            <ion-icon color="danger" title="Google" name="logo-google"></ion-icon>
-          </ion-label>
-        </ion-button>
-        <!-- <ion-button expand="block" class="login-button" color="light" fill="solid" (click)="loginWithFb()">
-              <ion-label>
-                <ion-icon color="primary" name="logo-facebook" title="Facebook"></ion-icon>
+          <section class="ion-text-center">
+            <ion-label class="notice-text-level-2 text-reg"> Don't have an account? <a routerLink="/login/register"
+                routerDirection="forward">
+                <ion-label class="signUp-text">Create account</ion-label>
+              </a>
+            </ion-label>
+          </section>
+
+          <!-- Social media login buttons -->
+          <section class="btn-options">
+            <div>
+              <ion-label class="text-reg">
+                Continue with
               </ion-label>
-            </ion-button> -->
-  
-        <section class="margin-bottom margin-top text-center">
-          <div class="error-div">
-            <ion-label color="danger">{{loginErrorMsg}}</ion-label>
-          </div>
-        </section>
-  
-        <section class="ion-text-center margin-top margin-bottom">
-          <ion-label> New to SlateIn? <a routerLink="/login/register" routerDirection="forward">
-              <ion-label class="signUp-text">Sign Up</ion-label>
-            </a>
-          </ion-label>
-        </section>
-      </div>
-      
-     
-    </form>
-  </section>
-  <section>
-    
-  </section>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options" fill="white" (click)="loginWithGoogle()">
+                <ion-label>
+                  <ion-icon color="primary" title="Google" name="logo-google" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options"  fill="white" (click)="loginWithFb()">
+                <ion-label>
+                  <ion-icon color="primary" name="logo-facebook" title="Facebook" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options" fill="white" (click)="loginWithFb()">
+                <ion-label>
+                  <ion-icon color="primary" name="logo-facebook" title="Facebook" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+          </section>
+
+        </div>
+
+      </form>
+    </section>
+  </article>
+
+
 
 </ion-content>

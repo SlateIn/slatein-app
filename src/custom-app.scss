@@ -1,19 +1,13 @@
 // ######################################### Start Global Customization #########################################
 
 /* Ion-button start*/
-ion-button {
-  --background: var(--ion-color-slateIn-success);
+
+
+.action-button-full {
+  min-height: 3.5rem;
+  margin-bottom: 32px;
 }
 
-.btn-primary {
-  .btn-label {
-    color: var(--ion-color-slateIn-primary);
-    font-weight: 600;
-    font-size: 1.0625rem; // ~17px;
-    line-height: 22px;
-    padding: 1rem 1.0625rem; // ~16px 17px
-  }
-}
 
 /* Ion-button End*/
 
@@ -25,7 +19,11 @@ ion-item {
 /* Ion-items ends*/
 
 /* Type of Text start */
-// Text use for notice ex."Remember Me", "Forget password" 
+// Text use for notice ex."Remember Me", "Forget password"
+ion-label {
+  font-weight: 600;
+  color:  var(--ion-color-slateIn-primary);
+} 
 .notice-text-level-1 {
   // Need to find solution for !important
   font-size: 13px !important;
@@ -36,14 +34,33 @@ ion-item {
   font-size: 15px !important;
   line-height: 20px;
 }
+
+.notice-text-level-3 {
+  font-size: 17px !important;
+  line-height: 22px;
+}
+
+.notice-text-level-4 {
+  font-size: 10px !important;
+  line-height: 12px;
+  font-weight: 500;
+}
+
+.page-header-level-1 {
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 41px;
+  letter-spacing: 0.374px;
+
+}
 /* Type of Text ends */
 
 
 
 /* SlateIn - FORM */
 .slateIn-form {
+  // Any ion-item tag with form field in it
   ion-item.item-input-field {
-    // min-height: 60px;
     --padding-top:15px;
     --border-color: var(--ion-color-grey-light);
 
@@ -51,8 +68,6 @@ ion-item {
     .app-form-field {
       font-size: 1.0625rem; // ~17px;
       width: 100%;
-      // min-height: 60px;
-      padding: 1.1875rem 1rem; // ~19px 16px
     }
 
     ion-icon {
