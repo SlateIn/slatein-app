@@ -4,26 +4,6 @@ ion-button {
   --background: var(--ion-color-slateIn-success);
 }
 
-// Bottom-Tab bar style, Applied Globally
-ion-tab-bar {
-  padding: 3% 0%;
-
-  ion-tab-button {
-    margin: 2%;
-    border-radius: 10px;
-
-
-    ion-icon {
-      color: var(--ion-color-slateIn-primary);
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .tab-selected {
-    box-shadow: none;
-  }
-}
 
 // SlateIn - CARD DEFAULT CSS
 .slateIn-card {
@@ -50,23 +30,7 @@ ion-tab-bar {
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
-.tab-selected {
-  color: var(--ion-color-slateIn-success);
-  font-family: RobotoBold;
 
-  ion-icon {
-    color: var(--ion-color-slateIn-success);
-    font-family: RobotoBold;
-
-    ion-icon {
-      color: var(--ion-color-slateIn-success);
-    }
-
-    ion-label {
-      font-size: medium;
-    }
-  }
-}
 
 
 
