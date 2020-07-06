@@ -8,7 +8,7 @@
         border-radius: 10px;
 
         section {
-            border: 0.5px solid var(--ion-color-slateIn-primary);
+            border: 0.5px solid var(--ion-color-primary);
             border-radius: 10px;
             height: 100%;
             overflow: hidden;
@@ -21,7 +21,7 @@
             transition: all 400ms ease;
             p {
                 
-                border-bottom: 0.3px solid var(--ion-color-slateIn-primary);
+                border-bottom: 0.3px solid var(--ion-color-primary);
                 padding: 5%;
                 font-size: large;
             }
