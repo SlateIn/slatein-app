@@ -19,22 +19,21 @@ export class TaskDisplayComponent implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-    this.showData();
+    // this.showData();
   }
 
-  /**
-   * just to display incoming data from parent
-   */
-  showData() {
-    console.log('Coming from Display Component', this.allTaskForDisplay);
-  }
+  // /**
+  //  * just to display incoming data from parent
+  //  */
+  // showData() {
+  //   console.log('Coming from Display Component', this.allTaskForDisplay);
+  // }
 
   /**
    * Getting taskData of task form click event on column
-   * @param taskData
+   * @ param taskData
    */
   async getTaskId(taskData) {
-    console.log(taskData);
     // this.taskIdEmit.emit(taskData);
     const myDayNewTask = await this.modalController.create({
       component: NewTaskComponent,
