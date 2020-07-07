@@ -66,9 +66,9 @@ export class MydayPage implements OnInit, OnDestroy {
     console.log('This is id of clicked Task', id);
   }
 
-  setReminder() {
-    this.alertReminderService.presentAlertPrompt('Add');
-  }
+  // setReminder() {
+  //   this.alertReminderService.presentAlertPrompt('Add');
+  // }
 
   segmentChanged(ev: any) {
     this.segment = ev.detail.value;
