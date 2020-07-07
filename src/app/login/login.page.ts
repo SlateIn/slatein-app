@@ -5,6 +5,7 @@ import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TaskService } from '@services/task.service';
+import { AnalyticsService } from '@services/analytics.service';
 
 const { Storage } = Plugins;
 
@@ -25,7 +26,8 @@ export class LoginPage implements OnInit {
     private auth: AuthService,
     private navCtrl: NavController,
     private fb: FormBuilder,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private analyticsService: AnalyticsService
   ) {}
 
   ngOnInit() {
@@ -75,6 +77,11 @@ export class LoginPage implements OnInit {
           }
           this.taskService.getAllTasks();
           this.navCtrl.navigateRoot('/tabs/myday');
+          this.analyticsService.logEvent('login', {
+            content_type: 'user',
+            userInfo: this.loginForm.value.email
+          });
+          this.analyticsService.trackScreen('Home');
         })
         .catch((err) => (this.loginErrorMsg = err.message));
     }
