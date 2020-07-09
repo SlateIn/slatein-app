@@ -25,7 +25,7 @@ export class AnalyticsService {
 
   setUserProperty(key: string, value: string) {
     this.platform.ready().then(() => {
-      //this.firebaseX.setUserProperty(key, value);
+      //this.analytics.setUserProperties(value);
     });
   }
 
@@ -38,7 +38,7 @@ export class AnalyticsService {
   //Track on 'screen-view' event in Firebase Analytics
   trackScreen(name: string) {
     this.platform.ready().then(() => {
-      //this.firebaseX.setScreenName(name);
+      this.analytics.setCurrentScreen(name);
     });
   }
 }
