@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
         this.loginForm.setValue({ email: res.value, password: '', canRemember: true });
       }
     });
+    this.analyticsService.trackScreen('login');
   }
 
   get controls() {
@@ -77,11 +78,6 @@ export class LoginPage implements OnInit {
           }
           this.taskService.getAllTasks();
           this.navCtrl.navigateRoot('/tabs/myday');
-          this.analyticsService.logEvent('login', {
-            content_type: 'user',
-            userInfo: this.loginForm.value.email
-          });
-          this.analyticsService.trackScreen('Home');
         })
         .catch((err) => (this.loginErrorMsg = err.message));
     }

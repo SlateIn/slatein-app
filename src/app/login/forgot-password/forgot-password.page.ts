@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AnalyticsService } from '@services/analytics.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss']
 })
-export class ForgotPasswordPage {
+export class ForgotPasswordPage implements OnInit{
   email: string;
   resetPwdFailedErrorMsg: string;
   constructor(
     private auth: AuthService,
     private loadingController: LoadingController,
     private navCtrl: NavController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private analyticsService: AnalyticsService
   ) {}
+
+  ngOnInit() {
+    this.analyticsService.trackScreen('forgot_password');
+  }
 
   async reset() {
     const loading = await this.createLoadingAlert();

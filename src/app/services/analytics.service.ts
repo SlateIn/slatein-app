@@ -12,7 +12,6 @@ export class AnalyticsService {
 
   // Tracks a custom event in Firebase Analytics
   logEvent(name: string, properties: object) {
-
     this.platform.ready().then(() => {
       // Ex. name="select-content" , properties = {content-type: "page-view", item-id: "home"}
       this.analytics.logEvent(name, properties);

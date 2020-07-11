@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { CameraService } from '@services/camera.service';
 import { DatePipe } from '@angular/common';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { AnalyticsService } from '@services/analytics.service';
 
 const { Storage } = Plugins;
 @Component({
@@ -37,7 +38,8 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     private pwdValidator: PasswordValidatorService,
     private datepipe: DatePipe,
-    private photoService: CameraService
+    private photoService: CameraService,
+    private analyticsService: AnalyticsService
   ) {}
 
   ngOnInit() {
@@ -56,6 +58,8 @@ export class RegisterPage implements OnInit {
       }
     );
     this.currentDate = this.datepipe.transform(this.currentDate, 'yyyy-MM-dd');
+
+    this.analyticsService.trackScreen('register');
   }
 
   ionViewWillLeave() {
