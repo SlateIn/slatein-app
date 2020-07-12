@@ -28,6 +28,11 @@ ion-button {
   border-radius: 10px;
 }
 
+.page-title {
+  font-size: 2rem ;
+  
+}
+
 // ######################################### End Global Customization ######################################### 
 
 
@@ -37,25 +42,25 @@ ion-button {
 
 
 
-.fab-add {
-  // border-bottom: 0.5px solid black;
-  border-radius: 50%;
-  height: 80px;
-  width: 80px;
-  margin-left: -43px;
+// .fab-add {
+//   // border-bottom: 0.5px solid black;
+//   border-radius: 50%;
+//   height: 80px;
+//   width: 80px;
+//   margin-left: -43px;
 
-  ion-fab-button {
-    --background: var(--ion-color-tertiary);
-    --background-activated: var(--ion-color-tertiary-shade);
-    border: 10px solid #fff;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    --color: var(--ion-color-primary);
-    --color-activated: var(--ion-color-primary-shade);
+//   ion-fab-button {
+//     --background: var(--ion-color-tertiary);
+//     --background-activated: var(--ion-color-tertiary-shade);
+//     border: 10px solid #fff;
+//     border-radius: 50%;
+//     width: 100%;
+//     height: 100%;
+//     --color: var(--ion-color-primary);
+//     --color-activated: var(--ion-color-primary-shade);
 
-  }
-}
+//   }
+// }
 
 // ######################################### End Global Customization #########################################
 

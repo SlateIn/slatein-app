@@ -33,15 +33,15 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loader.present('Loading...');
-    this.appLabels.getComponentContent('login').subscribe(labels => {
-      setTimeout(()=>{
-        console.log(labels);
-        this.loader.dismiss();
-      }, 0);
+    // this.loader.present('Loading...');
+    // this.appLabels.getComponentContent('login').subscribe(labels => {
+    //   setTimeout(()=>{
+    //     console.log(labels);
+    //     this.loader.dismiss();
+    //   }, 0);
       
       
-    });
+    // });
     this.showPassword = false;
     this.loginForm = this.fb.group({
       email: new FormControl('', Validators.compose([Validators.required])),
