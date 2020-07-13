@@ -1,13 +1,5 @@
 // ######################################### Start Global Customization #########################################
 
-ion-button {
-  --background: var(--ion-color-tertiary);
-  --background-activated: var(--ion-color-tertiary-shade);
-  --color: var(--ion-color-primary);
-  --color-activated: var(--ion-color-primary-shade);
-}
-
-
 // SlateIn - CARD DEFAULT CSS
 .slateIn-card {
   background: none;
@@ -34,9 +26,6 @@ ion-button {
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
 
-
-
-
 .fab-add {
   // border-bottom: 0.5px solid black;
   border-radius: 50%;
@@ -45,15 +34,10 @@ ion-button {
   margin-left: -43px;
 
   ion-fab-button {
-    --background: var(--ion-color-tertiary);
-    --background-activated: var(--ion-color-tertiary-shade);
     border: 10px solid #fff;
     border-radius: 50%;
     width: 100%;
     height: 100%;
-    --color: var(--ion-color-primary);
-    --color-activated: var(--ion-color-primary-shade);
-
   }
 }
 

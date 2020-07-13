@@ -32,14 +32,14 @@ ion-tab-bar {
     .tab-selected {
 
         ion-icon{
-            color: var(--ion-color-primary);
-            background-color: rgba(49, 232, 232, 0.4);
+            color: var(--ion-color-dark);
+            background-color: rgba(var(--ion-color-primary), 0.4);
             padding: 0.3rem 1rem;
             border-radius: 10rem;
         }
     
         ion-label {
-            color: var(--ion-color-primary);
+            color: var(--ion-color-dark);
         }
       }
 }
