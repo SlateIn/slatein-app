@@ -42,7 +42,6 @@
     }
     .login-button {
         margin: 1.5rem 0.7rem;
-        color: white;
 
         ion-label {
             font-size: 1.3em;
@@ -55,7 +54,7 @@
 
     a,
     h4 {
-        color: var(--ion-color-slateIn-primary);
+        color: var(--ion-color-primary);
     }
 
 }
