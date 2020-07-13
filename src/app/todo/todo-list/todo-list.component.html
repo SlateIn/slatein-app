@@ -25,21 +25,14 @@
             </ion-item-option>
           </ion-item-options>
 
-          <div *ngIf="!todo.completed; else ToDoompleted">
           <ion-item lines="none">
             <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
-            <ion-input type="text" [(ngModel)]="todo.title"></ion-input>
+            <ion-input *ngIf="!todo.completed" type="text" [(ngModel)]="todo.title"></ion-input>
             <ion-icon *ngIf="!todo.completed" slot="end" name="radio-button-off" (click)="todoCompleted(todo)"></ion-icon>
+          
+            <ion-label *ngIf="todo.completed"><s>{{ todo.title }}</s></ion-label>
+            <ion-icon *ngIf="todo.completed" slot="end"  mode="md" name="checkmark-circle-outline" (click)="todoCompleted(todo)"></ion-icon>
           </ion-item>
-          </div>
-
-          <ng-template #ToDoompleted>
-            <ion-item lines="none">
-              <ion-icon slot="start" name="checkmark-done-outline"></ion-icon>
-              <ion-label *ngIf="todo.completed"><s>{{ todo.title }}</s></ion-label>
-              <ion-icon *ngIf="todo.completed" slot="end"  mode="md" name="checkmark-circle-outline" (click)="todoCompleted(todo)"></ion-icon>
-            </ion-item>
-          </ng-template>
           
         </ion-item-sliding>
       </ion-list>
