@@ -1,7 +1,5 @@
 .login-page {
     .parent {
-        display: flex;
-        flex-direction: column;
         height: 100%;
         margin: 0px;
     }
@@ -34,8 +32,6 @@
 
         .login-form {
             height: inherit;
-            display: flex;
-            flex-direction: column;
             justify-content: space-between;
             .action-button-full {
                 --background: #31E8E8;
@@ -46,10 +42,17 @@
             font-weight: normal;
         }
 
+        .link-div {
+            justify-content: space-between;
+            margin: 8px 0px;
+
+            .remember-text {
+                margin-left: 8px;
+            }
+        }
+
         .btn-options{
             margin-top: 60px;
-            display: flex;
-            flex-flow: row;
             justify-content: space-between;
             align-items: center;
 
@@ -75,11 +78,4 @@
             margin-bottom: 2%;
         }
     }
-
-
-    // a,
-    // h4 {
-    //     color: var(--ion-color-slateIn-primary);
-    // }
-
 }

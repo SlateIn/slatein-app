@@ -1,0 +1,35 @@
+/* Type of Text start */
+// Text use for notice ex."Remember Me", "Forget password"
+ion-label {
+    font-weight: 600;
+    color:  var(--ion-color-slateIn-primary);
+  } 
+  .notice-text-level-1 {
+    // Need to find solution for !important
+    font-size: 13px !important;
+    line-height: 18px;
+  }
+  
+  .notice-text-level-2 {
+    font-size: 15px !important;
+    line-height: 20px;
+  }
+  
+  .notice-text-level-3 {
+    font-size: 17px !important;
+    line-height: 22px;
+  }
+  
+  .notice-text-level-4 {
+    font-size: 10px !important;
+    line-height: 12px;
+    font-weight: 500;
+  }
+  
+  .page-header-level-1 {
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 41px;
+    letter-spacing: 0.374px;
+  }
+  /* Type of Text ends */
