@@ -1,60 +1,80 @@
 .login-page {
+    .parent {
+        height: 100%;
+        margin: 0px;
+    }
+
+    // --background: linear-gradient(to bottom, #f2fcfe 10%, #8Fa5cf 100%);
+
+    /* Logo and title class start */
     .app-logo {
         img {
-            width: 40vw;
+            width: 30%;
         }
 
-        margin: 3rem 0rem 2rem;
+        margin: 1rem 0rem 2rem;
+
         .app-logo-col {
             text-align: center;
         }
 
-        .logo-text {
-            margin-top: 2rem;
-            font-size: 3em;
-            font-weight: bold;
+        .app-title {
+             margin-top: 2rem;
         }
     }
 
-    .remember-me-row {
-        background: transparent;
-    }
+    /* Logo and title class End */
 
-    ion-list {
-        ion-item {
-            --padding-end: 0px;
-            --inner-padding-end: 0px;
-            --padding-start: 0;
+    /* Form Style start */
+    .form-section {
+        flex: 1 1 auto;
+        height: 100%;
+
+        .login-form {
+            height: inherit;
+            justify-content: space-between;
+            .action-button-full {
+                --background: #31E8E8;
+            }
+        }
+
+        .text-reg {
+            font-weight: normal;
+        }
+
+        .link-div {
+            justify-content: space-between;
+            margin: 8px 0px;
+
+            .remember-text {
+                margin-left: 8px;
+            }
+        }
+
+        .btn-options{
+            margin-top: 60px;
+            justify-content: space-between;
+            align-items: center;
+
+            .login-button-options{
+                --padding-start:25px;
+                --padding-end:25px;
+                box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.04), 0px 0px 10px rgba(49, 232, 232, 0.07);
+                --border-radius: 100px;
+               border-radius: 100px;
+               --background: white;
+            }
+        }
+
+
+        .fg-pass-label {
+            text-align: right;
+            margin-right: 0px;
+        }
+
+        .error-div {
+            text-align: center;
+            margin-bottom: 2%;
         }
     }
-
-    ion-checkbox {
-        margin-right: 0.5rem;
-    }
-    .fg-pass-label {
-        text-align: right;
-        margin-right: 0px;
-    }
-
-    .error-div {
-        text-align: center;
-        margin-bottom: 2%;
-    }
-    .login-button {
-        margin: 1.5rem 0.7rem;
-
-        ion-label {
-            font-size: 1.3em;
-        }
-    }
-
-    .signUp-text {
-        font-size: 1em;
-    }
-
-    a,
-    h4 {
-        color: var(--ion-color-primary);
-    }
-
 }

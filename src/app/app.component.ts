@@ -29,7 +29,7 @@ export class AppComponent implements OnDestroy {
       this.splashScreen.hide();
       this.network.checkNetworkConnection();
       this.auth.initializeIdleTimeOut();
-      this.navCtrl.navigateRoot('/login');
+      // this.navCtrl.navigateRoot('/login');
     });
   }
 

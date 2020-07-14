@@ -1,34 +1,19 @@
 
+<article>
 <ion-content class="signUp-page">
-    <ion-item class="default-avatar">
-        <ion-avatar (click)="onProfilePicClick()">
-          <img #profilePic [src]="(photo)?photo:avatarSrc" />
-          <ion-icon mode="md" name="add-circle"></ion-icon>
-        </ion-avatar>
-    </ion-item>
   <section>
-    <ion-card class="slateIn-card">
-      <ion-card-content>
         <form class="slateIn-form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <!-- Name -->
           <ion-item class="form-field">
             <ion-input placeholder="First Name" formControlName="fname" type="text"></ion-input>
             <ion-icon name="person-outline" slot="end" align-self-end></ion-icon>
           </ion-item>
-
           <div class="error-div" *ngIf="controls.fname.touched &&controls.fname.errors" lines="none">
             <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special
               characters.</ion-label>
           </div>
 
-          <ion-item class="form-field">
-            <ion-input placeholder="Last Name" formControlName="lname" type="text"></ion-input>
-            <ion-icon name="person-outline" slot="end" align-self-end></ion-icon>
-          </ion-item>
-          <div class="error-div" *ngIf="controls.lname.touched &&controls.lname.errors" lines="none">
-          <ion-label class="ion-text-wrap" color="danger">Lastname can not contain whitespace, numbers and special
-            characters.</ion-label>
-          </div>
-
+          <!-- Email -->
           <ion-item class="form-field">
             <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
             </ion-input>
@@ -40,41 +25,25 @@
           </div>
 
 
-          <ion-item class="form-field">
-            <ion-label class="label-color">Gender</ion-label>
-            <ion-icon slot="end" name="people-outline"></ion-icon>
-            <ion-select class="select-icon" mode="ios" formControlName="gender">
-              <ion-select-option value="female">Female</ion-select-option>
-              <ion-select-option value="male">Male</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-          <ion-item class="form-field">
-            <ion-label class="label-color">Birth date</ion-label>
-            <ion-datetime max="{{currentDate}}" formControlName="birthdate"></ion-datetime>
-            <ion-icon slot="end" name="calendar-outline"></ion-icon>
-          </ion-item>
-
+          <!-- Password -->
           <ion-item class="form-field">
             <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit
               autocomplete="new-password"></ion-input>
             <ion-icon name="key-outline" slot="end" align-self-end></ion-icon>
           </ion-item>
-
           <div class="error-div"
             *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)"
             lines="none">
             <ion-label color="danger">Password must be at least 6 characters long.</ion-label>
           </div>
 
-
+          <!-- Confirm Password -->
           <ion-item class="form-field">
             <ion-input placeholder="Confirm Password" formControlName="confirmPassword" type="password" clear-on-edit
               autocomplete="new-password">
             </ion-input>
             <ion-icon name="key-outline" mode="ios" slot="end" align-self-end></ion-icon>
           </ion-item>
-
           <div class="error-div"
             *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)"
             lines="none">
@@ -99,9 +68,6 @@
             </h4>
           </section>
         </form>
-      </ion-card-content>
-    </ion-card>
   </section>
-
-
 </ion-content>
+</article>
