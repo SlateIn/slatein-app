@@ -18,9 +18,24 @@ export class NewTaskComponent implements OnInit {
   repetationPicker = '';
   endRepetationPicker = '';
   repetationPickerValue = '';
+  updatedRepetationPickerValue = '';
   updateTitle = '';
   @ViewChild('documentEditForm') documentEditForm: FormGroupDirective;
   @Input() taskData: any;
+
+  repetationPickerColumn = [
+    {
+      name: 'repetationPicker',
+      options: [
+        { text: 'Never', value: 'never' },
+        { text: 'Daily', value: 'day' },
+        { text: 'Weekly', value: 'week' },
+        { text: 'BiWeekly', value: 'two-weeks' },
+        { text: 'Monthly', value: 'month' },
+        { text: 'Yearly', value: 'year' }
+      ]
+    }
+  ];
 
   constructor(private modalController: ModalController,
               private pickerController: PickerController,
@@ -43,8 +58,6 @@ export class NewTaskComponent implements OnInit {
     );
 
     if (this.taskData !== undefined) {
-      console.log('This is TaskData');
-      console.log(this.taskData);
       this.updateTitle = 'Update Task';
       this.updateNewTaskForm.patchValue({
         title: this.taskData.title,
@@ -53,9 +66,13 @@ export class NewTaskComponent implements OnInit {
         startTime: this.taskData.startTimePeriod,
         endDate : this.taskData.endTimePeriod,
         endTime : this.taskData.endTimePeriod,
+        repetationPicker: this.taskData.repeat
       });
 
-      this.repetationPicker = this.taskData.repeat;
+      this.updatedRepetationPickerValue = this.taskData.repeat;
+      // tslint:disable-next-line:triple-equals
+      // tslint:disable-next-line:max-line-length
+      this.repetationPicker = this.repetationPickerColumn.map(item => item.options.filter(rep => rep.value === this.taskData.repeat))[0][0].text;
     }
   }
 
@@ -106,19 +123,7 @@ export class NewTaskComponent implements OnInit {
           text: 'Confirm'
         }
       ],
-      columns: [
-        {
-          name: 'repetationPicker',
-          options: [
-            { text: 'Never', value: 'year' },
-            { text: 'Daily', value: 'day' },
-            { text: 'Weekly', value: 'week' },
-            { text: 'BiWeekly', value: 'two-weeks' },
-            { text: 'Monthly', value: 'month' },
-            { text: 'Yearly', value: 'year' }
-          ]
-        }
-      ]
+      columns: this.repetationPickerColumn
     };
 
     const picker = await this.pickerController.create(opts);
@@ -134,9 +139,11 @@ export class NewTaskComponent implements OnInit {
   register() {
     // const type = this.taskData !== undefined ? 'update' : 'add' ;
     if (this.taskData !== undefined) {
-      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, this.taskData.id);
+      // tslint:disable-next-line:max-line-length
+      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, (!this.updatedRepetationPickerValue || this.updatedRepetationPickerValue === null) ? 'never' : this.updatedRepetationPickerValue, this.taskData.id);
     } else {
-      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, this.repetationPickerValue, null);
+      // tslint:disable-next-line:max-line-length
+      this.alertReminderService.onSubmit(this.updateNewTaskForm.value, (!this.repetationPickerValue || this.repetationPickerValue === null) ? 'never' : this.repetationPickerValue, null);
     }
     this.modalController.dismiss();
   }

@@ -4,8 +4,8 @@ ion-card {
   --background: #ffffff;
 
   position: relative;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 0;
+  margin-right: 0;
 
   ion-grid,
   ion-row,
@@ -27,6 +27,7 @@ ion-card {
 
     ion-badge {
       --background: #555555;
+      --color: #ffffff;
       padding: 5px;
     }
   }

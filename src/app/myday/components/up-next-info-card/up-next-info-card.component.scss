@@ -1,12 +1,11 @@
 ion-card {
-  margin-top: 24px;
+  margin: 0;
+  margin-bottom: 32px;
   box-shadow: none;
   --background: #222222;
   --color: #ffffff;
 
   position: relative;
-  margin-left: 20px;
-  margin-right: 20px;
 
   ion-icon {
     position: absolute;
@@ -77,3 +76,4 @@ ion-card {
 .left-margin {
   margin-left: 12px;
 }
+
