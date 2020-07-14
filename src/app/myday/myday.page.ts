@@ -5,6 +5,8 @@ import { TaskService } from '@services/task.service';
 import { TaskReminderInfo } from '@models/taskDetails';
 import { map } from 'rxjs/operators';
 import { AlertReminderService } from './services/alert-reminder.service';
+import { ModalController } from '@ionic/angular';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @Component({
   selector: 'app-myday',
@@ -25,7 +27,7 @@ export class MydayPage implements OnInit, OnDestroy {
   segment: string;
   getAllTasksInfoSubscription: Subscription;
 
-  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService) { }
+  constructor(private taskService: TaskService, private alertReminderService: AlertReminderService, private modalController: ModalController) { }
 
   ngOnInit() {
     const todaysDate = new Date();
@@ -66,10 +68,6 @@ export class MydayPage implements OnInit, OnDestroy {
     console.log('This is id of clicked Task', id);
   }
 
-  setReminder() {
-    this.alertReminderService.presentAlertPrompt('Add');
-  }
-
   segmentChanged(ev: any) {
     this.segment = ev.detail.value;
   }
@@ -81,6 +79,13 @@ export class MydayPage implements OnInit, OnDestroy {
     } else if (!task.favourite) {
       this.favouriteTaskDetails.splice(getIndex, 1);
     }
+  }
+
+  async setReminder() {
+    const myDayNewTask = await this.modalController.create({
+      component: NewTaskComponent
+    });
+    return await myDayNewTask.present();
   }
 
   ngOnDestroy(): void {

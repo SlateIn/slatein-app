@@ -7,17 +7,13 @@ ion-content {
 .default-avatar {
   --border-style: none;
 
-  ion-avatar {
-    position: relative;
-    width: 80px;
-    height: 80px;
+  .profile_avatar {
+    margin: 0 auto;
+    margin-top: 40px;
   }
 }
 
-.profile_avatar {
-  margin: 0 auto;
-  margin-top: 40px;
-}
+
 
 .name-avatar {
   text-align: center;
