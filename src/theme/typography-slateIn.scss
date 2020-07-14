@@ -1,8 +1,12 @@
 /* Type of Text start */
 // Text use for notice ex."Remember Me", "Forget password"
+.text-reg {
+  font-weight: normal;
+}
+
 ion-label {
     font-weight: 600;
-    color:  var(--ion-color-slateIn-primary);
+    color:  var(--ion-color-primary-contrast);
   } 
   .notice-text-level-1 {
     // Need to find solution for !important

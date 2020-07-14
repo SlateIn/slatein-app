@@ -1,24 +1,22 @@
 // ######################################### Start Global Customization #########################################
-.no-decoration {
-  text-decoration: none;
+.width-100 {
+  width: 100%;
 }
 
-width-100 {
-  width: 100%;
+.align-center {
+  align-items: center;
+}
+
+.align-left {
+  align-items: left;
+}
+
+.align-right {
+  align-items: right;
 }
 
 .flex {
   display: flex;
-}
-
-// SlateIn - CARD DEFAULT CSS
-.slateIn-card {
-  background: none;
-  padding: 0.2rem 0.2rem;
-
-  ion-card-content {
-    padding: 0.2rem 0.2rem;
-  }
 }
 
 .flex-column {
@@ -29,29 +27,25 @@ width-100 {
   flex-direction: row;
 }
 
-// Default remove all padding from ion-item
 ion-item {
   --padding-start: 0;
 }
 
-// ######################################### End Global Customization ######################################### 
+.no-decoration {
+  text-decoration: none;
+}
+
+ion-router-link{
+  --color : var(--ion-color-primary-contrast);
+  font-weight: 600;
+}
 // ######################################### End Global Customization ######################################### 
 
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
-
-// ######################################### Start Global Margin & Padding Classes ######################################### 
-
-// Margin Start //
 .margin-auto {
   margin: auto;
-  ion-fab-button {
-    border: 10px solid #fff;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .margin-bottom16 {
@@ -75,18 +69,5 @@ ion-item {
 // Padding Start //
 .padding16 {
   padding: 1rem;
-}
-
-// Padding Ends // 
-.align-center {
-  align-items: center;
-}
-
-.align-left {
-  align-items: left;
-}
-
-.align-right {
-  align-items: right;
 }
 // ######################################### End Global Customization #########################################

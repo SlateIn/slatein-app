@@ -4,9 +4,18 @@
 /** Ionic CSS Variables **/
 :root {
 
+  // Background color for whole app
+  --ion-background-color:var(--ion-color-light);
   // APP Font Family
-  --ion-font-family: 'SFProTextRegulr';
+  --ion-font-family: 'SFProTextRegular';
   font-weight: normal;
+
+  // APP Text Color
+  --ion-text-color: var(--ion-color-primary-contrast);
+  // APP Text Color RGB
+  --ion-text-color-rgb: var(--ion-color-primary-contrast-rgb);
+  
+
 
   --ion-color-primary: #31E8E8;
   --ion-color-primary-rgb: 49,232,232;
@@ -172,7 +181,7 @@ $fab-size: 70px;
 
 /* Fonts Face Variable*/
 @font-face {
-  font-family: SFProTextRegulr;
+  font-family: SFProTextRegular;
   src: url(../assets/fonts/sf-pro-text-regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
