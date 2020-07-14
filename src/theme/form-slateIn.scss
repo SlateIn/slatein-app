@@ -1,0 +1,19 @@
+
+/* SlateIn - FORM */
+.slateIn-form {
+    // Any ion-item tag with form field in it
+    ion-item.item-input-field {
+      --padding-top:15px;
+      --border-color: var(--ion-color-grey-light);
+  
+      // Form Field Style
+      .app-form-field {
+        font-size: 1.0625rem; // ~17px;
+        width: 100%;
+      }
+  
+      ion-icon {
+        color:var(--ion-color-grey-light);
+      }
+    }
+  }
