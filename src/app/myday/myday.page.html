@@ -1,45 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>My Day</ion-title>
-    <!-- <ion-buttons slot="primary" (click)="setReminder()">
-      <ion-button>
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
+    <ion-title class="ion-text-start main-title">
+      Hello Alicia,
+    </ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="ion-text-start sub-title">
+      Got any plans today?
+    </ion-title>
+  </ion-toolbar>
+  <app-week-timeline></app-week-timeline>
 </ion-header>
 
 <ion-content>
-  <!-- below ion-segment might be removed after refactoring UI -->
-  <ion-segment value="All" color="primary" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="All">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Favourite">
-      <ion-label>Favourite</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+  <ion-card class="side-padding">
 
-  <ion-toolbar>
-    <ion-title>Tasks List</ion-title>
-  </ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9">
+          <h3>21st Sept. 2020</h3>
+        </ion-col>
+        <ion-col class="ion-text-end">
+          <ion-icon name="add-circle" color="primary" (click)="setReminder()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <!-- Task Display component start -->
-  <ng-container>
-    <app-task-display [allTaskForDisplay]="taskDetails" (taskIdEmit)="clickedTaskId($event)"></app-task-display>
-  </ng-container>
-  <!-- Task Display component end -->
 
-  <!-- <div [ngSwitch]="segment">
-    <ion-label *ngSwitchCase="'Favourite'">
-      <ng-container *ngFor="let taskDetail of favouriteTaskDetails">
-        <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
-      </ng-container>
-    </ion-label>
-    <ion-label *ngSwitchDefault>
-      <ng-container *ngFor="let taskDetail of taskDetails">
-        <app-task-info-card [taskinfo]="taskDetail" (favoriteChange)="updateFavorite($event)"></app-task-info-card>
-      </ng-container>
-    </ion-label>
-  </div> -->
+    <app-up-next-info-card></app-up-next-info-card>
+
+    <ion-text>Followed by</ion-text>
+    <app-follow-by-info-card></app-follow-by-info-card>
+  
+  </ion-card>
+    
+  
+  
+
+  
 </ion-content>

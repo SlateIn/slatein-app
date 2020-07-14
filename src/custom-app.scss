@@ -1,4 +1,15 @@
 // ######################################### Start Global Customization #########################################
+.no-decoration {
+  text-decoration: none;
+}
+
+width-100 {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
 
 // SlateIn - CARD DEFAULT CSS
 .slateIn-card {
@@ -10,14 +21,17 @@
   }
 }
 
-// SlateIn - FORM DEFAULT CSS
-.slateIn-form {}
+.flex-column {
+  flex-direction: column;
+}
 
-.form-field {
-  margin: 0.8rem 0rem;
-  padding: 0;
-  // border-bottom: 1.5px solid;
-  border-radius: 10px;
+.flex-row {
+  flex-direction: row;
+}
+
+// Default remove all padding from ion-item
+ion-item {
+  --padding-start: 0;
 }
 
 .page-title {
@@ -26,73 +40,58 @@
 }
 
 // ######################################### End Global Customization ######################################### 
+// ######################################### End Global Customization ######################################### 
 
 
 
 // ######################################### Start Global Margin & Padding Classes ######################################### 
 
+// ######################################### Start Global Margin & Padding Classes ######################################### 
 
-
-
-// .fab-add {
-//   // border-bottom: 0.5px solid black;
-//   border-radius: 50%;
-//   height: 80px;
-//   width: 80px;
-//   margin-left: -43px;
-
-//   ion-fab-button {
-//     --background: var(--ion-color-tertiary);
-//     --background-activated: var(--ion-color-tertiary-shade);
-//     border: 10px solid #fff;
-//     border-radius: 50%;
-//     width: 100%;
-//     height: 100%;
-//     --color: var(--ion-color-primary);
-//     --color-activated: var(--ion-color-primary-shade);
-
-//   }
-// }
-
-// ######################################### End Global Customization #########################################
-
-// ######################################### Start Global Margin & Padding Classes #########################################
-
-// .margin-bottom {
-//   margin-bottom: 20px !important;
-// }
-
-// .margin-top {
-//   margin-top: 20px !important;
-// }
-
-// ######################################### End Global Margin & Padding Classes #########################################
-
-// ######################################### Start Ion Icons #########################################
-// ion-fab {
-//   ion-icon {
-//     color: #ffffff;
-//   }
-// }
-// ######################################### End Ion Icons #########################################
-
-app-register,
-app-login,
-app-forgot-password {
-  div.register-card {
-    padding: 10px;
+// Margin Start //
+.margin-auto {
+  margin: auto;
+  ion-fab-button {
+    border: 10px solid #fff;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
   }
 }
 
-.float-right {
-  float: right;
+.margin-bottom16 {
+  margin-bottom: 1rem;
 }
 
-input[placeholder='startDate'],
-input[placeholder='endDate'],
-input[placeholder='startTime'],
-input[placeholder='endTime'] {
-  border: none !important;
-  background-color: #f9f9f9 !important;
-  font-size: larger !important;
+.margin-top16 {
+  margin-bottom: 1rem;
 }
+
+.margin-v-16 {
+  margin: 1rem 0rem;
+}
+
+.margin-h-16 {
+  margin-bottom: 0rem 1rem;
+}
+
+// Margin Ends //
+
+// Padding Start //
+.padding16 {
+  padding: 1rem;
+}
+
+// Padding Ends // 
+.align-center {
+  align-items: center;
+}
+
+.align-left {
+  align-items: left;
+}
+
+.align-right {
+  align-items: right;
+}
+// ######################################### End Global Customization #########################################
