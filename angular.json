@@ -36,9 +36,6 @@
                 "input": "src/theme/global-variables.scss"
               },
               {
-                "input": "src/theme/app-variables.scss"
-              },
-              {
                 "input": "src/global.scss"
               }
             ],
