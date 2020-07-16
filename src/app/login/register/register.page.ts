@@ -29,6 +29,7 @@ export class RegisterPage implements OnInit {
   currentDate = new Date().toLocaleDateString();
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
+  showPassword: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -41,13 +42,10 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.showPassword = true;
     this.registerForm = this.fb.group(
       {
-        fname: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
-        lname: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
         email: ['', Validators.compose([Validators.email, Validators.required])],
-        gender: new FormControl('', Validators.required),
-        birthdate: new FormControl('', Validators.required),
         password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
         confirmPassword: new FormControl('')
       },

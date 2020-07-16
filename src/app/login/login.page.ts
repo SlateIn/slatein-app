@@ -83,9 +83,7 @@ export class LoginPage implements OnInit {
         .catch((err) => (this.loginErrorMsg = err.message));
     }
   }
-  toggleShowPassowrd() {
-    this.showPassword = !this.showPassword;
-  }
+
   loginWithGoogle() {
     this.auth
       .logInWithGoogle()
