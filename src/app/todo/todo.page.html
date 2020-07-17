@@ -19,8 +19,7 @@
       </ion-row>
     </ion-grid>
     
-    
-    <ion-card *ngFor="let row of listRows" >
+    <!-- <ion-card *ngFor="let row of listRows" >
       <ion-item-sliding>
         <ion-item-options side="end">
           <ion-item-option (click)="deleteRow(row)" color="danger" expandable>
@@ -33,7 +32,17 @@
           <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
         </ion-item>
       </ion-item-sliding>
-    </ion-card>
+    </ion-card> -->
 
   </ion-list>
+
+  <app-list-card-item *ngFor="let row of listRows"
+    (click)="gotoToDoListModal(row)" 
+    [cardTitle]="row.listName"
+    [cardContent]="totalAndRemainingItemCount(row)"
+    [cardProgressValue]="progressBarCount(row)"
+    (cancelled)="onCancel($event)">
+  </app-list-card-item>
+
   </ion-content>
+

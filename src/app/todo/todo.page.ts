@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ToDoService } from './services/todo.service';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { ToDoList } from '@models/todoList';
@@ -22,9 +22,11 @@ export class TodoPage implements OnInit {
   listRows: ToDoList[] = [];
   public cnt = 0;
   public listData: any = [];
+  isCancelled = false;
 
   constructor(private toDoService: ToDoService,
-              private modalController: ModalController) {}
+              private modalController: ModalController,
+              private alertController: AlertController) {}
 
   ngOnInit() {
     this.toDoService.getAllLists().subscribe((lists: ToDoList[]) => {
@@ -36,26 +38,46 @@ export class TodoPage implements OnInit {
 
   }
 
-  deleteRow(row: any) {
-    this.toDoService.deleteToDoList(row);
+  async deleteRow(row: ToDoList) {
+    const alert = await this.alertController.create({
+      message: `Do you really want to delete list: ${row.listName}`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.toDoService.deleteToDoList(row);
+          }
+        }
+      ]
+    });
+    await alert.present();
+    this.isCancelled = false;
   }
 
   async gotoToDoListModal(list: ToDoList) {
-    if (list.listItems === undefined) {
-      list.listItems = [];
-    }
-
-    const commonToDoList = await this.modalController.create({
-      component: TodoListComponent,
-      componentProps: {
-        isNewList: false,
-        id: list.id,
-        header: list.listName,
-        list: list.listItems,
-        cnt: this.cnt
+    if (!this.isCancelled) {
+      if (list.listItems === undefined) {
+        list.listItems = [];
       }
-    });
-    return await commonToDoList.present();
+
+      const commonToDoList = await this.modalController.create({
+        component: TodoListComponent,
+        componentProps: {
+          isNewList: false,
+          id: list.id,
+          header: list.listName,
+          list: list.listItems,
+          cnt: this.cnt
+        }
+      });
+      return await commonToDoList.present();
+    } else {
+      this.deleteRow(list);
+    }
   }
 
   async gotoNewListModal() {
@@ -67,5 +89,36 @@ export class TodoPage implements OnInit {
       }
     });
       return await commonToDoList.present();
+  }
+
+  totalListCount(list: ToDoList) {
+    return list.listItems.length;
+  }
+
+  totalAndRemainingItemCount(list: ToDoList) {
+    const totalCount = list.listItems.length;
+    let count = 0;
+    list.listItems.forEach(item => {
+      if (item.completed) {
+        count++;
+      }
+    });
+    return `${count} of ${totalCount} completed`;
+  }
+
+  progressBarCount(list: ToDoList) {
+    const totalCount = list.listItems.length;
+    let remainingCount = 0;
+    list.listItems.forEach(item => {
+      if (item.completed) {
+        remainingCount++;
+      }
+    });
+
+    return (remainingCount / totalCount);
+  }
+
+  onCancel(cancelClicked: boolean) {
+    this.isCancelled = true;
   }
 }
