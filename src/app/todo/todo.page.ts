@@ -4,6 +4,7 @@ import { ToDoService } from './services/todo.service';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { ToDoList } from '@models/todoList';
 import { ToDoItem } from '@models/todoItem';
+import { NewTodoListComponent } from './new-todo-list/new-todo-list.component';
 
 
 @Component({
@@ -82,7 +83,7 @@ export class TodoPage implements OnInit {
 
   async gotoNewListModal() {
       const commonToDoList = await this.modalController.create({
-      component: TodoListComponent,
+      component: NewTodoListComponent,
       componentProps: {
         isNewList: true,
         cnt: this.cnt
