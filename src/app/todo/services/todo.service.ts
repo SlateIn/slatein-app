@@ -20,14 +20,18 @@ export class ToDoService {
     }
 
     addNewList(list: ToDoList) {
-        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).set(list);
+        return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).set(list);
     }
 
     updateToDoList(id: number, header: string, list: ToDoItem[]) {
-        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${id}`).update({listName: header, listItems: list});
+        return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${id}`).update({listName: header, listItems: list});
     }
 
     deleteToDoList(list: ToDoList) {
-        this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).remove();
+        return this.db.object(`/users/${this.afAuth.auth.currentUser.uid}/todo/${list.id}`).remove();
+    }
+
+    getList(id: string) {
+        return this.getAllLists
     }
 }

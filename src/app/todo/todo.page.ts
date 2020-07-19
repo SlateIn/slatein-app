@@ -92,10 +92,6 @@ export class TodoPage implements OnInit {
       return await commonToDoList.present();
   }
 
-  totalListCount(list: ToDoList) {
-    return list.listItems.length;
-  }
-
   totalAndRemainingItemCount(list: ToDoList) {
     const totalCount = list.listItems.length;
     let count = 0;

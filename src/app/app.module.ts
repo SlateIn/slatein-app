@@ -33,6 +33,7 @@ import { MomentModule } from 'angular2-moment';
 import { OfflineModePageModule } from './offline-mode/offline-mode.module';
 import { SharedcomponentModule } from './components/sharedcomponent.module';
 import { NewTodoListComponent } from './todo/new-todo-list/new-todo-list.component';
+import { EditTodoListComponent } from './todo/edit-todo-list/edit-todo-list.component';
 
 
 @NgModule({
@@ -42,14 +43,16 @@ import { NewTodoListComponent } from './todo/new-todo-list/new-todo-list.compone
     PersonalInformationPage,
     SecurityPasswordPage,
     TodoListComponent,
-    NewTodoListComponent
+    NewTodoListComponent,
+    EditTodoListComponent
   ],
   entryComponents: [
     SettingsPage,
     PersonalInformationPage,
     SecurityPasswordPage,
     TodoListComponent,
-    NewTodoListComponent
+    NewTodoListComponent,
+    EditTodoListComponent
   ],
   imports: [
     BrowserModule,

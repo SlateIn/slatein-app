@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, IonReorderGroup, LoadingController } from '@ionic/angular';
-import { ToDoService } from '../services/todo.service';
-import { ToDoItem } from '@models/todoItem';
 import { ToDoList } from '@models/todoList';
+import { ToDoItem } from '@models/todoItem';
+import { IonReorderGroup, ModalController, NavController } from '@ionic/angular';
+import { ToDoService } from '../services/todo.service';
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
-import { LoaderService } from '@services/loader.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  selector: 'app-todo-list-detail',
+  templateUrl: './todo-list-detail.page.html',
+  styleUrls: ['./todo-list-detail.page.scss'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListDetailPage implements OnInit {
 
   isNewList: boolean;
   newList: ToDoList;
@@ -28,15 +28,24 @@ export class TodoListComponent implements OnInit {
 
   constructor(private toDoService: ToDoService,
               private modalController: ModalController,
-              private loadingCtrl: LoadingController) {}
+              private route: ActivatedRoute,
+              private navCtrl: NavController) {}
 
   ngOnInit() {
-    this.previousTotalList = this.cnt;
-    if (this.isNewList) {
-      this.header = '';
-      this.list = [];
-      this.newList = {id: new Date().getTime(), listName: this.header, listItems: this.list};
-    }
+    this.route.paramMap.subscribe( paramMap => {
+      if (!paramMap.has('listId')) {
+        this.navCtrl.navigateBack('tabs/todo');
+        return;
+      } else {
+        
+      }
+    })
+    // this.previousTotalList = this.cnt;
+    // if (this.isNewList) {
+    //   this.header = '';
+    //   this.list = [];
+    //   this.newList = {id: new Date().getTime(), listName: this.header, listItems: this.list};
+    // }
   }
 
   async close() {
@@ -103,18 +112,7 @@ export class TodoListComponent implements OnInit {
   }
 
   async gotoEditToDoListModal() {
-      // const editToDoList = await this.modalController.create({
-      //   component: EditTodoListComponent,
-      //   componentProps: {
-      //     id: this.id,
-      //     header: this.header,
-      //     list: this.list,
-      //     cnt: this.cnt
-      //   }
-      // });
-      // return await editToDoList.present();
-
-      this.modalController.create({
+      const editToDoList = await this.modalController.create({
         component: EditTodoListComponent,
         componentProps: {
           id: this.id,
@@ -122,21 +120,7 @@ export class TodoListComponent implements OnInit {
           list: this.list,
           cnt: this.cnt
         }
-      }).then(modalEl => {
-        modalEl.present();
-        return modalEl.onDidDismiss();
-      }).then(resultData => {
-        if ('confirm' === resultData.role) {
-
-          this.loadingCtrl.create({
-            message: 'Loading list data...'
-          }).then(loadingEl => {
-            loadingEl.present();
-            this.header = resultData.data.header;
-            this.list = resultData.data.list;
-            loadingEl.dismiss();
-          });
-        }
       });
+      return await editToDoList.present();
   }
 }

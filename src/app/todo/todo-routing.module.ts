@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: TodoPage
+  },
+  {
+    path: 'todo-list-detail/:listId',
+    loadChildren: () => import('./todo-list-detail/todo-list-detail.module').then( m => m.TodoListDetailPageModule)
   }
 ];
 
