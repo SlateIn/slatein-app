@@ -22,8 +22,8 @@
               autocomplete="username">
             </ion-input>
           </ion-item>
-          <div class="form-field-error-div" *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)"
-            lines="none">
+          <div class="form-field-error-div"
+            *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)" lines="none">
             <ion-label color="danger">The email address is badly formatted.</ion-label>
           </div>
 
@@ -31,9 +31,9 @@
           <!-- Password -->
           <ion-item class="item-input-field">
             <ion-input class="app-form-field" placeholder="Password" formControlName="password" type="password"
-            [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password"></ion-input>
-            <ion-icon *ngIf="!showPassword" (click)="showPassword = !showPassword" name="eye-outline"></ion-icon>
-            <ion-icon *ngIf="showPassword" (click)="showPassword = !showPassword" name="eye-off-outline"></ion-icon>
+              [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password"></ion-input>
+            <ion-icon name="eye-outline" (click)="showPassword = !showPassword"
+              [attr.name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
           </ion-item>
           <div class="form-field-error-div"
             *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)"
@@ -44,15 +44,28 @@
           <!-- Confirm Password -->
           <ion-item class="item-input-field">
             <ion-input class="app-form-field" placeholder="Confirm Password" formControlName="confirmPassword"
-              type="password" clear-on-edit autocomplete="new-password">
+              [type]="!showPasswordMatched ? 'password' : 'text'" clear-on-edit autocomplete="new-password">
             </ion-input>
-            <ion-icon name="eye-outline"></ion-icon>
+            <ion-icon name="eye-outline" (click)="showPasswordMatched = !showPasswordMatched"
+              [attr.name]="showPasswordMatched ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
           </ion-item>
           <div class="form-field-error-div"
             *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)"
             lines="none">
             <ion-label color="danger">Passwords must match.</ion-label>
           </div>
+
+          <!-- Remember-me checkbox-->
+          <div class="link-div flex flex-row">
+            <ion-item lines="none">
+                <ion-checkbox item-right size="small" formControlName="canRemember" class="checkbox-square"></ion-checkbox>
+                <ion-label class="notice-text-level-1 remember-text text-reg">Remember Me</ion-label>
+            </ion-item>
+          </div>
+
+
+
+
           <div>
             <ion-label color="danger">{{ singUpFailedErrorMsg }}</ion-label>
           </div>

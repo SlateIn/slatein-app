@@ -30,6 +30,7 @@ export class RegisterPage implements OnInit {
 
   @ViewChild('profilePic', { static: false }) profilePicRef: ElementRef;
   showPassword: boolean;
+  showPasswordMatched: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -42,12 +43,12 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.showPassword = true;
     this.registerForm = this.fb.group(
       {
         email: ['', Validators.compose([Validators.email, Validators.required])],
         password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
-        confirmPassword: new FormControl('')
+        confirmPassword: new FormControl(''),
+        canRemember: new FormControl(false)
       },
       {
         validator: this.pwdValidator.mustMatch('password', 'confirmPassword')
