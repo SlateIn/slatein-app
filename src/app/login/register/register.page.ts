@@ -82,7 +82,7 @@ export class RegisterPage implements OnInit {
     const loading = await this.createLoadingAlert();
     await loading.present();
     this.auth
-      .signUp(this.registerForm.value, this.photoBase64)
+      .signUp(this.registerForm.value)
       .then(async () => {
         Storage.clear();
         loading.dismiss();
