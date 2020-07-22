@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="margin-bottom16">
     <ion-buttons slot="start" (click)="close()">
-      <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      <ion-icon name="arrow-back" slot="icon-only" class="back-button-icon"></ion-icon>
     </ion-buttons>
     <ion-title >Checklist</ion-title>
     <ion-text slot="end" color="secondary" style="padding-right: .8rem;" (click)="gotoEditToDoListModal()">Edit</ion-text>
@@ -14,14 +14,21 @@
       {{header}}
     </ion-list-header>
     
+    <ion-item lines="none">
+      <ion-label color="grey-light" style="font-size: 0.85rem;">04 of 10 completed</ion-label>
+    </ion-item>
+    <ion-progress-bar color="primary" value="0.5" style="height: 2px;"></ion-progress-bar>
+
     <ion-list *ngFor="let todo of list; let i = index">      
         <ion-item lines="none" class="item-input-field">
           <!-- <ion-icon slot="start" name="square-outline"></ion-icon> -->
-          <ion-input *ngIf="!todo.completed" type="text" [(ngModel)]="todo.title"></ion-input>
-          <ion-icon *ngIf="!todo.completed" slot="start" name="square-outline" (click)="todoCompleted(todo)"></ion-icon>
+          <!-- <ion-input *ngIf="!todo.completed" type="text" [(ngModel)]="todo.title"></ion-input> -->
+          <!-- <ion-checkbox color="primary" slot="start" [checked]="!todo.completed" (ionChange)="todoCompleted(todo)"></ion-checkbox> -->
+          <!-- <ion-icon *ngIf="!todo.completed" slot="start" name="square-outline" (click)="todoCompleted(todo)"></ion-icon> -->
         
-          <ion-label *ngIf="todo.completed" color="grey-light">{{ todo.title }}</ion-label>
-          <ion-icon class="completed-item-icon" color="primary" *ngIf="todo.completed" slot="start"  mode="md" name="checkbox-outline" (click)="todoCompleted(todo)"></ion-icon>
+          <ion-label [color]="todo.completed ? 'dark' : 'grey-light'">{{ todo.title }}</ion-label>
+          <!-- <ion-icon class="completed-item-icon" color="primary" *ngIf="todo.completed" slot="start"  mode="md" name="checkbox" (click)="todoCompleted(todo)"></ion-icon> -->
+          <ion-checkbox color="primary" class="slateIn-checkbox" slot="start" [checked]="todo.completed" (ionChange)="todoCompleted(todo)"></ion-checkbox>
         </ion-item>
     </ion-list>
   </ion-list>

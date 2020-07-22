@@ -43,8 +43,26 @@ export class EditTodoListComponent implements OnInit {
           {
             text: 'Yes',
             handler: () => {
+              const updatedList: ToDoItem[] = [];
               this.toDoService.updateToDoList(this.id, this.header, this.list);
-              this.modalController.dismiss();
+              if (this.isCurrentDataChanged) {
+                this.list.forEach(item => {
+                  if (item.title)  {
+                    console.log(item.title);
+                    updatedList.push(item);
+                  }
+                });
+                this.toDoService.updateToDoList(this.id, this.header, updatedList);
+                this.modalController.dismiss({
+                  header: this.header,
+                  list: updatedList
+                }, 'confirm');
+              } else {
+                this.modalController.dismiss({
+                  header: this.header,
+                  list: this.list
+                }, 'confirm');
+              }
             }
           }
         ]

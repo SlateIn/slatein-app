@@ -95,24 +95,32 @@ export class TodoPage implements OnInit {
   totalAndRemainingItemCount(list: ToDoList) {
     const totalCount = list.listItems.length;
     let count = 0;
-    list.listItems.forEach(item => {
-      if (item.completed) {
-        count++;
-      }
-    });
-    return `${count} of ${totalCount} completed`;
+    if (list.listItems.length > 0) {
+      list.listItems.forEach(item => {
+        if (item.completed) {
+          count++;
+        }
+      });
+      return `${count} of ${totalCount} completed`;
+    } else {
+      return `No item is added to this list`;
+    }
   }
 
   progressBarCount(list: ToDoList) {
     const totalCount = list.listItems.length;
     let remainingCount = 0;
-    list.listItems.forEach(item => {
-      if (item.completed) {
-        remainingCount++;
-      }
-    });
+    if (list.listItems.length > 0) {
+      list.listItems.forEach(item => {
+        if (item.completed) {
+          remainingCount++;
+        }
+      });
 
-    return (remainingCount / totalCount);
+      return (remainingCount / totalCount);
+    } else {
+      return 0;
+    }
   }
 
   onCancel(cancelClicked: boolean) {
