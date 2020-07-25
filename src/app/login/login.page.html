@@ -25,18 +25,18 @@
 
           <!-- Form field Password-->
           <ion-item class="item-input-field">
-            <ion-input class="app-form-field" placeholder="Password" formControlName="password"
+            <ion-input class="app-form-field" placeholder="Password" formControlName="password" 
               [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password">
             </ion-input>
-            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
-            <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
+            <ion-icon *ngIf="!showPassword" (click)="showPassword = !showPassword" name="eye-outline"></ion-icon>
+            <ion-icon *ngIf="showPassword" (click)="showPassword = !showPassword" name="eye-off-outline"></ion-icon>
           </ion-item>
 
           <div class="link-div flex flex-row">
             <!-- Remember-me checkbox-->
             <ion-item lines="none">
-                <ion-checkbox item-right size="small" formControlName="canRemember"></ion-checkbox>
-                <ion-label class="notice-text-level-1 remember-text">Remember Me</ion-label>
+                <ion-checkbox item-right size="small" formControlName="canRemember" class="checkbox-square"></ion-checkbox>
+                <ion-label class="notice-text-level-1 remember-text text-reg">Remember Me</ion-label>
             </ion-item>
            
             <!-- Forgot Password -->
