@@ -6,3 +6,114 @@ span.repetationPicker {
         content:attr(data-text);
         opacity: 0.5;
     }
+
+ion-toolbar {
+    --border-width: 0px !important;
+    
+    ion-buttons {
+        ion-icon {
+            width: 18px !important;
+            height: 18px !important;
+        }
+    }
+
+    ion-title.main-title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: -0.24px;
+        color: #000000;
+    }
+    
+    ion-title.sub-title {
+        padding-left: 0px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 28px;
+        color: #000000;
+    }
+}
+
+
+ion-list {
+    ion-item {
+        ion-label { 
+            font-style: normal;
+            font-weight: normal;
+            font-size: 17px;
+            line-height: 22px;
+        }
+        ion-toggle {
+            top: 18px;
+        }
+    }
+
+    ion-item.toggle {
+        --padding-top: 0px !important;
+        --border-style: none;
+    }
+
+    ion-item.chipOptions{
+        --border-style: none !important;
+    }
+
+    ion-row.start-end-time-row{
+        span.to-label{
+            padding: 25px 10px 0px 10px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 20px;
+            color: #CCCCCC
+        }
+    }
+
+    ion-item.item-input-field-time {
+        --padding-top: 15px;
+        --padding-start: 2px;
+        --padding-end: 2px;
+        --border-color: var(--ion-color-grey-light);
+        width: 44%;
+    }
+    // ion-datetime.app-form-field-date{
+    //     font-size: 1.0625rem;
+    //     width: 30%;
+    // }
+
+    ion-row {
+        ion-chip.notActive {
+            background: #FFFFFF !important;
+            border-radius: 40px;
+            border: 1px solid #E5E5E5;
+            padding: 7px;
+        }
+        ion-label.chip {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 18px;
+            color: #7B7B7B;
+        }
+
+        ion-chip.chipActive {
+            background: #222222;
+            border-radius: 40px;
+            padding: 8px;
+        }
+        ion-label.chipLable {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 18px;
+            color: #FFFFFF;
+        }
+    }
+}
+
+
+.side-padding {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+     

@@ -20,21 +20,17 @@ export class NewTaskComponent implements OnInit {
   repetationPickerValue = '';
   updatedRepetationPickerValue = '';
   updateTitle = '';
+  repeatEveryDay = false;
+  repeatChipStatus = false;
   @ViewChild('documentEditForm') documentEditForm: FormGroupDirective;
   @Input() taskData: any;
 
   repetationPickerColumn = [
-    {
-      name: 'repetationPicker',
-      options: [
-        { text: 'Never', value: 'never' },
-        { text: 'Daily', value: 'day' },
-        { text: 'Weekly', value: 'week' },
-        { text: 'BiWeekly', value: 'two-weeks' },
-        { text: 'Monthly', value: 'month' },
-        { text: 'Yearly', value: 'year' }
-      ]
-    }
+    { text: 'Every Day', value: 'day' },
+    { text: 'Weekly', value: 'week' },
+    { text: 'Bi-Weekly', value: 'two-weeks' },
+    { text: 'Monthly', value: 'month' },
+    { text: 'Yearly', value: 'year' }
   ];
 
   constructor(private modalController: ModalController,
@@ -43,11 +39,12 @@ export class NewTaskComponent implements OnInit {
               private alertReminderService: AlertReminderService) { }
 
   ngOnInit() {
-    this.updateTitle = 'New Task';
+    this.updateTitle = 'Create Task';
     this.updateNewTaskForm = this.fb.group(
       {
         title: ['', Validators.compose([Validators.required])],
         description: ['', Validators.compose([Validators.pattern('[a-zA-Z]*'), Validators.required])],
+        repetationtoggle: [false, Validators.compose([Validators.required])],
         startDate: new FormControl('', Validators.required),
         startTime: new FormControl('', Validators.required),
         endDate: new FormControl('', Validators.required),
@@ -59,20 +56,23 @@ export class NewTaskComponent implements OnInit {
 
     if (this.taskData !== undefined) {
       this.updateTitle = 'Update Task';
+      // const repetationToggleValue: any;
+      // tslint:disable-next-line:no-unused-expression
+      // this.taskData.repeat ? repetationToggleValue === true : repetationToggleValue === false;
       this.updateNewTaskForm.patchValue({
         title: this.taskData.title,
         description: this.taskData.desc,
         startDate: this.taskData.startTimePeriod,
         startTime: this.taskData.startTimePeriod,
-        endDate : this.taskData.endTimePeriod,
-        endTime : this.taskData.endTimePeriod,
+        endDate: this.taskData.endTimePeriod,
+        endTime: this.taskData.endTimePeriod,
         repetationPicker: this.taskData.repeat
       });
 
-      this.updatedRepetationPickerValue = this.taskData.repeat;
+      // this.updatedRepetationPickerValue = this.taskData.repeat;
       // tslint:disable-next-line:triple-equals
       // tslint:disable-next-line:max-line-length
-      this.repetationPicker = this.repetationPickerColumn.map(item => item.options.filter(rep => rep.value === this.taskData.repeat))[0][0].text;
+      // this.repetationPicker = this.repetationPickerColumn.map(item => item.options.filter(rep => rep.value === this.taskData.repeat))[0][0].text;
     }
   }
 
@@ -80,60 +80,66 @@ export class NewTaskComponent implements OnInit {
     await this.modalController.dismiss();
   }
 
-  async openEndRepeationPicker() {
-    const opts: PickerOptions = {
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Confirm'
-        }
-      ],
-      columns: [
-        {
-          name: 'endRepetationPicker',
-          options: [
-            { text: 'Never', value: 'year' },
-            { text: 'Ondate', value: 'Ondate' }
-          ]
-        }
-      ]
-    };
+  // async openEndRepeationPicker() {
+  //   const opts: PickerOptions = {
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel'
+  //       },
+  //       {
+  //         text: 'Confirm'
+  //       }
+  //     ],
+  //     columns: [
+  //       {
+  //         name: 'endRepetationPicker',
+  //         options: [
+  //           { text: 'Never', value: 'year' },
+  //           { text: 'Ondate', value: 'Ondate' }
+  //         ]
+  //       }
+  //     ]
+  //   };
 
-    const picker = await this.pickerController.create(opts);
-    picker.present();
-    picker.onDidDismiss().then(async data => {
-      const endCol = await picker.getColumn('endRepetationPicker');
-      this.endRepetationPicker = endCol.options[endCol.selectedIndex].text;
-      this.updateNewTaskForm.get('endRepetationPicker').setValue(endCol.options[endCol.selectedIndex].value);
-    });
-  }
+  //   const picker = await this.pickerController.create(opts);
+  //   picker.present();
+  //   picker.onDidDismiss().then(async data => {
+  //     const endCol = await picker.getColumn('endRepetationPicker');
+  //     this.endRepetationPicker = endCol.options[endCol.selectedIndex].text;
+  //     this.updateNewTaskForm.get('endRepetationPicker').setValue(endCol.options[endCol.selectedIndex].value);
+  //   });
+  // }
 
 
-  async openRepeationPicker() {
-    const opts: PickerOptions = {
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Confirm'
-        }
-      ],
-      columns: this.repetationPickerColumn
-    };
+  // async openRepeationPicker() {
+  //   const opts: PickerOptions = {
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel'
+  //       },
+  //       {
+  //         text: 'Confirm'
+  //       }
+  //     ],
+  //     columns: this.repetationPickerColumn
+  //   };
 
-    const picker = await this.pickerController.create(opts);
-    picker.present();
-    picker.onDidDismiss().then(async data => {
-      const col = await picker.getColumn('repetationPicker');
-      this.repetationPicker = col.options[col.selectedIndex].text;
-      this.repetationPickerValue = col.options[col.selectedIndex].value;
-      this.updateNewTaskForm.get('repetationPicker').setValue(col.options[col.selectedIndex].value);
-    });
+  //   const picker = await this.pickerController.create(opts);
+  //   picker.present();
+  //   picker.onDidDismiss().then(async data => {
+  //     const col = await picker.getColumn('repetationPicker');
+  //     this.repetationPicker = col.options[col.selectedIndex].text;
+  //     this.repetationPickerValue = col.options[col.selectedIndex].value;
+  //     this.updateNewTaskForm.get('repetationPicker').setValue(col.options[col.selectedIndex].value);
+  //   });
+  // }
+
+
+  onClickofChips(repeatText) {
+    this.repeatChipStatus = repeatText;
+    repeatText === 'Every Day' ? this.repeatEveryDay = true : this.repeatEveryDay = false;
   }
 
   register() {

@@ -1,30 +1,92 @@
 <ion-header>
-  <ion-toolbar class="header">
-    <ion-buttons slot="start" (click)="backClicked()">
-      <ion-icon name="arrow-back" size="large"></ion-icon>
-      Back
+  <ion-toolbar class="side-padding">
+    <ion-buttons (click)="backClicked()">
+      <ion-icon name="arrow-back" size="medium"></ion-icon>
     </ion-buttons>
-    <ion-title>{{updateTitle}}</ion-title>
-    <ion-buttons slot="end" type="submit" (click)="documentEditForm.ngSubmit.emit()">
-      Done
-    </ion-buttons>
+    <ion-title class="main-title">{{updateTitle}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="sub-title">
+      What's your plan?
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <form class="slateIn-form" #documentEditForm="ngForm" [formGroup]="updateNewTaskForm" 
-  (ngSubmit)="register()">
+  <form class="login-form flex flex-column slateIn-form side-padding" #documentEditForm="ngForm"
+    [formGroup]="updateNewTaskForm" (ngSubmit)="register()">
     <ion-list>
-      <ion-item>
-        <ion-label position="floating">Title</ion-label>
-        <ion-input id="title" formControlName="title" [value]="title" type="text"></ion-input>
+      <ion-item class="item-input-field">
+        <ion-input class="app-form-field" placeholder="Title" id="title" formControlName="title" [value]="title"
+          type="text"></ion-input>
       </ion-item>
-      <ion-item>
+
+      <ion-item class="item-input-field toggle">
+        <ion-label position="floating">All-day</ion-label>
+        <ion-toggle slot="end"></ion-toggle>
+      </ion-item>
+
+      <ion-item class="item-input-field toggle">
+        <ion-label position="floating">Repeat</ion-label>
+        <ion-toggle slot="end" name="repetationtoggle" [(ngModel)]="repetationtoggle" formControlName="repetationtoggle"></ion-toggle>
+      </ion-item>
+
+      <ion-item class="item-input-field chipOptions" *ngIf="repetationtoggle">
+        <ion-row class="ion-justify-content-center ion-align-items-center" *ngFor="let repeat of repetationPickerColumn">
+          <ion-chip (click)="onClickofChips(repeat.text)" [ngClass]="repeatChipStatus === repeat.text ? 'chipActive' : 'notActive'">
+            <ion-label [ngClass]="repeatChipStatus === repeat.text ? 'chipLable' : 'chip'">{{repeat.text}}</ion-label>
+          </ion-chip>
+        </ion-row>
+      </ion-item>
+      <br>
+      <ion-item class="item-input-field" *ngIf="repeatEveryDay === false">
+        <ion-datetime class="app-form-field" placeholder="Select Date" value="" display-format="MMM DD, YYYY"
+          picker-format="MMM DD, YYYY" formControlName="startDate" type="text"></ion-datetime>
+      </ion-item>
+      <ion-row class="start-end-time-row" *ngIf="repeatEveryDay === true">
+        <ion-item class="item-input-field-time">
+          <ion-datetime class="app-form-field" placeholder="Start Date" value="" display-format="hh:mm a"
+            picker-format="hh:mm a" formControlName="startDate"></ion-datetime>
+        </ion-item>
+        <span class="to-label">to</span>
+        <ion-item class="item-input-field-time">
+          <ion-datetime class="app-form-field" placeholder="End Date" value="" display-format="hh:mm a"
+            picker-format="hh:mm a" formControlName="endDate"></ion-datetime>
+        </ion-item>
+      </ion-row>
+      <ion-row class="start-end-time-row">
+        <ion-item class="item-input-field-time">
+          <ion-datetime class="app-form-field" placeholder="Start Time" value="" display-format="hh:mm a"
+            picker-format="hh:mm a" formControlName="startTime"></ion-datetime>
+        </ion-item>
+        <span class="to-label">to</span>
+        <ion-item class="item-input-field-time">
+          <ion-datetime class="app-form-field" placeholder="End Time" value="" display-format="hh:mm a"
+            picker-format="hh:mm a" formControlName="endTime"></ion-datetime>
+        </ion-item>
+      </ion-row>
+      <ion-item class="item-input-field chipOptions">
+        <ion-label position="floating">Add Notes</ion-label>
+      </ion-item>
+      <ion-item class="item-input-field">
+        <ion-input class="app-form-field" placeholder="Write here" id="description" formControlName="description" [value]="description"
+          type="text"></ion-input>
+      </ion-item>
+
+
+      <br>
+      <br>
+      <br>
+      <ion-button expand="block" class="action-button-full" fill="solid">
+        <ion-label class="btn-label notice-text-level-3">
+          Create Task
+        </ion-label>
+      </ion-button>
+
+      <!-- <ion-item>
         <ion-label position="floating">Description</ion-label>
         <ion-input formControlName="description" type="text"></ion-input>
       </ion-item>
-      <br>
-      <ion-item-divider></ion-item-divider>
       <ion-item>
         <ion-label>Start Date</ion-label>
         <ion-datetime value="" display-format="MMM DD, YYYY" picker-format="MMM DD, YYYY"
@@ -55,7 +117,7 @@
         <ion-label>Repeat</ion-label>
         <span class="repetationPicker" contentEditable=true data-text="Never" formControlName="repetationPicker" type="text" name="repetationPicker" ngDefaultControl
           >{{repetationPicker}}</span>
-      </ion-item>
+      </ion-item> -->
 
     </ion-list>
   </form>
