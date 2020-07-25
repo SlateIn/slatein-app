@@ -96,6 +96,7 @@ export class EditTodoListComponent implements OnInit {
   }
 
   deleteToDo(todo: any) {
+    console.log('Delete ToDo....');
     console.log(todo);
     const index: number = this.list.indexOf(todo);
     if (index !== -1) {
@@ -105,6 +106,7 @@ export class EditTodoListComponent implements OnInit {
   }
 
   toDoEntered() {
+    console.log('ToDo Entered....');
     if (this.inputValue !== '') {
       this.cnt++;
       const todo = {id: new Date().getTime(), title: this.inputValue, completed: false};
@@ -117,8 +119,21 @@ export class EditTodoListComponent implements OnInit {
     this.addingToDo = false;
   }
 
+  todoCompleted(todo: any) {
+    console.log('ToDo Completed...');
+    this.list.forEach(item => {
+      if (item === todo) {
+        if (!todo.completed) {
+          item.completed = true;
+        } else {
+          item.completed = false;
+        }
+        this.isCurrentDataChanged = true;
+      }
+    });
+  }
+
   valueChanged() {
     this.isCurrentDataChanged = true;
-    console.log(this.isCurrentDataChanged);
   }
 }

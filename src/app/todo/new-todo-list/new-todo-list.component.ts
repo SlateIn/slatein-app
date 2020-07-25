@@ -75,8 +75,8 @@ export class NewTodoListComponent implements OnInit {
 
   async createChecklistAndClose() {
     if (this.header === '') {
-      const todo = this.list[0];
-      this.newList.listName =  todo.title;
+        const todo = this.list[0];
+        this.newList.listName =  todo.title;
     } else {
       this.newList.listName = this.header;
     }
@@ -93,7 +93,7 @@ export class NewTodoListComponent implements OnInit {
           this.list.splice(index, 1);
     }
 
-    if(this.list.length <= 0) {
+    if (this.list.length <= 0) {
       this.listItemAdded = false;
     }
   }
@@ -121,5 +121,9 @@ export class NewTodoListComponent implements OnInit {
           }
         }
       });
+  }
+
+  valueChanged() {
+    this.listItemAdded = true;
   }
 }

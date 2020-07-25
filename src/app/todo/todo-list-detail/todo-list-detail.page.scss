@@ -1,10 +1,22 @@
+ion-toolbar {
+    --border-width: 0px !important;
+}
+
 ion-item {
     --inner-padding-end: 0px;
     --inner-padding-start: 0px;
     --padding-start: 1.25rem;
     --padding-end: 1.25rem;
+
+    ion-label {
+        font-weight: inherit;
+    }
 }
 
-// ion-card {
-//     margin: 10px;
+// ion-checkbox {
+//     --border-radius: 5px;
+//     --border-color-checked: var(--ion-color-secondary);
+//     --border-color: var(--ion-color-secondary);
+//     --checkmark-color: var(--ion-color-secondary);
+//     --size: 23px;
 // }

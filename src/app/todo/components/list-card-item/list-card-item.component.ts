@@ -9,6 +9,7 @@ export class ListCardItemComponent implements OnInit {
   @Input() cardTitle: string;
   @Input() cardContent: string;
   @Input() cardProgressValue: number;
+  @Input() isAllItemCompleted: boolean;
   @Output() cancelled = new EventEmitter<boolean>();
 
   constructor() {}

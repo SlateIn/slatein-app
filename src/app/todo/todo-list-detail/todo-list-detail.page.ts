@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToDoList } from '@models/todoList';
 import { ToDoItem } from '@models/todoItem';
-import { IonReorderGroup, ModalController, NavController } from '@ionic/angular';
+import { IonReorderGroup, ModalController, NavController, LoadingController } from '@ionic/angular';
 import { ToDoService } from '../services/todo.service';
 import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list-detail',
@@ -12,14 +12,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./todo-list-detail.page.scss'],
 })
 export class TodoListDetailPage implements OnInit {
-
   isNewList: boolean;
-  newList: ToDoList;
-  id = 0;
-  header: string;
-  list: ToDoItem[] = [];
+  cuttentList = {} as ToDoList;
+  // id = 0;
+  // header: string;
+  // listItems: ToDoItem[] = [];
   cnt: number;
-  previousTotalList: number;
+  totalCount: number;
+  completedCount: number;
+  progressBarCount: number;
   isCurrentDataChanged = false;
   addingToDo = false;
   inputValue = '';
@@ -29,7 +30,8 @@ export class TodoListDetailPage implements OnInit {
   constructor(private toDoService: ToDoService,
               private modalController: ModalController,
               private route: ActivatedRoute,
-              private navCtrl: NavController) {}
+              private navCtrl: NavController,
+              private loadingCtrl: LoadingController) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe( paramMap => {
@@ -37,67 +39,39 @@ export class TodoListDetailPage implements OnInit {
         this.navCtrl.navigateBack('tabs/todo');
         return;
       } else {
-        
+        this.toDoService.getList(paramMap.get('listId')).subscribe(list => {
+          this.cuttentList = list;
+          // this.id = list.id;
+          // this.header = list.listName;
+          // this.listItems = list.listItems;
+          this.totalCount = this.toDoService.getTotoalItemCount(this.cuttentList);
+          this.completedCount = this.toDoService.getCompletedItemCount(this.cuttentList);
+          this.progressBarCount = this.toDoService.getProgressBarCount(this.cuttentList);
+        });
       }
-    })
-    // this.previousTotalList = this.cnt;
-    // if (this.isNewList) {
-    //   this.header = '';
-    //   this.list = [];
-    //   this.newList = {id: new Date().getTime(), listName: this.header, listItems: this.list};
-    // }
+    });
   }
 
-  async close() {
+  close() {
 
-    if (this.isNewList && (this.header !== '' || this.list.length > 0)) {
-
-      if (this.header === '') {
-        const todo = this.list[0];
-        this.newList.listName =  todo.title;
-      } else {
-        this.newList.listName = this.header;
-      }
-
-      this.newList.listItems = this.list;
-      this.toDoService.addNewList(this.newList);
-    } else if (this.isCurrentDataChanged) {
-      this.toDoService.updateToDoList(this.id, this.header, this.list);
+    if (this.isCurrentDataChanged) {
+      this.toDoService.updateToDoList(this.cuttentList.id, this.cuttentList.listName, this.cuttentList.listItems);
     }
 
-    await this.modalController.dismiss();
-  }
-
-  deleteToDo(todo: any) {
-    console.log(todo);
-    const index: number = this.list.indexOf(todo);
-    if (index !== -1) {
-          this.list.splice(index, 1);
-          this.isCurrentDataChanged = true;
-    }
-  }
-
-  toDoEntered() {
-    if (this.inputValue !== '') {
-      this.cnt++;
-      const todo = {id: new Date().getTime(), title: this.inputValue, completed: false};
-      this.list.push(todo);
-      this.inputValue = '';
-      this.isCurrentDataChanged = true;
-    } else {
-      this.addingToDo = false;
-    }
-    this.addingToDo = false;
+    this.navCtrl.navigateBack('tabs/todo');
   }
 
   todoCompleted(todo: any) {
-      this.list.forEach(item => {
+    this.cuttentList.listItems.forEach(item => {
         if (item === todo) {
           if (!todo.completed) {
             item.completed = true;
+            this.completedCount++;
           } else {
             item.completed = false;
+            this.completedCount--;
           }
+          this.progressBarCount = (this.completedCount / this.totalCount);
           this.isCurrentDataChanged = true;
         }
       });
@@ -107,20 +81,49 @@ export class TodoListDetailPage implements OnInit {
     this.isCurrentDataChanged = true;
   }
 
-  createChecklistAndClose() {
+  async gotoEditToDoListModal() {
+    if (this.cuttentList.listItems === undefined || this.cuttentList.listItems === null) {
+      this.cuttentList.listItems = [];
+    }
 
+    this.modalController.create({
+      component: EditTodoListComponent,
+      componentProps: {
+        id: this.cuttentList.id,
+        header: this.cuttentList.listName,
+        list: this.cuttentList.listItems,
+        cnt: this.cnt
+      }
+    }).then(modalEl => {
+      modalEl.present();
+      return modalEl.onDidDismiss();
+    }).then(resultData => {
+      if ('confirm' === resultData.role) {
+
+        this.loadingCtrl.create({
+          message: 'Loading list data...'
+        }).then(loadingEl => {
+          loadingEl.present();
+          this.cuttentList.listName = resultData.data.header;
+          this.cuttentList.listItems = resultData.data.list;
+          this.totalCount = this.toDoService.getTotoalItemCount(this.cuttentList);
+          this.completedCount = this.toDoService.getCompletedItemCount(this.cuttentList);
+          this.progressBarCount = this.toDoService.getProgressBarCount(this.cuttentList);
+          loadingEl.dismiss();
+        });
+      }
+    });
   }
 
-  async gotoEditToDoListModal() {
-      const editToDoList = await this.modalController.create({
-        component: EditTodoListComponent,
-        componentProps: {
-          id: this.id,
-          header: this.header,
-          list: this.list,
-          cnt: this.cnt
-        }
-      });
-      return await editToDoList.present();
+  totalAndRemainingItemCount() {
+    if (this.totalCount > 0) {
+      return `${this.completedCount} of ${this.totalCount} completed`;
+    } else {
+      return `No item is added to this list`;
+    }
+  }
+
+  getProgressBarCount() {
+    return this.progressBarCount;
   }
 }

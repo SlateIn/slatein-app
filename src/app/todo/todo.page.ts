@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { ToDoService } from './services/todo.service';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { ToDoList } from '@models/todoList';
 import { ToDoItem } from '@models/todoItem';
 import { NewTodoListComponent } from './new-todo-list/new-todo-list.component';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -27,13 +28,14 @@ export class TodoPage implements OnInit {
 
   constructor(private toDoService: ToDoService,
               private modalController: ModalController,
-              private alertController: AlertController) {}
+              private alertController: AlertController,
+              private navController: NavController) {}
 
   ngOnInit() {
     this.toDoService.getAllLists().subscribe((lists: ToDoList[]) => {
       if (lists !== null) {
-          this.listRows = lists;
-          this.cnt = this.listRows.length;
+        this.listRows = lists;
+        this.cnt = this.listRows.length;
       }
   });
 
@@ -59,23 +61,12 @@ export class TodoPage implements OnInit {
     this.isCancelled = false;
   }
 
-  async gotoToDoListModal(list: ToDoList) {
+  async gotoToDoLisPage(list: ToDoList) {
     if (!this.isCancelled) {
       if (list.listItems === undefined) {
         list.listItems = [];
       }
-
-      const commonToDoList = await this.modalController.create({
-        component: TodoListComponent,
-        componentProps: {
-          isNewList: false,
-          id: list.id,
-          header: list.listName,
-          list: list.listItems,
-          cnt: this.cnt
-        }
-      });
-      return await commonToDoList.present();
+      await this.navController.navigateForward(`/tabs/todo/${list.id}`);
     } else {
       this.deleteRow(list);
     }
@@ -92,38 +83,29 @@ export class TodoPage implements OnInit {
       return await commonToDoList.present();
   }
 
-  totalAndRemainingItemCount(list: ToDoList) {
-    const totalCount = list.listItems.length;
-    let count = 0;
-    if (list.listItems.length > 0) {
-      list.listItems.forEach(item => {
-        if (item.completed) {
-          count++;
-        }
-      });
-      return `${count} of ${totalCount} completed`;
+  totalAndCompletedItemCount(list: ToDoList) {
+    const totalCount = this.toDoService.getTotoalItemCount(list);
+    const completedCount = this.toDoService.getCompletedItemCount(list);
+
+    if (totalCount > 0) {
+      return `${completedCount} of ${totalCount} completed`;
     } else {
       return `No item is added to this list`;
     }
   }
 
   progressBarCount(list: ToDoList) {
-    const totalCount = list.listItems.length;
-    let remainingCount = 0;
-    if (list.listItems.length > 0) {
-      list.listItems.forEach(item => {
-        if (item.completed) {
-          remainingCount++;
-        }
-      });
-
-      return (remainingCount / totalCount);
-    } else {
-      return 0;
-    }
+    return this.toDoService.getProgressBarCount(list);
   }
 
   onCancel(cancelClicked: boolean) {
     this.isCancelled = true;
+  }
+
+  isAllItemCompleted(list: ToDoList) {
+    const totalCount = this.toDoService.getTotoalItemCount(list);
+    const completedCount = this.toDoService.getCompletedItemCount(list);
+
+    return (totalCount > 0 && totalCount === completedCount);
   }
 }

@@ -14,18 +14,18 @@
     </ion-list-header>
 
     <ion-item class="item-input-field margin-bottom16">
-        <ion-input color="secondary" type="text" class="app-form-field" placeholder="Title" [(ngModel)]="header"></ion-input>
+        <ion-input color="secondary" type="text" class="app-form-field" placeholder="Title" [(ngModel)]="header" (ionInput)="valueChanged()"></ion-input>
     </ion-item>
-    
+
     <ion-list *ngFor="let todo of list; let i = index">
-        <ion-item lines="none" class="item-input-field">
-          <!-- <ion-icon slot="start" name="square-outline"></ion-icon> -->
-          <ion-label [color]="todo.completed ? 'grey-light' : 'dark'">{{ todo.title }}</ion-label>
-          <ion-checkbox color="primary" class="slateIn-checkbox" slot="start" [checked]="todo.completed" (ionChange)="todoCompleted(todo)"></ion-checkbox>
-        
-          <!-- <ion-label *ngIf="todo.completed"><s>{{ todo.title }}</s></ion-label> -->
-          <!-- <ion-icon *ngIf="todo.completed" slot="start"  mode="md" name="checkbox-outline" (click)="todoCompleted(todo)"></ion-icon> -->
-        </ion-item>
+      <ion-item lines="none" class="item-input-field">
+        <!-- <ion-icon slot="start" name="square-outline"></ion-icon> -->
+        <ion-label [color]="todo.completed ? 'grey-light' : 'dark'">{{ todo.title }}</ion-label>
+        <ion-checkbox color="primary" class="slateIn-checkbox" slot="start" [checked]="todo.completed" (ionChange)="todoCompleted(todo)"></ion-checkbox>
+        <ion-icon slot="end" size="small" (click)="deleteToDo(todo)" src="./assets/icons/follow-up-card-close.svg" style="z-index: 10;"></ion-icon>
+        <!-- <ion-label *ngIf="todo.completed"><s>{{ todo.title }}</s></ion-label> -->
+        <!-- <ion-icon *ngIf="todo.completed" slot="start"  mode="md" name="checkbox-outline" (click)="todoCompleted(todo)"></ion-icon> -->
+      </ion-item>
     </ion-list>
 
     <ion-item class="item-input-field">
