@@ -1,0 +1,73 @@
+<ion-content class="createProfile-page">
+  <article class="parent flex flex-column padding16">
+    <section class="app-logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="app-logo-col">
+            <h1 class="app-title page-header-level-1">Create Profile</h1>
+            <div>
+              <img src="../../assets/icon/logo.svg" alt="slateInLogo">
+            </div>
+            <div>
+              <ion-label class="notice-text-level-3 text-reg">
+                Upload Image
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+
+    <section class="form-section">
+      <form action="" class="createProfile-form flex flex-column slateIn-form" [formGroup]="createProfile">
+        <div>
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Name" formControlName="name" type="text"
+              autocomplete="name">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Date of Birth" formControlName="dateofBirth"
+              type="text" autocomplete="dateofBirth">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Add Location" formControlName="addLocation"
+              type="text" autocomplete="addLocation">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Select Time Zone" formControlName="timeZone"
+              type="text" autocomplete="timeZone">
+            </ion-input>
+          </ion-item>
+
+          <div class="error-div">
+            <ion-label class="ion-text-wrap" color="danger">{{resetPwdFailedErrorMsg}}</ion-label>
+          </div>
+        </div>
+
+        <div>
+          <ion-button expand="block" class="action-button-full" fill="solid">
+            <ion-label class="btn-label notice-text-level-3">
+              Save Profile
+            </ion-label>
+          </ion-button>
+
+          <section class="ion-text-center">
+            <ion-label class="notice-text-level-2 text-reg"> Already have an account?
+              <ion-router-link class="no-decoration" routerLink="/login" routerDirection="back">
+                Sign In
+              </ion-router-link>
+            </ion-label>
+          </section>
+
+          <ion-router-link _ngcontent-wke-c148="" routerlink="/login/register" routerdirection="forward" class="no-decoration ios ion-activatable hydrated" tabindex="0" ng-reflect-router-direction="forward" ng-reflect-router-link="/login/register"> Create Account </ion-router-link>
+        </div>
+      </form>
+    </section>
+  </article>
+</ion-content>
