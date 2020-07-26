@@ -1,4 +1,4 @@
-.login-page {
+.login-page, .signUp-page {
     .parent {
         height: 100%;
         margin: 0px;
@@ -30,24 +30,30 @@
         flex: 1 1 auto;
         height: 100%;
 
-        .login-form {
+        .login-form, .signUp-form {
             height: inherit;
             justify-content: space-between;
             .action-button-full {
-                --background: #31E8E8;
+                --background: var(--ion-color-primary);
             }
-        }
-
-        .text-reg {
-            font-weight: normal;
         }
 
         .link-div {
             justify-content: space-between;
             margin: 8px 0px;
 
+            ion-checkbox {
+                --border-radius: 3px;
+                --size: 19px;
+                --checkmark-width: 3px;
+                --checkmark-color: var(--ion-color-secondary-contrast);
+            }
+
             .remember-text {
-                margin-left: 8px;
+                margin-left: 0px;
+            }
+            .fg-password-text {
+                margin-right: 0px;
             }
         }
 
@@ -64,12 +70,6 @@
                border-radius: 100px;
                --background: white;
             }
-        }
-
-
-        .fg-pass-label {
-            text-align: right;
-            margin-right: 0px;
         }
 
         .error-div {

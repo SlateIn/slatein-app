@@ -1,73 +1,124 @@
-
-<article>
 <ion-content class="signUp-page">
-  <section>
-        <form class="slateIn-form" [formGroup]="registerForm" (ngSubmit)="register()">
-          <!-- Name -->
-          <ion-item class="form-field">
-            <ion-input placeholder="First Name" formControlName="fname" type="text"></ion-input>
-            <ion-icon name="person-outline" slot="end" align-self-end></ion-icon>
-          </ion-item>
-          <div class="error-div" *ngIf="controls.fname.touched &&controls.fname.errors" lines="none">
-            <ion-label class="ion-text-wrap" color="danger">Firstname can not contain whitespace, numbers and special
-              characters.</ion-label>
-          </div>
-
+  <article class="parent flex flex-column padding16">
+    <section class="app-logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="app-logo-col">
+            <div>
+              <img src="../../assets/icon/logo.svg" alt="slateInLogo">
+            </div>
+            <h1 class="app-title page-header-level-1">Create Account</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+    <section class="form-section">
+      <form class="signUp-form flex flex-column slateIn-form" [formGroup]="registerForm" (ngSubmit)="register()">
+        <!-- Form field section-->
+        <div>
           <!-- Email -->
-          <ion-item class="form-field">
-            <ion-input autofill="off" placeholder="Email" formControlName="email" type="text" autocomplete="username">
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" autofill="off" placeholder="Email" formControlName="email" type="text"
+              autocomplete="username">
             </ion-input>
-            <ion-icon name="mail-outline" slot="end" align-self-end></ion-icon>
           </ion-item>
-          <div class="error-div" *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)"
-            lines="none">
+          <div class="form-field-error-div"
+            *ngIf="controls.email.errors && (controls.email.touched || controls.email.dirty)" lines="none">
             <ion-label color="danger">The email address is badly formatted.</ion-label>
           </div>
 
 
           <!-- Password -->
-          <ion-item class="form-field">
-            <ion-input placeholder="Password" formControlName="password" type="password" clear-on-edit
-              autocomplete="new-password"></ion-input>
-            <ion-icon name="key-outline" slot="end" align-self-end></ion-icon>
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" placeholder="Password" formControlName="password" type="password"
+              [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password"></ion-input>
+            <ion-icon name="eye-outline" (click)="showPassword = !showPassword"
+              [attr.name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
           </ion-item>
-          <div class="error-div"
+          <div class="form-field-error-div"
             *ngIf="controls.password.errors && controls.password.errors.minlength && (controls.password.touched || controls.password.dirty)"
             lines="none">
             <ion-label color="danger">Password must be at least 6 characters long.</ion-label>
           </div>
 
           <!-- Confirm Password -->
-          <ion-item class="form-field">
-            <ion-input placeholder="Confirm Password" formControlName="confirmPassword" type="password" clear-on-edit
-              autocomplete="new-password">
+          <ion-item class="item-input-field">
+            <ion-input class="app-form-field" placeholder="Confirm Password" formControlName="confirmPassword"
+              [type]="!showPasswordMatched ? 'password' : 'text'" clear-on-edit autocomplete="new-password">
             </ion-input>
-            <ion-icon name="key-outline" mode="ios" slot="end" align-self-end></ion-icon>
+            <ion-icon name="eye-outline" (click)="showPasswordMatched = !showPasswordMatched"
+              [attr.name]="showPasswordMatched ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
           </ion-item>
-          <div class="error-div"
+          <div class="form-field-error-div"
             *ngIf="controls.confirmPassword.errors && controls.confirmPassword.errors.mustMatch && (controls.confirmPassword.touched || controls.confirmPassword.dirty)"
             lines="none">
             <ion-label color="danger">Passwords must match.</ion-label>
           </div>
 
+          <!-- Remember-me checkbox-->
+          <div class="link-div flex flex-row">
+            <ion-item lines="none">
+                <ion-checkbox item-right size="small" formControlName="canRemember" class="checkbox-square"></ion-checkbox>
+                <ion-label class="notice-text-level-1 remember-text text-reg">Remember Me</ion-label>
+            </ion-item>
+          </div>
+
+
+
+
           <div>
             <ion-label color="danger">{{ singUpFailedErrorMsg }}</ion-label>
           </div>
-
-          <ion-button expand="block" class="signUp-button" fill="solid" (click)="register()"
+        </div>
+        <!-- button section-->
+        <div>
+          <ion-button expand="block" class="action-button-full" fill="solid" (click)="register()"
             [disabled]="!registerForm.valid">
-            <ion-label>
-              Register Now
+            <ion-label class="btn-label notice-text-level-3">
+              Create Account
             </ion-label>
           </ion-button>
 
-          <section class="ion-text-center margin-top margin-bottom">
-            <h4> Already have an account? <a routerLink="/login" routerDirection="back">
-                <ion-label class="signUp-text">Login</ion-label>
-              </a>
-            </h4>
+          <section class="ion-text-center">
+            <ion-label class="notice-text-level-2 text-reg"> Already have an account?
+              <ion-router-link class="no-decoration" routerLink="/login" routerDirection="back">
+                Sign In
+              </ion-router-link>
+            </ion-label>
           </section>
-        </form>
-  </section>
+
+          <!-- Social media login buttons -->
+          <section class="btn-options flex flex-row">
+            <div>
+              <ion-label class="text-reg">
+                Continue with
+              </ion-label>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options" fill="white" (click)="loginWithGoogle()">
+                <ion-label>
+                  <ion-icon title="Google" name="logo-google" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options" fill="white" (click)="loginWithFb()">
+                <ion-label>
+                  <ion-icon name="logo-facebook" title="Facebook" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+            <div>
+              <ion-button expand="block" class="login-button-options" fill="white" (click)="loginWithFb()">
+                <ion-label>
+                  <ion-icon name="logo-apple" title="Apple" size="small"></ion-icon>
+                </ion-label>
+              </ion-button>
+            </div>
+          </section>
+
+        </div>
+      </form>
+    </section>
+  </article>
 </ion-content>
-</article>

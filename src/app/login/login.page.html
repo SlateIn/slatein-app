@@ -25,26 +25,28 @@
 
           <!-- Form field Password-->
           <ion-item class="item-input-field">
-            <ion-input class="app-form-field" placeholder="Password" formControlName="password"
+            <ion-input class="app-form-field" placeholder="Password" formControlName="password" 
               [type]="!showPassword ? 'password' : 'text'" clear-on-edit autocomplete="new-password">
             </ion-input>
-            <ion-icon *ngIf="!showPassword" (click)="toggleShowPassowrd()" name="eye-outline"></ion-icon>
-            <ion-icon *ngIf="showPassword" (click)="toggleShowPassowrd()" name="eye-off-outline"></ion-icon>
+            <ion-icon *ngIf="!showPassword" (click)="showPassword = !showPassword" name="eye-outline"></ion-icon>
+            <ion-icon *ngIf="showPassword" (click)="showPassword = !showPassword" name="eye-off-outline"></ion-icon>
           </ion-item>
 
           <div class="link-div flex flex-row">
             <!-- Remember-me checkbox-->
-            <ion-item lines="none" class="">
-                <ion-checkbox item-right size="small" formControlName="canRemember" color="primary" style="margin-right: 0px;"></ion-checkbox>
-                <ion-label class="notice-text-level-1 remember-text">Remember Me</ion-label>
+            <ion-item lines="none">
+                <ion-checkbox item-right size="small" formControlName="canRemember" class="checkbox-square"></ion-checkbox>
+                <ion-label class="notice-text-level-1 remember-text text-reg">Remember Me</ion-label>
             </ion-item>
            
             <!-- Forgot Password -->
             <ion-item lines="none">
-              <ion-label class="fg-pass-label ">
-                <a routerLink="/login/forgot-password" routerDirection="forward" fill="clear" class="no-decoration">
-                  <ion-label class="notice-text-level-1">Forgot password?</ion-label>
-                </a>
+              <ion-label class="notice-text-level-1 fg-password-text">
+                <ion-router-link class="no-decoration" 
+                  routerLink="/login/forgot-password"
+                  routerDirection="forward">
+                  Forget password
+                </ion-router-link>
               </ion-label>
             </ion-item>
           </div>
@@ -67,11 +69,12 @@
           </ion-button>
 
           <section class="ion-text-center">
-            <ion-label class="notice-text-level-2 text-reg"> Don't have an account? <a class="no-decoration" 
+            <ion-label class="notice-text-level-2 text-reg"> Don't have an account? 
+              <ion-router-link class="no-decoration" 
                 routerLink="/login/register"
                 routerDirection="forward">
-                <ion-label class="signUp-text">Create account</ion-label>
-              </a>
+                Create Account
+              </ion-router-link>
             </ion-label>
           </section>
 
