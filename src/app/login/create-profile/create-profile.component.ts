@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-profile',
@@ -12,7 +13,7 @@ export class CreateProfileComponent implements OnInit {
   addLocation: string;
   timeZone: string;
   createProfile: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.createProfile = this.fb.group(
@@ -25,3 +26,4 @@ export class CreateProfileComponent implements OnInit {
     );
   }
 }
+
