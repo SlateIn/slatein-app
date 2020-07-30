@@ -3,13 +3,26 @@
     <section class="app-logo">
       <ion-grid>
         <ion-row>
-          <ion-col class="app-logo-col">
-            <h1 class="app-title page-header-level-1">Create Profile</h1>
-            <div class="placeholder-box">
-              <!-- <img src="../../assets/icon/logo.svg" alt="slateInLogo"> -->
+          <ion-col size="12" class="text-right">
+            <ion-label class="notice-text-level-3">
+              <!-- TODO : Add click event for routing to myDay page-->
+              <ion-router-link class="no-decoration" routerLink="/login" routerDirection="back">
+                Skip
+              </ion-router-link>
+            </ion-label>
+           </ion-col>
+          <ion-col size="12" class="app-logo-col">
+            <h1 class="app-title page-header-level-1 margin-bottom16">Create Profile</h1>
+            <div class="userImageDiv flex flex-row">
+                <ion-avatar class="ion-margin-start no-margin user-avatar">
+                  <div class="nameFirst">
+                    <ion-label class="nameFirst-label">J</ion-label>
+                  </div>
+                </ion-avatar>
             </div>
-            <div>
-              <ion-label class="notice-text-level-3 text-reg">
+            <div class="margin-top16">
+              <!-- TODO : Add Upload image event-->
+              <ion-label class="notice-text-level-1 text-reg">
                 Upload Image
               </ion-label>
             </div>
@@ -56,14 +69,6 @@
               Save Profile
             </ion-label>
           </ion-button>
-
-          <section class="ion-text-center">
-            <ion-label class="notice-text-level-2 text-reg"> Already have an account?
-              <ion-router-link class="no-decoration" routerLink="/login" routerDirection="back">
-                Sign In
-              </ion-router-link>
-            </ion-label>
-          </section>
         </div>
       </form>
     </section>
