@@ -1,4 +1,4 @@
-.login-page, .signUp-page {
+.login-page, .signUp-page, .forgotPass-page {
     .parent {
         height: 100%;
         margin: 0px;
@@ -30,7 +30,7 @@
         flex: 1 1 auto;
         height: 100%;
 
-        .login-form, .signUp-form {
+        .login-form, .signUp-form, .forgetPass-form  {
             height: inherit;
             justify-content: space-between;
             .action-button-full {
