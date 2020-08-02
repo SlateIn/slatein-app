@@ -27,4 +27,10 @@
 @import '~animate.css/animate.min.css';
 
 
+@import './mixins.scss';
 @import './custom-app.scss';
+@import './theme/button-slateIn.scss';
+@import './theme/card-slateIn.scss';
+@import './theme/form-slateIn.scss';
+@import './theme/typography-slateIn.scss';
+@import './theme/avatar.scss';

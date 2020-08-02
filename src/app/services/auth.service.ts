@@ -89,7 +89,7 @@ export class AuthService {
         console.log(error);
     });
   }
-  signUp(newUser, profilePic) {
+  signUp(newUser, profilePic?) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
       if (profilePic) {
         return firebase
@@ -115,13 +115,13 @@ export class AuthService {
 
   private updateUserInfo(newUser, profilePicUrl?) {
     return this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
-      fname: newUser.fname,
-      lname: newUser.lname,
+      // fname: newUser.fname,
+      // lname: newUser.lname,
       email: newUser.email,
-      gender: newUser.gender,
-      birthdate: newUser.birthdate,
-      photoURL: profilePicUrl ? profilePicUrl : '',
-      provider: newUser.provider ? newUser.provider : ''
+      // gender: newUser.gender,
+      // birthdate: newUser.birthdate,
+      // photoURL: profilePicUrl ? profilePicUrl : '',
+      // provider: newUser.provider ? newUser.provider : ''
     });
   }
 

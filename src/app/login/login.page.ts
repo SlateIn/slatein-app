@@ -5,6 +5,8 @@ import { AuthService } from '@services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TaskService } from '@services/task.service';
+import { AppLabels } from '@services/app-labels.service';
+import { LoaderService } from '@services/loader.service';
 
 const { Storage } = Plugins;
 
@@ -26,7 +28,9 @@ export class LoginPage implements OnInit, OnDestroy {
     private auth: AuthService,
     private navCtrl: NavController,
     private fb: FormBuilder,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private appLabels: AppLabels,
+    private loader: LoaderService
   ) {}
 
   ngOnInit() {
@@ -80,9 +84,7 @@ export class LoginPage implements OnInit, OnDestroy {
         .catch((err) => (this.loginErrorMsg = err.message));
     }
   }
-  toggleShowPassowrd() {
-    this.showPassword = !this.showPassword;
-  }
+
   loginWithGoogle() {
     this.auth
       .logInWithGoogle()

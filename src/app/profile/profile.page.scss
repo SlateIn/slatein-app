@@ -7,17 +7,13 @@ ion-content {
 .default-avatar {
   --border-style: none;
 
-  ion-avatar {
-    position: relative;
-    width: 80px;
-    height: 80px;
+  .profile_avatar {
+    margin: 0 auto;
+    margin-top: 40px;
   }
 }
 
-.profile_avatar {
-  margin: 0 auto;
-  margin-top: 40px;
-}
+
 
 .name-avatar {
   text-align: center;
@@ -29,4 +25,24 @@ ion-content {
 
 .logout {
   --min-height: 52px;
+}
+
+.default-avatar {
+  ion-avatar {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 140px;
+    width: 80px;
+    height: 80px;
+
+    ion-icon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: 3px;
+      right: -13px;
+    }
+  }
 }
