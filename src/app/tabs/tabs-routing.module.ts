@@ -13,7 +13,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../myday/myday.module').then((m) => m.MydayPageModule)
-          }
+          },
         ]
       },
       {
@@ -22,6 +22,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../todo/todo.module').then((m) => m.TodoPageModule)
+          },
+          {
+            path: ':listId',
+            loadChildren: () => import('../todo/todo-list-detail/todo-list-detail.module').then( m => m.TodoListDetailPageModule)
           }
         ]
       },

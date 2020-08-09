@@ -1,32 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-start main-title">
+      Hello Alicia,
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title class="ion-text-start sub-title">
+      Got any plans today?
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <!-- header of the page --> 
-<app-page-header  [pageTitle]="pageTitle" [backButton]="false"></app-page-header>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-list-header class="page-title">
+            Checklist
+          </ion-list-header>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-fab class="slateIn-fab" horizontal="end">
+            <ion-fab-button class="slateIn-fab-button" (click)="gotoNewListModal()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button (click)="gotoNewListModal()" color="orange-medium">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> 
-  
-  <ion-list>
-    <ion-list-header>
-      ToDo Lists
-    </ion-list-header>
-    
-    <ion-card *ngFor="let row of listRows" >
-      <ion-item-sliding>
-        <ion-item-options side="end">
-          <ion-item-option (click)="deleteRow(row)" color="danger" expandable>
-            Delete
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item lines="none" (click)="gotoToDoListModal(row)">
-          <ion-icon slot="start" name="list"></ion-icon>
-          <ion-label>{{ row.listName }}</ion-label>
-          <ion-icon slot="end" size="large" name="arrow-forward-outline"></ion-icon>
-        </ion-item>
-      </ion-item-sliding>
-    </ion-card>
+    <ion-list>
+      <app-list-card-item *ngFor="let row of listRows.slice().reverse()"
+        class="margin-bottom16"
+        (click)="gotoToDoLisPage(row)"
+        [cardTitle]="row.listName"
+        [cardContent]="totalAndCompletedItemCount(row)"
+        [cardProgressValue]="progressBarCount(row)"
+        [isAllItemCompleted]="isAllItemCompleted(row)"
+        (cancelled)="onCancel($event)">
+      </app-list-card-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
 
-  </ion-list>
-  </ion-content>

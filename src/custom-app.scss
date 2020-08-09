@@ -31,6 +31,18 @@ ion-item {
   --padding-start: 0;
 }
 
+.page-title {
+  font-size: 2rem ;
+  
+}
+
+.alert-button-inner {
+  color: var(--ion-color-dark);
+  font-size: 1rem;
+  font-weight: normal;
+}
+// ######################################### End Global Customization ######################################### 
+// ######################################### End Global Customization ######################################### 
 .no-decoration {
   text-decoration: none;
 }
@@ -69,5 +81,23 @@ ion-router-link{
 // Padding Start //
 .padding16 {
   padding: 1rem;
+}
+
+// Padding Ends // 
+.align-center {
+  align-items: center;
+}
+
+.align-left {
+  align-items: left;
+}
+
+.align-right {
+  align-items: right;
+}
+
+.back-button-icon {
+  font-size: 1.375rem !important;
+  padding-left: 0.8rem !important;
 }
 // ######################################### End Global Customization #########################################
