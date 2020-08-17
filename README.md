@@ -11,3 +11,11 @@ $ npm i -g firebase-tools (Required only first time)
 $ firebase login (Required only first time)
 $ npm run deploy-firebase
 ```
+
+## Ionic Build and To check on Simulator (Xcode and Andorid Studio)
+
+npm install
+ionic build
+npx cap copy
+npx cap open ios
+tap on play

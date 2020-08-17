@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { AuthService } from '@services/auth.service';
@@ -15,13 +15,14 @@ const { Storage } = Plugins;
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   email: string;
   password: string;
   loginErrorMsg: string;
   loginForm: FormGroup;
   showPassword: boolean;
   formValueChangesSubscription: Subscription;
+  subscription: Subscription;
 
   constructor(
     private auth: AuthService,
@@ -102,21 +103,42 @@ export class LoginPage implements OnInit {
       .catch((err) => (this.loginErrorMsg = err.message));
   }
 
-  // loginWithFb() {
-  //   this.auth
-  //     .logInWithFacebook()
-  //     .then(() => {
-  //       if (this.loginForm.value.canRemember) {
-  //         Storage.set({
-  //           key: 'email',
-  //           value: this.loginForm.value.email
-  //         });
-  //       } else {
-  //         Storage.remove({ key: 'email' });
-  //       }
-  //       this.taskService.getAllTasks();
-  //       this.navCtrl.navigateRoot('/tabs/myday');
-  //     })
-  //     .catch((err) => (this.loginErrorMsg = err.message));
-  // }
+  loginWithFb() {
+    this.auth
+      .logInWithFacebook()
+      .then(() => {
+        if (this.loginForm.value.canRemember) {
+          Storage.set({
+            key: 'email',
+            value: this.loginForm.value.email
+          });
+        } else {
+          Storage.remove({ key: 'email' });
+        }
+        this.taskService.getAllTasks();
+        this.navCtrl.navigateRoot('/tabs/myday');
+      })
+      .catch((err) => (this.loginErrorMsg = err.message));
+  }
+
+  loginWithApple() {
+    this.auth
+      .logInWithFacebook()
+      .then(() => {
+        if (this.loginForm.value.canRemember) {
+          Storage.set({
+            key: 'email',
+            value: this.loginForm.value.email
+          });
+        } else {
+          Storage.remove({ key: 'email' });
+        }
+        this.taskService.getAllTasks();
+        this.navCtrl.navigateRoot('/tabs/myday');
+      })
+      .catch((err) => (this.loginErrorMsg = err.message));
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
