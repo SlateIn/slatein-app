@@ -89,21 +89,10 @@ export class AuthService {
         console.log(error);
     });
   }
-  signUp(newUser, profilePic?) {
+
+  signUp(newUser) {
     return this.afAuth.auth.createUserWithEmailAndPassword(newUser.email, newUser.password).then(() => {
-      if (profilePic) {
-        return firebase
-          .storage()
-          .ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`)
-          .putString(profilePic, 'base64')
-          .then((snapshot) => {
-            return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
-              return Promise.all([this.updateUserInfo(newUser, profilePicUrl), this.initdata()]);
-            });
-          });
-      } else {
-        return Promise.all([this.updateUserInfo(newUser), this.initdata()]);
-      }
+        return Promise.all([this.addUserInfo(newUser), this.initdata()]);
     });
   }
 
@@ -113,16 +102,34 @@ export class AuthService {
     });
   }
 
-  private updateUserInfo(newUser, profilePicUrl?) {
+  private addUserInfo(newUser) {
     return this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
-      // fname: newUser.fname,
-      // lname: newUser.lname,
       email: newUser.email,
-      // gender: newUser.gender,
-      // birthdate: newUser.birthdate,
-      // photoURL: profilePicUrl ? profilePicUrl : '',
-      // provider: newUser.provider ? newUser.provider : ''
     });
+  }
+
+  updateUserInfo(newUser, profilePic?) {
+    if (profilePic) {
+      firebase
+        .storage()
+        .ref(`images/${this.afAuth.auth.currentUser.uid}.jpg`)
+        .putString(profilePic, 'base64')
+        .then((snapshot) => {
+          return snapshot.ref.getDownloadURL().then((profilePicUrl) => {
+            return this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
+              fullname: newUser.fullname ? newUser.fullname : '',
+              birthdate: newUser.dateofBirth ? newUser.dateofBirth : '',
+              photoURL: profilePicUrl
+            });
+          });
+        });
+    } else {
+      return this.firedata.child(`${this.afAuth.auth.currentUser.uid}/profile/personalInfo`).update({
+        fullname: newUser.fullname ? newUser.fullname : '',
+        birthdate: newUser.dateofBirth ? newUser.dateofBirth : '',
+        photoURL: ''
+      });
+    }
   }
 
   passwordReset(email) {

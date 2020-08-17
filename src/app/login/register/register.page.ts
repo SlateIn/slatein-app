@@ -86,7 +86,7 @@ export class RegisterPage implements OnInit {
       .then(async () => {
         Storage.clear();
         loading.dismiss();
-        this.navCtrl.navigateRoot('/tabs/myday');
+        this.navCtrl.navigateRoot('/login/createprofile');
       })
       .catch((err) => {
         loading.dismiss();
