@@ -10,6 +10,7 @@ import { TodoPage } from './todo.page';
 import { TodoDisplayComponent } from '@app/components/todo-display/todo-display.component';
 import { HeaderComponent } from '@app/components/header/header.component';
 import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
+import { ListCardItemComponent } from './components/list-card-item/list-card-item.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { SharedcomponentModule } from '@app/components/sharedcomponent.module';
     TodoPageRoutingModule,
     SharedcomponentModule
   ],
-  declarations: [TodoPage],
+  declarations: [TodoPage, ListCardItemComponent],
   entryComponents: []
 })
 export class TodoPageModule {}

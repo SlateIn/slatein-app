@@ -84,7 +84,14 @@ export class RegisterPage implements OnInit {
     this.auth
       .signUp(this.registerForm.value)
       .then(async () => {
-        Storage.clear();
+        if (this.registerForm.value.canRemember) {
+          Storage.set({
+            key: 'email',
+            value: this.registerForm.value.email
+          });
+        } else {
+          Storage.remove({ key: 'email' });
+        }
         loading.dismiss();
         this.navCtrl.navigateRoot('/login/createprofile');
       })

@@ -32,6 +32,8 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { OfflineModePageModule } from './offline-mode/offline-mode.module';
 import { SharedcomponentModule } from './components/sharedcomponent.module';
+import { NewTodoListComponent } from './todo/new-todo-list/new-todo-list.component';
+import { EditTodoListComponent } from './todo/edit-todo-list/edit-todo-list.component';
 
 
 @NgModule({
@@ -40,13 +42,17 @@ import { SharedcomponentModule } from './components/sharedcomponent.module';
     SettingsPage,
     PersonalInformationPage,
     SecurityPasswordPage,
-    TodoListComponent
+    TodoListComponent,
+    NewTodoListComponent,
+    EditTodoListComponent
   ],
   entryComponents: [
     SettingsPage,
     PersonalInformationPage,
     SecurityPasswordPage,
-    TodoListComponent
+    TodoListComponent,
+    NewTodoListComponent,
+    EditTodoListComponent
   ],
   imports: [
     BrowserModule,

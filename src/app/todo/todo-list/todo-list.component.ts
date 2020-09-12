@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, IonReorderGroup } from '@ionic/angular';
+import { ModalController, IonReorderGroup, LoadingController } from '@ionic/angular';
 import { ToDoService } from '../services/todo.service';
 import { ToDoItem } from '@models/todoItem';
 import { ToDoList } from '@models/todoList';
+import { EditTodoListComponent } from '../edit-todo-list/edit-todo-list.component';
+import { LoaderService } from '@services/loader.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -25,7 +27,8 @@ export class TodoListComponent implements OnInit {
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
   constructor(private toDoService: ToDoService,
-              private modalController: ModalController) {}
+              private modalController: ModalController,
+              private loadingCtrl: LoadingController) {}
 
   ngOnInit() {
     this.previousTotalList = this.cnt;
@@ -93,5 +96,47 @@ export class TodoListComponent implements OnInit {
 
   headerChanged() {
     this.isCurrentDataChanged = true;
+  }
+
+  createChecklistAndClose() {
+
+  }
+
+  async gotoEditToDoListModal() {
+      // const editToDoList = await this.modalController.create({
+      //   component: EditTodoListComponent,
+      //   componentProps: {
+      //     id: this.id,
+      //     header: this.header,
+      //     list: this.list,
+      //     cnt: this.cnt
+      //   }
+      // });
+      // return await editToDoList.present();
+
+      this.modalController.create({
+        component: EditTodoListComponent,
+        componentProps: {
+          id: this.id,
+          header: this.header,
+          list: this.list,
+          cnt: this.cnt
+        }
+      }).then(modalEl => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      }).then(resultData => {
+        if ('confirm' === resultData.role) {
+
+          this.loadingCtrl.create({
+            message: 'Loading list data...'
+          }).then(loadingEl => {
+            loadingEl.present();
+            this.header = resultData.data.header;
+            this.list = resultData.data.list;
+            loadingEl.dismiss();
+          });
+        }
+      });
   }
 }

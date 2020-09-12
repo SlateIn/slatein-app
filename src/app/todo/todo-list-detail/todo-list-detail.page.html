@@ -11,15 +11,15 @@
 <ion-content>
   <ion-list class="slateIn-form">
     <ion-list-header class="page-title">
-      {{header}}
+      {{this.cuttentList.listName}}
     </ion-list-header>
     
     <ion-item lines="none">
-      <ion-label color="grey-light" style="font-size: 0.85rem;">04 of 10 completed</ion-label>
+      <ion-label color="grey-light" style="font-size: 0.85rem;">{{ totalAndRemainingItemCount() }}</ion-label>
     </ion-item>
-    <ion-progress-bar color="primary" value="0.5" style="height: 2px;"></ion-progress-bar>
+    <ion-progress-bar color="primary" [value]="getProgressBarCount()" style="height: 2px;"></ion-progress-bar>
 
-    <ion-list *ngFor="let todo of list; let i = index">      
+    <ion-list *ngFor="let todo of cuttentList.listItems; let i = index">      
         <ion-item lines="none" class="item-input-field">
           <!-- <ion-icon slot="start" name="square-outline"></ion-icon> -->
           <!-- <ion-input *ngIf="!todo.completed" type="text" [(ngModel)]="todo.title"></ion-input> -->
