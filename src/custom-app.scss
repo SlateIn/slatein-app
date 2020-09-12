@@ -15,6 +15,14 @@
   align-items: right;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+ text-align: right;
+}
+
 .flex {
   display: flex;
 }
@@ -60,12 +68,16 @@ ion-router-link{
   margin: auto;
 }
 
+.no-margin {
+  margin: 0px !important;
+}
+
 .margin-bottom16 {
   margin-bottom: 1rem;
 }
 
 .margin-top16 {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .margin-v-16 {

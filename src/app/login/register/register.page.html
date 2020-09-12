@@ -72,7 +72,8 @@
         </div>
         <!-- button section-->
         <div>
-          <ion-button expand="block" class="action-button-full" fill="solid" (click)="register()"
+          <ion-button expand="block" class="action-button-full" fill="solid" 
+            routerDirection="forward" (click)="register()"
             [disabled]="!registerForm.valid">
             <ion-label class="btn-label notice-text-level-3">
               Create Account

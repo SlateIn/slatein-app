@@ -1,0 +1,29 @@
+.createProfile-page {
+    .app-title {
+        margin-top: 1.500em; // 24px
+    }
+    .userImageDiv {
+        justify-content: center;
+        .user-avatar {
+            width: 100px !important;  
+            height: 100px !important;  
+            border: 1px solid var(--ion-color-primary);
+            .nameFirst {
+                background-color: var(--ion-color-primary);
+                padding-top: 0.68em;
+                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+                font-weight: 400;
+                font-size: 34px;
+                .nameFirst-label {
+                    color: var(--ion-color-secondary-contrast); // White
+                }
+            }
+        }
+    }
+}
+
+ion-datetime {
+    --padding-start: 0px;
+}

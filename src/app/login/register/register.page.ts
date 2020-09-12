@@ -93,7 +93,7 @@ export class RegisterPage implements OnInit {
           Storage.remove({ key: 'email' });
         }
         loading.dismiss();
-        this.navCtrl.navigateRoot('/tabs/myday');
+        this.navCtrl.navigateRoot('/login/createprofile');
       })
       .catch((err) => {
         loading.dismiss();
