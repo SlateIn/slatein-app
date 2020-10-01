@@ -18,9 +18,9 @@ export class TaskInfoCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  // updateTask() {
-  //   this.alertReminderService.presentAlertPrompt('Update');
-  // }
+  updateTask() {
+    //this.alertReminderService.presentAlertPrompt('Update');
+  }
 
   deleteTask() {
     this.taskService.deleteTask(this.taskinfo.id);

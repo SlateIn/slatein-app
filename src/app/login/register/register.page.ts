@@ -113,4 +113,12 @@ export class RegisterPage implements OnInit {
   goBack() {
     this.navCtrl.navigateBack('/login');
   }
+
+  // NEED WORK: We need to create this method in service instead of login.page.ts
+  loginWithFb() {
+  }
+
+  // NEED WORK: We need to create this method in service instead of login.page.ts
+  loginWithGoogle() {
+  }
 }

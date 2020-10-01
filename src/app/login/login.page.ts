@@ -102,7 +102,7 @@ export class LoginPage implements OnInit {
       .catch((err) => (this.loginErrorMsg = err.message));
   }
 
-  // loginWithFb() {
+  loginWithFb() {
   //   this.auth
   //     .logInWithFacebook()
   //     .then(() => {
@@ -118,5 +118,5 @@ export class LoginPage implements OnInit {
   //       this.navCtrl.navigateRoot('/tabs/myday');
   //     })
   //     .catch((err) => (this.loginErrorMsg = err.message));
-  // }
+   }
 }
