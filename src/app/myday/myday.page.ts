@@ -14,6 +14,8 @@ import { NewTaskComponent } from './new-task/new-task.component';
   styleUrls: ['./myday.page.scss']
 })
 export class MydayPage implements OnInit, OnDestroy {
+  // TODO : Get User Object
+  // TODO : Get All Task Object
   info$: Observable<UserInfo>;
   taskDetails: TaskReminderInfo[] = [];
   favouriteTaskDetails: TaskReminderInfo[] = [];
