@@ -41,7 +41,7 @@
     "firebase": "^7.14.2",
     "ionic2-calendar": "^0.5.10",
     "magic.css": "^1.4.5",
-    "moment": "^2.25.3",
+    "moment": "^2.29.4",
     "ngx-bootstrap": "^5.6.1",
     "number-flip": "^1.1.8",
     "rxjs": "^6.5.5",
